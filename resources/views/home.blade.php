@@ -9,13 +9,17 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
                     {{-- {{ __('You are logged in!') }} --}}
-                    <h1 class="text-center text-primary">Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V</h1>
+                    <h1 class="text-center text-primary">Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V
+                    </h1>
+                    <div class="body__logo">
+                        <img src="{{ asset('img/tecoatl.jpeg') }}" alt="">
+                    </div>
                 </div>
             </div>
         </div>
