@@ -18,7 +18,8 @@
                     <h1 class="text-center text-primary">Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V
                     </h1>
                     <div class="body__logo">
-                        <img src="{{ asset('img/tecoatl.jpeg') }}" alt="">
+                        <img src="{{ asset('img/tecoatl.jpeg') }}"
+                            alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
                     </div>
                 </div>
             </div>
