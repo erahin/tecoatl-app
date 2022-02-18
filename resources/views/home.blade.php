@@ -13,7 +13,6 @@
                         {{ session('status') }}
                     </div>
                     @endif
-
                     {{-- {{ __('You are logged in!') }} --}}
                     <h1 class="text-center text-primary">Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V
                     </h1>
