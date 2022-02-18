@@ -1,6 +1,7 @@
 .body__logo img {
     display: block;
     width: 55vw;
+    max-width: 900px;
     height: 45vh;
     margin-left: auto;
     margin-right: auto;
