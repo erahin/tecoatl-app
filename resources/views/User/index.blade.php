@@ -20,7 +20,6 @@
                                 <tr>
                                     <th scope="col">Nombre de usuario</th>
                                     <th scope="col">Correo</th>
-                                    <th scope="col">Contraseña</th>
                                     <th scope="col" colspan="2">Acciones</th>
                                 </tr>
                             </thead>
@@ -29,11 +28,15 @@
                                     <tr>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->password }}</td>
                                         <td><a href="{{ route('usuarios.edit', $user->id) }}"
                                                 class="btn btn-success">Editar</a></td>
-                                        <td><a href="{{ route('usuarios.destroy', $user->id) }}"
-                                                class="btn btn-danger">Eliminar</a></td>
+                                        <td>
+                                            <form action="{{ route('usuarios.destroy', $user->id) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="submit" value="Eliminar" class="btn btn-danger">
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

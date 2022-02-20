@@ -40,4 +40,4 @@ Route::get('/home', [
 /* -------------------------------------------------------------------------- */
 /*                                 User Routes                                */
 /* -------------------------------------------------------------------------- */
-Route::resource('usuarios', UserController::class);
+Route::resource('usuarios', UserController::class)->middleware('auth');
