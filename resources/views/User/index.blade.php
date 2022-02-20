@@ -15,6 +15,9 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        <a class="btn btn-primary my-2 float-left" href="{{ route('usuarios.create') }}"
+                            role="button">Crear
+                            Usuario</a>
                         <table class="table table-hover table-bordered">
                             <thead>
                                 <tr>
