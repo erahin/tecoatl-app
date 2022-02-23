@@ -73,6 +73,10 @@
                                 <a class="dropdown-item" href="{{ route('regiones.index') }}">
                                     {{ __('Regiones') }}
                                 </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="{{ route('proyectos.index') }}">
+                                    {{ __('Proyectos') }}
+                                </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown text-uppercase">

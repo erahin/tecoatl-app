@@ -16,7 +16,8 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::paginate(10);
-        return view('Project.index', compact('projects'));
+        $regions = Region::all();
+        return view('Project.index', compact('projects', 'regions'));
     }
 
     /**
