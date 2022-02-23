@@ -13,7 +13,7 @@ class CreateRegionTable extends Migration
      */
     public function up()
     {
-        Schema::create('region', function (Blueprint $table) {
+        Schema::create('regions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateRegionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('region');
+        Schema::dropIfExists('regions');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Study;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudyController extends Controller
 {
@@ -14,7 +15,8 @@ class StudyController extends Controller
      */
     public function index()
     {
-        $studies = Study::paginate(10);
+        // $studies = DB::select('select * from study');
+        $studies = Study::all();
         return view('Study.index', compact('studies'));
     }
 

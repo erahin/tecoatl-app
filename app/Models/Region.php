@@ -9,7 +9,7 @@ class Region extends Model
 {
     use HasFactory;
 
-    public function productos()
+    public function projects()
     {
         return $this->hasMany(Project::class, 'id');
     }

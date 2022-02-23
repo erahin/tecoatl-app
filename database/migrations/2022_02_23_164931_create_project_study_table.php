@@ -13,18 +13,18 @@ class CreateProjectStudyTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_study', function (Blueprint $table) {
+  Schema::create('projects_studies', function (Blueprint $table) {
             $table->id();
             $table
                 ->foreignId('project_id')
                 ->nullable()
-                ->constrained('project')
+                ->constrained('projects')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table
                 ->foreignId('study_id')
                 ->nullable()
-                ->constrained('study')
+                ->constrained('studies')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->timestamps();
@@ -38,6 +38,6 @@ class CreateProjectStudyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_study');
+        Schema::dropIfExists('projects_studies');
     }
 }

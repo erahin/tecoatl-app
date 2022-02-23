@@ -13,7 +13,7 @@ class CreateStudyTable extends Migration
      */
     public function up()
     {
-        Schema::create('study', function (Blueprint $table) {
+  Schema::create('studies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateStudyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('study');
+        Schema::dropIfExists('studies');
     }
 }
