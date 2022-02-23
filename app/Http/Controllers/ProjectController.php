@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+use App\Models\Region;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -13,6 +15,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $projects = Project::paginate(10);
+        return view('Project.index', compact('projects'));
     }
 
     /**
@@ -22,7 +26,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $regions = Region::all();
+        return view('Project.create', compact('regions'));
     }
 
     /**
@@ -33,7 +38,19 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'place' => 'required',
+                'abbreviation' => 'required',
+                'region_id' => 'required',
+            ]
+        );
+        $project = new Project();
+        $project->place = $request->place;
+        $project->abbreviation = $request->abbreviation;
+        $project->region_id = $request->region_id;
+        $project->save();
+        return redirect()->route('estudios.index');
     }
 
     /**
@@ -55,7 +72,9 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $regions = Region::all();
+        $project = Project::find($id);
+        return view('Project.edit', compact('regions', 'project'));
     }
 
     /**
@@ -67,7 +86,19 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'place' => 'required',
+                'abbreviation' => 'required',
+                'region_id' => 'required',
+            ]
+        );
+        $project = Project::find($id);
+        $project->place = $request->place;
+        $project->abbreviation = $request->abbreviation;
+        $project->region_id = $request->region_id;
+        $project->save();
+        return redirect()->route('estudios.index');
     }
 
     /**
@@ -78,6 +109,8 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::find($id);
+        $project->delete();
+        return redirect()->route('estudios.index');
     }
 }

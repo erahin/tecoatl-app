@@ -70,8 +70,8 @@
                                     {{ __('Estudios') }}
                                 </a>
                                 <hr class="dropdown-divider">
-                                <a class="dropdown-item" href="{{ route('region.index') }}">
-                                    {{ __('Region') }}
+                                <a class="dropdown-item" href="{{ route('regiones.index') }}">
+                                    {{ __('Regiones') }}
                                 </a>
                             </div>
                         </li>
