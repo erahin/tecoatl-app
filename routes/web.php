@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RegionController;
+use App\Http\Controllers\StudyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +44,15 @@ Route::get('/home', [
 /*                                 User Routes                                */
 /* -------------------------------------------------------------------------- */
 Route::resource('usuarios', UserController::class)->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                               Project Routes                               */
+/* -------------------------------------------------------------------------- */
+Route::resource('proyectos', ProjectController::class)->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                                Region Routes                               */
+/* -------------------------------------------------------------------------- */
+Route::resource('regiones', RegionController::class)->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                              Study Controller                              */
+/* -------------------------------------------------------------------------- */
+Route::resource('estudios', StudyController::class)->middleware('auth');
