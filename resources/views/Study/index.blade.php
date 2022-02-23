@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center text-primary">Lista de Usuarios.
+                    <h1 class="text-center text-primary">Lista de Estudios.
                     </h1>
                 </div>
                 <div class="card-body">
@@ -16,7 +16,7 @@
                     </div>
                     @endif
                     <a class="btn btn-primary my-2" href="{{ route('estudios.create') }}" role="button">Crear
-                        Usuario</a>
+                        Estudio</a>
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
@@ -35,14 +35,15 @@
                                     <form action="{{ route('estudios.destroy', $study->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <input type="submit" value="Eliminar" class="btn btn-danger">
+                                        <input type="submit" value="Eliminar" class="btn btn-danger"
+                                            onclick="return confirm( '¿Está seguro de eliminar {{ $study->name }}?') ">
                                     </form>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{-- {{ $studies->links() }} --}}
+                    {{ $studies->links() }}
                 </div>
             </div>
         </div>

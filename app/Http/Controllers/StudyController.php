@@ -16,7 +16,7 @@ class StudyController extends Controller
     public function index()
     {
         // $studies = DB::select('select * from study');
-        $studies = Study::all();
+        $studies = Study::paginate(10);
         return view('Study.index', compact('studies'));
     }
 
@@ -39,7 +39,7 @@ class StudyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'require',
+            'name' => ['required'],
         ]);
         $study = new Study();
         $study->name = $request->name;
@@ -80,7 +80,7 @@ class StudyController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'require',
+            'name' => ['required'],
         ]);
         $study = Study::find($id);
         $study->name = $request->name;
