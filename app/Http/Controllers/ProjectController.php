@@ -28,8 +28,8 @@ class ProjectController extends Controller
     public function create()
     {
         $regions = Region::pluck('name', 'id');
-        $project = new Project();
-        return view('Project.create', compact('regions', 'project'));
+        // $project = new Project();
+        return view('Project.create', compact('regions'));
     }
 
     /**
