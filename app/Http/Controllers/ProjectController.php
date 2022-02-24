@@ -72,7 +72,7 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        $regions = Region::all();
+        $regions = Region::pluck('name', 'id');
         $project = Project::find($id);
         return view('Project.edit', compact('regions', 'project'));
     }
