@@ -27,8 +27,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $regions = Region::all();
-        return view('Project.create', compact('regions'));
+        $regions = Region::pluck('name', 'id');
+        $project = new Project();
+        return view('Project.create', compact('regions', 'project'));
     }
 
     /**
@@ -39,13 +40,11 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'place' => 'required',
-                'abbreviation' => 'required',
-                'region_id' => 'required',
-            ]
-        );
+        $request->validate([
+            'place' => 'required',
+            'abbreviation' => 'required',
+            'region_id' => 'required',
+        ]);
         $project = new Project();
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;
@@ -87,13 +86,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(
-            [
-                'place' => 'required',
-                'abbreviation' => 'required',
-                'region_id' => 'required',
-            ]
-        );
+        $request->validate([
+            'place' => 'required',
+            'abbreviation' => 'required',
+            'region_id' => 'required',
+        ]);
         $project = Project::find($id);
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;

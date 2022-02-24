@@ -13,55 +13,32 @@
                         <form method="POST" action="{{ route('proyectos.store') }}">
                             @csrf
                             <div class="row mb-3">
-                                <label for="place" class="col-md-4 col-form-label text-md-end">{{ __('Lugar') }}</label>
-
+                                {!! Form::label('place', 'Lugar', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
                                 <div class="col-md-6">
-                                    <input id="place" type="text" class="form-control @error('place') is-invalid @enderror"
-                                        name="place" value="{{ old('name') }}" required autocomplete="place" autofocus>
-
-                                    @error('place')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    {!! Form::text('place', '', ['class' => 'form-control', 'autofocus', 'required', 'id' => 'place']) !!}
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="abbreviation"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Abreviación') }}</label>
-
+                                {!! Form::label('abbreviation', 'Abreviación', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
                                 <div class="col-md-6">
-                                    <input id="abbreviation" type="abbreviation" class="form-control @error('abbreviation') is-invalid @enderror"
-                                        name="abbreviation" value="{{ old('abbreviation') }}" required autocomplete="abbreviation">
-
-                                    @error('abbreviation')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    {!! Form::text('abbreviation', '', ['class' => 'form-control', 'required', 'id' => 'abbreviation']) !!}
                                 </div>
                             </div>
-                             <div class="form-group">
-                                    <label for="region_id">Región</label>
-                                    <select class="form-control" id="region_id">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    </select>
+                            <div class="row mb-3">
+                                {!! Form::label('region_id', 'Regíon', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
+                                <div class="col-md-6">
+                                    {!! Form::select('region_id', $regions, $project->region_id, ['class' => 'form-select', 'id' => 'region_id']) !!}
+                                </div>
                             </div>
-
-  
-                            <div class="custom-file" >
-                                <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                            <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                            <div class="row mb-3">
+                                {!! Form::label('select', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
+                                <div class="col-md-6">
+                                    {!! Form::file('name', ['class' => 'form-control', 'multiple', 'required', 'id' => 'select']) !!}
+                                </div>
                             </div>
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Crear') }}
-                                    </button>
+                                    {!! Form::submit('Crear', ['class' => 'btn btn-primary']) !!}
                                 </div>
                             </div>
                         </form>
