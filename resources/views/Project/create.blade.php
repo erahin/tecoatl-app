@@ -27,7 +27,7 @@
                             <div class="row mb-3">
                                 {!! Form::label('region_id', 'Regíon', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
                                 <div class="col-md-6">
-                                    {!! Form::select('region_id', $regions, $project->region_id, ['class' => 'form-select', 'id' => 'region_id']) !!}
+                                    {!! Form::select('region_id', $regions, $project->region_id, ['class' => 'form-select', 'id' => 'region_id', 'placeholder' => 'Seleccione Región']) !!}
                                 </div>
                             </div>
                             <div class="row mb-3">
