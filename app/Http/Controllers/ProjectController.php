@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Region;
+use App\Models\Study;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -28,8 +29,9 @@ class ProjectController extends Controller
     public function create()
     {
         $regions = Region::pluck('name', 'id');
+        $studies = Study::all();
         // $project = new Project();
-        return view('Project.create', compact('regions'));
+        return view('Project.create', compact('regions', 'studies'));
     }
 
     /**

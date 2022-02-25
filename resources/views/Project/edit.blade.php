@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -32,8 +31,9 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Abreviación') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="abbreviation" type="abbreviation" class="form-control @error('abbreviation') is-invalid @enderror"
-                                        name="abbreviation" value="{{ old('abbreviation') }}" required autocomplete="abbreviation">
+                                    <input id="abbreviation" type="abbreviation"
+                                        class="form-control @error('abbreviation') is-invalid @enderror" name="abbreviation"
+                                        value="{{ old('abbreviation') }}" required autocomplete="abbreviation">
 
                                     @error('abbreviation')
                                         <span class="invalid-feedback" role="alert">
@@ -42,17 +42,17 @@
                                     @enderror
                                 </div>
                             </div>
-                             <div class="form-group">
-                                    <label for="region_id">Región</label>
-                                    <select class="form-control" id="region_id">
+                            <div class="form-group">
+                                <label for="region_id">Región</label>
+                                <select class="form-control" id="region_id">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
-                                    </select>
+                                </select>
                             </div>
-                            
+
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
