@@ -16,6 +16,6 @@ class Project extends Model
 
     public function studys()
     {
-        return $this->belongsToMany(Study::class, 'project_study');
+        return $this->belongsToMany(Study::class, 'projects_studies');
     }
 }

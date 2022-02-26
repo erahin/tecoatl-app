@@ -32,19 +32,24 @@
                                 {{-- <div class="col-md-6">
                                     {!! Form::select('region_id', $regions, $project->region_id, ['class' => 'form-select', 'id' => 'region_id', 'placeholder' => 'Seleccione Región']) !!}
                                 </div> --}}
-                                <div class="form-check form-check-inline">
-                                    @foreach ($studies as $study)
-                                        <label>
-                                            {!! Form::checkbox('studie_id[]', $study->id, null, ['class' => 'form-check']) !!}
-                                            {{ $study->name }}
-                                        </label>
-                                    @endforeach
+                            </div>
+                            <div class="row mb-3">
+                                {!! Form::label('studie_id', 'Estudios', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline ml-5">
+                                        @foreach ($studies as $study)
+                                            <label class="form-check-label inline_label">
+                                                {!! Form::checkbox('studie_id[]', $study->id, null, ['class' => 'form-check-input']) !!}
+                                                {{ $study->name }}
+                                            </label>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 {!! Form::label('select', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
                                 <div class="col-md-6">
-                                    {!! Form::file('name', ['class' => 'form-control', 'multiple', 'required', 'id' => 'select']) !!}
+                                    {!! Form::file('name', ['class' => 'form-control', 'multiple', 'id' => 'select']) !!}
                                 </div>
                             </div>
                             <div class="row mb-0">

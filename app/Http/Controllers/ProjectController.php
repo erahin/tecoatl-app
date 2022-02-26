@@ -52,7 +52,9 @@ class ProjectController extends Controller
         $project->abbreviation = $request->abbreviation;
         $project->region_id = $request->region_id;
         $project->save();
-        return redirect()->route('estudios.index');
+        $project = Project::latest('id')->first();
+        $project->studys()->attach($request->studie_id);
+        return redirect()->route('proyectos.index');
     }
 
     /**
@@ -98,7 +100,7 @@ class ProjectController extends Controller
         $project->abbreviation = $request->abbreviation;
         $project->region_id = $request->region_id;
         $project->save();
-        return redirect()->route('estudios.index');
+        return redirect()->route('proyectos.index');
     }
 
     /**
@@ -111,6 +113,6 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $project->delete();
-        return redirect()->route('estudios.index');
+        return redirect()->route('proyectos.index');
     }
 }

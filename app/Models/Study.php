@@ -10,6 +10,6 @@ class Study extends Model
     use HasFactory;
     public function projects_study()
     {
-        return $this->belongsToMany(Project::class, 'project_study');
+        return $this->belongsToMany(Project::class, 'projects_studies');
     }
 }
