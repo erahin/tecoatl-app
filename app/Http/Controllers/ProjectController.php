@@ -77,8 +77,9 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $regions = Region::pluck('name', 'id');
+        $studies = Study::all();
         $project = Project::find($id);
-        return view('Project.edit', compact('regions', 'project'));
+        return view('Project.edit', compact('regions', 'project', 'studies'));
     }
 
     /**
@@ -100,6 +101,7 @@ class ProjectController extends Controller
         $project->abbreviation = $request->abbreviation;
         $project->region_id = $request->region_id;
         $project->save();
+        $project->studys()->sync($request->studie_id);
         return redirect()->route('proyectos.index');
     }
 
