@@ -8,6 +8,16 @@
                     <div class="card-header">
                         <h1 class="text-center text-primary">Lista de Proyectos.
                         </h1>
+                        <div>
+                            <div class="input-group d-flex justify-content-end">
+                                <div class="form-outline">
+                                    <input type="search" id="form1" class="form-control" placeholder="Buscar" />
+                                </div>
+                                <button type="button" class="btn btn-primary">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         @if (session('status'))
@@ -15,9 +25,24 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <a class="btn btn-primary my-2" href="{{ route('proyectos.create') }}" role="button">Crear
-                            Proyectos</a>
-                        <table class="table table-hover table-bordered">
+                        <div class="d-flex justify-content-start flex-wrap">
+                            <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}" role="button">
+                                Crear
+                                Proyectos</a>
+                            {{-- <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}" role="button">
+                                Crear
+                                Proyectos</a> <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}"
+                                role="button">
+                                Crear
+                                Proyectos</a> <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}"
+                                role="button">
+                                Crear
+                                Proyectos</a>
+                            <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}" role="button">
+                                Crear
+                                Proyectos</a> --}}
+                        </div>
+                        <table class="table table-hover table-bordered" id="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Lugar</th>
@@ -32,10 +57,11 @@
                                         <td>{{ $project->place }}</td>
                                         <td>{{ $project->abbreviation }}</td>
                                         <td>{{ $project->regions->name }}</td>
-                                        <td><a href="{{ route('proyectos.edit', $project->id) }}"
+                                        <td class="d-flex justify-content-around"><a
+                                                href="{{ route('proyectos.show', $project->id) }}"
+                                                class="btn btn-secondary">Detalle</a>
+                                            <a href="{{ route('proyectos.edit', $project->id) }}"
                                                 class="btn btn-success">Editar</a>
-                                        </td>
-                                        <td>
                                             <form action="{{ route('proyectos.destroy', $project->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')

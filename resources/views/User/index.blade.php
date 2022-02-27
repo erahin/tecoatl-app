@@ -8,6 +8,16 @@
                     <div class="card-header">
                         <h1 class="text-center text-primary">Lista de Usuarios.
                         </h1>
+                        <div>
+                            <div class="input-group d-flex justify-content-end">
+                                <div class="form-outline">
+                                    <input type="search" id="form1" class="form-control" placeholder="Buscar" />
+                                </div>
+                                <button type="button" class="btn btn-primary">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         @if (session('status'))

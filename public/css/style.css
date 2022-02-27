@@ -10,3 +10,6 @@
 .inline_label {
     width: 100%;
 }
+.card-body {
+    overflow-x: scroll;
+}
