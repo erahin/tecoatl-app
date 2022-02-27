@@ -23,7 +23,6 @@
                                     <th scope="col">Lugar</th>
                                     <th scope="col">Abreviación</th>
                                     <th scope="col">Región</th>
-                                    {{-- <th scope="col">Estudios</th> --}}
                                     <th scope="col" colspan="2">Acciones</th>
                                 </tr>
                             </thead>
@@ -33,7 +32,6 @@
                                         <td>{{ $project->place }}</td>
                                         <td>{{ $project->abbreviation }}</td>
                                         <td>{{ $project->regions->name }}</td>
-                                        {{-- <td>{{ $project->studys->name }}</td> --}}
                                         <td><a href="{{ route('proyectos.edit', $project->id) }}"
                                                 class="btn btn-success">Editar</a>
                                         </td>

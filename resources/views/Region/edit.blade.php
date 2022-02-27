@@ -14,24 +14,14 @@
                             @csrf
                             @method('PUT')
                             <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
-
+                                {!! Form::label('name', 'Nombre', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" required autocomplete="name" autofocus value="{{ $region->name }}">
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    {!! Form::text('name', $region->name, ['class' => 'form-control', 'required', 'autofocus']) !!}
                                 </div>
                             </div>
-                            
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Modificar') }}
-                                    </button>
+                                    {!! Form::submit('Modificar', ['class' => 'btn btn-primary']) !!}
                                 </div>
                             </div>
                         </form>
