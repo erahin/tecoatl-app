@@ -9,7 +9,7 @@
                         </h1>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('proyectos.store') }}">
+                        <form method="POST" action="{{ route('proyectos.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
                                 {!! Form::label('place', 'Lugar', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
@@ -45,7 +45,7 @@
                             <div class="row mb-3">
                                 {!! Form::label('select', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
                                 <div class="col-md-6">
-                                    {!! Form::file('name', ['class' => 'form-control', 'multiple', 'id' => 'select']) !!}
+                                    {!! Form::file('file[]', ['class' => 'form-control', 'multiple', 'id' => 'select']) !!}
                                 </div>
                             </div>
                             <div class="row mb-0">

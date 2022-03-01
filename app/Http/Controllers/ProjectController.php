@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Region;
 use App\Models\Study;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -30,7 +31,6 @@ class ProjectController extends Controller
     {
         $regions = Region::pluck('name', 'id');
         $studies = Study::all();
-        // $project = new Project();
         return view('Project.create', compact('regions', 'studies'));
     }
 
@@ -54,6 +54,12 @@ class ProjectController extends Controller
         $project->save();
         $project = Project::latest('id')->first();
         $project->studys()->attach($request->studie_id);
+        foreach ($request->file('file') as $key) {
+            $file = $key;
+            $imageName = $key->getClientOriginalName();
+            $filePath = 'project-inform/' . $project->id . '/' . $imageName;
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+        }
         return redirect()->route('proyectos.index');
     }
 
