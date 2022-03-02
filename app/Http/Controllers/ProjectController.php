@@ -112,6 +112,8 @@ class ProjectController extends Controller
             'place' => 'required',
             'abbreviation' => 'required',
             'region_id' => 'required',
+            'file' => 'max:50000',
+            'studie_id' => 'required',
         ]);
         $project = Project::find($id);
         $project->place = $request->place;
