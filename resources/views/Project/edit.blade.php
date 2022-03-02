@@ -78,7 +78,7 @@
                             <div class="row mb-3">
                                 {!! Form::label('select', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
                                 <div class="col-md-6">
-                                    {!! Form::file('file[]', ['class' => 'form-control', 'multiple', 'id' => 'file', 'required']) !!}
+                                    {!! Form::file('file[]', ['class' => 'form-control', 'multiple', 'id' => 'select', 'required']) !!}
                                 </div>
                             </div>
                             <div class="row mb-0">

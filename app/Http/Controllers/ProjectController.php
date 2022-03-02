@@ -46,8 +46,6 @@ class ProjectController extends Controller
             'place' => 'required',
             'abbreviation' => 'required',
             'region_id' => 'required',
-            'file' => 'max:50000',
-            'studie_id' => 'required',
         ]);
         $project = new Project();
         $project->place = $request->place;
@@ -60,6 +58,7 @@ class ProjectController extends Controller
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
             $filePath = 'project-inform/' . $project->id . '/' . $fileName;
+            // dd(file_get_contents($file));
             Storage::disk('s3')->put($filePath, file_get_contents($file));
         }
         return redirect()->route('proyectos.index');
@@ -112,8 +111,7 @@ class ProjectController extends Controller
             'place' => 'required',
             'abbreviation' => 'required',
             'region_id' => 'required',
-            'file' => 'max:50000',
-            'studie_id' => 'required',
+            'file' => 'required',
         ]);
         $project = Project::find($id);
         $project->place = $request->place;
@@ -125,6 +123,7 @@ class ProjectController extends Controller
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
             $filePath = 'project-inform/' . $id . '/' . $fileName;
+            echo file_get_contents($file);
             Storage::disk('s3')->put($filePath, file_get_contents($file));
         }
         return redirect()->route('proyectos.index');
@@ -140,6 +139,7 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $project->delete();
+        Storage::disk('s3')->deleteDirectory('project-inform/' . $id . '/');
         return redirect()->route('proyectos.index');
     }
 }
