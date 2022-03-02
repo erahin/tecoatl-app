@@ -9,7 +9,8 @@
                         </h1>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('proyectos.update', $project->id) }}">
+                        <form method="POST" action="{{ route('proyectos.update', $project->id) }}"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row mb-3">
@@ -61,9 +62,23 @@
                                 @endforeach
                             @endforeach
                             <div class="row mb-3">
+                                {!! Form::label('', 'Informes subidos', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
+                                <div class="col-md-6">
+                                    <ul class="list-group">
+                                        @foreach ($fileName as $file_name)
+                                            {{-- @foreach ($files as $file) --}}
+                                            <li class="list-group-item">
+                                                {!! Form::checkbox('reports[]', $file_name, 'true', ['class' => 'form-check-input']) !!}
+                                                {{ $file_name }}</li>
+                                            {{-- @endforeach --}}
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 {!! Form::label('select', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
                                 <div class="col-md-6">
-                                    {!! Form::file('file', ['class' => 'form-control', 'multiple', 'id' => 'select']) !!}
+                                    {!! Form::file('file[]', ['class' => 'form-control', 'multiple', 'id' => 'file', 'required']) !!}
                                 </div>
                             </div>
                             <div class="row mb-0">

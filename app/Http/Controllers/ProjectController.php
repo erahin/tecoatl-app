@@ -46,6 +46,8 @@ class ProjectController extends Controller
             'place' => 'required',
             'abbreviation' => 'required',
             'region_id' => 'required',
+            'file' => 'max:50000',
+            'studie_id' => 'required',
         ]);
         $project = new Project();
         $project->place = $request->place;
@@ -54,10 +56,10 @@ class ProjectController extends Controller
         $project->save();
         $project = Project::latest('id')->first();
         $project->studys()->attach($request->studie_id);
-        foreach ($request->file('file') as $key) {
-            $file = $key;
-            $imageName = $key->getClientOriginalName();
-            $filePath = 'project-inform/' . $project->id . '/' . $imageName;
+        foreach ($request->file('file') as $fileRequest) {
+            $file = $fileRequest;
+            $fileName = $fileRequest->getClientOriginalName();
+            $filePath = 'project-inform/' . $project->id . '/' . $fileName;
             Storage::disk('s3')->put($filePath, file_get_contents($file));
         }
         return redirect()->route('proyectos.index');
@@ -85,7 +87,16 @@ class ProjectController extends Controller
         $regions = Region::pluck('name', 'id');
         $studies = Study::all();
         $project = Project::find($id);
-        return view('Project.edit', compact('regions', 'project', 'studies'));
+        $files = Storage::disk('s3')->allFiles('project-inform/' . $id . '/');
+        $fileName = [];
+        foreach ($files as $fileNameStorage) {
+            $fileArray = explode('/', $fileNameStorage);
+            array_push($fileName, $fileArray[2]);
+        }
+        return view(
+            'Project.edit',
+            compact('regions', 'project', 'studies', 'fileName', 'files')
+        );
     }
 
     /**
@@ -108,6 +119,12 @@ class ProjectController extends Controller
         $project->region_id = $request->region_id;
         $project->save();
         $project->studys()->sync($request->studie_id);
+        foreach ($request->file('file') as $fileRequest) {
+            $file = $fileRequest;
+            $fileName = $fileRequest->getClientOriginalName();
+            $filePath = 'project-inform/' . $id . '/' . $fileName;
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+        }
         return redirect()->route('proyectos.index');
     }
 
