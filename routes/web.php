@@ -19,8 +19,9 @@ use Illuminate\Support\Facades\Route;
 /* -------------------------------------------------------------------------- */
 /*                                 Auth Routes                                */
 /* -------------------------------------------------------------------------- */
+
 Auth::routes([
-    'register' => false, // Register Routes...
+    'register' => true, // Register Routes...
 
     'reset' => false, // Reset Password Routes...
 

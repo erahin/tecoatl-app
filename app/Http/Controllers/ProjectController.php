@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Region;
 use App\Models\Study;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -42,11 +43,17 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                  validate                                  */
+        /* -------------------------------------------------------------------------- */
         $request->validate([
             'place' => 'required',
             'abbreviation' => 'required',
             'region_id' => 'required',
         ]);
+        /* -------------------------------------------------------------------------- */
+        /*                                create projet                               */
+        /* -------------------------------------------------------------------------- */
         $project = new Project();
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;
@@ -54,13 +61,23 @@ class ProjectController extends Controller
         $project->save();
         $project = Project::latest('id')->first();
         $project->studys()->attach($request->studie_id);
-        foreach ($request->file('file') as $fileRequest) {
-            $file = $fileRequest;
-            $fileName = $fileRequest->getClientOriginalName();
-            $filePath = 'project-inform/' . $project->id . '/' . $fileName;
-            // dd(file_get_contents($file));
-            Storage::disk('s3')->put($filePath, file_get_contents($file));
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get region                                 */
+        /* -------------------------------------------------------------------------- */
+        $region = Region::find($request->region_id);
+        $region = strtolower($region->name);
+        /* -------------------------------------------------------------------------- */
+        /*                               Make directory                               */
+        /* -------------------------------------------------------------------------- */
+        foreach ($request->studie_id as $studie) {
+            Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
         }
+        // foreach ($request->file('file') as $fileRequest) {
+        //     $file = $fileRequest;
+        //     $fileName = $fileRequest->getClientOriginalName();
+        //     $filePath = 'project-inform/' . $project->id . '/' . $fileName;
+        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
+        // }
         return redirect()->route('proyectos.index');
     }
 
@@ -86,15 +103,16 @@ class ProjectController extends Controller
         $regions = Region::pluck('name', 'id');
         $studies = Study::all();
         $project = Project::find($id);
-        $files = Storage::disk('s3')->allFiles('project-inform/' . $id . '/');
-        $fileName = [];
-        foreach ($files as $fileNameStorage) {
-            $fileArray = explode('/', $fileNameStorage);
-            array_push($fileName, $fileArray[2]);
-        }
+        // $files = Storage::disk('s3')->allFiles('project-inform/' . $id . '/');
+        // $fileName = [];
+        // foreach ($files as $fileNameStorage) {
+        //     $fileArray = explode('/', $fileNameStorage);
+        //     array_push($fileName, $fileArray[2]);
+        // }
+        //  'fileName', 'files'
         return view(
             'Project.edit',
-            compact('regions', 'project', 'studies', 'fileName', 'files')
+            compact('regions', 'project', 'studies')
         );
     }
 
@@ -107,28 +125,33 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                  validate                                  */
+        /* -------------------------------------------------------------------------- */
         $request->validate([
             'place' => 'required',
             'abbreviation' => 'required',
             'region_id' => 'required',
-            'file' => 'required',
+            // 'file' => 'required',
         ]);
+        /* -------------------------------------------------------------------------- */
+        /*                                create projet                               */
+        /* -------------------------------------------------------------------------- */
         $project = Project::find($id);
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;
         $project->region_id = $request->region_id;
         $project->save();
         $project->studys()->sync($request->studie_id);
-        foreach ($request->file('file') as $fileRequest) {
-            $file = $fileRequest;
-            $fileName = $fileRequest->getClientOriginalName();
-            $filePath = 'project-inform/' . $id . '/' . $fileName;
-            echo file_get_contents($file);
-            Storage::disk('s3')->put($filePath, file_get_contents($file));
-        }
-        return redirect()->route('proyectos.index');
+        // foreach ($request->file('file') as $fileRequest) {
+        //     $file = $fileRequest;
+        //     $fileName = $fileRequest->getClientOriginalName();
+        //     $filePath = 'project-inform/' . $id . '/' . $fileName;
+        //     echo file_get_contents($file);
+        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
+        // }
+        // return redirect()->route('proyectos.index');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -137,9 +160,23 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                Find project                                */
+        /* -------------------------------------------------------------------------- */
         $project = Project::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get region                                 */
+        /* -------------------------------------------------------------------------- */
+        $region = Region::find($project->region_id);
+        $region = strtolower($region->name);
+        /* -------------------------------------------------------------------------- */
+        /*                              Delete directory                              */
+        /* -------------------------------------------------------------------------- */
+        Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $project->id . '/');
+        /* -------------------------------------------------------------------------- */
+        /*                               Delete project                               */
+        /* -------------------------------------------------------------------------- */
         $project->delete();
-        Storage::disk('s3')->deleteDirectory('project-inform/' . $id . '/');
         return redirect()->route('proyectos.index');
     }
 }
