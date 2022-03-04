@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegionController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReportStudioController;
 use App\Http\Controllers\StudyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +48,14 @@ Route::resource('proyectos', ProjectController::class)->middleware('auth');
 /* -------------------------------------------------------------------------- */
 Route::resource('regiones', RegionController::class)->middleware('auth');
 /* -------------------------------------------------------------------------- */
-/*                              Study Controller                              */
+/*                              Study Routes                                  */
 /* -------------------------------------------------------------------------- */
 Route::resource('estudios', StudyController::class)->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                                Upload File Route                           */
+/* -------------------------------------------------------------------------- */
+Route::get('/subir-informes/{id}', [ReportController::class, 'create'])->name('upload-reports')->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                                Report Route                                */
+/* -------------------------------------------------------------------------- */
+Route::resource('informes', ReportStudioController::class)->middleware('auth');

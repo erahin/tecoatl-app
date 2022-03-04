@@ -150,7 +150,7 @@ class ProjectController extends Controller
         //     echo file_get_contents($file);
         //     Storage::disk('s3')->put($filePath, file_get_contents($file));
         // }
-        // return redirect()->route('proyectos.index');
+        return redirect()->route('proyectos.index');
     }
     /**
      * Remove the specified resource from storage.
