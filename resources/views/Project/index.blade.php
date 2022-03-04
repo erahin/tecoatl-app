@@ -58,7 +58,7 @@
                                 <td>{{ $project->abbreviation }}</td>
                                 <td>{{ $project->regions->name }}</td>
                                 <td class="d-flex justify-content-around">
-                                    <a href="{{ route('upload-reports', $project->id) }}" class="btn btn-primary">Subir
+                                    <a href="{{ route('studies-list', $project->id) }}" class="btn btn-primary">Subir
                                         reportes</a>
                                     <a href="{{ route('proyectos.show', $project->id) }}"
                                         class="btn btn-secondary">Detalle</a>

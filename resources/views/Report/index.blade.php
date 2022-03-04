@@ -36,12 +36,14 @@
                             @foreach ($project->studys as $registre)
                             <tr>
                                 <td>{{ $registre->name }}</td>
-                                <td><a href="{{ route('informes.create', $project->id) }}"
-                                        class="btn btn-success">Agregar reportes</a></td>
+                                <td><a href="{{ route('upload-reports', ['id' => $project->id, 'idStudio' => $registre->id]) }}"
+                                        class="btn btn-success">Agregar
+                                        reportes</a></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

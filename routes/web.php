@@ -54,8 +54,10 @@ Route::resource('estudios', StudyController::class)->middleware('auth');
 /* -------------------------------------------------------------------------- */
 /*                                Upload File Route                           */
 /* -------------------------------------------------------------------------- */
-Route::get('/subir-informes/{id}', [ReportController::class, 'create'])->name('upload-reports')->middleware('auth');
+Route::get('/lista-estudios/{id}', [ReportController::class, 'create'])->name('studies-list')->middleware('auth');
+Route::get('/subir-informes/proyecto/{id}/estudio/{idStudio}', [ReportController::class, 'createReport'])->name('upload-reports')->middleware('auth');
+
 /* -------------------------------------------------------------------------- */
 /*                                Report Route                                */
 /* -------------------------------------------------------------------------- */
-Route::resource('informes', ReportStudioController::class)->middleware('auth');
+// Route::resource('informes', ReportStudioController::class)->middleware('auth');

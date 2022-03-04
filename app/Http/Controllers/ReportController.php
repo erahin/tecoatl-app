@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Study;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,5 +13,10 @@ class ReportController extends Controller
     {
         $project = Project::find($id);
         return view('Report.index', compact('project'));
+    }
+    public function createReport($id, $idStudio)
+    {
+        $project = Project::find($id);
+        return view('ReportStudio.create', compact('project', 'idStudio'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ReportStudioController extends Controller
@@ -23,7 +24,7 @@ class ReportStudioController extends Controller
      */
     public function create()
     {
-        //
+        return view('ReportStudio.create');
     }
 
     /**
