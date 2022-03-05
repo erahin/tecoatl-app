@@ -72,12 +72,6 @@ class ProjectController extends Controller
         foreach ($request->studie_id as $studie) {
             Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
         }
-        // foreach ($request->file('file') as $fileRequest) {
-        //     $file = $fileRequest;
-        //     $fileName = $fileRequest->getClientOriginalName();
-        //     $filePath = 'project-inform/' . $project->id . '/' . $fileName;
-        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
-        // }
         return redirect()->route('proyectos.index');
     }
 

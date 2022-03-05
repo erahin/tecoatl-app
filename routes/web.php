@@ -60,4 +60,4 @@ Route::get('/subir-informes/proyecto/{id}/estudio/{idStudio}', [ReportController
 /* -------------------------------------------------------------------------- */
 /*                                Report Route                                */
 /* -------------------------------------------------------------------------- */
-// Route::resource('informes', ReportStudioController::class)->middleware('auth');
+Route::resource('informes', ReportStudioController::class)->middleware('auth');

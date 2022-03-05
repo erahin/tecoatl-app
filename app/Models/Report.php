@@ -18,7 +18,7 @@ class Report extends Model
     /* -------------------------------------------------------------------------- */
     /*                          Relation user and project                         */
     /* -------------------------------------------------------------------------- */
-    function users()
+    public function users()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

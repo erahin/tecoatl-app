@@ -3,81 +3,77 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ReportStudioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('ReportStudio.create');
+        // return view('ReportStudio.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate                                  */
+        /* -------------------------------------------------------------------------- */
+        $request->validate([
+            'report_number' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+        ]);
+        /* -------------------------------------------------------------------------- */
+        /*                                Create report                               */
+        /* -------------------------------------------------------------------------- */
+        $report = new Report();
+        $report->repor_number = $request->report_number;
+        $report->start_date = $request->start_date;
+        $report->end_date = $request->end_date;
+        $report->project_id = $request->project_id;
+        $report->user_id = $request->user_id;
+        $report->save();
+        /* -------------------------------------------------------------------------- */
+        /*                            Find project with id                            */
+        /* -------------------------------------------------------------------------- */
+        $project = Project::find($request->project_id);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get region                                 */
+        /* -------------------------------------------------------------------------- */
+        $region = strtolower($project->regions->name);
+        /* -------------------------------------------------------------------------- */
+        /*                          Insert files to directory                         */
+        /* -------------------------------------------------------------------------- */
+        foreach ($request->file('file') as $fileRequest) {
+            $file = $fileRequest;
+            $fileName = $fileRequest->getClientOriginalName();
+            $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $request->studio_id . '/' . $fileName;
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+        }
+        /* -------------------------------------------------------------------------- */
+        /*                                 Redirect to                                */
+        /* -------------------------------------------------------------------------- */
+        return redirect()->route('proyectos.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

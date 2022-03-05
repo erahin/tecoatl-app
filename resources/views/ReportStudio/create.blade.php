@@ -10,7 +10,12 @@
                     </h1>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                    <form method="POST" action="{{ route('informes.store') }}">
                         @csrf
                         <div class="row mb-3">
                             {!! Form::label('report_number', 'Número de informe', ['class' => 'col-md-4 col-form-label
@@ -22,10 +27,10 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            {!! Form::label('project_id', 'Proyecto', ['class' => 'col-md-4 col-form-label
+                            {!! Form::label('project_name', 'Proyecto', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
-                                {!! Form::text('project_id', $project->place, ['class' => 'form-control',
+                                {!! Form::text('project_name', $project->place, ['class' => 'form-control',
                                 'required', 'disabled']) !!}
                             </div>
                         </div>
@@ -46,13 +51,19 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            {!! Form::label('file', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end'])
+                            {!! Form::label('file[]', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
                             <div class="col-md-6">
                                 {!! Form::file('file[]', ['class' => 'form-control', 'multiple', 'id' => 'select',
                                 'required']) !!}
                             </div>
                         </div>
+                        {!! Form::number('user_id', Auth::user()->id , ['class' => 'form-control', 'hidden',
+                        'required']) !!}
+                        {!! Form::number('project_id', $project->id , ['class' => 'form-control', 'hidden',
+                        'required']) !!}
+                        {!! Form::number('studio_id', $idStudio , ['class' => 'form-control', 'hidden',
+                        'required']) !!}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {!! Form::submit('Crear', ['class' => 'btn btn-primary']) !!}
