@@ -24,6 +24,12 @@ class CreateReportsTable extends Migration
                 ->constrained('projects')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table
+                ->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
