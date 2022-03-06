@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Region;
+use App\Models\Study;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
@@ -36,5 +40,33 @@ class ReportController extends Controller
         }
         $project = Project::find($id);
         return view('ReportStudio.create', compact('project', 'idStudio', 'fileName'));
+    }
+    public function showProjectAndStudio($idProject, $idStudio)
+    {
+        /* -------------------------------------------------------------------------- */
+        /*                                 Return data                                */
+        /* -------------------------------------------------------------------------- */
+        $project = Project::find($idProject);
+        $studio = Study::find($idStudio);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get region                                 */
+        /* -------------------------------------------------------------------------- */
+        $region = strtolower($project->regions->name);
+        /* -------------------------------------------------------------------------- */
+        /*                                Get all files                               */
+        /* -------------------------------------------------------------------------- */
+        $files = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $project->id . '/' . $idStudio);
+        /* -------------------------------------------------------------------------- */
+        /*                                Get only name                               */
+        /* -------------------------------------------------------------------------- */
+        $fileName = [];
+        foreach ($files as $fileNameStorage) {
+            $fileArray = explode('/', $fileNameStorage);
+            array_push($fileName, $fileArray[4]);
+        }
+        return view(
+            'Report.show',
+            compact('project', 'fileName', 'studio')
+        );
     }
 }

@@ -56,7 +56,7 @@ Route::resource('estudios', StudyController::class)->middleware('auth');
 /* -------------------------------------------------------------------------- */
 Route::get('/lista-estudios/{id}', [ReportController::class, 'create'])->name('studies-list')->middleware('auth');
 Route::get('/subir-informes/proyecto/{id}/estudio/{idStudio}', [ReportController::class, 'createReport'])->name('upload-reports')->middleware('auth');
-
+Route::get('/proyectos/{idProject}/consultar-informes/{idStudio}', [ReportController::class, 'showProjectAndStudio'])->name('show-informs')->middleware('auth');
 /* -------------------------------------------------------------------------- */
 /*                                Report Route                                */
 /* -------------------------------------------------------------------------- */

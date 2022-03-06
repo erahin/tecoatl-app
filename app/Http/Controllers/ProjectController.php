@@ -61,40 +61,45 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        /* -------------------------------------------------------------------------- */
-        /*                                 Return data                                */
-        /* -------------------------------------------------------------------------- */
-        $regions = Region::pluck('name', 'id');
-        $studies = Study::all();
-        $project = Project::find($id);
-        /* -------------------------------------------------------------------------- */
-        /*                                 Get region                                 */
-        /* -------------------------------------------------------------------------- */
-        $region = strtolower($project->regions->name);
-        /* -------------------------------------------------------------------------- */
-        /*                                 Get studies                                */
-        /* -------------------------------------------------------------------------- */
-        $studies = DB::select('select study_id from projects_studies where project_id = ?', [$id]);
-        /* -------------------------------------------------------------------------- */
-        /*                                Get all files                               */
-        /* -------------------------------------------------------------------------- */
-        $arrayFiles = [];
-        foreach ($studies as $studio) {
-            $files = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $id . '/' . $studio->study_id);
-            array_push($arrayFiles, $files);
-        }
-        /* -------------------------------------------------------------------------- */
-        /*                                Get only name                               */
-        /* -------------------------------------------------------------------------- */
-        $fileName = [];
-        foreach ($files as $fileNameStorage) {
-            $fileArray = explode('/', $fileNameStorage);
-            array_push($fileName, $fileArray[4]);
-        }
-        return view(
-            'Project.show',
-            compact('regions', 'project', 'studies', 'arrayFiles')
-        );
+        // /* -------------------------------------------------------------------------- */
+        // /*                                 Return data                                */
+        // /* -------------------------------------------------------------------------- */
+        // $regions = Region::pluck('name', 'id');
+        // $studies = Study::all();
+        // $project = Project::find($id);
+        // /* -------------------------------------------------------------------------- */
+        // /*                                 Get region                                 */
+        // /* -------------------------------------------------------------------------- */
+        // $region = strtolower($project->regions->name);
+        // /* -------------------------------------------------------------------------- */
+        // /*                                 Get studies                                */
+        // /* -------------------------------------------------------------------------- */
+        // $studies = DB::select('select study_id from projects_studies where project_id = ?', [$id]);
+        // /* -------------------------------------------------------------------------- */
+        // /*                                Get all files                               */
+        // /* -------------------------------------------------------------------------- */
+        // $arrayFiles = [];
+        // $arrayID = [];
+        // foreach ($studies as $studio) {
+        //     $files = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $id . '/' . $studio->study_id);
+        //     array_push($arrayFiles, $files);
+        //     array_push($arrayID, $studio->study_id);
+        // }
+        // /* -------------------------------------------------------------------------- */
+        // /*                                Get only name                               */
+        // /* -------------------------------------------------------------------------- */
+        // $fileName = [];
+        // foreach ($arrayFiles as $fileNameStorage) {
+        //     foreach ($fileNameStorage as $key) {
+        //         $fileArray = explode('/', $key);
+        //         array_push($fileName, $fileArray[4]);
+        //     }
+        // }
+
+        // return view(
+        //     'Project.show',
+        //     compact('regions', 'project', 'arrayID', 'arrayFiles', 'studies')
+        // );
     }
 
     public function edit($id)

@@ -21,8 +21,10 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            {!! Form::label('abbreviation', 'Abreviación', ['class' => 'col-md-4 col-form-label
-                            text-md-end']) !!}
+                            {!! Form::label('abbreviation', 'Abreviación', [
+                            'class' => 'col-md-4 col-form-label
+                            text-md-end',
+                            ]) !!}
                             <div class="col-md-6">
                                 {!! Form::text('abbreviation', $project->abbreviation, ['class' => 'form-control',
                                 'required', 'id' => 'abbreviation']) !!}
@@ -55,15 +57,20 @@
                         @foreach ($studies as $study)
                         @if ($study->id == $registre->id)
                         <script>
-                            checkActive({{ $study->id }});
+                            checkActive({
+                                {
+                                    $study - > id
+                                }
+                            });
 
-                                            function checkActive(idStudy) {
-                                                let id = idStudy;
-                                                let checkStudy = document.getElementById(
-                                                    id
-                                                );
-                                                checkStudy.setAttribute("checked", "");
-                                            }
+                            function checkActive(idStudy) {
+                                let id = idStudy;
+                                let checkStudy = document.getElementById(
+                                    id
+                                );
+                                checkStudy.setAttribute("checked", "");
+                            }
+
                         </script>
                         @endif
                         @endforeach
