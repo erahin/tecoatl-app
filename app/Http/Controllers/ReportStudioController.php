@@ -21,7 +21,7 @@ class ReportStudioController extends Controller
     {
         /* -------------------------------------------------------------------------- */
         /*                                  Validate                                  */
-        /* -------------------------------------------------------------------------- */
+        // /* -------------------------------------------------------------------------- */
         $request->validate([
             'report_number' => 'required',
             'start_date' => 'required',
@@ -31,12 +31,12 @@ class ReportStudioController extends Controller
         /*                                Create report                               */
         /* -------------------------------------------------------------------------- */
         $report = new Report();
-        $report->repor_number = $request->report_number;
+        $report->report_number = $request->report_number;
         $report->start_date = $request->start_date;
         $report->end_date = $request->end_date;
         $report->project_id = $request->project_id;
         $report->user_id = $request->user_id;
-        $report->save();
+        // $report->save();
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */
         /* -------------------------------------------------------------------------- */
@@ -48,7 +48,7 @@ class ReportStudioController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                          Insert files to directory                         */
         /* -------------------------------------------------------------------------- */
-        foreach ($request->file('file') as $fileRequest) {
+        foreach ($request->file('reports') as $fileRequest) {
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
             $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $request->studio_id . '/' . $fileName;

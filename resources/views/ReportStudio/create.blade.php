@@ -15,8 +15,23 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <form method="POST" action="{{ route('informes.store') }}">
+                    <form method="POST" action="{{ route('informes.store') }}" enctype="multipart/form-data">
                         @csrf
+                        <div class="row mb-3">
+                            {!! Form::label('', 'Informes subidos', ['class' => 'col-md-4 col-form-label text-md-end'])
+                            !!}
+                            <div class="col-md-6" style="height: 150px; overflow-y: scroll">
+                                <ul class="list-group">
+                                    @foreach ($fileName as $file_name)
+                                    <li class="list-group-item">
+                                        {!! Form::checkbox('files[]', $file_name, 'true', ['class' =>
+                                        'form-check-input']) !!}
+                                        {{ $file_name }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
                         <div class="row mb-3">
                             {!! Form::label('report_number', 'Número de informe', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
@@ -51,10 +66,10 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            {!! Form::label('file[]', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end'])
+                            {!! Form::label('select', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
                             <div class="col-md-6">
-                                {!! Form::file('file[]', ['class' => 'form-control', 'multiple', 'id' => 'select',
+                                {!! Form::file('reports[]', ['class' => 'form-control', 'multiple', 'id' => 'select',
                                 'required']) !!}
                             </div>
                         </div>

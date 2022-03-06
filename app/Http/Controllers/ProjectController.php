@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $projects = Project::paginate(10);
@@ -23,11 +18,6 @@ class ProjectController extends Controller
         return view('Project.index', compact('projects', 'regions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $regions = Region::pluck('name', 'id');
@@ -35,12 +25,6 @@ class ProjectController extends Controller
         return view('Project.create', compact('regions', 'studies'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         /* -------------------------------------------------------------------------- */
@@ -75,48 +59,55 @@ class ProjectController extends Controller
         return redirect()->route('proyectos.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        /* -------------------------------------------------------------------------- */
+        /*                                 Return data                                */
+        /* -------------------------------------------------------------------------- */
+        $regions = Region::pluck('name', 'id');
+        $studies = Study::all();
+        $project = Project::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get region                                 */
+        /* -------------------------------------------------------------------------- */
+        $region = strtolower($project->regions->name);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get studies                                */
+        /* -------------------------------------------------------------------------- */
+        $studies = DB::select('select study_id from projects_studies where project_id = ?', [$id]);
+        /* -------------------------------------------------------------------------- */
+        /*                                Get all files                               */
+        /* -------------------------------------------------------------------------- */
+        $arrayFiles = [];
+        foreach ($studies as $studio) {
+            $files = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $id . '/' . $studio->study_id);
+            array_push($arrayFiles, $files);
+        }
+        /* -------------------------------------------------------------------------- */
+        /*                                Get only name                               */
+        /* -------------------------------------------------------------------------- */
+        $fileName = [];
+        foreach ($files as $fileNameStorage) {
+            $fileArray = explode('/', $fileNameStorage);
+            array_push($fileName, $fileArray[4]);
+        }
+        return view(
+            'Project.show',
+            compact('regions', 'project', 'studies', 'arrayFiles')
+        );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $regions = Region::pluck('name', 'id');
         $studies = Study::all();
         $project = Project::find($id);
-        // $files = Storage::disk('s3')->allFiles('project-inform/' . $id . '/');
-        // $fileName = [];
-        // foreach ($files as $fileNameStorage) {
-        //     $fileArray = explode('/', $fileNameStorage);
-        //     array_push($fileName, $fileArray[2]);
-        // }
-        //  'fileName', 'files'
         return view(
             'Project.edit',
             compact('regions', 'project', 'studies')
         );
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         /* -------------------------------------------------------------------------- */
@@ -137,21 +128,8 @@ class ProjectController extends Controller
         $project->region_id = $request->region_id;
         $project->save();
         $project->studys()->sync($request->studie_id);
-        // foreach ($request->file('file') as $fileRequest) {
-        //     $file = $fileRequest;
-        //     $fileName = $fileRequest->getClientOriginalName();
-        //     $filePath = 'project-inform/' . $id . '/' . $fileName;
-        //     echo file_get_contents($file);
-        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
-        // }
         return redirect()->route('proyectos.index');
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         /* -------------------------------------------------------------------------- */
