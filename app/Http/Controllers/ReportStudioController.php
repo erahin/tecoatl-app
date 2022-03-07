@@ -36,7 +36,9 @@ class ReportStudioController extends Controller
         $report->end_date = $request->end_date;
         $report->project_id = $request->project_id;
         $report->user_id = $request->user_id;
-        // $report->save();
+        $report->save();
+        $report = Report::latest('id')->first();
+
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */
         /* -------------------------------------------------------------------------- */
@@ -51,13 +53,13 @@ class ReportStudioController extends Controller
         foreach ($request->file('reports') as $fileRequest) {
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
-            $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $request->studio_id . '/' . $fileName;
+            $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $request->studio_id . '/' . $report->id . '/' . $fileName;
             Storage::disk('s3')->put($filePath, file_get_contents($file));
         }
         /* -------------------------------------------------------------------------- */
         /*                                 Redirect to                                */
         /* -------------------------------------------------------------------------- */
-        return redirect()->route('proyectos.index');
+        return redirect()->route('studies-list', $request->project_id);
     }
 
     public function show($id)

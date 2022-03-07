@@ -37,11 +37,14 @@
                                     <tr>
                                         <td>{{ $registre->name }}</td>
                                         <td><a href="{{ route('upload-reports', ['id' => $project->id, 'idStudio' => $registre->id]) }}"
-                                                class="btn btn-primary">Agregar
+                                                class="btn btn-outline-primary">Agregar
                                                 reportes</a>
-                                            <a href="{{ route('show-informs', ['idProject' => $project->id, 'idStudio' => $registre->id]) }}"
-                                                class="btn btn-secondary">Ver lista de
-                                                reportes</a>
+                                            <a href="{{ route('reports-list', ['id' => $project->id, 'idStudio' => $registre->id]) }}"
+                                                class="btn btn-outline-success">Lista de informes
+                                            </a>
+                                            {{-- <a href="{{ route('show-informs', ['idProject' => $project->id, 'idStudio' => $registre->id, 'idReport' => $report->id]) }}"
+                                                class="btn btn-outline-secondary">Ver lista de
+                                                reportes</a> --}}
                                         </td>
                                     </tr>
                                 @endforeach
