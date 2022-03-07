@@ -18,6 +18,7 @@ class CreateReportsTable extends Migration
             $table->integer('report_number');
             $table->date('start_date');
             $table->date('end_date');
+            $table->text('report_type');
             $table
                 ->foreignId('project_id')
                 ->nullable()
@@ -28,6 +29,12 @@ class CreateReportsTable extends Migration
                 ->foreignId('user_id')
                 ->nullable()
                 ->constrained('users')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table
+                ->foreignId('studio_id')
+                ->nullable()
+                ->constrained('studies')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->timestamps();

@@ -16,10 +16,17 @@ class Report extends Model
         return $this->belongsTo(Project::class, 'project_id');
     }
     /* -------------------------------------------------------------------------- */
-    /*                          Relation user and project                         */
+    /*                          Relation user and report                          */
     /* -------------------------------------------------------------------------- */
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    /* -------------------------------------------------------------------------- */
+    /*                         Relation studio with report                        */
+    /* -------------------------------------------------------------------------- */
+    public function studies()
+    {
+        return $this->belongsTo(Study::class, 'studio_id');
     }
 }
