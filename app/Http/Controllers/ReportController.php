@@ -8,6 +8,7 @@ use App\Models\Study;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use stdClass;
 
 class ReportController extends Controller
 {
@@ -57,16 +58,19 @@ class ReportController extends Controller
         /* -------------------------------------------------------------------------- */
         $files = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $project->id . '/' . $idStudio);
         /* -------------------------------------------------------------------------- */
-        /*                                Get only name                               */
+        /*                                Get file url                                */
         /* -------------------------------------------------------------------------- */
-        $fileName = [];
-        foreach ($files as $fileNameStorage) {
-            $fileArray = explode('/', $fileNameStorage);
-            array_push($fileName, $fileArray[4]);
+        $urls = [];
+        foreach ($files as $file) {
+            $url = Storage::url($file);
+            array_push($urls, $url);
         }
+        /* -------------------------------------------------------------------------- */
+        /*                            Return view and data                            */
+        /* -------------------------------------------------------------------------- */
         return view(
             'Report.show',
-            compact('project', 'fileName', 'studio')
+            compact('project', 'studio', 'urls', 'files')
         );
     }
 }

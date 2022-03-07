@@ -60,8 +60,6 @@
                                         <td class="d-flex justify-content-around">
                                             <a href="{{ route('studies-list', $project->id) }}" class="btn btn-primary">
                                                 Reportes</a>
-                                            <a href="{{ route('proyectos.show', $project->id) }}"
-                                                class="btn btn-secondary">Detalle</a>
                                             <a href="{{ route('proyectos.edit', $project->id) }}"
                                                 class="btn btn-success">Editar</a>
                                             <form action="{{ route('proyectos.destroy', $project->id) }}" method="post">

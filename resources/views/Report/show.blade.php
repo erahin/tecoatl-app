@@ -11,17 +11,22 @@
                     </div>
                     <div class="card-body">
                         {{-- <h2 class="h4"></h2> --}}
-                        <table class="table">
+                        <table class="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">Archivo</th>
+                                    <th scope="col">ARCHIVO</th>
+                                    <th scope="col">URL</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($fileName as $file)
+                                @foreach ($files as $file)
                                     <tr>
                                         <td>
-                                            {{ $file }}
+                                            {{ explode('/', $file)[4] }}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-primary"
+                                                href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}">Abrir</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -32,11 +37,4 @@
             </div>
         </div>
     </div>
-    {{-- @if ($id == $registre->id)
-        @foreach ($fileName as $files)
-            <tr>
-                <td>{{ $files }}</td>
-            </tr>
-        @endforeach
-    @endif --}}
 @endsection
