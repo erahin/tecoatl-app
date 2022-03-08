@@ -41,7 +41,7 @@
                         <div class="row mb-3">
                             {!! Form::label('studie_id', 'Estudios', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
-                            <div class="col-md-6">
+                            <div class="col-md-6 scroll-studies">
                                 <div class="form-check form-check-inline ml-5">
                                     @foreach ($studies as $study)
                                     <label class="form-check-label inline_label">

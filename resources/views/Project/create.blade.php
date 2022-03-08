@@ -38,7 +38,7 @@
                             {!! Form::label('studie_id', 'Estudios', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
                             <div class="col-md-6">
-                                <div class="form-check form-check-inline ml-5">
+                                <div class="form-check scroll-studies">
                                     @foreach ($studies as $study)
                                     <label class="form-check-label inline_label">
                                         {!! Form::checkbox('studie_id[]', $study->id, null, ['class' =>

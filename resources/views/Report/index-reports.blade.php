@@ -25,6 +25,10 @@
                         {{ session('status') }}
                     </div>
                     @endif
+                    <div class="d-flex justify-content-start flex-wrap mb-2">
+                        <a class="btn btn-outline-primary" href="{{ route('studies-list', $project->id) }}">Regresar
+                        </a>
+                    </div>
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
@@ -33,6 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($reports)
                             @foreach ($reports as $report)
                             <tr>
                                 <td>{{ $report->report_number }}</td>
@@ -51,6 +56,11 @@
                                 </td>
                             </tr>
                             @endforeach
+                            @else
+                            <tr>
+                                <td colspan="2">No existen informes</td>
+                            </tr>
+                            @endif
                         </tbody>
                     </table>
 

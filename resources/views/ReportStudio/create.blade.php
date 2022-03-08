@@ -21,7 +21,7 @@
                         <div class="row mb-3">
                             {!! Form::label('', 'Informes subidos', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
-                            <div class="col-md-6" style="height: 120px; overflow-y: scroll">
+                            <div class="col-md-6 scroll-studies">
                                 <ul class="list-group">
                                     @foreach ($reportsArray as $directorie)
                                     @foreach ($directorie as $dir)
@@ -98,6 +98,8 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {!! Form::submit('Crear', ['class' => 'btn btn-primary']) !!}
+                                <a class="btn btn-danger" href="{{ route('studies-list', $project->id) }}">Cancelar
+                                </a>
                             </div>
                         </div>
                     </form>

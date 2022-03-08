@@ -10,6 +10,7 @@ use AWS\CRT\HTTP\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use League\Flysystem\Filesystem;
 use stdClass;
 
 class ReportController extends Controller
@@ -127,13 +128,18 @@ class ReportController extends Controller
     {
         // $file = Storage::disk('s3')->get($file_path);
         // return Storage::url($file_path);
-        // return Storage::download($file);
+        $project = Project::find($idProject);
+        $region = strtolower($project->regions->name);
+        $pathToFile = Storage::disk('s3')->get('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile);
+        $headers = ['Content-Type: application/pdf'];
+        // return response()->download($pathToFile, $nameFile, $headers);
+        return Storage::download($pathToFile, $nameFile, $headers);
     }
     public function deleteFile($idProject, $idStudio,  $idReport, $nameFile)
     {
         $project = Project::find($idProject);
         $region = strtolower($project->regions->name);
-        Storage::disk('s3')->delete('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile . '/');
+        Storage::disk('s3')->delete('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile);
         return redirect()->route('show-informs', [$idProject, $idStudio, $idReport]);
     }
 }
