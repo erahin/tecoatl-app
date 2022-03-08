@@ -34,8 +34,10 @@ class ReportStudioController extends Controller
         $report->report_number = $request->report_number;
         $report->start_date = $request->start_date;
         $report->end_date = $request->end_date;
+        $report->report_type = $request->report_type;
         $report->project_id = $request->project_id;
         $report->user_id = $request->user_id;
+        $report->studio_id = $request->studio_id;
         $report->save();
         $report = Report::latest('id')->first();
 

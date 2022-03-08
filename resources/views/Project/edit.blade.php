@@ -57,11 +57,7 @@
                         @foreach ($studies as $study)
                         @if ($study->id == $registre->id)
                         <script>
-                            checkActive({
-                                {
-                                    $study - > id
-                                }
-                            });
+                            checkActive({{$study->id}});
 
                             function checkActive(idStudy) {
                                 let id = idStudy;

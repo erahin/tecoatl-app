@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Region;
 use App\Models\Report;
 use App\Models\Study;
+use AWS\CRT\HTTP\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +32,7 @@ class ReportController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                Find reports                                */
         /* -------------------------------------------------------------------------- */
-        $reports =  DB::select('select * from reports where project_id = ?', [$id]);
+        $reports =  DB::select('select * from reports where project_id = ? and studio_id = ?', [$id, $idStudio]);
         /* -------------------------------------------------------------------------- */
         /*                                 Get region                                 */
         /* -------------------------------------------------------------------------- */
@@ -121,5 +122,18 @@ class ReportController extends Controller
             'Report.show',
             compact('project', 'studio', 'urls', 'files', 'report')
         );
+    }
+    public function downloadFile($idProject, $idStudio,  $idReport, $nameFile)
+    {
+        // $file = Storage::disk('s3')->get($file_path);
+        // return Storage::url($file_path);
+        // return Storage::download($file);
+    }
+    public function deleteFile($idProject, $idStudio,  $idReport, $nameFile)
+    {
+        $project = Project::find($idProject);
+        $region = strtolower($project->regions->name);
+        Storage::disk('s3')->delete('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile . '/');
+        return redirect()->route('show-informs', [$idProject, $idStudio, $idReport]);
     }
 }

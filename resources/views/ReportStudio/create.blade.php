@@ -56,6 +56,15 @@
                             </div>
                         </div>
                         <div class="row mb-3">
+                            <label for="report_type" class="col-md-4 col-form-label text-md-end">Tipo de reporte</label>
+                            <div class="col-md-6">
+                                <select name="report_type" class="form-select">
+                                    <option value="Bimestral">Bimestral</option>
+                                    <option value="Anual">Anual</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             {!! Form::label('start_date', 'Fecha inicio', [
                             'class' => 'col-md-4 col-form-label
                             text-md-end',
