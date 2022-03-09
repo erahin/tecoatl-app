@@ -42,6 +42,7 @@ class ProjectController extends Controller
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;
         $project->region_id = $request->region_id;
+        $project->user_id = $request->user_id;
         $project->save();
         $project = Project::latest('id')->first();
         $project->studys()->attach($request->studie_id);
@@ -92,6 +93,7 @@ class ProjectController extends Controller
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;
         $project->region_id = $request->region_id;
+        $project->user_id = $request->user_id;
         // $project_studys = DB::select('select * from projects_studies where project_id = ?', [$id]);
         /* -------------------------------------------------------------------------- */
         /*                                 Get region                                 */

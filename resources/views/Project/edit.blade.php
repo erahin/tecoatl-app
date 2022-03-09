@@ -86,6 +86,7 @@
                                 'required']) !!}
                             </div>
                         </div> --}}
+                            {!! Form::number('user_id', Auth::user()->id, ['class' => 'form-control', 'hidden', 'required']) !!}
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}

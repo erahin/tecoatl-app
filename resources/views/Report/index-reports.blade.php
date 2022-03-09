@@ -33,14 +33,25 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Número de informe</th>
+                                    <th scope="col">Tipo de reporte</th>
+                                    <th scope="col">Fecha inicio</th>
+                                    <th scope="col">Fecha final</th>
                                     <th scope="col" colspan="1">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($reports == null)
+                                    <tr>
+                                        <td colspan="2">No existen informes</td>
+                                    </tr>
+                                @endif
                                 @if ($reports)
                                     @foreach ($reports as $report)
                                         <tr>
-                                            <td>{{ $report->report_number }}</td>
+                                            <td>{{ $report->report_number }}° informe</td>
+                                            <td>{{ $report->report_type }}</td>
+                                            <td>{{ $report->start_date }}</td>
+                                            <td>{{ $report->end_date }}</td>
                                             <td>
                                                 <a href="{{ route('show-informs', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id]) }}"
                                                     class="btn btn-outline-secondary">Lista de archivos</a>
@@ -51,10 +62,6 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="2">No existen informes</td>
-                                    </tr>
                                 @endif
                             </tbody>
                         </table>

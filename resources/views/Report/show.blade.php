@@ -20,8 +20,8 @@
                                 href="{{ route('reports-list', ['id' => $project->id, 'idStudio' => $studio->id]) }}">Regresar
                             </a>
                         </div>
-                        <h2 class="h6 text-center">Ruta: {{ $project->abbreviation }}/{{ $studio->name }}/Reporte
-                            {{ $report->report_number }}
+                        <h2 class="h6 text-center">Ruta:
+                            {{ $project->abbreviation }}/{{ $studio->name }}/{{ $report->report_number }}° Reporte
                         </h2>
                         {{-- <h2 class="h4"></h2> --}}
                         <table class="table table-hover table-bordered">

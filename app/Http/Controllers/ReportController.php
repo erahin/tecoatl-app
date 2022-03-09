@@ -15,7 +15,7 @@ use stdClass;
 
 class ReportController extends Controller
 {
-    public function studiesList($id) //ok
+    public function studiesList($id)
     {
         $project = Project::find($id);
         return view('Report.index', compact('project'));
@@ -33,23 +33,14 @@ class ReportController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                Find reports                                */
         /* -------------------------------------------------------------------------- */
-        $reports =  DB::select('select * from reports where project_id = ? and studio_id = ?', [$id, $idStudio]);
-        /* -------------------------------------------------------------------------- */
-        /*                                 Get region                                 */
-        /* -------------------------------------------------------------------------- */
-        $region = strtolower($project->regions->name);
-        /* -------------------------------------------------------------------------- */
-        /*                                Get all files                               */
-        /* -------------------------------------------------------------------------- */
-        // $files = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $id . '/' . $idStudio . '/');
-        // /* -------------------------------------------------------------------------- */
-        // /*                                Get only name                               */
-        // /* -------------------------------------------------------------------------- */
-        // $fileName = [];
-        // foreach ($files as $fileNameStorage) {
-        //     $fileArray = explode('/', $fileNameStorage);
-        //     array_push($fileName, $fileArray[4]);
-        // }
+        $reports = DB::table('reports')
+            ->join('studies', 'reports.studio_id', '=', 'studies.id')
+            ->join('projects_studies', 'studies.id', '=', 'projects_studies.study_id')
+            ->join('projects', 'projects_studies.project_id', '=', 'projects.id')
+            ->select('reports.*')
+            ->where('projects.id', '=', $id)
+            ->where('studies.id', '=', $idStudio)
+            ->get();
         return view('Report.index-reports', compact('project', 'studio', 'reports'));
     }
     public function uploadReports($id, $idStudio)
@@ -66,6 +57,7 @@ class ReportController extends Controller
         /*                                Get all files                               */
         /* -------------------------------------------------------------------------- */
         $files = Storage::disk('s3')->directories('tecnico/' . $region . '/' . $id . '/' . $idStudio);
+        // return $files;
         /* -------------------------------------------------------------------------- */
         /*                                Get only directory                          */
         /* -------------------------------------------------------------------------- */
@@ -74,6 +66,9 @@ class ReportController extends Controller
             $fileArray = explode('/', $fileNameStorage);
             array_push($fileDirectorie, (int)$fileArray[4]);
         }
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get reports                                */
+        /* -------------------------------------------------------------------------- */
         $reportsArray = [];
         if ($fileDirectorie) {
             foreach ($fileDirectorie as $reports) {
@@ -81,7 +76,6 @@ class ReportController extends Controller
                 if ($report_find) {
                     array_push($reportsArray, $report_find[0]);
                 }
-                break;
             }
         }
         // return $reportsArray;
