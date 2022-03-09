@@ -60,7 +60,8 @@ Route::get('/subir-informes/proyecto/{id}/estudio/{idStudio}', [ReportController
 Route::get('/proyecto/{idProject}/estudio/{idStudio}/consultar-informes/{idReport}', [ReportController::class, 'showInforms'])->name('show-informs')->middleware('auth');
 Route::get('descargar-archivo/{idProject}/{idStudio}/{idReport}/{nameFile}', [ReportController::class, 'downloadFile'])->name('downloadFile')->middleware('auth');
 Route::get('eliminar-archivo/{idProject}/{idStudio}/{idReport}/{nameFile}', [ReportController::class, 'deleteFile'])->name('deleteFile')->middleware('auth');
-
+Route::get('eliminar-directorio-estudio/{idProject}/{idStudio}', [ReportController::class, 'deleteStudioDirectory'])->name('deleteStudioDirectory')->middleware('auth');
+Route::get('eliminar-directorio-reporte/{idProject}/{idStudio}/{idReport}', [ReportController::class, 'deleteReportsDirectory'])->name('deleteReportsDirectory')->middleware('auth');
 /* -------------------------------------------------------------------------- */
 /*                                Report Route                                */
 /* -------------------------------------------------------------------------- */

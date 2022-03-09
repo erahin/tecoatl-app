@@ -142,4 +142,21 @@ class ReportController extends Controller
         Storage::disk('s3')->delete('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile);
         return redirect()->route('show-informs', [$idProject, $idStudio, $idReport]);
     }
+    public function deleteStudioDirectory($idProject, $idStudio)
+    {
+        $project = Project::find($idProject);
+        $region = strtolower($project->regions->name);
+        $project->studys()->detach($idStudio);
+        Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/');
+        return redirect()->route('studies-list', [$idProject, $idStudio]);
+    }
+    public function deleteReportsDirectory($idProject, $idStudio,  $idReport)
+    {
+        $project = Project::find($idProject);
+        $region = strtolower($project->regions->name);
+        Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/');
+        $report = Report::find($idReport);
+        $report->delete();
+        return redirect()->route('reports-list', [$idProject, $idStudio]);
+    }
 }

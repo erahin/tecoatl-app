@@ -61,45 +61,6 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        // /* -------------------------------------------------------------------------- */
-        // /*                                 Return data                                */
-        // /* -------------------------------------------------------------------------- */
-        // $regions = Region::pluck('name', 'id');
-        // $studies = Study::all();
-        // $project = Project::find($id);
-        // /* -------------------------------------------------------------------------- */
-        // /*                                 Get region                                 */
-        // /* -------------------------------------------------------------------------- */
-        // $region = strtolower($project->regions->name);
-        // /* -------------------------------------------------------------------------- */
-        // /*                                 Get studies                                */
-        // /* -------------------------------------------------------------------------- */
-        // $studies = DB::select('select study_id from projects_studies where project_id = ?', [$id]);
-        // /* -------------------------------------------------------------------------- */
-        // /*                                Get all files                               */
-        // /* -------------------------------------------------------------------------- */
-        // $arrayFiles = [];
-        // $arrayID = [];
-        // foreach ($studies as $studio) {
-        //     $files = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $id . '/' . $studio->study_id);
-        //     array_push($arrayFiles, $files);
-        //     array_push($arrayID, $studio->study_id);
-        // }
-        // /* -------------------------------------------------------------------------- */
-        // /*                                Get only name                               */
-        // /* -------------------------------------------------------------------------- */
-        // $fileName = [];
-        // foreach ($arrayFiles as $fileNameStorage) {
-        //     foreach ($fileNameStorage as $key) {
-        //         $fileArray = explode('/', $key);
-        //         array_push($fileName, $fileArray[4]);
-        //     }
-        // }
-
-        // return view(
-        //     'Project.show',
-        //     compact('regions', 'project', 'arrayID', 'arrayFiles', 'studies')
-        // );
     }
 
     public function edit($id)
@@ -131,6 +92,24 @@ class ProjectController extends Controller
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;
         $project->region_id = $request->region_id;
+        // $project_studys = DB::select('select * from projects_studies where project_id = ?', [$id]);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get region                                 */
+        /* -------------------------------------------------------------------------- */
+        // $region = Region::find($request->region_id);
+        // $region = strtolower($region->name);
+        // /* -------------------------------------------------------------------------- */
+        // /*                              Update directory                              */
+        // /* -------------------------------------------------------------------------- */
+        // foreach ($project->studys as $registre) {
+        //     foreach ($request->studie_id as $key) {
+        //         // if ($key == $registre->id) {
+        //         //     Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $registre->id);
+        //         // } else {
+        //         //     Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $project->id . '/' . $registre->id);
+        //         // }
+        //     }
+        // }
         $project->save();
         $project->studys()->sync($request->studie_id);
         return redirect()->route('proyectos.index');
