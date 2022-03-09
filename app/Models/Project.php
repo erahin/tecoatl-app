@@ -25,8 +25,8 @@ class Project extends Model
     /* -------------------------------------------------------------------------- */
     /*                        Relation project and reports                        */
     /* -------------------------------------------------------------------------- */
-    public function reports()
-    {
-        return $this->hasMany(Report::class, 'id');
-    }
+    // public function reports()
+    // {
+    //     return $this->hasMany(Report::class, 'id');
+    // }
 }
