@@ -13,7 +13,8 @@
 .card-body {
     overflow-x: scroll;
 }
-.scroll-studies {
+.scroll-studies,
+.scroll-roles {
     height: 120px;
     overflow-y: scroll;
 }

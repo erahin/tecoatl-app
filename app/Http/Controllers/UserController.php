@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+
 class UserController extends Controller
 {
     /**
@@ -74,8 +76,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $roles = Role::all();
         $user = User::find($id);
-        return view('User.edit', compact('user'));
+        return view('User.edit', compact('user', 'roles'));
     }
 
     /**
@@ -97,6 +100,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
+        $user->roles()->sync($request->roles);
         return redirect()->route('usuarios.index');
     }
 
