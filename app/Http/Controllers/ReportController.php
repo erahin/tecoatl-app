@@ -120,14 +120,10 @@ class ReportController extends Controller
     }
     public function downloadFile($idProject, $idStudio,  $idReport, $nameFile)
     {
-        // $file = Storage::disk('s3')->get($file_path);
-        // return Storage::url($file_path);
         $project = Project::find($idProject);
         $region = strtolower($project->regions->name);
-        $pathToFile = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport);
-        // dd($pathToFile);
-        // return response()->download($pathToFile, $nameFile, $headers);
-        return Storage::download($pathToFile[0], $nameFile);
+        $pathToFile = Storage::disk('s3')->path('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile);
+        return Storage::disk('s3')->download($pathToFile);
     }
     public function deleteFile($idProject, $idStudio,  $idReport, $nameFile)
     {
