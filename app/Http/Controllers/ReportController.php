@@ -124,10 +124,10 @@ class ReportController extends Controller
         // return Storage::url($file_path);
         $project = Project::find($idProject);
         $region = strtolower($project->regions->name);
-        $pathToFile = Storage::disk('s3')->get('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile);
-        $headers = ['Content-Type: application/pdf'];
+        $pathToFile = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport);
+        // dd($pathToFile);
         // return response()->download($pathToFile, $nameFile, $headers);
-        return Storage::download($pathToFile, $nameFile, $headers);
+        return Storage::download($pathToFile[0], $nameFile);
     }
     public function deleteFile($idProject, $idStudio,  $idReport, $nameFile)
     {
@@ -152,5 +152,21 @@ class ReportController extends Controller
         $report = Report::find($idReport);
         $report->delete();
         return redirect()->route('reports-list', [$idProject, $idStudio]);
+    }
+    public function reportEdit($id, $idStudio, $idProject)
+    {
+        $report = Report::find($id);
+        $project = Project::find($idProject);
+        $region = strtolower($project->regions->name);
+        $allfiles = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $id . '/');
+        /* -------------------------------------------------------------------------- */
+        /*                                Get file url                                */
+        /* -------------------------------------------------------------------------- */
+        $files = [];
+        foreach ($allfiles as $file) {
+            $url = Storage::url($file);
+            array_push($files, $url);
+        }
+        return view('ReportStudio.edit', compact('report', 'files', 'project', 'idStudio'));
     }
 }

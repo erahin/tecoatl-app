@@ -38,10 +38,9 @@
                                 @foreach ($studies as $study)
                                     <tr>
                                         <td>{{ $study->name }}</td>
-                                        <td><a href="{{ route('estudios.edit', $study->id) }}"
-                                                class="btn btn-success">Editar</a>
-                                        </td>
-                                        <td>
+                                        <td class="d-flex justify-content-start"><a
+                                                href="{{ route('estudios.edit', $study->id) }}"
+                                                class="btn btn-success ancla">Editar</a>
                                             <form action="{{ route('estudios.destroy', $study->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')

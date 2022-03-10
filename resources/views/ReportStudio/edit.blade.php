@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center text-primary">Crear Informe.
+                    <h1 class="text-center text-primary">Editar Informe {{ $report->report_number }}.
                     </h1>
                 </div>
                 <div class="card-body">
@@ -15,20 +15,23 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <form method="POST" action="{{ route('informes.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('informes.update', $report->id) }}"
+                        enctype="multipart/form-data">
                         @csrf
-                        @if ($reportsArray)
+                        @method('PUT')
+                        @if ($files)
                         <div class="row mb-3">
-                            {!! Form::label('', 'Informes subidos', ['class' => 'col-md-4 col-form-label text-md-end'])
+                            {!! Form::label('', 'Archivos subidos', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
                             <div class="col-md-6 scroll-studies">
                                 <ul class="list-group">
-                                    @foreach ($reportsArray as $directorie)
-                                    @foreach ($directorie as $dir)
+                                    @foreach ($files as $file)
+                                    {{-- @foreach ($directory as $file) --}}
                                     <li class="list-group-item">
-                                        {!! Form::checkbox('files[]', $dir, 'true', ['class' => 'form-check-input']) !!}
-                                        {{ $dir }} informe</li>
-                                    @endforeach
+                                        {!! Form::checkbox('files[]', $file, 'true', ['class' =>
+                                        'form-check-input']) !!}
+                                        {{explode('/', $file)[7]}} </li>
+                                    {{-- @endforeach --}}
                                     @endforeach
                                 </ul>
                             </div>
@@ -41,8 +44,8 @@
                             text-md-end',
                             ]) !!}
                             <div class="col-md-6">
-                                {!! Form::number('report_number', '', ['class' => 'form-control', 'autofocus',
-                                'required', 'autofocus']) !!}
+                                {!! Form::number('report_number', $report->report_number , ['class' =>
+                                'form-control','required']) !!}
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -59,19 +62,25 @@
                             <label for="report_type" class="col-md-4 col-form-label text-md-end">Tipo de reporte</label>
                             <div class="col-md-6">
                                 <select name="report_type" class="form-select">
-                                    <option value="" selected>Seleccione</option>
-                                    <option value="Bimestral">Bimestral</option>
+                                    <option value="">Seleccione</option>
+                                    @if ($report->report_type == "Bimestral")
+                                    <option value="Bimestral" selected>Bimestral</option>
                                     <option value="Anual">Anual</option>
+                                    @else
+                                    <option value="Bimestral">Bimestral</option>
+                                    <option value="Anual" selected>Anual</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            {!! Form::label('start_date', 'Fecha inicio', [
+                            {!! Form::label('start_date' ,'Fecha inicio', [
                             'class' => 'col-md-4 col-form-label
                             text-md-end',
                             ]) !!}
                             <div class="col-md-6">
-                                {!! Form::date('start_date', '', ['class' => 'form-control', 'required']) !!}
+                                {!! Form::date('start_date', $report->start_date, ['class' => 'form-control',
+                                'required']) !!}
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -80,7 +89,8 @@
                             text-md-end',
                             ]) !!}
                             <div class="col-md-6">
-                                {!! Form::date('end_date', '', ['class' => 'form-control', 'required']) !!}
+                                {!! Form::date('end_date', $report->end_date, ['class' => 'form-control', 'required'])
+                                !!}
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -98,8 +108,9 @@
                         {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden', 'required']) !!}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                {!! Form::submit('Crear', ['class' => 'btn btn-primary']) !!}
-                                <a class="btn btn-danger" href="{{ route('studies-list', $project->id) }}">Cancelar
+                                {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}
+                                <a class="btn btn-danger"
+                                    href="{{ route('reports-list',[ 'id' => $project->id, 'idStudio' => $idStudio]) }}">Cancelar
                                 </a>
                             </div>
                         </div>

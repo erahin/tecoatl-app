@@ -6,15 +6,18 @@ use App\Models\Project;
 use App\Models\Region;
 use App\Models\Study;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::paginate(10);
         $regions = Region::all();
+        if ($request->search) {
+            $projects = Project::where('place', 'like', $request->search)->paginate(10);
+        } else {
+            $projects = Project::paginate(10);
+        }
         return view('Project.index', compact('projects', 'regions'));
     }
 

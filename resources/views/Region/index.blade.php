@@ -38,9 +38,9 @@
                                 @foreach ($regions as $region)
                                     <tr>
                                         <td>{{ $region->name }}</td>
-                                        <td><a href="{{ route('regiones.edit', $region->id) }}"
-                                                class="btn btn-success">Editar</a></td>
-                                        <td>
+                                        <td class="d-flex justify-content-start">
+                                            <a href="{{ route('regiones.edit', $region->id) }}"
+                                                class="btn btn-success ancla">Editar</a>
                                             <form action="{{ route('regiones.destroy', $region->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')

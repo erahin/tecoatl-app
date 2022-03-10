@@ -17,3 +17,7 @@
     height: 120px;
     overflow-y: scroll;
 }
+.ancla {
+    display: inline-block;
+    margin-right: 10px;
+}

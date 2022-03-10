@@ -9,14 +9,14 @@
                         <h1 class="text-center text-primary">Lista de Proyectos.
                         </h1>
                         <div>
-                            <div class="input-group d-flex justify-content-end">
+                            <form action="{{ route('proyectos.index') }}" class="input-group d-flex justify-content-end">
                                 <div class="form-outline">
-                                    <input type="search" id="form1" class="form-control" placeholder="Buscar" />
+                                    <input type="text" name="search" class="form-control" placeholder="Buscar" required />
                                 </div>
-                                <button type="button" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-search"></i>
                                 </button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="card-body">
@@ -26,12 +26,12 @@
                             </div>
                         @endif
                         <div class="d-flex justify-content-start flex-wrap">
-                            <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}" role="button">
+                            <a class=" btn btn-primary my-2 ancla" href="{{ route('proyectos.create') }}" role="button">
                                 Crear
                                 Proyectos</a>
-                            {{-- <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}" role="button">
-                            Crear
-                            Proyectos</a> <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}"
+                            <a class=" btn btn-secondary my-2" href="{{ route('proyectos.index') }}" role="button">
+                                Lista completa</a>
+                            {{-- <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}"
                             role="button">
                             Crear
                             Proyectos</a> <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}"
@@ -57,11 +57,12 @@
                                         <td>{{ $project->place }}</td>
                                         <td>{{ $project->abbreviation }}</td>
                                         <td>{{ $project->regions->name }}</td>
-                                        <td class="d-flex justify-content-around">
-                                            <a href="{{ route('studies-list', $project->id) }}" class="btn btn-primary">
+                                        <td class="d-flex justify-content-start">
+                                            <a href="{{ route('studies-list', $project->id) }}"
+                                                class="btn btn-primary ancla">
                                                 Reportes</a>
                                             <a href="{{ route('proyectos.edit', $project->id) }}"
-                                                class="btn btn-success">Editar</a>
+                                                class="btn btn-success ancla">Editar</a>
                                             <form action="{{ route('proyectos.destroy', $project->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
