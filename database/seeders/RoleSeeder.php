@@ -25,7 +25,7 @@ class RoleSeeder extends Seeder
         /*                            Super User Permission                           */
         /* -------------------------------------------------------------------------- */
         /* Home */
-        Permission::create(['name' => 'home'])->syncRoles([$role1, $role2, $role3]);
+        // Permission::create(['name' => 'home'])->syncRoles([$role1, $role2, $role3]);
         /* Users Module */
         Permission::create(['name' => 'usuarios.index'])->syncRoles([$role1]);
         Permission::create(['name' => 'usuarios.create'])->syncRoles([$role1]);
@@ -58,9 +58,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'informes.store'])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'informes.create'])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'reports-list'])->syncRoles([$role1, $role2, $role3]);
+        Permission::create(['name' => 'studies-list'])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'upload-reports'])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'show-informs'])->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'downloadFile'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'downloadFile'])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'deleteFile'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'deleteStudioDirectory'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'deleteReportsDirectory'])->syncRoles([$role1, $role2]);

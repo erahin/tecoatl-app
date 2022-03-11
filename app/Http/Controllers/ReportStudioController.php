@@ -9,14 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ReportStudioController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-    public function create()
-    {
-        // return view('ReportStudio.create');
-    }
     public function store(Request $request)
     {
         /* -------------------------------------------------------------------------- */
@@ -65,14 +57,6 @@ class ReportStudioController extends Controller
         return redirect()->route('studies-list', $request->project_id);
     }
 
-    public function show($id)
-    {
-        //
-    }
-    public function edit($id)
-    {
-    }
-
     public function update(Request $request, $id)
     {
         /* -------------------------------------------------------------------------- */
@@ -117,10 +101,5 @@ class ReportStudioController extends Controller
         /* -------------------------------------------------------------------------- */
         // return redirect()->route('studies-list', $request->project_id);
         return redirect()->route('reports-list', [$project->id, $request->studio_id]);
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }

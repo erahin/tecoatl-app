@@ -52,113 +52,113 @@
                     <ul class="navbar-nav ms-auto grt-menu">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+                        @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                        @endif
                         @else
-                            {{-- <li class="nav-item">
-                                <a class="nav-link gtr-menu__li" href="{{ url('/') }}">{{ __('INICIO') }}</a>
-                            </li> --}}
-                            <li class="nav-item dropdown text-uppercase">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ 'Proyectos' }}
+                        {{-- <li class="nav-item">
+                            <a class="nav-link gtr-menu__li" href="{{ url('/') }}">{{ __('INICIO') }}</a>
+                        </li> --}}
+                        <li class="nav-item dropdown text-uppercase">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ 'Proyectos' }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                @can('estudios.index')
+                                <a class="dropdown-item" href="{{ route('estudios.index') }}">
+                                    {{ __('Estudios') }}
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('estudios.index') }}">
-                                        {{ __('Estudios') }}
-                                    </a>
-                                    <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="{{ route('regiones.index') }}">
-                                        {{ __('Regiones') }}
-                                    </a>
-                                    <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="{{ route('proyectos.index') }}">
-                                        {{ __('Proyectos') }}
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown text-uppercase">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ 'OPCIÓN' }}
+                                <hr class="dropdown-divider">
+                                @endcan
+                                @can('regiones.index')
+                                <a class="dropdown-item" href="{{ route('regiones.index') }}">
+                                    {{ __('Regiones') }}
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();">
-                                        {{ __('A') }}
-                                    </a>
-                                    <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();">
-                                        {{ __('b') }}
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown text-uppercase">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ 'OPCIÓN' }}
+                                <hr class="dropdown-divider">
+                                @endcan
+                                @can('proyectos.index')
+                                <a class="dropdown-item" href="{{ route('proyectos.index') }}">
+                                    {{ __('Proyectos') }}
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();">
-                                        {{ __('A') }}
-                                    </a>
-                                    <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();">
-                                        {{ __('b') }}
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown text-uppercase">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ 'OPCIÓN' }}
+                                @endcan
+                            </div>
+                        </li>
+                        {{-- <li class="nav-item dropdown text-uppercase">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ 'OPCIÓN' }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
+                                    {{ __('A') }}
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();">
-                                        {{ __('A') }}
-                                    </a>
-                                    <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();">
-                                        {{ __('b') }}
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                    href="{{ route('usuarios.index') }}">{{ __('USUARIOS') }}</a>
-                            </li>
-                            <li class="nav-item dropdown text-uppercase">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
+                                    {{ __('b') }}
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown text-uppercase">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ 'OPCIÓN' }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
+                                    {{ __('A') }}
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
+                                    {{ __('b') }}
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown text-uppercase">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ 'OPCIÓN' }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
+                                    {{ __('A') }}
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
+                                    {{ __('b') }}
+                                </a>
+                            </div>
+                        </li> --}}
+                        @can('usuarios.index')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('usuarios.index') }}">{{ __('USUARIOS') }}</a>
+                        </li>
+                        @endcan
+                        <li class="nav-item dropdown text-uppercase">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
                                                                                                                                                                                                          document.getElementById('logout-form').submit();">
-                                        {{ __('SALIR') }}
-                                    </a>
+                                    {{ __('SALIR') }}
+                                </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                         @endguest
                     </ul>
                 </div>

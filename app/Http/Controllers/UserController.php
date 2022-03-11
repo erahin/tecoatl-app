@@ -27,7 +27,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('User.create');
+        $roles = Role::all();
+        return view('User.create', compact('roles'));
     }
 
     /**
@@ -54,6 +55,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
+        $user->roles()->attach($request->roles);
         return redirect()->route('usuarios.index');
     }
 

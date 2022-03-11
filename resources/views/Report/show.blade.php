@@ -40,13 +40,15 @@
                                 <td>
                                     <a target="_blank" class="btn btn-outline-primary"
                                         href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}">Abrir</a>
-                                    {{-- <a class="btn btn-outline-secondary"
-                                        href="{{ route('downloadFile', ['file_path' => $file]) }}">Descargar</a> --}}
+                                    @can('downloadFile')
                                     <a class="btn btn-outline-secondary"
                                         href="{{ route('downloadFile', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id, 'nameFile' => explode('/', $file)[5]]) }}">Descargar</a>
+                                    @endcan
+                                    @can('deleteFile')
                                     <a class="btn btn-outline-danger"
                                         href="{{ route('deleteFile', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id,'nameFile' => explode('/', $file)[5]]) }}"
                                         onclick="return confirm( '¿Está seguro de eliminar {{ explode('/', $file)[5] }}?') ">Eliminar</a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

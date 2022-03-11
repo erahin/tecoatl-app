@@ -65,5 +65,5 @@ Route::get('eliminar-directorio-reporte/{idProject}/{idStudio}/{idReport}', [Rep
 /* -------------------------------------------------------------------------- */
 /*                                Report Route                                */
 /* -------------------------------------------------------------------------- */
-Route::resource('informes', ReportStudioController::class)->middleware('auth');
+Route::resource('informes', ReportStudioController::class)->only(['store', 'update'])->middleware('auth');
 Route::get('informes-editar/{id}/estudio/{idStudio}/proyecto/{idProject}', [ReportController::class, 'reportEdit'])->name('report-edit')->middleware('auth');

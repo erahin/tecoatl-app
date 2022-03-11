@@ -53,15 +53,21 @@
                                 <td>{{ $report->start_date }}</td>
                                 <td>{{ $report->end_date }}</td>
                                 <td>
+                                    @can('show-informs')
                                     <a href="{{ route('show-informs', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id]) }}"
                                         class="btn btn-outline-secondary">Lista de archivos</a>
+                                    @endcan
+                                    @can('report-edit')
                                     <a href="{{ route('report-edit', ['id' => $report->id, 'idStudio' => $studio->id, 'idProject' => $project->id]) }}"
                                         class="btn btn-outline-success">Agregar
                                         más archivos</a>
+                                    @endcan
+                                    @can('deleteReportsDirectory')
                                     <a href="{{ route('deleteReportsDirectory', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id]) }}"
                                         class="btn btn-outline-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ $report->report_number }} informe, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') ">Eliminar
                                         carpeta</a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
