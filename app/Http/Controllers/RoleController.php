@@ -39,7 +39,7 @@ class RoleController extends Controller
     {
         $permissions = Permission::all();
         $role = Role::find($id);
-        return view('Role.edit', compact('permissions'));
+        return view('Role.edit', compact('permissions', 'role'));
     }
 
     public function update(Request $request, $id)
@@ -59,7 +59,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $role = Role::find($id);
-        $role->destroy();
+        $role->delete();
         return redirect()->route('roles.index');
     }
 }

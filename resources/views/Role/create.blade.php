@@ -13,11 +13,15 @@
                     <form method="POST" action="{{ route('roles.store') }}">
                         @csrf
                         <div class="row mb-3">
-                            {!! Form::label('name', 'Nombre del rol', ['class' => 'col-md-4 col-form-label
+                            {!! Form::label('', 'Nombre del rol', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('name', '', ['class' => 'form-control', 'autofocus', 'required',
                                 'autofocus']) !!}
+                                @error('name')
+                                <strong class="text-danger text-center">{{ 'El campo nombre del rol es obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -26,7 +30,7 @@
                             <div class="col-md-6">
                                 <div class="form-check scroll-permissions">
                                     @foreach ($permissions as $permission)
-                                    <label class="form-check-label inline_label">
+                                    <label class="form-check-label inline_label" required>
                                         {!! Form::checkbox('roles[]', $permission->id, null, ['class' =>
                                         'form-check-input',
                                         'id' => $permission->id])
@@ -35,6 +39,10 @@
                                     </label>
                                     @endforeach
                                 </div>
+                                @error('permissions')
+                                <strong class="text-danger text-center">{{ 'El campo permisos es obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-0">
