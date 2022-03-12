@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:proyectos.index')->only('index');
+        $this->middleware('can:proyectos.create')->only('create', 'store');
+        $this->middleware('can:proyectos.edit')->only('edit', 'update');
+        $this->middleware('can:proyectos.destoy')->only('destoy');
+    }
     public function index(Request $request)
     {
         $regions = Region::all();
@@ -61,10 +68,6 @@ class ProjectController extends Controller
             Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
         }
         return redirect()->route('proyectos.index');
-    }
-
-    public function show($id)
-    {
     }
 
     public function edit($id)

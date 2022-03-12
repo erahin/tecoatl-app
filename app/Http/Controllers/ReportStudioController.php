@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ReportStudioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:informes.create')->only('create', 'store');
+    }
     public function store(Request $request)
     {
         /* -------------------------------------------------------------------------- */

@@ -9,34 +9,26 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('can:usuarios.index')->only('index');
+        $this->middleware('can:usuarios.create')->only('create', 'store');
+        $this->middleware('can:usuarios.edit')->only('edit', 'update');
+        $this->middleware('can:usuarios.destoy')->only('destoy');
+    }
+
     public function index()
     {
         $users = User::paginate(10);
         return view('User.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roles = Role::all();
         return view('User.create', compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -59,23 +51,6 @@ class UserController extends Controller
         return redirect()->route('usuarios.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $roles = Role::all();
@@ -83,13 +58,6 @@ class UserController extends Controller
         return view('User.edit', compact('user', 'roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -106,12 +74,6 @@ class UserController extends Controller
         return redirect()->route('usuarios.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $user = User::find($id);

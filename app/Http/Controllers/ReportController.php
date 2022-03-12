@@ -3,18 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Models\Region;
 use App\Models\Report;
 use App\Models\Study;
-use AWS\CRT\HTTP\Response;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use League\Flysystem\Filesystem;
-use stdClass;
 
 class ReportController extends Controller
 {
+
     public function studiesList($id)
     {
         $project = Project::find($id);
