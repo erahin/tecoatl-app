@@ -4,6 +4,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportStudioController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -69,3 +70,7 @@ Route::get('eliminar-directorio-reporte/{idProject}/{idStudio}/{idReport}', [Rep
 /* -------------------------------------------------------------------------- */
 Route::resource('informes', ReportStudioController::class)->only(['store', 'update'])->middleware('auth');
 Route::get('informes-editar/{id}/estudio/{idStudio}/proyecto/{idProject}', [ReportController::class, 'reportEdit'])->name('report-edit')->middleware('report-edit')->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                                 Roles Route                                */
+/* -------------------------------------------------------------------------- */
+Route::resource('roles', RoleController::class)->except('show')->middleware('auth');

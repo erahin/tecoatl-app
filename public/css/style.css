@@ -14,9 +14,13 @@
     overflow-x: scroll;
 }
 .scroll-studies,
-.scroll-roles {
-    height: 120px;
+.scroll-roles,
+.scroll-permissions {
+    height: 150px;
     overflow-y: scroll;
+}
+.scroll-permissions {
+    height: 200px;
 }
 .ancla {
     display: inline-block;

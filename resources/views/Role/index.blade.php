@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center text-primary">Lista de Usuarios.
+                    <h1 class="text-center text-primary">Lista de Roles.
                     </h1>
                     <div>
                         <div class="input-group d-flex justify-content-end">
@@ -25,36 +25,33 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <a class="btn btn-primary my-2" href="{{ route('usuarios.create') }}" role="button">Crear
+                    <a class="btn btn-primary my-2" href="{{ route('roles.create') }}" role="button">Crear
                         Usuario</a>
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">Nombre de usuario</th>
-                                <th scope="col">Correo</th>
+                                <th scope="col">Nombre del rol</th>
                                 <th scope="col" colspan="2">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($roles as $role)
                             <tr>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td class="d-flex justify-content-start"><a
-                                        href="{{ route('usuarios.edit', $user->id) }}"
+                                <td>{{ $role->name }}</td>
+                                <td class="d-flex justify-content-start"><a href="{{ route('roles.edit', $role->id) }}"
                                         class="btn btn-success ancla">Editar</a>
-                                    <form action="{{ route('usuarios.destroy', $user->id) }}" method="post">
+                                    <form action="{{ route('roles.destroy', $role->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <input type="submit" value="Eliminar" class="btn btn-danger"
-                                            onclick="return confirm( '¿Está seguro de eliminar {{ $user->name }}?') ">
+                                            onclick="return confirm( '¿Está seguro de eliminar {{ $role->name }}?') ">
                                     </form>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $users->links() }}
+                    {{ $roles->links() }}
                 </div>
             </div>
         </div>
