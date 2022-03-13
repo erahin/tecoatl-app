@@ -48,6 +48,7 @@
                             <tr>
                                 <th scope="col">Lugar</th>
                                 <th scope="col">Abreviación</th>
+                                <th scope="col">Estatus</th>
                                 <th scope="col">Región</th>
                                 <th scope="col" colspan="2">Acciones</th>
                             </tr>
@@ -57,6 +58,7 @@
                             <tr>
                                 <td>{{ $project->place }}</td>
                                 <td>{{ $project->abbreviation }}</td>
+                                <td>{{ $status[$project->status] }}</td>
                                 <td>{{ $project->regions->name }}</td>
                                 <td class="d-flex justify-content-start">
                                     @can('studies-list')

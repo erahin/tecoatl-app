@@ -19,20 +19,23 @@ class ProjectController extends Controller
     }
     public function index(Request $request)
     {
+        $status = ["Por iniciar", "En desarrollo", "Concluido"];
         $regions = Region::all();
         if ($request->search) {
             $projects = Project::where('place', 'like', $request->search)->paginate(10);
         } else {
             $projects = Project::paginate(10);
         }
-        return view('Project.index', compact('projects', 'regions'));
+        return view('Project.index', compact('projects', 'regions', 'status'));
     }
 
     public function create()
     {
+
         $regions = Region::pluck('name', 'id');
+        $status = ["Por iniciar", "En desarrollo", "Concluido"];
         $studies = Study::all();
-        return view('Project.create', compact('regions', 'studies'));
+        return view('Project.create', compact('regions', 'studies', 'status'));
     }
 
     public function store(Request $request)
@@ -43,6 +46,7 @@ class ProjectController extends Controller
         $request->validate([
             'place' => 'required',
             'abbreviation' => 'required',
+            'status' => 'required',
             'region_id' => 'required',
             'studie_id' => 'required|min:1'
         ]);
@@ -52,6 +56,7 @@ class ProjectController extends Controller
         $project = new Project();
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;
+        $project->status = $request->status;
         $project->region_id = $request->region_id;
         $project->user_id = $request->user_id;
         $project->save();
@@ -75,10 +80,11 @@ class ProjectController extends Controller
     {
         $regions = Region::pluck('name', 'id');
         $studies = Study::all();
+        $status = ["Por iniciar", "En desarrollo", "Concluido"];
         $project = Project::find($id);
         return view(
             'Project.edit',
-            compact('regions', 'project', 'studies')
+            compact('regions', 'project', 'studies', 'status')
         );
     }
 
@@ -90,6 +96,7 @@ class ProjectController extends Controller
         $request->validate([
             'place' => 'required',
             'abbreviation' => 'required',
+            'status' => 'required',
             'region_id' => 'required',
             'studie_id' => 'required|min:1'
         ]);
@@ -99,6 +106,7 @@ class ProjectController extends Controller
         $project = Project::find($id);
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;
+        $project->status = $request->status;
         $project->region_id = $request->region_id;
         $project->user_id = $request->user_id;
         $project->save();

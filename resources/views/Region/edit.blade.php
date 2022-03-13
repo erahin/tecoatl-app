@@ -29,6 +29,8 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {!! Form::submit('Modificar', ['class' => 'btn btn-primary']) !!}
+                                <a class="btn btn-danger" href="{{ route('regiones.index') }}">Cancelar
+                                </a>
                             </div>
                         </div>
                     </form>

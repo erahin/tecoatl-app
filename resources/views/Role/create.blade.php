@@ -48,6 +48,8 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {!! Form::submit('Crear', ['class' => 'btn btn-primary']) !!}
+                                <a class="btn btn-danger" href="{{ route('roles.index') }}">Cancelar
+                                </a>
                             </div>
                         </div>
                     </form>

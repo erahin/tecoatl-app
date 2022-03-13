@@ -37,6 +37,19 @@
                             </div>
                         </div>
                         <div class="row mb-3">
+                            {!! Form::label('status', 'Estatus del proyecto', ['class' => 'col-md-4 col-form-label
+                            text-md-end'])
+                            !!}
+                            <div class="col-md-6">
+                                {!! Form::select('status', $status, $project->status, ['class' => 'form-select', 'id' =>
+                                'status', 'placeholder' => 'Seleccione el estatus']) !!}
+                                @error('status')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo estatus es obligatorio'
+                                    }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             {!! Form::label('region_id', 'Regíon', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
                             <div class="col-md-6">
@@ -89,6 +102,8 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}
+                                <a class="btn btn-danger" href="{{ route('proyectos.index') }}">Cancelar
+                                </a>
                             </div>
                         </div>
                     </form>

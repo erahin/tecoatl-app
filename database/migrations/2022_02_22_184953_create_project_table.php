@@ -17,6 +17,7 @@ class CreateProjectTable extends Migration
             $table->id();
             $table->string('place');
             $table->string('abbreviation');
+            $table->string('status');
             $table
                 ->foreignId('region_id')
                 ->nullable()

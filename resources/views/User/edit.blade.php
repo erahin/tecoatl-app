@@ -91,6 +91,8 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Modificar') }}
                                 </button>
+                                <a class="btn btn-danger" href="{{ route('usuarios.index') }}">Cancelar
+                                </a>
                             </div>
                         </div>
                     </form>
