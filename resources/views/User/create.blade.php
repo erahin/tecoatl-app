@@ -48,7 +48,6 @@
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
                                     required autocomplete="new-password">
-
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -63,6 +62,11 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control"
                                     name="password_confirmation" required autocomplete="new-password">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -78,6 +82,11 @@
                                     </label>
                                     @endforeach
                                 </div>
+                                @error('roles')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ 'Seleccione al menos un rol'}}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-0">

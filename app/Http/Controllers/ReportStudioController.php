@@ -22,7 +22,8 @@ class ReportStudioController extends Controller
             'report_number' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'report_type' => 'required'
+            'report_type' => 'required',
+            'reports' => 'required'
         ]);
         /* -------------------------------------------------------------------------- */
         /*                                Create report                               */
@@ -32,12 +33,10 @@ class ReportStudioController extends Controller
         $report->start_date = $request->start_date;
         $report->end_date = $request->end_date;
         $report->report_type = $request->report_type;
-        // $report->project_id = $request->project_id;
         $report->studio_id = $request->studio_id;
         $report->user_id = $request->user_id;
         $report->save();
         $report = Report::latest('id')->first();
-
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */
         /* -------------------------------------------------------------------------- */
@@ -70,7 +69,8 @@ class ReportStudioController extends Controller
             'report_number' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'report_type' => 'required'
+            'report_type' => 'required',
+            'reports' => 'required'
         ]);
         /* -------------------------------------------------------------------------- */
         /*                                Create report                               */

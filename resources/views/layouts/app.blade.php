@@ -64,82 +64,34 @@
                         </li>
                         @endif
                         @else
-                        {{-- <li class="nav-item">
-                            <a class="nav-link gtr-menu__li" href="{{ url('/') }}">{{ __('INICIO') }}</a>
-                        </li> --}}
-                        <li class="nav-item dropdown text-uppercase">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ 'Proyectos' }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                @can('estudios.index')
-                                <a class="dropdown-item" href="{{ route('estudios.index') }}">
-                                    {{ __('Estudios') }}
-                                </a>
-                                <hr class="dropdown-divider">
-                                @endcan
-                                @can('regiones.index')
-                                <a class="dropdown-item" href="{{ route('regiones.index') }}">
-                                    {{ __('Regiones') }}
-                                </a>
-                                <hr class="dropdown-divider">
-                                @endcan
-                                @can('proyectos.index')
-                                <a class="dropdown-item" href="{{ route('proyectos.index') }}">
-                                    {{ __('Proyectos') }}
-                                </a>
-                                @endcan
-                            </div>
-                        </li>
-                        {{-- <li class="nav-item dropdown text-uppercase">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ 'OPCIÓN' }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
-                                    {{ __('A') }}
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
-                                    {{ __('b') }}
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown text-uppercase">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ 'OPCIÓN' }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
-                                    {{ __('A') }}
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
-                                    {{ __('b') }}
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown text-uppercase">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ 'OPCIÓN' }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
-                                    {{ __('A') }}
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();">
-                                    {{ __('b') }}
-                                </a>
-                            </div>
-                        </li> --}}
-                        @can('usuarios.index')
+                        {{-- @can('')
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('') }}">{{ __('') }}</a>
+                        </li>
+                        @endcan --}}
+                        @can('proyectos.index')
+                        <li class="nav-item text-uppercase">
+                            <a class="nav-link" href="{{ route('proyectos.index') }}">{{ __('proyectos') }}</a>
+                        </li>
+                        @endcan
+                        @can('estudios.index')
+                        <li class="nav-item text-uppercase">
+                            <a class="nav-link" href="{{ route('estudios.index') }}">{{ __('estudios') }}</a>
+                        </li>
+                        @endcan
+                        @can('regiones.index')
+                        <li class="nav-item text-uppercase">
+                            <a class="nav-link" href="{{ route('regiones.index') }}">{{ __('regiones') }}</a>
+                        </li>
+                        @endcan
+                        @can('usuarios.index')
+                        <li class="nav-item text-uppercase">
                             <a class="nav-link" href="{{ route('usuarios.index') }}">{{ __('USUARIOS') }}</a>
+                        </li>
+                        @endcan
+                        @can('roles.index')
+                        <li class="nav-item text-uppercase">
+                            <a class="nav-link" href="{{ route('roles.index') }}">{{ __('roles') }}</a>
                         </li>
                         @endcan
                         <li class="nav-item dropdown text-uppercase">

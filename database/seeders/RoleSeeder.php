@@ -22,41 +22,30 @@ class RoleSeeder extends Seeder
         $role2 = Role::create(['name' => 'Admin']); //jefas de region
         $role3 = Role::create(['name' => 'Operator']); //estudios
         /* -------------------------------------------------------------------------- */
-        /*                            Super User Permission                           */
+        /*                            User Permission                                 */
         /* -------------------------------------------------------------------------- */
-        /* Home */
-        // Permission::create(['name' => 'home'])->syncRoles([$role1, $role2, $role3]);
         /* Users Module */
         Permission::create(['name' => 'usuarios.index', 'description' => 'Ver lista de usuarios'])->syncRoles([$role1]);
         Permission::create(['name' => 'usuarios.create', 'description' => 'Crear nuevo usuario'])->syncRoles([$role1]);
-        // Permission::create(['name' => 'usuarios.store'])->syncRoles([$role1]);
         Permission::create(['name' => 'usuarios.edit', 'description' => 'Editar usuario'])->syncRoles([$role1]);
-        // Permission::create(['name' => 'usuarios.update'])->syncRoles([$role1]);
         Permission::create(['name' => 'usuarios.destroy', 'description' => 'Eliminar usuario'])->syncRoles([$role1]);
         /* Studies Module */
         Permission::create(['name' => 'estudios.index', 'description' => 'Ver lista de estudios'])->syncRoles([$role1]);
         Permission::create(['name' => 'estudios.create', 'description' => 'Crear nuevo estudio'])->syncRoles([$role1]);
-        // Permission::create(['name' => 'estudios.store'])->syncRoles([$role1]);
         Permission::create(['name' => 'estudios.edit', 'description' => 'Editar estudio'])->syncRoles([$role1]);
-        // Permission::create(['name' => 'estudios.update'])->syncRoles([$role1]);
         Permission::create(['name' => 'estudios.destroy', 'description' => 'Eliminar estudio'])->syncRoles([$role1]);
         /* Regions Module */
         Permission::create(['name' => 'regiones.index', 'description' => 'Ver lista de regiones'])->syncRoles([$role1]);
         Permission::create(['name' => 'regiones.create', 'description' => 'Crear nueva región'])->syncRoles([$role1]);
-        // Permission::create(['name' => 'regiones.store'])->syncRoles([$role1]);
         Permission::create(['name' => 'regiones.edit', 'description' => 'Editar región'])->syncRoles([$role1]);
-        // Permission::create(['name' => 'regiones.update'])->syncRoles([$role1]);
         Permission::create(['name' => 'regiones.destroy', 'description' => 'Eliminar región'])->syncRoles([$role1]);
         /* Projects Module */
         Permission::create(['name' => 'proyectos.index', 'description' => 'Ver lista de proyectos'])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'proyectos.create', 'description' => 'Crear nuevo proyecto'])->syncRoles([$role1, $role2]);
-        // Permission::create(['name' => 'proyectos.store'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'proyectos.edit', 'description' => 'Editar proyecto'])->syncRoles([$role1, $role2]);
-        // Permission::create(['name' => 'proyectos.update'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'proyectos.destroy', 'description' => 'Eliminar proyecto'])->syncRoles([$role1, $role2]);
         /* Report Module */
         Permission::create(['name' => 'informes.create', 'description' => 'Crear informe'])->syncRoles([$role1, $role2, $role3]);
-        // Permission::create(['name' => 'informes.store', 'description' => ''])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'reports-list', 'description' => 'Ver lista de informe de un proyecto'])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'studies-list', 'description' => 'Ver lista de estudios de un proyecto'])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'upload-reports', 'description' => 'Subir informes'])->syncRoles([$role1, $role2, $role3]);
@@ -66,5 +55,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'deleteStudioDirectory', 'description' => 'Eliminar directorio de un estudio'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'deleteReportsDirectory', 'description' => 'Eliminar directorio de un reporte'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'report-edit', 'description' => 'Editar informe'])->syncRoles([$role1, $role2, $role3]);
+        /* Role Module */
+        Permission::create(['name' => 'roles.index', 'description' => 'Ver lista de usuarios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'roles.create', 'description' => 'Crear nuevo usuario'])->syncRoles([$role1]);
+        Permission::create(['name' => 'roles.edit', 'description' => 'Editar usuario'])->syncRoles([$role1]);
+        Permission::create(['name' => 'roles.destroy', 'description' => 'Eliminar usuario'])->syncRoles([$role1]);
     }
 }

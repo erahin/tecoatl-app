@@ -41,6 +41,7 @@ class UserController extends Controller
                 'unique:users',
             ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'roles' => 'required|min:1'
         ]);
         $user = new User();
         $user->name = $request->name;
@@ -64,6 +65,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
+            'roles' => 'required|min:1'
         ]);
         $user = User::find($id);
         $user->name = $request->name;

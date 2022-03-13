@@ -44,6 +44,7 @@ class ProjectController extends Controller
             'place' => 'required',
             'abbreviation' => 'required',
             'region_id' => 'required',
+            'studie_id' => 'required|min:1'
         ]);
         /* -------------------------------------------------------------------------- */
         /*                                create projet                               */
@@ -90,7 +91,7 @@ class ProjectController extends Controller
             'place' => 'required',
             'abbreviation' => 'required',
             'region_id' => 'required',
-            // 'file' => 'required',
+            'studie_id' => 'required|min:1'
         ]);
         /* -------------------------------------------------------------------------- */
         /*                                create projet                               */
@@ -100,24 +101,6 @@ class ProjectController extends Controller
         $project->abbreviation = $request->abbreviation;
         $project->region_id = $request->region_id;
         $project->user_id = $request->user_id;
-        // $project_studys = DB::select('select * from projects_studies where project_id = ?', [$id]);
-        /* -------------------------------------------------------------------------- */
-        /*                                 Get region                                 */
-        /* -------------------------------------------------------------------------- */
-        // $region = Region::find($request->region_id);
-        // $region = strtolower($region->name);
-        // /* -------------------------------------------------------------------------- */
-        // /*                              Update directory                              */
-        // /* -------------------------------------------------------------------------- */
-        // foreach ($project->studys as $registre) {
-        //     foreach ($request->studie_id as $key) {
-        //         // if ($key == $registre->id) {
-        //         //     Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $registre->id);
-        //         // } else {
-        //         //     Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $project->id . '/' . $registre->id);
-        //         // }
-        //     }
-        // }
         $project->save();
         $project->studys()->sync($request->studie_id);
         return redirect()->route('proyectos.index');

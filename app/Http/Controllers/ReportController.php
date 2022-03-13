@@ -74,12 +74,6 @@ class ReportController extends Controller
                 }
             }
         }
-        // return $reportsArray;
-        // $nameReport = [];
-        // foreach ($files as $fileNameStorage) {
-        //     $fileArray = explode('/', $fileNameStorage);
-        //     array_push($nameReport, $fileArray[5]);
-        // }
         return view('ReportStudio.create', compact('project', 'idStudio', 'reportsArray'));
     }
     public function showInforms($idProject, $idStudio,  $idReport)
@@ -101,10 +95,12 @@ class ReportController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                Get file url                                */
         /* -------------------------------------------------------------------------- */
-        $urls = [];
-        foreach ($files as $file) {
-            $url = Storage::url($file);
-            array_push($urls, $url);
+        if ($files) {
+            $urls = [];
+            foreach ($files as $file) {
+                $url = Storage::url($file);
+                array_push($urls, $url);
+            }
         }
         /* -------------------------------------------------------------------------- */
         /*                            Return view and data                            */

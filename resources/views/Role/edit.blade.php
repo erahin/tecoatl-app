@@ -25,13 +25,13 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            {!! Form::label('permissions[]', 'Permisos', ['class' => 'col-md-4 col-form-label
+                            {!! Form::label('permissions', 'Permisos', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 <div class="form-check scroll-permissions">
                                     @foreach ($permissions as $permission)
                                     <label class="form-check-label inline_label" required>
-                                        {!! Form::checkbox('roles[]', $permission->id, null, ['class' =>
+                                        {!! Form::checkbox('permissions[]', $permission->id, null, ['class' =>
                                         'form-check-input',
                                         'id' => $permission->id])
                                         !!}
