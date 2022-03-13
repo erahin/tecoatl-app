@@ -94,6 +94,27 @@
                             <a class="nav-link" href="{{ route('roles.index') }}">{{ __('roles') }}</a>
                         </li>
                         @endcan
+                        @can('show.reports')
+                        <li class="nav-item dropdown text-uppercase">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ 'REPORTES'}}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('projectStart') }}">
+                                    {{ __('proyectos por iniciar') }}
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="{{ route('projectInProcess') }}">
+                                    {{ __('proyectos en proceso') }}
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="{{ route('completedProject') }}">
+                                    {{ __('proyectos concluidos') }}
+                                </a>
+                            </div>
+                        </li>
+                        @endcan
                         <li class="nav-item dropdown text-uppercase">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

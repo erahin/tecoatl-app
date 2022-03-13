@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectReportController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportStudioController;
@@ -74,3 +75,9 @@ Route::get('informes-editar/{id}/estudio/{idStudio}/proyecto/{idProject}', [Repo
 /*                                 Roles Route                                */
 /* -------------------------------------------------------------------------- */
 Route::resource('roles', RoleController::class)->except('show')->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                                 Query Route                                */
+/* -------------------------------------------------------------------------- */
+Route::get('/consulta-proyectos-iniciar', [ProjectReportController::class, 'projectStart'])->name('projectStart')->middleware('auth');
+Route::get('/consulta-proyectos-en-procesos', [ProjectReportController::class, 'projectInProcess'])->name('projectInProcess')->middleware('auth');
+Route::get('/consulta-proyectos-concluidos', [ProjectReportController::class, 'completedProject'])->name('completedProject')->middleware('auth');
