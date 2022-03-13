@@ -26,12 +26,10 @@
                             <div class="col-md-6 scroll-studies">
                                 <ul class="list-group">
                                     @foreach ($files as $file)
-                                    {{-- @foreach ($directory as $file) --}}
                                     <li class="list-group-item">
                                         {!! Form::checkbox('files[]', $file, 'true', ['class' =>
                                         'form-check-input']) !!}
                                         {{explode('/', $file)[7]}} </li>
-                                    {{-- @endforeach --}}
                                     @endforeach
                                 </ul>
                             </div>
@@ -46,6 +44,11 @@
                             <div class="col-md-6">
                                 {!! Form::number('report_number', $report->report_number , ['class' =>
                                 'form-control','required']) !!}
+                                @error('report_number')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo número de informe es
+                                    obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -56,6 +59,11 @@
                             <div class="col-md-6">
                                 {!! Form::text('project_name', $project->place, ['class' => 'form-control', 'required',
                                 'disabled']) !!}
+                                @error('project_name')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo nombre del proyecto es
+                                    obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -71,6 +79,10 @@
                                     <option value="Anual" selected>Anual</option>
                                     @endif
                                 </select>
+                                @error('report_type')
+                                <strong class="text-danger text-center mt-5">{{ 'Seleccione el tipo de reporte'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -81,6 +93,11 @@
                             <div class="col-md-6">
                                 {!! Form::date('start_date', $report->start_date, ['class' => 'form-control',
                                 'required']) !!}
+                                @error('start_date')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo fecha inicio
+                                    obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -91,6 +108,11 @@
                             <div class="col-md-6">
                                 {!! Form::date('end_date', $report->end_date, ['class' => 'form-control', 'required'])
                                 !!}
+                                @error('end_date')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo fecha final
+                                    obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -99,13 +121,17 @@
                             <div class="col-md-6">
                                 {!! Form::file('reports[]', ['class' => 'form-control', 'multiple', 'id' => 'select',
                                 'required']) !!}
+                                @error('reports')
+                                <strong class="text-danger text-center mt-5">{{ 'Suba al menos un archivo'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
-                        {!! Form::number('user_id', Auth::user()->id, ['class' => 'form-control', 'hidden', 'required'])
+                        {!! Form::number('user_id', Auth::user()->id, ['class' => 'form-control', 'hidden'])
                         !!}
-                        {!! Form::number('project_id', $project->id, ['class' => 'form-control', 'hidden', 'required'])
+                        {!! Form::number('project_id', $project->id, ['class' => 'form-control', 'hidden'])
                         !!}
-                        {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden', 'required']) !!}
+                        {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden']) !!}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}

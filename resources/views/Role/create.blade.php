@@ -40,7 +40,7 @@
                                     @endforeach
                                 </div>
                                 @error('permissions')
-                                <strong class="text-danger text-center">{{ 'El campo permisos es obligatorio'
+                                <strong class="text-danger text-center">{{ 'Seleccione al menos un permiso'
                                     }}</strong>
                                 @enderror
                             </div>

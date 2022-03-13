@@ -43,6 +43,11 @@
                             <div class="col-md-6">
                                 {!! Form::number('report_number', '', ['class' => 'form-control', 'autofocus',
                                 'required', 'autofocus']) !!}
+                                @error('report_number')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo número de informe es
+                                    obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -53,6 +58,11 @@
                             <div class="col-md-6">
                                 {!! Form::text('project_name', $project->place, ['class' => 'form-control', 'required',
                                 'disabled']) !!}
+                                @error('project_name')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo nombre del proyecto es
+                                    obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -63,6 +73,10 @@
                                     <option value="Bimestral">Bimestral</option>
                                     <option value="Anual">Anual</option>
                                 </select>
+                                @error('report_type')
+                                <strong class="text-danger text-center mt-5">{{ 'Seleccione el tipo de reporte'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -72,6 +86,11 @@
                             ]) !!}
                             <div class="col-md-6">
                                 {!! Form::date('start_date', '', ['class' => 'form-control', 'required']) !!}
+                                @error('start_date')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo fecha inicio
+                                    obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -81,14 +100,23 @@
                             ]) !!}
                             <div class="col-md-6">
                                 {!! Form::date('end_date', '', ['class' => 'form-control', 'required']) !!}
+                                @error('end_date')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo fecha final
+                                    obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
-                            {!! Form::label('select', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end'])
+                            {!! Form::label('reports', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
                             <div class="col-md-6">
                                 {!! Form::file('reports[]', ['class' => 'form-control', 'multiple', 'id' => 'select',
                                 'required']) !!}
+                                @error('reports')
+                                <strong class="text-danger text-center mt-5">{{ 'Suba al menos un archivo'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         {!! Form::number('user_id', Auth::user()->id, ['class' => 'form-control', 'hidden', 'required'])

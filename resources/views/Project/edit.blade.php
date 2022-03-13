@@ -18,6 +18,10 @@
                             <div class="col-md-6">
                                 {!! Form::text('place', $project->place, ['class' => 'form-control', 'autofocus',
                                 'required', 'id' => 'place']) !!}
+                                @error('place')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo lugar es obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -26,6 +30,10 @@
                             <div class="col-md-6">
                                 {!! Form::text('abbreviation', $project->abbreviation, ['class' => 'form-control',
                                 'required', 'id' => 'abbreviation']) !!}
+                                @error('abbreviation')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo abreviación es obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -34,6 +42,10 @@
                             <div class="col-md-6">
                                 {!! Form::select('region_id', $regions, $project->region_id, ['class' => 'form-select',
                                 'id' => 'region_id', 'placeholder' => 'Seleccione Región']) !!}
+                                @error('region_id')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo región es obligatorio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -49,6 +61,10 @@
                                     </label>
                                     @endforeach
                                 </div>
+                                @error('studie_id')
+                                <strong class="text-danger text-center mt-5">{{ 'Seleccione al menos un estudio'
+                                    }}</strong>
+                                @enderror
                             </div>
                         </div>
                         @foreach ($project->studys as $registre)
