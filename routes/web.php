@@ -70,7 +70,7 @@ Route::get('eliminar-directorio-reporte/{idProject}/{idStudio}/{idReport}', [Rep
 /*                                Report Route                                */
 /* -------------------------------------------------------------------------- */
 Route::resource('informes', ReportStudioController::class)->only(['store', 'update'])->middleware('auth');
-Route::get('informes-editar/{id}/estudio/{idStudio}/proyecto/{idProject}', [ReportController::class, 'reportEdit'])->name('report-edit')->middleware('report-edit')->middleware('auth');
+Route::get('informes-editar/{id}/estudio/{idStudio}/proyecto/{idProject}', [ReportController::class, 'reportEdit'])->name('report-edit')->middleware('can:report-edit')->middleware('auth');
 /* -------------------------------------------------------------------------- */
 /*                                 Roles Route                                */
 /* -------------------------------------------------------------------------- */
@@ -78,6 +78,7 @@ Route::resource('roles', RoleController::class)->except('show')->middleware('aut
 /* -------------------------------------------------------------------------- */
 /*                                 Query Route                                */
 /* -------------------------------------------------------------------------- */
-Route::get('/consulta-proyectos-iniciar', [ProjectReportController::class, 'projectStart'])->name('projectStart')->middleware('auth');
-Route::get('/consulta-proyectos-en-procesos', [ProjectReportController::class, 'projectInProcess'])->name('projectInProcess')->middleware('auth');
-Route::get('/consulta-proyectos-concluidos', [ProjectReportController::class, 'completedProject'])->name('completedProject')->middleware('auth');
+Route::get('/consulta-proyectos-iniciar', [ProjectReportController::class, 'projectStart'])->middleware('can:show.reports')->name('projectStart')->middleware('auth');
+Route::get('/consulta-proyectos-en-procesos', [ProjectReportController::class, 'projectInProcess'])->middleware('can:show.reports')->name('projectInProcess')->middleware('auth');
+Route::get('/consulta-proyectos-concluidos', [ProjectReportController::class, 'completedProject'])->middleware('can:show.reports')->name('completedProject')->middleware('auth');
+Route::get('/consulta-proyectos-por-zona', [ProjectReportController::class, 'showRegionForm'])->middleware('can:show.reports')->name('showRegionForm')->middleware('auth');

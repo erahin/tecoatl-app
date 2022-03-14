@@ -67,18 +67,13 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="report_type" class="col-md-4 col-form-label text-md-end">Tipo de reporte</label>
+                            {!! Form::label('report_type', 'Tipo de reporte', ['class' => 'col-md-4 col-form-label
+                            text-md-end'])
+                            !!}
                             <div class="col-md-6">
-                                <select name="report_type" class="form-select">
-                                    <option value="">Seleccione</option>
-                                    @if ($report->report_type == "Bimestral")
-                                    <option value="Bimestral" selected>Bimestral</option>
-                                    <option value="Anual">Anual</option>
-                                    @else
-                                    <option value="Bimestral">Bimestral</option>
-                                    <option value="Anual" selected>Anual</option>
-                                    @endif
-                                </select>
+                                {!! Form::select('report_type', $report_type, $report->report_type, ['class' =>
+                                'form-select', 'id' =>
+                                'status', 'placeholder' => 'Seleccione el tipo de reporte']) !!}
                                 @error('report_type')
                                 <strong class="text-danger text-center mt-5">{{ 'Seleccione el tipo de reporte'
                                     }}</strong>

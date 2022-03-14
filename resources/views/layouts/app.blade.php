@@ -112,6 +112,10 @@
                                 <a class="dropdown-item" href="{{ route('completedProject') }}">
                                     {{ __('proyectos concluidos') }}
                                 </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="{{ route('showRegionForm') }}">
+                                    {{ __('proyectos por zona') }}
+                                </a>
                             </div>
                         </li>
                         @endcan

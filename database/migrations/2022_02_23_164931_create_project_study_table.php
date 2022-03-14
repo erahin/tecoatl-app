@@ -13,7 +13,7 @@ class CreateProjectStudyTable extends Migration
      */
     public function up()
     {
-  Schema::create('projects_studies', function (Blueprint $table) {
+        Schema::create('projects_studies', function (Blueprint $table) {
             $table->id();
             $table
                 ->foreignId('project_id')

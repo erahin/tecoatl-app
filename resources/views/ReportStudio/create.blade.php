@@ -27,7 +27,7 @@
                                     @foreach ($directorie as $dir)
                                     <li class="list-group-item">
                                         {!! Form::checkbox('files[]', $dir, 'true', ['class' => 'form-check-input']) !!}
-                                        {{ $dir }} informe</li>
+                                        {{ $dir }}</li>
                                     @endforeach
                                     @endforeach
                                 </ul>
@@ -40,7 +40,7 @@
                             'class' => 'col-md-4 col-form-label
                             text-md-end',
                             ]) !!}
-                            <div class="col-md-6">
+                            <div class=" col-md-6">
                                 {!! Form::number('report_number', '', ['class' => 'form-control', 'autofocus',
                                 'required', 'autofocus']) !!}
                                 @error('report_number')
@@ -66,13 +66,12 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="report_type" class="col-md-4 col-form-label text-md-end">Tipo de reporte</label>
+                            {!! Form::label('report_type', 'Tipo de reporte', ['class' => 'col-md-4 col-form-label
+                            text-md-end'])
+                            !!}
                             <div class="col-md-6">
-                                <select name="report_type" class="form-select">
-                                    <option value="" selected>Seleccione</option>
-                                    <option value="Bimestral">Bimestral</option>
-                                    <option value="Anual">Anual</option>
-                                </select>
+                                {!! Form::select('report_type', $report_type, '', ['class' => 'form-select', 'id' =>
+                                'status', 'placeholder' => 'Seleccione el tipo de reporte']) !!}
                                 @error('report_type')
                                 <strong class="text-danger text-center mt-5">{{ 'Seleccione el tipo de reporte'
                                     }}</strong>

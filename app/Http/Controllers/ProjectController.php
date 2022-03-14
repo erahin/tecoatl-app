@@ -80,7 +80,7 @@ class ProjectController extends Controller
     {
         $regions = Region::pluck('name', 'id');
         $studies = Study::all();
-        $status = ["Por iniciar", "En desarrollo", "Concluido"];
+        $status = ["Por iniciar", "En desarrollo", "Concluido", "Cancelado"];
         $project = Project::find($id);
         return view(
             'Project.edit',
@@ -111,6 +111,19 @@ class ProjectController extends Controller
         $project->user_id = $request->user_id;
         $project->save();
         $project->studys()->sync($request->studie_id);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get region                                 */
+        /* -------------------------------------------------------------------------- */
+        $region = Region::find($request->region_id);
+        $region = strtolower($region->name);
+        /* -------------------------------------------------------------------------- */
+        /*                               Make directory                               */
+        /* -------------------------------------------------------------------------- */
+        if ($request->studie_id) {
+            foreach ($request->studie_id as $studie) {
+                Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
+            }
+        }
         return redirect()->route('proyectos.index');
     }
     public function destroy($id)

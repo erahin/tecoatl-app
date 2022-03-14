@@ -27,6 +27,10 @@ class ReportController extends Controller
         /* -------------------------------------------------------------------------- */
         $studio = Study::find($idStudio);
         /* -------------------------------------------------------------------------- */
+        /*                              Report type array                             */
+        /* -------------------------------------------------------------------------- */
+        $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
+        /* -------------------------------------------------------------------------- */
         /*                                Find reports                                */
         /* -------------------------------------------------------------------------- */
         $reports = DB::table('reports')
@@ -37,7 +41,7 @@ class ReportController extends Controller
             ->where('projects.id', '=', $id)
             ->where('studies.id', '=', $idStudio)
             ->get();
-        return view('Report.index-reports', compact('project', 'studio', 'reports'));
+        return view('Report.index-reports', compact('project', 'studio', 'reports', 'report_type'));
     }
     public function uploadReports($id, $idStudio)
     {
@@ -45,6 +49,10 @@ class ReportController extends Controller
         /*                            Find project with id                            */
         /* -------------------------------------------------------------------------- */
         $project = Project::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Report Type Array                             */
+        /* -------------------------------------------------------------------------- */
+        $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
         /* -------------------------------------------------------------------------- */
         /*                                 Get region                                 */
         /* -------------------------------------------------------------------------- */
@@ -68,13 +76,13 @@ class ReportController extends Controller
         $reportsArray = [];
         if ($fileDirectorie) {
             foreach ($fileDirectorie as $reports) {
-                $report_find = DB::select('select report_number from reports where id = ?', [$reports]);
+                $report_find = DB::select('select concat (report_number,"° Informe ", report_type) from reports where id = ?', [$reports]);
                 if ($report_find) {
                     array_push($reportsArray, $report_find[0]);
                 }
             }
         }
-        return view('ReportStudio.create', compact('project', 'idStudio', 'reportsArray'));
+        return view('ReportStudio.create', compact('project', 'idStudio', 'reportsArray', 'report_type'));
     }
     public function showInforms($idProject, $idStudio,  $idReport)
     {
@@ -146,6 +154,7 @@ class ReportController extends Controller
         $report = Report::find($id);
         $project = Project::find($idProject);
         $region = strtolower($project->regions->name);
+        $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
         $allfiles = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $id . '/');
         /* -------------------------------------------------------------------------- */
         /*                                Get file url                                */
@@ -155,6 +164,6 @@ class ReportController extends Controller
             $url = Storage::url($file);
             array_push($files, $url);
         }
-        return view('ReportStudio.edit', compact('report', 'files', 'project', 'idStudio'));
+        return view('ReportStudio.edit', compact('report', 'files', 'project', 'idStudio', 'report_type'));
     }
 }
