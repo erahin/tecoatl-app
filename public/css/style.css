@@ -26,3 +26,98 @@
     display: inline-block;
     margin-right: 10px;
 }
+li a.active {
+    color: rgba(27, 7, 206, 0.877) !important;
+    font-weight: bold;
+    text-decoration: overline;
+    border-radius: 10px;
+}
+
+a.active:hover {
+    background-color: rgb(192, 201, 209);
+}
+
+ul.grt-menu li a {
+    padding: 5px 10px;
+    display: inline-block;
+    color: #000000 !important;
+    line-height: 1.1em;
+    box-shadow: inset 0 0 0 0 #fff;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+    position: relative;
+    text-decoration: none;
+}
+
+li.active a:after {
+    position: absolute;
+    bottom: 1px;
+    content: "";
+    left: 12px;
+    right: 12px;
+    border-bottom: 2px solid #6372ff;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+ul.grt-menu li.grt-dropdown:hover {
+    cursor: pointer;
+}
+
+ul.grt-menu li.grt-dropdown:hover a {
+    box-shadow: none;
+}
+
+ul.grt-menu li.grt-dropdown ul.grt-dropdown-list {
+    position: absolute;
+    background: #6372ff;
+    margin: 0;
+    padding: 0;
+    min-width: 150px;
+    animation: fadeIn 0.8s;
+    z-index: 999;
+}
+
+ul.grt-menu li.grt-dropdown ul.grt-dropdown-list li a {
+    font-size: 18px;
+    color: #fff;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+}
+
+ul.grt-menu li.grt-dropdown.active-dropdown {
+    background: #6372ff;
+}
+
+ul.grt-menu li.grt-dropdown.active-dropdown a {
+    color: #fff;
+}
+
+/* Desktop only style */
+@media (min-width: 768px) {
+    ul.grt-menu li.grt-dropdown:hover > a + ul.grt-dropdown-list {
+        top: calc(100% - 17px);
+    }
+
+    ul.grt-menu li.grt-dropdown ul.grt-dropdown-list li {
+        display: block;
+    }
+
+    ul.grt-menu li.grt-dropdown:hover > a {
+        color: #fff;
+        box-shadow: inset 150px 0 0 0 #6372ff;
+    }
+
+    ul.grt-menu li a:hover {
+        color: #fff;
+        box-shadow: inset 150px 0 0 0 #6372ff;
+    }
+}

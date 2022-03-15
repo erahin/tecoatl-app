@@ -33,7 +33,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" id="home">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -54,7 +54,7 @@
                         @guest
                         @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('INICIAR SESIÓN') }}</a>
                         </li>
                         @endif
 
@@ -70,32 +70,32 @@
                         </li>
                         @endcan --}}
                         @can('proyectos.index')
-                        <li class="nav-item text-uppercase">
+                        <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('proyectos.index') }}">{{ __('proyectos') }}</a>
                         </li>
                         @endcan
                         @can('estudios.index')
-                        <li class="nav-item text-uppercase">
+                        <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('estudios.index') }}">{{ __('estudios') }}</a>
                         </li>
                         @endcan
                         @can('regiones.index')
-                        <li class="nav-item text-uppercase">
+                        <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('regiones.index') }}">{{ __('regiones') }}</a>
                         </li>
                         @endcan
                         @can('usuarios.index')
-                        <li class="nav-item text-uppercase">
+                        <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('usuarios.index') }}">{{ __('USUARIOS') }}</a>
                         </li>
                         @endcan
                         @can('roles.index')
-                        <li class="nav-item text-uppercase">
+                        <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('roles.index') }}">{{ __('roles') }}</a>
                         </li>
                         @endcan
                         @can('show.reports')
-                        <li class="nav-item dropdown text-uppercase">
+                        <li class="nav-item dropdown text-uppercase gtr-menu__li">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ 'REPORTES'}}

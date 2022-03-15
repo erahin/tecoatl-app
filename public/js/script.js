@@ -1,3 +1,6 @@
+/* -------------------------------------------------------------------------- */
+/*                                 Data Table                                 */
+/* -------------------------------------------------------------------------- */
 $(document).ready(function () {
     $("#example").DataTable({
         paging: false,
@@ -12,4 +15,30 @@ $(document).ready(function () {
             infoFiltered: "(filtered from _MAX_ total records)",
         },
     });
+});
+/* -------------------------------------------------------------------------- */
+/*                             Change class active                            */
+/* -------------------------------------------------------------------------- */
+let liActive = 0;
+let liMenu = document.querySelectorAll(".gtr-menu__li");
+
+liMenu.forEach((element, index) => {
+    element.addEventListener("click", function () {
+        changeActive(index);
+    });
+});
+
+function changeActive(index) {
+    localStorage.setItem("index", index);
+}
+
+(function () {
+    liMenu[liActive].classList.remove("active");
+    liMenu[localStorage.getItem("index")].classList.add("active");
+    liActive = localStorage.getItem("index");
+})();
+
+const home = document.getElementById("home");
+home.addEventListener("click", () => {
+    localStorage.setItem("index", null);
 });
