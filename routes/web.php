@@ -81,4 +81,5 @@ Route::resource('roles', RoleController::class)->except('show')->middleware('aut
 Route::get('/consulta-proyectos-iniciar', [ProjectReportController::class, 'projectStart'])->middleware('can:show.reports')->name('projectStart')->middleware('auth');
 Route::get('/consulta-proyectos-en-procesos', [ProjectReportController::class, 'projectInProcess'])->middleware('can:show.reports')->name('projectInProcess')->middleware('auth');
 Route::get('/consulta-proyectos-concluidos', [ProjectReportController::class, 'completedProject'])->middleware('can:show.reports')->name('completedProject')->middleware('auth');
-Route::get('/consulta-proyectos-por-zona', [ProjectReportController::class, 'showRegionForm'])->middleware('can:show.reports')->name('showRegionForm')->middleware('auth');
+Route::get('/consulta-proyectos-por-region', [ProjectReportController::class, 'showRegionForm'])->middleware('can:show.reports')->name('showRegionForm')->middleware('auth');
+Route::get('/grafica-proyectos-por-region', [ProjectReportController::class, 'showPiechartbyRegion'])->middleware('can:show.reports')->name('showPiechartbyRegion')->middleware('auth');

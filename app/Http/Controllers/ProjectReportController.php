@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Region;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectReportController extends Controller
 {
@@ -34,5 +35,21 @@ class ProjectReportController extends Controller
             $projects = null;
         }
         return view('ProjectQuery.regionForm', compact('regions', 'projects', 'status', 'id'));
+    }
+    public function showPiechartbyRegion()
+    {
+        $regions = Region::all();
+        $projectArray = [];
+        foreach ($regions as $region) {
+            $projects = Project::where('region_id', '=', $region->id)->get();
+            array_push($projectArray, $projects);
+        }
+        $percentArray = [];
+        for ($i = 0; $i < count($projectArray); $i++) {
+            $totalProject = count(Project::all()); //100%
+            $percent = (count($projectArray[$i]) * 100) / $totalProject;
+            $percentArray[] = ['name' => $regions[$i]->name, 'y' => $percent];
+        }
+        return view('ProjectQuery.allProject', ["data" => json_encode($percentArray)]);
     }
 }

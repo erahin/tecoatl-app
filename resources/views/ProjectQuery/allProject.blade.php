@@ -1,0 +1,97 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-12 col-xl-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-center text-primary">Gráfica de proyectos por región.
+                    </h1>
+                </div>
+                <div class="card-body">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                    <div id="container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    Highcharts.setOptions({
+        lang: {
+        contextButtonTitle: "Menú contextual del diagrama"
+        , loading: 'Cargando...'
+        , months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre',
+        'Noviembre'
+        , 'Diciembre'
+        ]
+        , weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+        , shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+        , exportButtonTitle: "Exportar"
+        , printButtonTitle: "Importar"
+        , rangeSelectorFrom: "Desde"
+        , rangeSelectorTo: "Hasta"
+        , rangeSelectorZoom: "Período"
+        , downloadPNG: 'Descargar imagen PNG'
+        , downloadJPEG: 'Descargar imagen JPEG'
+        , downloadPDF: 'Descargar imagen PDF'
+        , downloadSVG: 'Descargar imagen SVG'
+        , downloadCSV: 'Descargar CSV'
+        , downloadXLS: 'Descargar XLS'
+        , viewFullScreen: 'Ver pantalla completa'
+        , printChart: 'Imprimir'
+        , resetZoom: 'Reiniciar zoom'
+        , resetZoomTitle: 'Reiniciar zoom'
+        , thousandsSep: ","
+        , decimalPoint: '.'
+        , viewFullscreen:"Ver en pantalla completa"
+        , viewdataTable:"Ver en pantalla completa"
+        }
+        });
+    Highcharts.chart('container', {
+        chart: {
+            plotBackgroundColor: null
+            , plotBorderWidth: null
+            , plotShadow: false
+            , type: 'pie'
+        }
+        , title: {
+            text: ''
+        }
+        , tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            , enabled: false
+        }
+        , accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        }
+        , plotOptions: {
+            pie: {
+                allowPointSelect: true
+                , cursor: 'pointer'
+                , dataLabels: {
+                    enabled: true
+                    , format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        }
+        , series: [{
+            name: 'Brands'
+            , colorByPoint: true
+            , data: <?= $data ?>
+        }]
+    });
+
+</script>
+@endsection
