@@ -33,12 +33,22 @@ function changeActive(index) {
 }
 
 (function () {
-    liMenu[liActive].classList.remove("active");
-    liMenu[localStorage.getItem("index")].classList.add("active");
-    liActive = localStorage.getItem("index");
+    if (
+        localStorage.getItem("index") == -1 ||
+        localStorage.getItem("index") == undefined
+    ) {
+        console.log("0");
+    } else {
+        liMenu[liActive].classList.remove("active");
+        liMenu[localStorage.getItem("index")].classList.add("active");
+        liActive = localStorage.getItem("index");
+    }
 })();
 
 const home = document.getElementById("home");
 home.addEventListener("click", () => {
-    localStorage.setItem("index", null);
+    liMenu[liActive].classList.remove("active");
+    localStorage.setItem("index", -1);
+    localStorage.removeItem("index");
+    localStorage.clear();
 });

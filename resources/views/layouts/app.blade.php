@@ -14,6 +14,9 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/1934e005fb.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.11.5/kt-2.6.4/datatables.min.js">
+    </script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -24,8 +27,6 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.11.5/kt-2.6.4/datatables.min.css" />
 
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.11.5/kt-2.6.4/datatables.min.js">
-    </script>
 
 </head>
 
@@ -98,7 +99,7 @@
                         <li class="nav-item dropdown text-uppercase gtr-menu__li">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ 'REPORTES'}}
+                                {{ 'REPORTES' }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('projectStart') }}">
@@ -114,23 +115,25 @@
                                 </a>
                                 <hr class="dropdown-divider">
                                 <a class="dropdown-item" href="{{ route('showRegionForm') }}">
-                                    {{ __('proyectos por zona') }}
+                                    {{ __('proyectos por región') }}
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="{{ route('showPiechartbyRegion') }}">
+                                    {{ __('gráfica por región') }}
                                 </a>
                             </div>
                         </li>
                         @endcan
                         <li class="nav-item dropdown text-uppercase">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                                                                                                                                                                         document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
                                     {{ __('SALIR') }}
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
@@ -142,7 +145,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="background-image: url({{ asset('img/snake.jpg') }});">
             @yield('content')
         </main>
     </div>

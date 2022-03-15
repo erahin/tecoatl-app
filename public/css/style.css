@@ -1,8 +1,8 @@
 .body__logo img {
     display: block;
-    width: 55vw;
+    width: 50vw;
     max-width: 900px;
-    height: 45vh;
+    height: 40vh;
     margin-left: auto;
     margin-right: auto;
 }
@@ -26,17 +26,9 @@
     display: inline-block;
     margin-right: 10px;
 }
-li a.active {
-    color: rgba(27, 7, 206, 0.877) !important;
-    font-weight: bold;
-    text-decoration: overline;
-    border-radius: 10px;
-}
-
-a.active:hover {
-    background-color: rgb(192, 201, 209);
-}
-
+/* -------------------------------------------------------------------------- */
+/*                                Change active                               */
+/* -------------------------------------------------------------------------- */
 ul.grt-menu li a {
     padding: 5px 10px;
     display: inline-block;
@@ -120,4 +112,23 @@ ul.grt-menu li.grt-dropdown.active-dropdown a {
         color: #fff;
         box-shadow: inset 150px 0 0 0 #6372ff;
     }
+}
+/* -------------------------------------------------------------------------- */
+/*                                    Login                                   */
+/* -------------------------------------------------------------------------- */
+.header__logo {
+    display: block;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button_login {
+    display: block;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+}
+main {
+    min-height: 92.6vh;
 }
