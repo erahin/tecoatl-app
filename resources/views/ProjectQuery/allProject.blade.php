@@ -26,37 +26,72 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
+    Highcharts.theme = {
+    colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572',
+    '#FF9655', '#FFF263', '#6AF9C4'],
+    chart: {
+    backgroundColor: {
+    linearGradient: [0, 0, 500, 500],
+    stops: [
+    [0, 'rgb(255, 255, 255)'],
+    [1, 'rgb(240, 240, 255)']
+    ]
+    },
+    },
+    title: {
+    style: {
+    color: '#000',
+    font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+    }
+    },
+    subtitle: {
+    style: {
+    color: '#666666',
+    font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+    }
+    },
+    legend: {
+    itemStyle: {
+    font: '9pt Trebuchet MS, Verdana, sans-serif',
+    color: 'black'
+    },
+    itemHoverStyle:{
+    color: 'gray'
+    }
+    }
+    };
+    Highcharts.setOptions(Highcharts.theme);
     Highcharts.setOptions({
         lang: {
-        contextButtonTitle: "Menú contextual del diagrama"
-        , loading: 'Cargando...'
-        , months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre',
-        'Noviembre'
-        , 'Diciembre'
-        ]
-        , weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
-        , shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-        , exportButtonTitle: "Exportar"
-        , printButtonTitle: "Importar"
-        , rangeSelectorFrom: "Desde"
-        , rangeSelectorTo: "Hasta"
-        , rangeSelectorZoom: "Período"
-        , downloadPNG: 'Descargar imagen PNG'
-        , downloadJPEG: 'Descargar imagen JPEG'
-        , downloadPDF: 'Descargar imagen PDF'
-        , downloadSVG: 'Descargar imagen SVG'
-        , downloadCSV: 'Descargar CSV'
-        , downloadXLS: 'Descargar XLS'
-        , viewFullScreen: 'Ver pantalla completa'
-        , printChart: 'Imprimir'
-        , resetZoom: 'Reiniciar zoom'
-        , resetZoomTitle: 'Reiniciar zoom'
-        , thousandsSep: ","
-        , decimalPoint: '.'
-        , viewFullscreen:"Ver en pantalla completa"
-        , viewdataTable:"Ver en pantalla completa"
+            contextButtonTitle: "Menú contextual del diagrama"
+            , loading: 'Cargando...'
+            , months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre'
+                , 'Noviembre'
+                , 'Diciembre'
+            ]
+            , weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+            , shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+            , exportButtonTitle: "Exportar"
+            , printButtonTitle: "Importar"
+            , rangeSelectorFrom: "Desde"
+            , rangeSelectorTo: "Hasta"
+            , rangeSelectorZoom: "Período"
+            , downloadPNG: 'Descargar imagen PNG'
+            , downloadJPEG: 'Descargar imagen JPEG'
+            , downloadPDF: 'Descargar imagen PDF'
+            , downloadSVG: 'Descargar imagen SVG'
+            , downloadCSV: 'Descargar CSV'
+            , downloadXLS: 'Descargar XLS'
+            , viewFullScreen: 'Ver pantalla completa'
+            , printChart: 'Imprimir'
+            , resetZoom: 'Reiniciar zoom'
+            , resetZoomTitle: 'Reiniciar zoom'
+            , thousandsSep: ","
+            , decimalPoint: '.'
+            , viewFullscreen: "Ver en pantalla completa"
+            , viewdataTable: "Ver en pantalla completa"
         }
-        });
+    });
     Highcharts.chart('container', {
         chart: {
             plotBackgroundColor: null
@@ -92,6 +127,5 @@
             , data: <?= $data ?>
         }]
     });
-
 </script>
 @endsection
