@@ -53,92 +53,98 @@
                     <ul class="navbar-nav ms-auto grt-menu">
                         <!-- Authentication Links -->
                         @guest
-                        @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('INICIAR SESIÓN') }}</a>
-                        </li>
-                        @endif
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="{{ route('login') }}">{{ __('INICIAR SESIÓN') }}</a>
+                                </li>
+                            @endif
 
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                        @endif
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
                         @else
-                        {{-- @can('')
+                            {{-- @can('')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('') }}">{{ __('') }}</a>
                         </li>
                         @endcan --}}
-                        @can('proyectos.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('proyectos.index') }}">{{ __('proyectos') }}</a>
-                        </li>
-                        @endcan
-                        @can('estudios.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('estudios.index') }}">{{ __('estudios') }}</a>
-                        </li>
-                        @endcan
-                        @can('regiones.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('regiones.index') }}">{{ __('regiones') }}</a>
-                        </li>
-                        @endcan
-                        @can('usuarios.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('usuarios.index') }}">{{ __('USUARIOS') }}</a>
-                        </li>
-                        @endcan
-                        @can('roles.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('roles.index') }}">{{ __('roles') }}</a>
-                        </li>
-                        @endcan
-                        @can('show.reports')
-                        <li class="nav-item dropdown text-uppercase gtr-menu__li">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ 'REPORTES' }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('projectStart') }}">
-                                    {{ __('proyectos por iniciar') }}
+                            @can('proyectos.index')
+                                <li class="nav-item text-uppercase gtr-menu__li">
+                                    <a class="nav-link"
+                                        href="{{ route('proyectos.index') }}">{{ __('proyectos') }}</a>
+                                </li>
+                            @endcan
+                            @can('estudios.index')
+                                <li class="nav-item text-uppercase gtr-menu__li">
+                                    <a class="nav-link"
+                                        href="{{ route('estudios.index') }}">{{ __('estudios') }}</a>
+                                </li>
+                            @endcan
+                            @can('regiones.index')
+                                <li class="nav-item text-uppercase gtr-menu__li">
+                                    <a class="nav-link"
+                                        href="{{ route('regiones.index') }}">{{ __('regiones') }}</a>
+                                </li>
+                            @endcan
+                            @can('usuarios.index')
+                                <li class="nav-item text-uppercase gtr-menu__li">
+                                    <a class="nav-link"
+                                        href="{{ route('usuarios.index') }}">{{ __('USUARIOS') }}</a>
+                                </li>
+                            @endcan
+                            @can('roles.index')
+                                <li class="nav-item text-uppercase gtr-menu__li">
+                                    <a class="nav-link" href="{{ route('roles.index') }}">{{ __('roles') }}</a>
+                                </li>
+                            @endcan
+                            @can('show.reports')
+                                <li class="nav-item dropdown text-uppercase">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ 'REPORTES' }}
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('projectStart') }}">
+                                            {{ __('proyectos por iniciar') }}
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a class="dropdown-item" href="{{ route('projectInProcess') }}">
+                                            {{ __('proyectos en proceso') }}
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a class="dropdown-item" href="{{ route('completedProject') }}">
+                                            {{ __('proyectos concluidos') }}
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a class="dropdown-item" href="{{ route('showRegionForm') }}">
+                                            {{ __('proyectos por región') }}
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a class="dropdown-item" href="{{ route('showPiechartbyRegion') }}">
+                                            {{ __('gráfica por región') }}
+                                        </a>
+                                    </div>
+                                </li>
+                            @endcan
+                            <li class="nav-item dropdown text-uppercase">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
-                                <hr class="dropdown-divider">
-                                <a class="dropdown-item" href="{{ route('projectInProcess') }}">
-                                    {{ __('proyectos en proceso') }}
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a class="dropdown-item" href="{{ route('completedProject') }}">
-                                    {{ __('proyectos concluidos') }}
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a class="dropdown-item" href="{{ route('showRegionForm') }}">
-                                    {{ __('proyectos por región') }}
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a class="dropdown-item" href="{{ route('showPiechartbyRegion') }}">
-                                    {{ __('gráfica por región') }}
-                                </a>
-                            </div>
-                        </li>
-                        @endcan
-                        <li class="nav-item dropdown text-uppercase">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                    {{ __('SALIR') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                        {{ __('SALIR') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
                         @endguest
                     </ul>
                 </div>
