@@ -132,3 +132,6 @@ ul.grt-menu li.grt-dropdown.active-dropdown a {
 main {
     min-height: 92.6vh;
 }
+.navbar__logo {
+    width: 70px;
+}

@@ -35,7 +35,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" id="home">
-                    {{ config('app.name', 'Laravel') }}
+                    {{-- {{ config('app.name', 'Laravel') }} --}}
+                    <img src="{{ asset('img/Tecoat-logo.png') }}" class="navbar__logo"
+                        alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -54,10 +56,10 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link"
                                         href="{{ route('login') }}">{{ __('INICIAR SESIÓN') }}</a>
-                                </li>
+                                </li> --}}
                             @endif
 
                             @if (Route::has('register'))
@@ -136,7 +138,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
+                                                        document.getElementById('logout-form').submit();">
                                         {{ __('SALIR') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
