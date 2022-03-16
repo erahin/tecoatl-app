@@ -104,30 +104,40 @@
                             @endcan
                             @can('show.reports')
                                 <li class="nav-item dropdown text-uppercase">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ 'REPORTES' }}
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('projectStart') }}">
-                                            {{ __('proyectos por iniciar') }}
-                                        </a>
-                                        <hr class="dropdown-divider">
-                                        <a class="dropdown-item" href="{{ route('projectInProcess') }}">
-                                            {{ __('proyectos en proceso') }}
-                                        </a>
-                                        <hr class="dropdown-divider">
-                                        <a class="dropdown-item" href="{{ route('completedProject') }}">
-                                            {{ __('proyectos concluidos') }}
-                                        </a>
-                                        <hr class="dropdown-divider">
-                                        <a class="dropdown-item" href="{{ route('showRegionForm') }}">
-                                            {{ __('proyectos por región') }}
-                                        </a>
-                                        <hr class="dropdown-divider">
-                                        <a class="dropdown-item" href="{{ route('showPiechartbyRegion') }}">
-                                            {{ __('gráfica por región') }}
-                                        </a>
+                                        <div class="gtr-menu__li">
+                                            <a class="dropdown-item" href="{{ route('projectStart') }}">
+                                                {{ __('proyectos por iniciar') }}
+                                            </a>
+                                        </div>
+                                        <div class="gtr-menu__li">
+                                            <hr class="dropdown-divider">
+                                            <a class="dropdown-item" href="{{ route('projectInProcess') }}">
+                                                {{ __('proyectos en proceso') }}
+                                            </a>
+                                        </div>
+                                        <div class="gtr-menu__li">
+                                            <hr class="dropdown-divider">
+                                            <a class="dropdown-item" href="{{ route('completedProject') }}">
+                                                {{ __('proyectos concluidos') }}
+                                            </a>
+                                        </div>
+                                        <div class="gtr-menu__li">
+                                            <hr class="dropdown-divider">
+                                            <a class="dropdown-item" href="{{ route('showRegionForm') }}">
+                                                {{ __('proyectos por región') }}
+                                            </a>
+                                        </div>
+                                        <div class="gtr-menu__li">
+                                            <hr class="dropdown-divider">
+                                            <a class="dropdown-item" href="{{ route('showPiechartbyRegion') }}">
+                                                {{ __('gráfica por región') }}
+                                            </a>
+                                        </div>
                                     </div>
                                 </li>
                             @endcan
@@ -137,8 +147,9 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                                                                                    document.getElementById('logout-form').submit();">
                                         {{ __('SALIR') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
