@@ -24,36 +24,38 @@
                         {{ $project->abbreviation }}/{{ $studio->name }}/{{ $report->report_number }}° Reporte
                     </h2>
                     {{-- <h2 class="h4"></h2> --}}
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Archivo</th>
-                                <th scope="col">Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($files as $file)
-                            <tr>
-                                <td>
-                                    {{ explode('/', $file)[5] }}
-                                </td>
-                                <td>
-                                    <a target="_blank" class="btn btn-outline-primary"
-                                        href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}">Abrir</a>
-                                    @can('downloadFile')
-                                    <a class="btn btn-outline-secondary"
-                                        href="{{ route('downloadFile', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id, 'nameFile' => explode('/', $file)[5]]) }}">Descargar</a>
-                                    @endcan
-                                    @can('deleteFile')
-                                    <a class="btn btn-outline-danger"
-                                        href="{{ route('deleteFile', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id,'nameFile' => explode('/', $file)[5]]) }}"
-                                        onclick="return confirm( '¿Está seguro de eliminar {{ explode('/', $file)[5] }}?') ">Eliminar</a>
-                                    @endcan
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="overflow-y">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Archivo</th>
+                                    <th scope="col">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($files as $file)
+                                <tr>
+                                    <td>
+                                        {{ explode('/', $file)[5] }}
+                                    </td>
+                                    <td>
+                                        <a target="_blank" class="btn btn-outline-primary"
+                                            href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}">Abrir</a>
+                                        @can('downloadFile')
+                                        <a class="btn btn-outline-secondary"
+                                            href="{{ route('downloadFile', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id, 'nameFile' => explode('/', $file)[5]]) }}">Descargar</a>
+                                        @endcan
+                                        @can('deleteFile')
+                                        <a class="btn btn-outline-danger"
+                                            href="{{ route('deleteFile', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id,'nameFile' => explode('/', $file)[5]]) }}"
+                                            onclick="return confirm( '¿Está seguro de eliminar {{ explode('/', $file)[5] }}?') ">Eliminar</a>
+                                        @endcan
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

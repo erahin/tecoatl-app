@@ -18,16 +18,16 @@ class UserSeeder extends Seeder
             'name' => 'super-admin',
             'email' => 'super-admin.tecoatl@gmail.com',
             'password' => bcrypt('super-admin'),
-        ])->assignRole('Super-user');
+        ])->assignRole('Super usuario');
         User::create([
             'name' => 'jefa-region',
             'email' => 'jefa-region.tecoatl@gmail.com',
             'password' => bcrypt('jefa-region'),
-        ])->assignRole('Admin');
+        ])->assignRole('Jefa de región');
         User::create([
             'name' => 'operativo',
             'email' => 'operativo.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Operator');
+        ])->assignRole('Operador');
     }
 }

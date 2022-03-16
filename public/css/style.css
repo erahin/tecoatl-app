@@ -26,6 +26,10 @@
     display: inline-block;
     margin-right: 10px;
 }
+.overflow-y {
+    overflow-y: scroll;
+    height: 50vh;
+}
 /* -------------------------------------------------------------------------- */
 /*                                Change active                               */
 /* -------------------------------------------------------------------------- */
@@ -60,49 +64,6 @@ div.active a:after {
     background-color: transparent;
     border-bottom: 2px solid #6372ff;
 }
-/* @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-} */
-
-/* ul.grt-menu li.grt-dropdown:hover {
-    cursor: pointer;
-}
-
-ul.grt-menu li.grt-dropdown:hover a {
-    box-shadow: none;
-}
-
-ul.grt-menu li.grt-dropdown ul.grt-dropdown-list {
-    position: absolute;
-    background: #6372ff;
-    margin: 0;
-    padding: 0;
-    min-width: 150px;
-    animation: fadeIn 0.8s;
-    z-index: 999;
-}
-
-ul.grt-menu li.grt-dropdown ul.grt-dropdown-list li a {
-    font-size: 18px;
-    color: #fff;
-    -webkit-transition: all ease 0.8s;
-    -moz-transition: all ease 0.8s;
-    transition: all ease 0.8s;
-}
-
-ul.grt-menu li.grt-dropdown.active-dropdown {
-    background: #6372ff;
-}
-
-ul.grt-menu li.grt-dropdown.active-dropdown a {
-    color: #fff;
-} */
-
 /* Desktop only style */
 @media (min-width: 768px) {
     ul.grt-menu li.grt-dropdown:hover > a + ul.grt-dropdown-list {
@@ -115,12 +76,12 @@ ul.grt-menu li.grt-dropdown.active-dropdown a {
 
     ul.grt-menu li.grt-dropdown:hover > a {
         color: #fff;
-        /* box-shadow: inset 150px 0 0 0 #6372ff; */
+        box-shadow: inset 150px 0 0 0 #6372ff;
     }
 
     ul.grt-menu li a:hover {
         color: #fff;
-        /* box-shadow: inset 150px 0 0 0 #6372ff; */
+        box-shadow: inset 150px 0 0 0 #6372ff;
     }
 }
 /* -------------------------------------------------------------------------- */
@@ -140,8 +101,11 @@ ul.grt-menu li.grt-dropdown.active-dropdown a {
     margin-right: auto;
 }
 main {
-    min-height: 92.6vh;
+    min-height: 100vh;
 }
+/* .card {
+    background-color: rgba(90, 0, 236, 0.719);
+} */
 .navbar__logo {
     width: 70px;
 }

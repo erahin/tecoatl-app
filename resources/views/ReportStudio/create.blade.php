@@ -18,7 +18,7 @@
                     <form method="POST" action="{{ route('informes.store') }}" enctype="multipart/form-data">
                         @csrf
                         @if ($reportsArray)
-                        <div class="row mb-3">
+                        <div class="row mb-3" id="upload-reports">
                             {!! Form::label('', 'Informes subidos', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
                             <div class="col-md-6 scroll-studies">
@@ -26,8 +26,10 @@
                                     @foreach ($reportsArray as $directorie)
                                     @foreach ($directorie as $dir)
                                     <li class="list-group-item">
-                                        {!! Form::checkbox('files[]', $dir, 'true', ['class' => 'form-check-input']) !!}
-                                        {{ $dir }}</li>
+                                        {!! Form::checkbox('files[]', $dir, 'true', ['class' => 'form-check-input'])
+                                        !!}
+                                        {{ explode(' ', $dir)[0] }} informe - {{ $report_type[explode(' ', $dir)[2]] }}
+                                    </li>
                                     @endforeach
                                     @endforeach
                                 </ul>
