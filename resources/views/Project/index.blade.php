@@ -46,7 +46,7 @@
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>
-                                <th scope="col">Lugar</th>
+                                <th scope="col">Nombre del proyecto</th>
                                 <th scope="col">Abreviación</th>
                                 <th scope="col">Estatus</th>
                                 <th scope="col">Región</th>

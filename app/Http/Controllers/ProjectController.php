@@ -23,9 +23,13 @@ class ProjectController extends Controller
         $regions = Region::all();
         if ($request->search) {
             $projects = Project::where('place', 'like', $request->search)->paginate(10);
-        } else {
-            $projects = Project::paginate(10);
+            return view('Project.index', compact('projects', 'regions', 'status'));
         }
+        if ($request->region) {
+            $projects = Project::where('region_id', '=', $request->region)->paginate(10);
+            return view('Project.index', compact('projects', 'regions', 'status'));
+        }
+        $projects = Project::paginate(10);
         return view('Project.index', compact('projects', 'regions', 'status'));
     }
 

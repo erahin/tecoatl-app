@@ -30,6 +30,21 @@
     overflow-y: scroll;
     height: 50vh;
 }
+.blue-form {
+    /* padding: 5px 10px; */
+    display: inline-block;
+    color: #000000 !important;
+    line-height: 1.1em;
+    box-shadow: inset 0 0 0 0 #fff;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+    position: relative;
+    text-decoration: none;
+}
+.blue-form:hover {
+    background-color: #6372ff !important;
+}
 /* -------------------------------------------------------------------------- */
 /*                                Change active                               */
 /* -------------------------------------------------------------------------- */

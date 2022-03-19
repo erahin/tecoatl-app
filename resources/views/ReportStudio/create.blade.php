@@ -109,7 +109,8 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            {!! Form::label('reports', 'Informes', ['class' => 'col-md-4 col-form-label text-md-end'])
+                            {!! Form::label('reports', 'Subir archivos', ['class' => 'col-md-4 col-form-label
+                            text-md-end'])
                             !!}
                             <div class="col-md-6">
                                 {!! Form::file('reports[]', ['class' => 'form-control', 'multiple', 'id' => 'select',

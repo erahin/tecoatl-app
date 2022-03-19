@@ -14,7 +14,8 @@
                         @csrf
                         @method('PUT')
                         <div class="row mb-3">
-                            {!! Form::label('place', 'Lugar', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
+                            {!! Form::label('place', 'Nombre del proyecto', ['class' => 'col-md-4 col-form-label
+                            text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('place', $project->place, ['class' => 'form-control', 'autofocus',
                                 'required', 'id' => 'place']) !!}
