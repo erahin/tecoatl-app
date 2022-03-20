@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row mb-3">
-                            <img src="{{ asset('img/Tecoat-logo.png') }}" class="header__logo"
+                            <img src="{{ asset('img/logo-tecoalt2.svg') }}" class="header__logo"
                                 alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 <div class="">
                                     <button type="submit" class="btn btn-primary button_login">
-                                        {{ __('INGRESAR') }}
+                                        <i class="fa fa-unlock-alt" aria-hidden="true"></i> {{ __('INGRESAR') }}
                                     </button>
 
                                     @if (Route::has('password.request'))

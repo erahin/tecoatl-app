@@ -36,7 +36,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" id="home">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
-                    <img src="{{ asset('img/Tecoat-logo.png') }}" class="navbar__logo"
+                    <img src="{{ asset('img/logo-tecoalt2.svg') }}" class="navbar__logo"
                         alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -90,24 +90,24 @@
                                 <li class="nav-item dropdown text-uppercase">
                                     <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ 'documentación' }}
+                                        <i class="fa fa-book" aria-hidden="true"></i> {{ 'documentación' }}
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <div class="gtr-menu__li">
                                             <a class="dropdown-item" href="{{ route('projectStart') }}">
-                                                {{ __('región norte') }}
+                                                <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región norte') }}
                                             </a>
                                         </div>
                                         <div class="gtr-menu__li">
                                             <hr class="dropdown-divider">
                                             <a class="dropdown-item" href="{{ route('projectInProcess') }}">
-                                                {{ __('región sur') }}
+                                                <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región sur') }}
                                             </a>
                                         </div>
                                         <div class="gtr-menu__li">
                                             <hr class="dropdown-divider">
                                             <a class="dropdown-item" href="{{ route('projectInProcess') }}">
-                                                {{ __('región centro') }}
+                                                <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región centro') }}
                                             </a>
                                         </div>
                                     </div>
@@ -146,35 +146,40 @@
                                 <li class="nav-item dropdown text-uppercase">
                                     <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ 'estatus de proyecto' }}
+                                        <i class="fa fa-line-chart" aria-hidden="true"></i> {{ 'estatus de proyecto' }}
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <div class="gtr-menu__li">
                                             <a class="dropdown-item" href="{{ route('projectStart') }}">
+                                                <i class="fa fa-hourglass-start" aria-hidden="true"></i>
                                                 {{ __('proyectos por iniciar') }}
                                             </a>
                                         </div>
                                         <div class="gtr-menu__li">
                                             <hr class="dropdown-divider">
                                             <a class="dropdown-item" href="{{ route('projectInProcess') }}">
+                                                <i class="fa fa-hourglass-half" aria-hidden="true"></i>
                                                 {{ __('proyectos en proceso') }}
                                             </a>
                                         </div>
                                         <div class="gtr-menu__li">
                                             <hr class="dropdown-divider">
                                             <a class="dropdown-item" href="{{ route('completedProject') }}">
+                                                <i class="fa fa-hourglass-end" aria-hidden="true"></i>
                                                 {{ __('proyectos concluidos') }}
                                             </a>
                                         </div>
                                         <div class="gtr-menu__li">
                                             <hr class="dropdown-divider">
                                             <a class="dropdown-item" href="{{ route('showRegionForm') }}">
+                                                <i class="fa fa-list-ol" aria-hidden="true"></i>
                                                 {{ __('proyectos por región') }}
                                             </a>
                                         </div>
                                         <div class="gtr-menu__li">
                                             <hr class="dropdown-divider">
                                             <a class="dropdown-item" href="{{ route('showPiechartbyRegion') }}">
+                                                <i class="fa fa-pie-chart" aria-hidden="true"></i>
                                                 {{ __('gráfica por región') }}
                                             </a>
                                         </div>
@@ -185,13 +190,13 @@
                                 <li class="nav-item dropdown text-uppercase">
                                     <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ 'configuración' }}
+                                        <i class="fa fa-cogs" aria-hidden="true"></i> {{ 'configuración' }}
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         @can('config')
                                             <div class="gtr-menu__li">
                                                 <a class="dropdown-item" href="{{ route('roles.index') }}">
-                                                    {{ __('roles') }}
+                                                    <i class="fa fa-tasks" aria-hidden="true"></i> {{ __('roles') }}
                                                 </a>
                                             </div>
                                         @endcan
@@ -199,7 +204,7 @@
                                             <div class="gtr-menu__li">
                                                 <hr class="dropdown-divider">
                                                 <a class="dropdown-item" href="{{ route('usuarios.index') }}">
-                                                    {{ __('USUARIOS') }}
+                                                    <i class="fa fa-users" aria-hidden="true"></i> {{ __('USUARIOS') }}
                                                 </a>
                                             </div>
                                         @endcan
@@ -207,7 +212,7 @@
                                             <div class="gtr-menu__li">
                                                 <hr class="dropdown-divider">
                                                 <a class="dropdown-item" href="{{ route('regiones.index') }}">
-                                                    {{ __('nueva región') }}
+                                                    <i class="fa fa-globe" aria-hidden="true"></i> {{ __('nueva región') }}
                                                 </a>
                                             </div>
                                         @endcan
@@ -217,6 +222,7 @@
                                             <div class="gtr-menu__li">
                                                 <hr class="dropdown-divider">
                                                 <a class="dropdown-item" href="{{ route('estudios.index') }}">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                                     {{ __('nueva categoría') }}
                                                 </a>
                                             </div>
@@ -227,12 +233,12 @@
                             <li class="nav-item dropdown text-uppercase">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i> {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('SALIR') }}
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i> {{ __('SALIR') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         class="d-none">
