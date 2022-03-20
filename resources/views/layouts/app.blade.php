@@ -181,36 +181,46 @@
                                     </div>
                                 </li>
                             @endcan
-                            @can('show.reports')
+                            @can('config')
                                 <li class="nav-item dropdown text-uppercase">
                                     <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ 'configuración' }}
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <div class="gtr-menu__li">
-                                            <a class="dropdown-item" href="{{ route('roles.index') }}">
-                                                {{ __('roles') }}
-                                            </a>
-                                        </div>
-                                        <div class="gtr-menu__li">
-                                            <hr class="dropdown-divider">
-                                            <a class="dropdown-item" href="{{ route('usuarios.index') }}">
-                                                {{ __('USUARIOS') }}
-                                            </a>
-                                        </div>
-                                        <div class="gtr-menu__li">
-                                            <hr class="dropdown-divider">
-                                            <a class="dropdown-item" href="{{ route('regiones.index') }}">
-                                                {{ __('nueva región') }}
-                                            </a>
-                                        </div>
-                                        <div class="gtr-menu__li">
-                                            <hr class="dropdown-divider">
-                                            <a class="dropdown-item" href="{{ route('estudios.index') }}">
-                                                {{ __('nueva categoría') }}
-                                            </a>
-                                        </div>
+                                        @can('config')
+                                            <div class="gtr-menu__li">
+                                                <a class="dropdown-item" href="{{ route('roles.index') }}">
+                                                    {{ __('roles') }}
+                                                </a>
+                                            </div>
+                                        @endcan
+                                        @can('config')
+                                            <div class="gtr-menu__li">
+                                                <hr class="dropdown-divider">
+                                                <a class="dropdown-item" href="{{ route('usuarios.index') }}">
+                                                    {{ __('USUARIOS') }}
+                                                </a>
+                                            </div>
+                                        @endcan
+                                        @can('config')
+                                            <div class="gtr-menu__li">
+                                                <hr class="dropdown-divider">
+                                                <a class="dropdown-item" href="{{ route('regiones.index') }}">
+                                                    {{ __('nueva región') }}
+                                                </a>
+                                            </div>
+                                        @endcan
+                                        @can('config')
+                                        @endcan
+                                        @can('config')
+                                            <div class="gtr-menu__li">
+                                                <hr class="dropdown-divider">
+                                                <a class="dropdown-item" href="{{ route('estudios.index') }}">
+                                                    {{ __('nueva categoría') }}
+                                                </a>
+                                            </div>
+                                        @endcan
                                     </div>
                                 </li>
                             @endcan

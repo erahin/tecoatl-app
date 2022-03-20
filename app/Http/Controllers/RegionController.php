@@ -10,10 +10,11 @@ class RegionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:regiones.index')->only('index');
-        $this->middleware('can:regiones.create')->only('create', 'store');
-        $this->middleware('can:regiones.edit')->only('edit', 'update');
-        $this->middleware('can:regiones.destoy')->only('destoy');
+        // $this->middleware('can:regiones.index')->only('index');
+        // $this->middleware('can:regiones.create')->only('create', 'store');
+        // $this->middleware('can:regiones.edit')->only('edit', 'update');
+        // $this->middleware('can:regiones.destoy')->only('destoy');
+        $this->middleware('can:config');
     }
 
     public function index()

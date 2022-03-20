@@ -11,10 +11,11 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:usuarios.index')->only('index');
-        $this->middleware('can:usuarios.create')->only('create', 'store');
-        $this->middleware('can:usuarios.edit')->only('edit', 'update');
-        $this->middleware('can:usuarios.destoy')->only('destoy');
+        // $this->middleware('can:usuarios.index')->only('index');
+        // $this->middleware('can:usuarios.create')->only('create', 'store');
+        // $this->middleware('can:usuarios.edit')->only('edit', 'update');
+        // $this->middleware('can:usuarios.destoy')->only('destoy');
+        $this->middleware('can:config');
     }
 
     public function index()

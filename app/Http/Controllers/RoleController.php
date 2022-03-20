@@ -10,10 +10,11 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:roles.index')->only('index');
-        $this->middleware('can:roles.create')->only('create', 'store');
-        $this->middleware('can:roles.edit')->only('edit', 'update');
-        $this->middleware('can:roles.destoy')->only('destoy');
+        // $this->middleware('can:roles.index')->only('index');
+        // $this->middleware('can:roles.create')->only('create', 'store');
+        // $this->middleware('can:roles.edit')->only('edit', 'update');
+        // $this->middleware('can:roles.destoy')->only('destoy');
+        $this->middleware('can:config');
     }
     public function index()
     {

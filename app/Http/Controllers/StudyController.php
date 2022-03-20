@@ -10,10 +10,11 @@ class StudyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:estudios.index')->only('index');
-        $this->middleware('can:estudios.create')->only('create', 'store');
-        $this->middleware('can:estudios.edit')->only('edit', 'update');
-        $this->middleware('can:estudios.destoy')->only('destoy');
+        // $this->middleware('can:estudios.index')->only('index');
+        // $this->middleware('can:estudios.create')->only('create', 'store');
+        // $this->middleware('can:estudios.edit')->only('edit', 'update');
+        // $this->middleware('can:estudios.destoy')->only('destoy');
+        $this->middleware('can:config');
     }
 
     public function index()
