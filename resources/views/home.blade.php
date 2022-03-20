@@ -17,6 +17,10 @@
                             </div>
                         @endif
                         <div class="body__logo">
+                            <script>
+                                localStorage.setItem("regions", "{{ $regionArray }}");
+                                localStorage.setItem("namesRegions", "{{ $regionNameArray }}");
+                            </script>
                             <img src="{{ asset('img/tecoatl.jpeg') }}"
                                 alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
                         </div>

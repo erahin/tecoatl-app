@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectByRegion;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
 use App\Http\Controllers\RegionController;
@@ -84,3 +85,5 @@ Route::get('/consulta-proyectos-en-procesos', [ProjectReportController::class, '
 Route::get('/consulta-proyectos-concluidos', [ProjectReportController::class, 'completedProject'])->middleware('can:show.reports')->name('completedProject')->middleware('auth');
 Route::get('/consulta-proyectos-por-region', [ProjectReportController::class, 'showRegionForm'])->middleware('can:show.reports')->name('showRegionForm')->middleware('auth');
 Route::get('/grafica-proyectos-por-region', [ProjectReportController::class, 'showPiechartbyRegion'])->middleware('can:show.reports')->name('showPiechartbyRegion')->middleware('auth');
+Route::get('/proyectos-por-region/{id}', [ProjectByRegion::class, 'projectByRegion'])->middleware('can:proyectos.index')->name('projectByRegion')->middleware('auth');
+Route::get('/busqueda-proyectos/{id}', [ProjectByRegion::class, 'searchProjectByRegion'])->middleware('can:proyectos.index')->name('searchProjectByRegion')->middleware('auth');

@@ -104,6 +104,8 @@
     <script>
         (function() {
             localStorage.removeItem("index");
+            localStorage.removeItem("regionArray");
+            localStorage.removeItem("namesRegions");
             localStorage.clear();
         })();
     </script>

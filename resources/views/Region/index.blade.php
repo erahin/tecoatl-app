@@ -58,4 +58,8 @@
             </div>
         </div>
     </div>
+    <script>
+        localStorage.setItem("regions", "{{ $regionArray }}");
+        localStorage.setItem("namesRegions", "{{ $regionNameArray }}");
+    </script>
 @endsection

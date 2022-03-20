@@ -20,7 +20,7 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $status = ["Por iniciar", "En desarrollo", "Concluido"];
-        $regions = Region::all();
+        // $regions = Region::all();
         if ($request->search) {
             $projects = Project::where('place', 'like', $request->search)->paginate(10);
             return view('Project.index', compact('projects', 'regions', 'status'));
@@ -30,7 +30,7 @@ class ProjectController extends Controller
             return view('Project.index', compact('projects', 'regions', 'status'));
         }
         $projects = Project::paginate(10);
-        return view('Project.index', compact('projects', 'regions', 'status'));
+        return view('Project.index', compact('projects', 'status'));
     }
 
     public function create()

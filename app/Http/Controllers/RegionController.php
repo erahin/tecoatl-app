@@ -19,8 +19,20 @@ class RegionController extends Controller
 
     public function index()
     {
+        $regionArray = "";
+        $regionNameArray = "";
+        $regions = Region::all();
+        for ($i = 0; $i < count($regions); $i++) {
+            if ($i == count($regions) - 1) {
+                $regionArray .= $regions[$i]->id;
+                $regionNameArray .= $regions[$i]->name;
+            } else {
+                $regionArray .= $regions[$i]->id . ',';
+                $regionNameArray .= $regions[$i]->name . ',';
+            }
+        }
         $regions = Region::paginate(10);
-        return view('Region.index', compact('regions'));
+        return view('Region.index', compact('regions', 'regionArray', 'regionNameArray'));
     }
 
     public function create()

@@ -24,7 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $regions = Region::pluck('id');
-        return view('home', compact('regions'));
+        $regionArray = "";
+        $regionNameArray = "";
+        $regions = Region::all();
+        for ($i = 0; $i < count($regions); $i++) {
+            if ($i == count($regions) - 1) {
+                $regionArray .= $regions[$i]->id;
+                $regionNameArray .= $regions[$i]->name;
+            } else {
+                $regionArray .= $regions[$i]->id . ',';
+                $regionNameArray .= $regions[$i]->name . ',';
+            }
+        }
+        return view('home', compact("regionArray", "regionNameArray"));
     }
 }

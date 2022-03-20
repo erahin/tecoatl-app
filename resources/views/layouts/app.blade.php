@@ -67,32 +67,14 @@
                                 </li>
                             @endif
                         @else
-                            {{-- <script>
-                                localStorage.setItem("regions", "{{ $regions }}");
-                                let data = localStorage.getItem("regions");
-                                data = data.split(",");
-                                let array = [];
-                                data.forEach((element, index) => {
-                                    if (index === 0) {
-                                        let id = element.charAt(1);
-                                        array.push(id);
-                                    }
-                                    if (index === data.length) {
-                                        let id = element.charAt(2);
-                                        array.push(id);
-                                    }
-                                    array.push(element);
-
-                                });
-                                console.log(array);
-                            </script> --}}
                             @can('proyectos.index')
                                 <li class="nav-item dropdown text-uppercase">
                                     <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <i class="fa fa-book" aria-hidden="true"></i> {{ 'documentación' }}
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"
+                                        id="dropdown-menu">
                                         <div class="gtr-menu__li">
                                             <a class="dropdown-item" href="{{ route('projectStart') }}">
                                                 <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región norte') }}
@@ -258,5 +240,35 @@
         </main>
     </div>
 </body>
+<script>
+    /* -------------------------------------------------------------------------- */
+    /*                                 Get regions                                */
+    /* -------------------------------------------------------------------------- */
+    (function() {
+        if (localStorage.getItem("regions") != null) {
+            let idRegions = localStorage.getItem("regions").split(",");
+            let nameRegions = localStorage.getItem("namesRegions").split(",");
+            const dropdown_menu = document.getElementById("dropdown-menu");
+            let menu = "";
+            for (let index = 0; index < idRegions.length; index++) {
+                if (index == (idRegions.length - 1)) {
+                    menu += `<div class="gtr-menu__li">
+                                <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}">
+                                    <i class="fa fa-folder" aria-hidden="true"></i> región ${nameRegions[index]}
+                                </a>
+                            </div>`;
+                } else {
+                    menu += `<div class="gtr-menu__li">
+                                <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}">
+                                    <i class="fa fa-folder" aria-hidden="true"></i> región ${nameRegions[index]}
+                                </a>
+                                <hr class="dropdown-divider">
+                             </div>`;
+                }
+            }
+            dropdown_menu.innerHTML = menu;
+        }
+    })();
+</script>
 
 </html>
