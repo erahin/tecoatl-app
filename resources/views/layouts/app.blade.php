@@ -67,6 +67,25 @@
                                 </li>
                             @endif
                         @else
+                            {{-- <script>
+                                localStorage.setItem("regions", "{{ $regions }}");
+                                let data = localStorage.getItem("regions");
+                                data = data.split(",");
+                                let array = [];
+                                data.forEach((element, index) => {
+                                    if (index === 0) {
+                                        let id = element.charAt(1);
+                                        array.push(id);
+                                    }
+                                    if (index === data.length) {
+                                        let id = element.charAt(2);
+                                        array.push(id);
+                                    }
+                                    array.push(element);
+
+                                });
+                                console.log(array);
+                            </script> --}}
                             @can('proyectos.index')
                                 <li class="nav-item dropdown text-uppercase">
                                     <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -100,7 +119,7 @@
                                         href="{{ route('proyectos.index') }}">{{ __('proyectos') }}</a>
                                 </li>
                             @endcan --}}
-                            @can('estudios.index')
+                            {{-- @can('estudios.index')
                                 <li class="nav-item text-uppercase gtr-menu__li">
                                     <a class="nav-link"
                                         href="{{ route('estudios.index') }}">{{ __('crear categoría') }}</a>
@@ -122,7 +141,7 @@
                                 <li class="nav-item text-uppercase gtr-menu__li">
                                     <a class="nav-link" href="{{ route('roles.index') }}">{{ __('roles') }}</a>
                                 </li>
-                            @endcan
+                            @endcan --}}
                             @can('show.reports')
                                 <li class="nav-item dropdown text-uppercase">
                                     <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -157,6 +176,39 @@
                                             <hr class="dropdown-divider">
                                             <a class="dropdown-item" href="{{ route('showPiechartbyRegion') }}">
                                                 {{ __('gráfica por región') }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endcan
+                            @can('show.reports')
+                                <li class="nav-item dropdown text-uppercase">
+                                    <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ 'configuración' }}
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <div class="gtr-menu__li">
+                                            <a class="dropdown-item" href="{{ route('roles.index') }}">
+                                                {{ __('roles') }}
+                                            </a>
+                                        </div>
+                                        <div class="gtr-menu__li">
+                                            <hr class="dropdown-divider">
+                                            <a class="dropdown-item" href="{{ route('usuarios.index') }}">
+                                                {{ __('USUARIOS') }}
+                                            </a>
+                                        </div>
+                                        <div class="gtr-menu__li">
+                                            <hr class="dropdown-divider">
+                                            <a class="dropdown-item" href="{{ route('regiones.index') }}">
+                                                {{ __('nueva región') }}
+                                            </a>
+                                        </div>
+                                        <div class="gtr-menu__li">
+                                            <hr class="dropdown-divider">
+                                            <a class="dropdown-item" href="{{ route('estudios.index') }}">
+                                                {{ __('nueva categoría') }}
                                             </a>
                                         </div>
                                     </div>

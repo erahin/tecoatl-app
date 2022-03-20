@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $regions = Region::all();
+        $regions = Region::pluck('id');
         return view('home', compact('regions'));
     }
 }
