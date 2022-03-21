@@ -21,9 +21,7 @@ class ProjectByRegion extends Controller
     {
         if ($request->search) {
             $projects = DB::table('projects')
-                ->where('place', 'like', $request->search)
-                ->orWhere('abbreviation', 'like', $request->search)
-                ->orWhere('status', 'like', $request->search)
+                ->where('place', 'like', '%' . $request->search . '%')
                 ->where('region_id', '=', $id)
                 ->paginate(10);
         }
