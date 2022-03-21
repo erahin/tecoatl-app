@@ -22,4 +22,11 @@ class Study extends Model
     {
         return $this->hasMany(Report::class, 'id');
     }
+    /* -------------------------------------------------------------------------- */
+    /*                           Relation user and study                          */
+    /* -------------------------------------------------------------------------- */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_studies');
+    }
 }

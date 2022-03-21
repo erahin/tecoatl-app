@@ -36,9 +36,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /* -------------------------------------------------------------------------- */
+    /*                        Relation reports and project                        */
+    /* -------------------------------------------------------------------------- */
     public function reports()
     {
         return $this->hasMany(Report::class, 'id');
     }
+    /* -------------------------------------------------------------------------- */
+    /*                           Relation user and study                          */
+    /* -------------------------------------------------------------------------- */
+    public function studies()
+    {
+        return $this->belongsToMany(Study::class, 'users_studies');
+    }
 }
-//falta poner relacion informes

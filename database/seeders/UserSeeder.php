@@ -23,11 +23,11 @@ class UserSeeder extends Seeder
             'name' => 'jefa-region',
             'email' => 'jefa-region.tecoatl@gmail.com',
             'password' => bcrypt('jefa-region'),
-        ])->assignRole('Jefa de región');
+        ])->assignRole('Jefa de sub-departamento técnico');
         User::create([
             'name' => 'operativo',
             'email' => 'operativo.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Operador');
+        ])->assignRole('Coordinador de sub-área');
     }
 }
