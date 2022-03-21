@@ -87,3 +87,4 @@ Route::get('/consulta-proyectos-por-region', [ProjectReportController::class, 's
 Route::get('/grafica-proyectos-por-region', [ProjectReportController::class, 'showPiechartbyRegion'])->middleware('can:show.reports')->name('showPiechartbyRegion')->middleware('auth');
 Route::get('/proyectos-por-region/{id}', [ProjectByRegion::class, 'projectByRegion'])->middleware('can:proyectos.index')->name('projectByRegion')->middleware('auth');
 Route::get('/busqueda-proyectos/{id}', [ProjectByRegion::class, 'searchProjectByRegion'])->middleware('can:proyectos.index')->name('searchProjectByRegion')->middleware('auth');
+Route::get('/proyectos/crear/region/{id}', [ProjectByRegion::class, 'createProjectByRegion'])->middleware('can:proyectos.index')->name('createProjectByRegion')->middleware('auth');

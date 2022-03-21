@@ -54,7 +54,7 @@
                             {!! Form::label('region_id', 'Regíon', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
                             <div class="col-md-6">
-                                {!! Form::select('region_id', $regions, '', ['class' => 'form-select', 'id' =>
+                                {!! Form::select('region_id', $regions, $id, ['class' => 'form-select', 'id' =>
                                 'region_id', 'placeholder' => 'Seleccione Región']) !!}
                                 @error('region_id')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo región es obligatorio'
