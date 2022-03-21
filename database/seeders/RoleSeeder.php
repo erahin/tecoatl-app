@@ -19,9 +19,10 @@ class RoleSeeder extends Seeder
         /*                                    Roles                                   */
         /* -------------------------------------------------------------------------- */
         $role1 = Role::create(['name' => 'Super usuario']); //super admin
-        $role2 = Role::create(['name' => 'Jefa de región']); //jefas de region
-        $role3 = Role::create(['name' => 'Operador']); //estudios
+        $role2 = Role::create(['name' => 'Jefa de sub-departamento técnico']); //jefas de region
+        $role3 = Role::create(['name' => 'Coordinador de sub-área']); //operador
         $role4 = Role::create(['name' => 'Técnico informatico']); //ti
+        $role5 = Role::create(['name' => 'Coordinador de área']); //
         /* -------------------------------------------------------------------------- */
         /*                            User Permission                                 */
         /* -------------------------------------------------------------------------- */
@@ -68,7 +69,7 @@ class RoleSeeder extends Seeder
         /*                              Other Permission                              */
         /* -------------------------------------------------------------------------- */
         /* Projects Module */
-        Permission::create(['name' => 'proyectos', 'description' => 'Ver opción proyectos'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'proyectos', 'description' => 'Ver menú proyectos'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'proyectos.index', 'description' => 'Ver lista de proyectos'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'proyectos.create', 'description' => 'Crear nuevo proyecto'])->syncRoles([$role1, $role2, $role4]);
         Permission::create(['name' => 'proyectos.edit', 'description' => 'Editar proyecto'])->syncRoles([$role1, $role2, $role4]);
@@ -89,6 +90,6 @@ class RoleSeeder extends Seeder
         /* Reports Module */
         Permission::create(['name' => 'show.reports', 'description' => 'Ver reportes'])->syncRoles([$role1, $role2, $role4]);
         /* Config Module */
-        Permission::create(['name' => 'config', 'description' => 'Menú/Acciones de configuración'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'config', 'description' => 'Ver menú de configuración'])->syncRoles([$role1, $role4]);
     }
 }

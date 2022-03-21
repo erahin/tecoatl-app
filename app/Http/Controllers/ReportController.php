@@ -14,7 +14,8 @@ class ReportController extends Controller
     public function studiesList($id)
     {
         $project = Project::find($id);
-        return view('Report.index', compact('project'));
+        $region_id = $project->region_id;
+        return view('Report.index', compact('project', 'region_id'));
     }
     public function reportsList($id, $idStudio)
     {

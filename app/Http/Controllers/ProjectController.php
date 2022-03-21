@@ -12,24 +12,11 @@ class ProjectController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:proyectos.index')->only('index');
-        $this->middleware('can:proyectos.create')->only('create', 'store');
+        // $this->middleware('can:proyectos.index')->only('index');
+        $this->middleware('can:proyectos.create')->only('store');
         $this->middleware('can:proyectos.edit')->only('edit', 'update');
         $this->middleware('can:proyectos.destoy')->only('destoy');
     }
-    public function index(Request $request)
-    {
-    }
-
-    public function create()
-    {
-
-        $regions = Region::pluck('name', 'id');
-        $status = ["Por iniciar", "En desarrollo", "Concluido"];
-        $studies = Study::all();
-        return view('Project.create', compact('regions', 'studies', 'status'));
-    }
-
     public function store(Request $request)
     {
         /* -------------------------------------------------------------------------- */
@@ -65,7 +52,7 @@ class ProjectController extends Controller
         foreach ($request->studie_id as $studie) {
             Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
         }
-        return redirect()->route('proyectos.index');
+        return redirect()->route('projectByRegion', [$request->region_id]);
     }
 
     public function edit($id)
@@ -116,7 +103,7 @@ class ProjectController extends Controller
                 Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
             }
         }
-        return redirect()->route('proyectos.index');
+        return redirect()->route('projectByRegion', [$request->region_id]);
     }
     public function destroy($id)
     {
@@ -137,6 +124,6 @@ class ProjectController extends Controller
         /*                               Delete project                               */
         /* -------------------------------------------------------------------------- */
         $project->delete();
-        return redirect()->route('proyectos.index');
+        return redirect()->route('projectByRegion', [$project->region_id]);
     }
 }

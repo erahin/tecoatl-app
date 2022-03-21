@@ -27,7 +27,7 @@
                     @endif
                     @can('proyectos.index')
                     <div class="d-flex justify-content-start flex-wrap mb-2">
-                        <a class="btn btn-outline-primary" href="{{ route('proyectos.index') }}">Regresar
+                        <a class="btn btn-outline-primary" href="{{ route('projectByRegion', $region_id) }}">Regresar
                         </a>
                     </div>
                     @endcan
