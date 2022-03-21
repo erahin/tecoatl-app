@@ -26,6 +26,42 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            {!! Form::label('', 'Encargado', ['class' => 'col-md-4 col-form-label
+                            text-md-end'])
+                            !!}
+                            <div class="col-md-6">
+                                <div class="form-check scroll-studies">
+                                    @foreach ($userArray as $user)
+                                    <label class="form-check-label inline_label">
+                                        {!! Form::checkbox('user_id[]', $user->id, null, ['class' =>
+                                        'form-check-input', 'id' => $user->id]) !!}
+                                        {{ $user->name }}
+                                    </label>
+                                    @endforeach
+                                </div>
+                                @error('user_id')
+                                <strong class="text-danger text-center mt-5">{{ 'Seleccione al menos un encargado'
+                                    }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        @foreach ($study->users as $registre)
+                        @foreach ($userArray as $user)
+                        @if ($user->id == $registre->id)
+                        <script>
+                            checkActive({{ $user->id }});
+
+                            function checkActive(id) {
+                                let checkStudy = document.getElementById(
+                                    id
+                                );
+                                checkStudy.setAttribute("checked", "");
+                            }
+                        </script>
+                        @endif
+                        @endforeach
+                        @endforeach
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {!! Form::submit('Modificar', ['class' => 'btn btn-primary']) !!}
