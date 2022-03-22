@@ -130,9 +130,14 @@
                         {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden']) !!}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}
+                                {{ Form::button('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar',
+                                ['type' =>
+                                'submit', 'class' =>
+                                'btn btn-primary'] ) }}
                                 <a class="btn btn-danger"
-                                    href="{{ route('reports-list',[ 'id' => $project->id, 'idStudio' => $idStudio]) }}">Cancelar
+                                    href="{{ route('reports-list',[ 'id' => $project->id, 'idStudio' => $idStudio]) }}"><i
+                                        class="fa fa-ban" aria-hidden="true"></i>
+                                    Cancelar
                                 </a>
                             </div>
                         </div>

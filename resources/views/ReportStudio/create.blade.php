@@ -128,8 +128,12 @@
                         {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden', 'required']) !!}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                {!! Form::submit('Crear', ['class' => 'btn btn-primary']) !!}
-                                <a class="btn btn-danger" href="{{ route('studies-list', $project->id) }}">Cancelar
+                                {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Crear', ['type' =>
+                                'submit', 'class' =>
+                                'btn btn-primary'] ) }}
+                                <a class="btn btn-danger" href="{{ route('studies-list', $project->id) }}"><i
+                                        class="fa fa-ban" aria-hidden="true"></i>
+                                    Cancelar
                                 </a>
                             </div>
                         </div>

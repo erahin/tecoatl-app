@@ -11,7 +11,8 @@
                     <div>
                         <div class="input-group d-flex justify-content-end">
                             <div class="form-outline">
-                                <input type="search" id="form1" class="form-control" placeholder="Buscar" />
+                                <input type="search" id="search" class="form-control" placeholder="Buscar"
+                                    onkeyup='searchTable()' />
                             </div>
                             <button type="button" class="btn btn-primary">
                                 <i class="fa fa-search"></i>
@@ -26,7 +27,8 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap mb-2">
-                        <a class="btn btn-outline-primary" href="{{ route('studies-list', $project->id) }}">Regresar
+                        <a class="btn btn-outline-primary" href="{{ route('studies-list', $project->id) }}"><i
+                                class="fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
                     <table class="table table-hover table-bordered display" id="example">
@@ -55,17 +57,20 @@
                                 <td>
                                     @can('show-informs')
                                     <a href="{{ route('show-informs', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id]) }}"
-                                        class="btn btn-outline-secondary">Lista de archivos</a>
+                                        class="btn btn-outline-secondary"><i class="fa fa-list-alt"
+                                            aria-hidden="true"></i> Lista de archivos</a>
                                     @endcan
                                     @can('report-edit')
                                     <a href="{{ route('report-edit', ['id' => $report->id, 'idStudio' => $studio->id, 'idProject' => $project->id]) }}"
-                                        class="btn btn-outline-success">Agregar
+                                        class="btn btn-outline-success"><i class="fa fa-file-pdf-o"
+                                            aria-hidden="true"></i> Agregar
                                         más archivos</a>
                                     @endcan
                                     @can('deleteReportsDirectory')
                                     <a href="{{ route('deleteReportsDirectory', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id]) }}"
                                         class="btn btn-outline-danger"
-                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ $report->report_number }} informe, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') ">Eliminar
+                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ $report->report_number }} informe, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
+                                            class="fa fa-trash-o" aria-hidden="true"></i> Eliminar
                                         carpeta</a>
                                     @endcan
                                 </td>

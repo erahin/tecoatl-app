@@ -28,7 +28,8 @@
                     @can('proyectos.index')
                     <div class="d-flex justify-content-start flex-wrap mb-2">
                         <a class="btn btn-outline-primary"
-                            href="{{ route('projectByRegion', ['id' => $region_id, 'idUser' => Auth::user()->id]) }}">Regresar
+                            href="{{ route('projectByRegion', ['id' => $region_id, 'idUser' => Auth::user()->id]) }}"><i
+                                class="fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
                     @endcan
@@ -46,18 +47,21 @@
                                 <td>
                                     @can('upload-reports')
                                     <a href="{{ route('upload-reports', ['id' => $project->id, 'idStudio' => $registre->id]) }}"
-                                        class="btn btn-outline-primary">Agregar
+                                        class="btn btn-outline-primary"><i class="fa fa-file-pdf-o"
+                                            aria-hidden="true"></i> Agregar
                                         informes</a>
                                     @endcan
                                     @can('reports-list')
                                     <a href="{{ route('reports-list', ['id' => $project->id, 'idStudio' => $registre->id]) }}"
-                                        class="btn btn-outline-success">Lista de informes
+                                        class="btn btn-outline-success"><i class="fa fa-list-alt"
+                                            aria-hidden="true"></i> Lista de informes
                                     </a>
                                     @endcan
                                     @can('deleteStudioDirectory')
                                     <a href="{{ route('deleteStudioDirectory', ['idProject' => $project->id, 'idStudio' => $registre->id]) }}"
                                         class="btn btn-outline-danger"
-                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ $registre->name }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') ">Eliminar
+                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ $registre->name }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
+                                            class="fa fa-trash-o" aria-hidden="true"></i> Eliminar
                                         carpeta</a>
                                     @endcan
                                 </td>

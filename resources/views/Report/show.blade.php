@@ -17,7 +17,8 @@
                     @endif
                     <div class="d-flex justify-content-start flex-wrap mb-2">
                         <a class="btn btn-outline-primary"
-                            href="{{ route('reports-list', ['id' => $project->id, 'idStudio' => $studio->id]) }}">Regresar
+                            href="{{ route('reports-list', ['id' => $project->id, 'idStudio' => $studio->id]) }}"><i
+                                class="fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
                     <h2 class="h6 text-center">Ruta:
@@ -40,15 +41,18 @@
                                     </td>
                                     <td>
                                         <a target="_blank" class="btn btn-outline-primary"
-                                            href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}">Abrir</a>
+                                            href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}"><i
+                                                class="fa fa-external-link" aria-hidden="true"></i> Abrir</a>
                                         @can('downloadFile')
                                         <a class="btn btn-outline-secondary"
-                                            href="{{ route('downloadFile', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id, 'nameFile' => explode('/', $file)[5]]) }}">Descargar</a>
+                                            href="{{ route('downloadFile', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id, 'nameFile' => explode('/', $file)[5]]) }}"><i
+                                                class="fa fa-download" aria-hidden="true"></i> Descargar</a>
                                         @endcan
                                         @can('deleteFile')
                                         <a class="btn btn-outline-danger"
                                             href="{{ route('deleteFile', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id,'nameFile' => explode('/', $file)[5]]) }}"
-                                            onclick="return confirm( '¿Está seguro de eliminar {{ explode('/', $file)[5] }}?') ">Eliminar</a>
+                                            onclick="return confirm( '¿Está seguro de eliminar {{ explode('/', $file)[5] }}?') "><i
+                                                class="fa fa-trash-o" aria-hidden="true"></i> Eliminar</a>
                                         @endcan
                                     </td>
                                 </tr>

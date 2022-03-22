@@ -9,7 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/img/favicon.svg') }}">
+    <link rel="shortcut icon" sizes="192x192" href="{{ asset('/img/favicon.svg') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
@@ -36,7 +37,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" id="home">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
-                    <img src="{{ asset('img/logo-tecoalt2.svg') }}" class="navbar__logo"
+                    <img src="{{ asset('img/completo_positivo-negativo.svg') }}" class="navbar__logo"
                         alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -229,7 +230,7 @@
             </div>
         </nav>
 
-        <main class="py-4" style="background-image: url({{ asset('img/snake.jpg') }});background-repeat: repeat;">
+        <main class="py-4" style="background-image: url({{ asset('img/flores.jpg') }});background-repeat: repeat;">
             @yield('content')
         </main>
     </div>

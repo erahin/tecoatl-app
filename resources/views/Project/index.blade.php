@@ -66,11 +66,12 @@
                                 <td class="d-flex justify-content-start">
                                     @can('studies-list')
                                     <a href="{{ route('studies-list', $project->id) }}" class="btn btn-primary ancla">
-                                        Reportes</a>
+                                        <i class="fa fa-folder-open" aria-hidden="true"></i> Reportes</a>
                                     @endcan
                                     @can('proyectos.edit')
                                     <a href="{{ route('proyectos.edit', $project->id) }}"
-                                        class="btn btn-success ancla">Editar</a>
+                                        class="btn btn-success ancla"><i class="fa fa-pencil-square-o"
+                                            aria-hidden="true"></i> Editar</a>
                                     @endcan
                                     @can('proyectos.destroy')
                                     <form
@@ -78,8 +79,10 @@
                                         method="post">
                                         @csrf
                                         @method('delete')
-                                        <input type="submit" value="Eliminar" class="btn btn-danger"
-                                            onclick="return confirm( '¿Está seguro de eliminar {{ $project->abbreviation }}?') ">
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm( '¿Está seguro de eliminar {{ $region->name }}?') "><i
+                                                class="fa fa-trash-o" aria-hidden="true"></i>
+                                            Eliminar</button>
                                     </form>
                                     @endcan
                                 </td>
