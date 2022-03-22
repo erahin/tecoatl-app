@@ -15,7 +15,7 @@ class ProjectController extends Controller
         // $this->middleware('can:proyectos.index')->only('index');
         $this->middleware('can:proyectos.create')->only('store');
         $this->middleware('can:proyectos.edit')->only('edit', 'update');
-        $this->middleware('can:proyectos.destoy')->only('destoy');
+        // $this->middleware('can:proyectos.destoy')->only('destoy');
     }
     public function store(Request $request)
     {
@@ -52,7 +52,7 @@ class ProjectController extends Controller
         foreach ($request->studie_id as $studie) {
             Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
         }
-        return redirect()->route('projectByRegion', [$request->region_id]);
+        return redirect()->route('projectByRegion', ['id' => $request->region_id, 'idUser' => $request->user_id]);
     }
 
     public function edit($id)
@@ -63,7 +63,7 @@ class ProjectController extends Controller
         $project = Project::find($id);
         return view(
             'Project.edit',
-            compact('regions', 'project', 'studies', 'status')
+            compact('regions', 'project', 'studies', 'status', 'id')
         );
     }
 
@@ -103,27 +103,27 @@ class ProjectController extends Controller
                 Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
             }
         }
-        return redirect()->route('projectByRegion', [$request->region_id]);
+        return redirect()->route('projectByRegion', ['id' => $request->region_id, 'idUser' => $request->user_id]);
     }
     public function destroy($id)
     {
-        /* -------------------------------------------------------------------------- */
-        /*                                Find project                                */
-        /* -------------------------------------------------------------------------- */
-        $project = Project::find($id);
-        /* -------------------------------------------------------------------------- */
-        /*                                 Get region                                 */
-        /* -------------------------------------------------------------------------- */
-        $region = Region::find($project->region_id);
-        $region = strtolower($region->name);
-        /* -------------------------------------------------------------------------- */
-        /*                              Delete directory                              */
-        /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $project->id . '/');
-        /* -------------------------------------------------------------------------- */
-        /*                               Delete project                               */
-        /* -------------------------------------------------------------------------- */
-        $project->delete();
-        return redirect()->route('projectByRegion', [$project->region_id]);
+        // /* -------------------------------------------------------------------------- */
+        // /*                                Find project                                */
+        // /* -------------------------------------------------------------------------- */
+        // $project = Project::find($id);
+        // /* -------------------------------------------------------------------------- */
+        // /*                                 Get region                                 */
+        // /* -------------------------------------------------------------------------- */
+        // $region = Region::find($project->region_id);
+        // $region = strtolower($region->name);
+        // /* -------------------------------------------------------------------------- */
+        // /*                              Delete directory                              */
+        // /* -------------------------------------------------------------------------- */
+        // Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $project->id . '/');
+        // /* -------------------------------------------------------------------------- */
+        // /*                               Delete project                               */
+        // /* -------------------------------------------------------------------------- */
+        // $project->delete();
+        // return redirect()->route('projectByRegion', [$project->region_id]);
     }
 }

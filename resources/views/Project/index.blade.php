@@ -9,7 +9,7 @@
                     <h1 class="text-center text-primary">Lista de Proyectos de la región {{ $region->name }}.
                     </h1>
                     <div>
-                        <form action="{{ route('searchProjectByRegion', $id) }}"
+                        <form action="{{ route('searchProjectByRegion', ['id' => $id, 'idUser' => Auth::user()->id]) }}"
                             class="input-group d-flex justify-content-end">
                             <div class="form-outline">
                                 <input type="text" name="search" class="form-control" placeholder="Buscar" required />
@@ -28,12 +28,15 @@
                     @endif
                     <div class="d-flex justify-content-start flex-wrap">
                         @can('proyectos.create')
-                        <a class=" btn btn-primary my-2 ancla" href="{{ route('createProjectByRegion', $id) }}"
+                        <a class=" btn btn-primary my-2 ancla"
+                            href="{{ route('createProjectByRegion', ['id' => $id, 'idUser' => Auth::user()->id]) }}"
                             role="button">
                             Crear
                             Proyectos</a>
                         @endcan
-                        <a class=" btn btn-secondary my-2" href="{{ route('projectByRegion', $id) }}" role="button">
+                        <a class=" btn btn-secondary my-2"
+                            href="{{ route('projectByRegion', ['id' => $id, 'idUser' => Auth::user()->id]) }}"
+                            role="button">
                             Lista completa</a>
                         {{-- <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}" role="button">
                             Crear
@@ -71,7 +74,9 @@
                                         class="btn btn-success ancla">Editar</a>
                                     @endcan
                                     @can('proyectos.destroy')
-                                    <form action="{{ route('proyectos.destroy', $project->id) }}" method="post">
+                                    <form
+                                        action="{{ route('destroyProjectByRegion',[ 'id' => $project->id, 'idUser' => Auth::user()->id]) }}"
+                                        method="post">
                                         @csrf
                                         @method('delete')
                                         <input type="submit" value="Eliminar" class="btn btn-danger"

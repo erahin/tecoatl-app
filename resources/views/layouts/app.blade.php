@@ -55,191 +55,186 @@
                     <ul class="navbar-nav ms-auto grt-menu">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
-                                {{-- <li class="nav-item">
+                        @if (Route::has('login'))
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('INICIAR SESIÓN') }}</a>
                         </li> --}}
-                            @endif
+                        @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                        @endif
                         @else
-                            @can('proyectos.index')
-                                <li class="nav-item dropdown text-uppercase">
-                                    <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <i class="fa fa-book" aria-hidden="true"></i> {{ 'documentación' }}
+                        @can('proyectos.index')
+                        <li class="nav-item dropdown text-uppercase">
+                            <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <i class="fa fa-book" aria-hidden="true"></i> {{ 'documentación' }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"
+                                id="dropdown-menu">
+                                <div class="gtr-menu__li">
+                                    <a class="dropdown-item" href="{{ route('projectStart') }}">
+                                        <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región norte') }}
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"
-                                        id="dropdown-menu">
-                                        <div class="gtr-menu__li">
-                                            <a class="dropdown-item" href="{{ route('projectStart') }}">
-                                                <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región norte') }}
-                                            </a>
-                                        </div>
-                                        <div class="gtr-menu__li">
-                                            <hr class="dropdown-divider">
-                                            <a class="dropdown-item" href="{{ route('projectInProcess') }}">
-                                                <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región sur') }}
-                                            </a>
-                                        </div>
-                                        <div class="gtr-menu__li">
-                                            <hr class="dropdown-divider">
-                                            <a class="dropdown-item" href="{{ route('projectInProcess') }}">
-                                                <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región centro') }}
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endcan
-                            {{-- @can('proyectos.index')
-                                <li class="nav-item text-uppercase gtr-menu__li">
-                                    <a class="nav-link"
-                                        href="{{ route('proyectos.index') }}">{{ __('proyectos') }}</a>
-                                </li>
-                            @endcan --}}
-                            {{-- @can('estudios.index')
-                                <li class="nav-item text-uppercase gtr-menu__li">
-                                    <a class="nav-link"
-                                        href="{{ route('estudios.index') }}">{{ __('crear categoría') }}</a>
-                                </li>
-                            @endcan
-                            @can('regiones.index')
-                                <li class="nav-item text-uppercase gtr-menu__li">
-                                    <a class="nav-link"
-                                        href="{{ route('regiones.index') }}">{{ __('nueva región') }}</a>
-                                </li>
-                            @endcan
-                            @can('usuarios.index')
-                                <li class="nav-item text-uppercase gtr-menu__li">
-                                    <a class="nav-link"
-                                        href="{{ route('usuarios.index') }}">{{ __('USUARIOS') }}</a>
-                                </li>
-                            @endcan
-                            @can('roles.index')
-                                <li class="nav-item text-uppercase gtr-menu__li">
-                                    <a class="nav-link" href="{{ route('roles.index') }}">{{ __('roles') }}</a>
-                                </li>
-                            @endcan --}}
-                            @can('show.reports')
-                                <li class="nav-item dropdown text-uppercase">
-                                    <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <i class="fa fa-line-chart" aria-hidden="true"></i> {{ 'estatus de proyecto' }}
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <div class="gtr-menu__li">
-                                            <a class="dropdown-item" href="{{ route('projectStart') }}">
-                                                <i class="fa fa-hourglass-start" aria-hidden="true"></i>
-                                                {{ __('proyectos por iniciar') }}
-                                            </a>
-                                        </div>
-                                        <div class="gtr-menu__li">
-                                            <hr class="dropdown-divider">
-                                            <a class="dropdown-item" href="{{ route('projectInProcess') }}">
-                                                <i class="fa fa-hourglass-half" aria-hidden="true"></i>
-                                                {{ __('proyectos en proceso') }}
-                                            </a>
-                                        </div>
-                                        <div class="gtr-menu__li">
-                                            <hr class="dropdown-divider">
-                                            <a class="dropdown-item" href="{{ route('completedProject') }}">
-                                                <i class="fa fa-hourglass-end" aria-hidden="true"></i>
-                                                {{ __('proyectos concluidos') }}
-                                            </a>
-                                        </div>
-                                        <div class="gtr-menu__li">
-                                            <hr class="dropdown-divider">
-                                            <a class="dropdown-item" href="{{ route('showRegionForm') }}">
-                                                <i class="fa fa-list-ol" aria-hidden="true"></i>
-                                                {{ __('proyectos por región') }}
-                                            </a>
-                                        </div>
-                                        <div class="gtr-menu__li">
-                                            <hr class="dropdown-divider">
-                                            <a class="dropdown-item" href="{{ route('showPiechartbyRegion') }}">
-                                                <i class="fa fa-pie-chart" aria-hidden="true"></i>
-                                                {{ __('gráfica por región') }}
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endcan
-                            @can('config')
-                                <li class="nav-item dropdown text-uppercase">
-                                    <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <i class="fa fa-cogs" aria-hidden="true"></i> {{ 'configuración' }}
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        @can('config')
-                                            <div class="gtr-menu__li">
-                                                <a class="dropdown-item" href="{{ route('roles.index') }}">
-                                                    <i class="fa fa-tasks" aria-hidden="true"></i> {{ __('roles') }}
-                                                </a>
-                                            </div>
-                                        @endcan
-                                        @can('config')
-                                            <div class="gtr-menu__li">
-                                                <hr class="dropdown-divider">
-                                                <a class="dropdown-item" href="{{ route('usuarios.index') }}">
-                                                    <i class="fa fa-users" aria-hidden="true"></i> {{ __('USUARIOS') }}
-                                                </a>
-                                            </div>
-                                        @endcan
-                                        @can('config')
-                                            <div class="gtr-menu__li">
-                                                <hr class="dropdown-divider">
-                                                <a class="dropdown-item" href="{{ route('regiones.index') }}">
-                                                    <i class="fa fa-globe" aria-hidden="true"></i> {{ __('nueva región') }}
-                                                </a>
-                                            </div>
-                                        @endcan
-                                        @can('config')
-                                        @endcan
-                                        @can('config')
-                                            <div class="gtr-menu__li">
-                                                <hr class="dropdown-divider">
-                                                <a class="dropdown-item" href="{{ route('estudios.index') }}">
-                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                                    {{ __('nueva categoría') }}
-                                                </a>
-                                            </div>
-                                        @endcan
-                                    </div>
-                                </li>
-                            @endcan
-                            <li class="nav-item dropdown text-uppercase">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="fa fa-user-circle" aria-hidden="true"></i> {{ Auth::user()->name }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out" aria-hidden="true"></i> {{ __('SALIR') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
                                 </div>
-                            </li>
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('projectInProcess') }}">
+                                        <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región sur') }}
+                                    </a>
+                                </div>
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('projectInProcess') }}">
+                                        <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región centro') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        @endcan
+                        {{-- @can('proyectos.index')
+                        <li class="nav-item text-uppercase gtr-menu__li">
+                            <a class="nav-link" href="{{ route('proyectos.index') }}">{{ __('proyectos') }}</a>
+                        </li>
+                        @endcan --}}
+                        {{-- @can('estudios.index')
+                        <li class="nav-item text-uppercase gtr-menu__li">
+                            <a class="nav-link" href="{{ route('estudios.index') }}">{{ __('crear categoría') }}</a>
+                        </li>
+                        @endcan
+                        @can('regiones.index')
+                        <li class="nav-item text-uppercase gtr-menu__li">
+                            <a class="nav-link" href="{{ route('regiones.index') }}">{{ __('nueva región') }}</a>
+                        </li>
+                        @endcan
+                        @can('usuarios.index')
+                        <li class="nav-item text-uppercase gtr-menu__li">
+                            <a class="nav-link" href="{{ route('usuarios.index') }}">{{ __('USUARIOS') }}</a>
+                        </li>
+                        @endcan
+                        @can('roles.index')
+                        <li class="nav-item text-uppercase gtr-menu__li">
+                            <a class="nav-link" href="{{ route('roles.index') }}">{{ __('roles') }}</a>
+                        </li>
+                        @endcan --}}
+                        @can('show.reports')
+                        <li class="nav-item dropdown text-uppercase">
+                            <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <i class="fa fa-line-chart" aria-hidden="true"></i> {{ 'estatus de proyecto' }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="gtr-menu__li">
+                                    <a class="dropdown-item" href="{{ route('projectStart') }}">
+                                        <i class="fa fa-hourglass-start" aria-hidden="true"></i>
+                                        {{ __('proyectos por iniciar') }}
+                                    </a>
+                                </div>
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('projectInProcess') }}">
+                                        <i class="fa fa-hourglass-half" aria-hidden="true"></i>
+                                        {{ __('proyectos en proceso') }}
+                                    </a>
+                                </div>
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('completedProject') }}">
+                                        <i class="fa fa-hourglass-end" aria-hidden="true"></i>
+                                        {{ __('proyectos concluidos') }}
+                                    </a>
+                                </div>
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('showRegionForm') }}">
+                                        <i class="fa fa-list-ol" aria-hidden="true"></i>
+                                        {{ __('proyectos por región') }}
+                                    </a>
+                                </div>
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('showPiechartbyRegion') }}">
+                                        <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                                        {{ __('gráfica por región') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        @endcan
+                        @can('config')
+                        <li class="nav-item dropdown text-uppercase">
+                            <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <i class="fa fa-cogs" aria-hidden="true"></i> {{ 'configuración' }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                @can('config')
+                                <div class="gtr-menu__li">
+                                    <a class="dropdown-item" href="{{ route('roles.index') }}">
+                                        <i class="fa fa-tasks" aria-hidden="true"></i> {{ __('roles') }}
+                                    </a>
+                                </div>
+                                @endcan
+                                @can('config')
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('usuarios.index') }}">
+                                        <i class="fa fa-users" aria-hidden="true"></i> {{ __('USUARIOS') }}
+                                    </a>
+                                </div>
+                                @endcan
+                                @can('config')
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('regiones.index') }}">
+                                        <i class="fa fa-globe" aria-hidden="true"></i> {{ __('nueva región') }}
+                                    </a>
+                                </div>
+                                @endcan
+                                @can('config')
+                                @endcan
+                                @can('config')
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('estudios.index') }}">
+                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                        {{ __('nueva categoría') }}
+                                    </a>
+                                </div>
+                                @endcan
+                            </div>
+                        </li>
+                        @endcan
+                        <li class="nav-item dropdown text-uppercase">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <i class="fa fa-user-circle" aria-hidden="true"></i> {{ Auth::user()->name }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> {{ __('SALIR') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <main class="py-4"
-            style="background-image: url({{ asset('img/snake.jpg') }});background-repeat: repeat;">
+        <main class="py-4" style="background-image: url({{ asset('img/snake.jpg') }});background-repeat: repeat;">
             @yield('content')
         </main>
     </div>
 </body>
+@if (!Auth::guest())
 <script>
     /* -------------------------------------------------------------------------- */
     /*                                 Get regions                                */
@@ -250,25 +245,29 @@
             let nameRegions = localStorage.getItem("namesRegions").split(",");
             const dropdown_menu = document.getElementById("dropdown-menu");
             let menu = "";
-            for (let index = 0; index < idRegions.length; index++) {
-                if (index == (idRegions.length - 1)) {
-                    menu += `<div class="gtr-menu__li">
-                                <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}">
-                                    <i class="fa fa-folder" aria-hidden="true"></i> región ${nameRegions[index]}
-                                </a>
-                            </div>`;
-                } else {
-                    menu += `<div class="gtr-menu__li">
-                                <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}">
-                                    <i class="fa fa-folder" aria-hidden="true"></i> región ${nameRegions[index]}
-                                </a>
-                                <hr class="dropdown-divider">
-                             </div>`;
+                for (let index = 0; index < idRegions.length; index++) {
+                    if (index == (idRegions.length - 1)) {
+                        menu += `<div class="gtr-menu__li">
+                                    <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}/usuario/{{ Auth::user()->id }}">
+                                        <i class="fa fa-folder" aria-hidden="true"></i> región ${nameRegions[index]}
+                                    </a>
+                                </div>`;
+                    } else {
+                        menu += `<div class="gtr-menu__li">
+                                    <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}/usuario/{{ Auth::user()->id }}">
+                                        <i class="fa fa-folder" aria-hidden="true"></i> región ${nameRegions[index]}
+                                    </a>
+                                    <hr class="dropdown-divider">
+                                 </div>`;
+                    }
                 }
-            }
-            dropdown_menu.innerHTML = menu;
+                dropdown_menu.innerHTML = menu;
+
         }
     })();
 </script>
+
+
+@endif
 
 </html>
