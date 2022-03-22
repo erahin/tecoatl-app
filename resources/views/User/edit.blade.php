@@ -88,10 +88,13 @@
                         @endforeach
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Modificar') }}
-                                </button>
-                                <a class="btn btn-danger" href="{{ route('usuarios.index') }}">Cancelar
+                                {{ Form::button('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar',
+                                ['type' =>
+                                'submit', 'class' =>
+                                'btn btn-primary'] ) }}
+                                <a class="btn btn-danger" href="{{ route('usuarios.index') }}"><i class="fa fa-ban"
+                                        aria-hidden="true"></i>
+                                    Cancelar
                                 </a>
                             </div>
                         </div>

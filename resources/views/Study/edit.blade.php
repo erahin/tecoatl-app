@@ -64,8 +64,13 @@
                         @endforeach
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                {!! Form::submit('Modificar', ['class' => 'btn btn-primary']) !!}
-                                <a class="btn btn-danger" href="{{ route('estudios.index') }}">Cancelar
+                                {{ Form::button('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar',
+                                ['type' =>
+                                'submit', 'class' =>
+                                'btn btn-primary'] ) }}
+                                <a class="btn btn-danger" href="{{ route('estudios.index') }}"><i class="fa fa-ban"
+                                        aria-hidden="true"></i>
+                                    Cancelar
                                 </a>
                             </div>
                         </div>

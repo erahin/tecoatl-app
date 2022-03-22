@@ -24,8 +24,11 @@
                         </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                {!! Form::submit('Consultar', ['class' => 'btn btn-primary']) !!}
-                                <a class="btn btn-danger" href="{{ route('home') }}">Cancelar
+                                {{ Form::button('<i class="fa fa-search" aria-hidden="true"></i> Consultar', ['type' =>
+                                'submit', 'class' =>
+                                'btn btn-primary'] ) }}
+                                <a class="btn btn-danger" href="{{ route('home') }}"><i class="fa fa-ban"
+                                        aria-hidden="true"></i> Cancelar
                                 </a>
                             </div>
                         </div>

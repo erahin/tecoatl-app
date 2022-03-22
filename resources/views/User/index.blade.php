@@ -47,13 +47,15 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td class="d-flex justify-content-start"><a
-                                        href="{{ route('usuarios.edit', $user->id) }}"
-                                        class="btn btn-success ancla">Editar</a>
+                                        href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-success ancla"><i
+                                            class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
                                     <form action="{{ route('usuarios.destroy', $user->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <input type="submit" value="Eliminar" class="btn btn-danger"
-                                            onclick="return confirm( '¿Está seguro de eliminar {{ $user->name }}?') ">
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm( '¿Está seguro de eliminar {{ $user->name }}?') "><i
+                                                class="fa fa-trash-o" aria-hidden="true"></i>
+                                            Eliminar</button>
                                     </form>
                                 </td>
                             </tr>
