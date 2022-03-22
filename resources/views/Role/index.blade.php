@@ -54,9 +54,6 @@
                                             onclick="return confirm( '¿Está seguro de eliminar {{ $role->name }}?') "><i
                                                 class="fa fa-trash-o" aria-hidden="true"></i>
                                             Eliminar</button>
-                                        {{-- <input type="submit" value="Eliminar" class="btn btn-danger"
-                                            onclick="return confirm( '¿Está seguro de eliminar {{ $role->name }}?') ">
-                                        --}}
                                     </form>
                                 </td>
                             </tr>

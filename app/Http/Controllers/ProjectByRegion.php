@@ -14,9 +14,15 @@ class ProjectByRegion extends Controller
 {
     public function projectByRegion($id, $idUser)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                               Find view data                               */
+        /* -------------------------------------------------------------------------- */
         $status = ["Por iniciar", "En desarrollo", "Concluido"];
         $region = Region::find($id);
         $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
+        /* -------------------------------------------------------------------------- */
+        /*                             Search data by user                            */
+        /* -------------------------------------------------------------------------- */
         foreach ($users as $user) {
             if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
                 $projects = Project::where('region_id', '=', $id)->paginate(10);
@@ -36,13 +42,15 @@ class ProjectByRegion extends Controller
     }
     public function searchProjectByRegion(Request $request, $id, $idUser)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                               Find view data                               */
+        /* -------------------------------------------------------------------------- */
         $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
         if ($request->search) {
             foreach ($users as $user) {
                 if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
                     $projects = DB::table('projects')
                         ->where('place', 'like', '%' . $request->search . '%')
-                        // ->orWhere('abbreviation', 'like', '%' . $request->search . '%')
                         ->where('region_id', '=', $id)
                         ->paginate(10);
                 } else if ($user->role_id == 3) {
@@ -59,6 +67,9 @@ class ProjectByRegion extends Controller
                 }
             }
         }
+        /* -------------------------------------------------------------------------- */
+        /*                               Find view data                               */
+        /* -------------------------------------------------------------------------- */
         $region = Region::find($id);
         $status = ["Por iniciar", "En desarrollo", "Concluido"];
         return view('Project.index', compact('projects', 'region', 'status', 'id'));

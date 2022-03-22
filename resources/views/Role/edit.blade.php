@@ -62,8 +62,13 @@
                         </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}
-                                <a class="btn btn-danger" href="{{ route('roles.index') }}">Cancelar
+                                {{ Form::button('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar',
+                                ['type' =>
+                                'submit', 'class' =>
+                                'btn btn-primary'] ) }}
+                                <a class="btn btn-danger" href="{{ route('roles.index') }}"><i class="fa fa-ban"
+                                        aria-hidden="true"></i>
+                                    Cancelar
                                 </a>
                             </div>
                         </div>
