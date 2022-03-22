@@ -17,8 +17,12 @@ class RegionController extends Controller
         $this->middleware('can:config');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+
+        /* -------------------------------------------------------------------------- */
+        /*                            Array name and region                           */
+        /* -------------------------------------------------------------------------- */
         $regionArray = "";
         $regionNameArray = "";
         $regions = Region::all();
@@ -31,7 +35,14 @@ class RegionController extends Controller
                 $regionNameArray .= $regions[$i]->name . ',';
             }
         }
-        $regions = Region::paginate(10);
+        /* -------------------------------------------------------------------------- */
+        /*                                   Search                                   */
+        /* -------------------------------------------------------------------------- */
+        if ($request->search) {
+            $regions = Region::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+        } else {
+            $regions = Region::paginate(10);
+        }
         return view('Region.index', compact('regions', 'regionArray', 'regionNameArray'));
     }
 

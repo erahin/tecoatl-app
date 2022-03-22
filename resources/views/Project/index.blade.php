@@ -31,13 +31,12 @@
                         <a class=" btn btn-primary my-2 ancla"
                             href="{{ route('createProjectByRegion', ['id' => $id, 'idUser' => Auth::user()->id]) }}"
                             role="button">
-                            Crear
-                            Proyectos</a>
+                            <i class="fa fa-plus" aria-hidden="true"></i> Crear Proyectos</a>
                         @endcan
                         <a class=" btn btn-secondary my-2"
                             href="{{ route('projectByRegion', ['id' => $id, 'idUser' => Auth::user()->id]) }}"
                             role="button">
-                            Lista completa</a>
+                            <i class="fa fa-list" aria-hidden="true"></i> Lista completa</a>
                         {{-- <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}" role="button">
                             Crear
                             Proyectos</a> <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}"

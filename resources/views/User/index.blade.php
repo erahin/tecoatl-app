@@ -9,14 +9,14 @@
                     <h1 class="text-center text-primary">Lista de Usuarios.
                     </h1>
                     <div>
-                        <div class="input-group d-flex justify-content-end">
+                        <form action="{{ route('usuarios.index') }}" class="input-group d-flex justify-content-end">
                             <div class="form-outline">
-                                <input type="search" id="form1" class="form-control" placeholder="Buscar" />
+                                <input type="text" name="search" class="form-control" placeholder="Buscar" required />
                             </div>
-                            <button type="button" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-search"></i>
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,8 +25,13 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <a class="btn btn-primary my-2" href="{{ route('usuarios.create') }}" role="button">Crear
-                        Usuario</a>
+                    <div class="d-flex justify-content-start flex-wrap">
+                        <a class="btn btn-primary my-2 ancla" href="{{ route('usuarios.create') }}" role="button"><i
+                                class="fa fa-plus" aria-hidden="true"></i> Crear
+                            Usuario</a>
+                        <a class=" btn btn-secondary my-2" href="{{ route('usuarios.index') }}" role="button">
+                            <i class="fa fa-list" aria-hidden="true"></i> Lista completa</a>
+                    </div>
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
@@ -36,6 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if (count($users) != 0)
                             @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->name }}</td>
@@ -52,6 +58,11 @@
                                 </td>
                             </tr>
                             @endforeach
+                            @else
+                            <tr>
+                                <td colspan="4">No existen usuarios.</td>
+                            </tr>
+                            @endif
                         </tbody>
                     </table>
                     {{ $users->links() }}

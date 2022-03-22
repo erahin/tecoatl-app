@@ -18,9 +18,13 @@ class UserController extends Controller
         $this->middleware('can:config');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
+        if ($request->search) {
+            $users = User::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+        } else {
+            $users = User::paginate(10);
+        }
         return view('User.index', compact('users'));
     }
 

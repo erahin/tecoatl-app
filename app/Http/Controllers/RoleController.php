@@ -16,9 +16,13 @@ class RoleController extends Controller
         // $this->middleware('can:roles.destoy')->only('destoy');
         $this->middleware('can:config');
     }
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Role::paginate(10);
+        if ($request->search) {
+            $roles = Role::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+        } else {
+            $roles = Role::paginate(10);
+        }
         return view('Role.index', compact('roles'));
     }
 
@@ -38,7 +42,7 @@ class RoleController extends Controller
         $role->name = $request->name;
         $role->save();
         $role = Role::latest('id')->first();
-        $role->permissions()->sync($request->permissions);
+        $role->permissions()->attach($request->permissions);
         return redirect()->route('roles.index');
     }
 
@@ -57,7 +61,7 @@ class RoleController extends Controller
 
         ]);
         $role = Role::find($id);
-        $role->name = $request->name;
+        // $role->name = $request->name;
         $role->save();
         $role->permissions()->sync($request->permissions);
         return redirect()->route('roles.index');

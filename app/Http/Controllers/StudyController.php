@@ -18,9 +18,13 @@ class StudyController extends Controller
         $this->middleware('can:config');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $studies = Study::paginate(10);
+        if ($request->search) {
+            $studies = Study::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+        } else {
+            $studies = Study::paginate(10);
+        }
         return view('Study.index', compact('studies'));
     }
 
