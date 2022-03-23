@@ -33,7 +33,7 @@
                         </a>
                     </div>
                     @endcan
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>
                                 <th scope="col">Nombre del estudio</th>

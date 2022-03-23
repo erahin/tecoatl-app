@@ -38,11 +38,14 @@ class RoleController extends Controller
             'name' => 'required',
             'permissions' => 'required|min:1'
         ]);
-        $role = new Role();
-        $role->name = $request->name;
-        $role->save();
-        $role = Role::latest('id')->first();
-        $role->permissions()->attach($request->permissions);
+        // $role = new Role();
+        // $role->name = $request->name;
+        // $role->save();
+        // $role = Role::latest('id')->first();
+        // $role->permissions()->attach($request->permissions);
+        // $role = Role::create(['name' => $request->name]);
+        $role = Role::firstOrCreate(['name' => $request->name]);
+        $role->permissions()->sync($request->permissions);
         return redirect()->route('roles.index');
     }
 
@@ -61,8 +64,9 @@ class RoleController extends Controller
 
         ]);
         $role = Role::find($id);
-        // $role->name = $request->name;
-        $role->save();
+        // $role->update(['name' => $request->name]);
+        $role = Role::firstOrCreate([$role->name]);
+        // $role->save();
         $role->permissions()->sync($request->permissions);
         return redirect()->route('roles.index');
     }

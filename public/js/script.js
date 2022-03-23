@@ -2,7 +2,7 @@
 /*                                 Data Table                                 */
 /* -------------------------------------------------------------------------- */
 $(document).ready(function () {
-    $("#example").DataTable({
+    $("#table").DataTable({
         paging: false,
         ordering: true,
         info: false,

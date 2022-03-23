@@ -16,8 +16,8 @@
                             {!! Form::label('', 'Nombre del rol', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
-                                {!! Form::text('name', $role->name, ['class' => 'form-control', 'autofocus', 'required',
-                                'autofocus']) !!}
+                                {!! Form::text('name', $role->name, ['class' => 'form-control', 'autofocus',
+                                'autofocus', 'id' => 'name', 'readOnly']) !!}
                                 @error('name')
                                 <strong class="text-danger text-center">{{ 'El campo nombre del rol es obligatorio'
                                     }}</strong>
@@ -78,4 +78,9 @@
         </div>
     </div>
 </div>
+<script>
+    (function(){
+        let rol = document.getElementById('name').readOnly = true;
+    })();
+</script>
 @endsection

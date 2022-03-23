@@ -31,7 +31,7 @@
                                 class="fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
-                    <table class="table table-hover table-bordered display" id="example">
+                    <table class="table table-hover table-bordered display" id="table">
                         <thead>
                             <tr>
                                 <th scope="col">Número de informe</th>

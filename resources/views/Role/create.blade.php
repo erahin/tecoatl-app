@@ -10,14 +10,14 @@
                     </h1>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('roles.store') }}">
+                    <form method="POST" action="{{ route('roles.store') }}" id="form">
                         @csrf
                         <div class="row mb-3">
                             {!! Form::label('', 'Nombre del rol', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('name', '', ['class' => 'form-control', 'autofocus', 'required',
-                                'autofocus']) !!}
+                                'autofocus', 'id' => 'name']) !!}
                                 @error('name')
                                 <strong class="text-danger text-center">{{ 'El campo nombre del rol es obligatorio'
                                     }}</strong>
@@ -49,7 +49,7 @@
                             <div class="col-md-6 offset-md-4">
                                 {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Crear', ['type' =>
                                 'submit', 'class' =>
-                                'btn btn-primary'] ) }}
+                                'btn btn-primary', 'id' => 'btn-submit'] ) }}
                                 <a class="btn btn-danger" href="{{ route('roles.index') }}"><i class="fa fa-ban"
                                         aria-hidden="true"></i>
                                     Cancelar
@@ -62,4 +62,23 @@
         </div>
     </div>
 </div>
+<script>
+    const button = document.getElementById('btn-submit');
+    button.addEventListener('click', function (e) {
+        let rol = document.getElementById('name').value;
+        if(rol){
+            if (!window.confirm('¿Desea confirmar el nombre del rol? Una ves agregado no se podrá modificar el nombre')) {
+                e.preventDefault();
+            }
+        }
+    });
+    // function validateInput() {
+    //     const rol = document.getElementById('name').value;
+    //     if(rol){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+</script>
 @endsection
