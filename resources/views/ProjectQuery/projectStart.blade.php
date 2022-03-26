@@ -39,4 +39,5 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('js/table.js') }}" defer></script>
 @endsection
