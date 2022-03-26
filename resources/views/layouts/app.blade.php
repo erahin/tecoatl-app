@@ -148,13 +148,13 @@
                                         {{ __('proyectos concluidos') }}
                                     </a>
                                 </div>
-                                <div class="gtr-menu__li">
+                                {{-- <div class="gtr-menu__li">
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="{{ route('showRegionForm') }}">
                                         <i class="fa fa-list-ol" aria-hidden="true"></i>
                                         {{ __('proyectos por región') }}
                                     </a>
-                                </div>
+                                </div> --}}
                                 <div class="gtr-menu__li">
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="{{ route('showPiechartbyRegion') }}">

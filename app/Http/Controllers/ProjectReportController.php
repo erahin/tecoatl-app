@@ -24,18 +24,18 @@ class ProjectReportController extends Controller
         $projects = Project::where('status', '=', '2')->paginate(10);
         return view('ProjectQuery.completedProject', compact('projects'));
     }
-    public function showRegionForm(Request $request)
-    {
-        $regions = Region::pluck('name', 'id');
-        $id = $request->region_id;
-        $status = ["Por iniciar", "En desarrollo", "Concluido", "Cancelado"];
-        if ($id) {
-            $projects = Project::where('region_id', '=', $id)->paginate(10);
-        } else {
-            $projects = null;
-        }
-        return view('ProjectQuery.regionForm', compact('regions', 'projects', 'status', 'id'));
-    }
+    // public function showRegionForm(Request $request)
+    // {
+    //     $regions = Region::pluck('name', 'id');
+    //     $id = $request->region_id;
+    //     $status = ["Por iniciar", "En desarrollo", "Concluido", "Cancelado"];
+    //     if ($id) {
+    //         $projects = Project::where('region_id', '=', $id)->paginate(10);
+    //     } else {
+    //         $projects = null;
+    //     }
+    //     return view('ProjectQuery.regionForm', compact('regions', 'projects', 'status', 'id'));
+    // }
     public function showPiechartbyRegion()
     {
         $regions = Region::all();

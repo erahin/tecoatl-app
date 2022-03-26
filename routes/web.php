@@ -47,6 +47,11 @@ Route::resource('usuarios', UserController::class)->except('show')->middleware('
 /*                               Project Routes                               */
 /* -------------------------------------------------------------------------- */
 Route::resource('proyectos', ProjectController::class)->except('show', 'index', 'create', 'destroy')->middleware('auth');
+Route::get('/proyectos-por-region/{id}/usuario/{idUser}', [ProjectByRegion::class, 'projectByRegion'])->middleware('can:proyectos.index')->name('projectByRegion')->middleware('auth');
+Route::get('/busqueda-proyectos/{id}/usuario/{idUser}', [ProjectByRegion::class, 'searchProjectByRegion'])->middleware('can:proyectos.index')->name('searchProjectByRegion')->middleware('auth');
+Route::get('/proyectos/crear/region/{id}/usuario/{idUser}', [ProjectByRegion::class, 'createProjectByRegion'])->middleware('can:proyectos.create')->name('createProjectByRegion')->middleware('auth');
+Route::get('/proyectos/eliminar/region/{id}/usuario/{idUser}', [ProjectByRegion::class, 'destroyProjectByRegion'])->middleware('can:proyectos.destroy')->name('destroyProjectByRegion')->middleware('auth');
+
 /* -------------------------------------------------------------------------- */
 /*                                Region Routes                               */
 /* -------------------------------------------------------------------------- */
@@ -83,9 +88,5 @@ Route::resource('roles', RoleController::class)->except('show')->middleware('aut
 Route::get('/consulta-proyectos-iniciar', [ProjectReportController::class, 'projectStart'])->middleware('can:show.reports')->name('projectStart')->middleware('auth');
 Route::get('/consulta-proyectos-en-procesos', [ProjectReportController::class, 'projectInProcess'])->middleware('can:show.reports')->name('projectInProcess')->middleware('auth');
 Route::get('/consulta-proyectos-concluidos', [ProjectReportController::class, 'completedProject'])->middleware('can:show.reports')->name('completedProject')->middleware('auth');
-Route::get('/consulta-proyectos-por-region', [ProjectReportController::class, 'showRegionForm'])->middleware('can:show.reports')->name('showRegionForm')->middleware('auth');
+// Route::get('/consulta-proyectos-por-region', [ProjectReportController::class, 'showRegionForm'])->middleware('can:show.reports')->name('showRegionForm')->middleware('auth');
 Route::get('/grafica-proyectos-por-region', [ProjectReportController::class, 'showPiechartbyRegion'])->middleware('can:show.reports')->name('showPiechartbyRegion')->middleware('auth');
-Route::get('/proyectos-por-region/{id}/usuario/{idUser}', [ProjectByRegion::class, 'projectByRegion'])->middleware('can:proyectos.index')->name('projectByRegion')->middleware('auth');
-Route::get('/busqueda-proyectos/{id}/usuario/{idUser}', [ProjectByRegion::class, 'searchProjectByRegion'])->middleware('can:proyectos.index')->name('searchProjectByRegion')->middleware('auth');
-Route::get('/proyectos/crear/region/{id}/usuario/{idUser}', [ProjectByRegion::class, 'createProjectByRegion'])->middleware('can:proyectos.create')->name('createProjectByRegion')->middleware('auth');
-Route::get('/proyectos/eliminar/region/{id}/usuario/{idUser}', [ProjectByRegion::class, 'destroyProjectByRegion'])->middleware('can:proyectos.destroy')->name('destroyProjectByRegion')->middleware('auth');
