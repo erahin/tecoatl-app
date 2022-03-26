@@ -234,6 +234,7 @@
             @yield('content')
         </main>
     </div>
+    @push('scripts')@stack('scripts')
 </body>
 @if (!Auth::guest())
 <script>

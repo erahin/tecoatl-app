@@ -32,7 +32,7 @@ Auth::routes([
 
     'verify' => false, // Email Verification Routes...
 ]);
-
+Route::get('/reload-captcha', [App\Http\Controllers\Auth\LoginController::class, 'reloadCaptcha']);
 /* --------------------------------------------------------------------------  */
 /*                                 Home Routes                                 */
 /* --------------------------------------------------------------------------  */
