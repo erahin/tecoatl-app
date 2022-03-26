@@ -101,4 +101,5 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('js/table.js') }}"></script>
 @endsection
