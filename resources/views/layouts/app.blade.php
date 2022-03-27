@@ -250,13 +250,13 @@
                 for (let index = 0; index < idRegions.length; index++) {
                     if (index == (idRegions.length - 1)) {
                         menu += `<div class="gtr-menu__li">
-                                    <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}/usuario/{{ Auth::user()->id }}">
+                                    <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}">
                                         <i class="fa fa-folder" aria-hidden="true"></i> región ${nameRegions[index]}
                                     </a>
                                 </div>`;
                     } else {
                         menu += `<div class="gtr-menu__li">
-                                    <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}/usuario/{{ Auth::user()->id }}">
+                                    <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}">
                                         <i class="fa fa-folder" aria-hidden="true"></i> región ${nameRegions[index]}
                                     </a>
                                     <hr class="dropdown-divider">

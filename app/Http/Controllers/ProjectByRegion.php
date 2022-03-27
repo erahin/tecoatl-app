@@ -7,13 +7,19 @@ use App\Models\Region;
 use App\Models\Study;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectByRegion extends Controller
 {
-    public function projectByRegion($id, $idUser)
+    public function projectByRegion($id)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user id                                */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
         /* -------------------------------------------------------------------------- */
         /*                               Find view data                               */
         /* -------------------------------------------------------------------------- */
@@ -40,8 +46,13 @@ class ProjectByRegion extends Controller
         }
         return view('Project.index', compact('projects', 'status', 'region', 'id'));
     }
-    public function searchProjectByRegion(Request $request, $id, $idUser)
+    public function searchProjectByRegion(Request $request, $id)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user id                                */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
         /* -------------------------------------------------------------------------- */
         /*                               Find view data                               */
         /* -------------------------------------------------------------------------- */
@@ -74,14 +85,14 @@ class ProjectByRegion extends Controller
         $status = ["Por iniciar", "En desarrollo", "Concluido"];
         return view('Project.index', compact('projects', 'region', 'status', 'id'));
     }
-    public function createProjectByRegion($id, $idUser)
+    public function createProjectByRegion($id)
     {
         $regions = Region::pluck('name', 'id');
         $status = ["Por iniciar", "En desarrollo", "Concluido"];
         $studies = Study::all();
-        return view('Project.create', compact('regions', 'studies', 'status', 'id', 'idUser'));
+        return view('Project.create', compact('regions', 'studies', 'status', 'id'));
     }
-    public function destroyProjectByRegion($id, $idUser)
+    public function destroyProjectByRegion($id)
     {
         /* -------------------------------------------------------------------------- */
         /*                                Find project                                */
@@ -100,6 +111,6 @@ class ProjectByRegion extends Controller
         /*                               Delete project                               */
         /* -------------------------------------------------------------------------- */
         $project->delete();
-        return redirect()->route('projectByRegion', ['id' => $project->region_id, 'idUser' => $idUser]);
+        return redirect()->route('projectByRegion', ['id' => $project->region_id]);
     }
 }

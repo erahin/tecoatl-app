@@ -29,8 +29,8 @@
                     @can('proyectos.index')
                     <div class="d-flex justify-content-start flex-wrap mb-2">
                         <a class="btn btn-outline-primary"
-                            href="{{ route('projectByRegion', ['id' => $region_id, 'idUser' => Auth::user()->id]) }}"><i
-                                class="fa fa-chevron-left" aria-hidden="true"></i> Regresar
+                            href="{{ route('projectByRegion', ['id' => $region_id]) }}"><i class="fa fa-chevron-left"
+                                aria-hidden="true"></i> Regresar
                         </a>
                     </div>
                     @endcan

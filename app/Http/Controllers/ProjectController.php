@@ -52,7 +52,7 @@ class ProjectController extends Controller
         foreach ($request->studie_id as $studie) {
             Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
         }
-        return redirect()->route('projectByRegion', ['id' => $request->region_id, 'idUser' => $request->user_id]);
+        return redirect()->route('projectByRegion', ['id' => $request->region_id]);
     }
 
     public function edit($id)
@@ -103,7 +103,7 @@ class ProjectController extends Controller
                 Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
             }
         }
-        return redirect()->route('projectByRegion', ['id' => $request->region_id, 'idUser' => $request->user_id]);
+        return redirect()->route('projectByRegion', ['id' => $request->region_id]);
     }
     public function destroy($id)
     {
