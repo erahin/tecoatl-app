@@ -24,7 +24,6 @@
                     <h2 class="h6 text-center">Ruta:
                         {{ $project->abbreviation }}/{{ $studio->name }}/{{ $report->report_number }}° Reporte
                     </h2>
-                    {{-- <h2 class="h4"></h2> --}}
                     <div class="overflow-y">
                         <table class="table table-hover table-bordered">
                             <thead>

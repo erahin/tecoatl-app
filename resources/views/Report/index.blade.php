@@ -11,7 +11,8 @@
                     <div>
                         <div class="input-group d-flex justify-content-end">
                             <div class="form-outline">
-                                <input type="search" id="form1" class="form-control" placeholder="Buscar" />
+                                <input type="search" id="search" class="form-control" placeholder="Buscar"
+                                    onkeyup='searchTable()' />
                             </div>
                             <button type="button" class="btn btn-primary">
                                 <i class="fa fa-search"></i>
