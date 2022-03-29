@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'super-admin',
             'email' => 'super-admin.tecoatl@gmail.com',
             'password' => bcrypt('super-admin'),
-        ])->assignRole('Super usuario');
+        ])->assignRole('Administrador general');
         User::create([
             'name' => 'jefa-region',
             'email' => 'jefa-region.tecoatl@gmail.com',

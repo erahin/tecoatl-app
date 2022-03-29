@@ -59,6 +59,10 @@ class RegionController extends Controller
         $region = new Region();
         $region->name = $request->name;
         $region->save();
+        /* -------------------------------------------------------------------------- */
+        /*                           Create region directory                          */
+        /* -------------------------------------------------------------------------- */
+        Storage::disk('s3')->makeDirectory('tecnico/' . strtolower($request->name));
         return redirect()->route('regiones.index');
     }
 
@@ -83,6 +87,10 @@ class RegionController extends Controller
     {
         $region = Region::find($id);
         $region->delete();
+        /* -------------------------------------------------------------------------- */
+        /*                           Destry region directory                          */
+        /* -------------------------------------------------------------------------- */
+        Storage::disk('s3')->deleteDirectory('tecnico/' . strtolower($region->name) . '/');
         return redirect()->route('regiones.index');
     }
 }

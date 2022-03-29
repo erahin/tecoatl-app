@@ -19,6 +19,7 @@ class ReportController extends Controller
     }
     public function reportsList($id, $idStudio)
     {
+        // dd($idStudio);
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */
         /* -------------------------------------------------------------------------- */
@@ -38,10 +39,13 @@ class ReportController extends Controller
             ->join('studies', 'reports.studio_id', '=', 'studies.id')
             ->join('projects_studies', 'studies.id', '=', 'projects_studies.study_id')
             ->join('projects', 'projects_studies.project_id', '=', 'projects.id')
+            ->join('regions', 'projects.region_id', '=', 'regions.id')
             ->select('reports.*')
-            ->where('projects.id', '=', $id)
-            ->where('studies.id', '=', $idStudio)
+            ->where('projects.id', '=', $project->id)
+            ->where('regions.id', '=', $project->region_id)
+            ->where('studies.id', '=', $studio->id)
             ->get();
+        // return $reports;
         return view('Report.index-reports', compact('project', 'studio', 'reports', 'report_type'));
     }
     public function uploadReports($id, $idStudio)
@@ -101,22 +105,22 @@ class ReportController extends Controller
         /*                                Get all files                               */
         /* -------------------------------------------------------------------------- */
         $files = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $project->id . '/' . $idStudio . '/' . $idReport . '/');
-        /* -------------------------------------------------------------------------- */
-        /*                                Get file url                                */
-        /* -------------------------------------------------------------------------- */
-        if ($files) {
-            $urls = [];
-            foreach ($files as $file) {
-                $url = Storage::url($file);
-                array_push($urls, $url);
-            }
-        }
+        // /* -------------------------------------------------------------------------- */
+        // /*                                Get file url                                */
+        // /* -------------------------------------------------------------------------- */
+        // if ($files) {
+        //     $urls = [];
+        //     foreach ($files as $file) {
+        //         $url = Storage::url($file);
+        //         array_push($urls, $url);
+        //     }
+        // }
         /* -------------------------------------------------------------------------- */
         /*                            Return view and data                            */
         /* -------------------------------------------------------------------------- */
         return view(
             'Report.show',
-            compact('project', 'studio', 'urls', 'files', 'report')
+            compact('project', 'studio', 'files', 'report')
         );
     }
     public function downloadFile($idProject, $idStudio,  $idReport, $nameFile)
