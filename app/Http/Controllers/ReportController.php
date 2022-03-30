@@ -99,6 +99,7 @@ class ReportController extends Controller
         $project = Project::find($idProject);
         $studio = Study::find($idStudio);
         $report = Report::find($idReport);
+        $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
         /* -------------------------------------------------------------------------- */
         /*                                 Get region                                 */
         /* -------------------------------------------------------------------------- */
@@ -122,7 +123,7 @@ class ReportController extends Controller
         /* -------------------------------------------------------------------------- */
         return view(
             'Report.show',
-            compact('project', 'studio', 'files', 'report')
+            compact('project', 'studio', 'files', 'report', 'report_type')
         );
     }
     public function downloadFile($idProject, $idStudio,  $idReport, $nameFile)

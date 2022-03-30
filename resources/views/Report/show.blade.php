@@ -22,7 +22,8 @@
                         </a>
                     </div>
                     <h2 class="h6 text-center">Ruta:
-                        {{ $project->abbreviation }}/{{ $studio->name }}/{{ $report->report_number }}° Reporte
+                        {{ $project->abbreviation }}/{{ $studio->name }}/{{ $report->report_number }}° Informe {{
+                        $report_type[$report->report_type] }}
                     </h2>
                     <div class="overflow-y">
                         <table class="table table-hover table-bordered">
