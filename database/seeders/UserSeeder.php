@@ -64,5 +64,15 @@ class UserSeeder extends Seeder
             'email' => 'coordinador-rescate.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
         ])->assignRole('Coordinador de sub-área');
+        User::create([
+            'name' => 'coordinador-ambiental',
+            'email' => 'coordinador-ambiental.tecoatl@gmail.com',
+            'password' => bcrypt('operativo'),
+        ])->assignRole('Coordinador de sub-área');
+        User::create([
+            'name' => 'coordinador-justificativo',
+            'email' => 'coordinador-justificativo.tecoatl@gmail.com',
+            'password' => bcrypt('operativo'),
+        ])->assignRole('Coordinador de sub-área');
     }
 }

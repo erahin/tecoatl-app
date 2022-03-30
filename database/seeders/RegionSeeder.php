@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Region;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class RegionSeeder extends Seeder
 {
@@ -23,5 +24,8 @@ class RegionSeeder extends Seeder
         Region::create([
             'name' => 'Centro',
         ]);
+        Storage::disk('s3')->makeDirectory('tecnico/centro');
+        Storage::disk('s3')->makeDirectory('tecnico/norte');
+        Storage::disk('s3')->makeDirectory('tecnico/sur');
     }
 }

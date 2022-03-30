@@ -23,5 +23,11 @@ class StudioSeeder extends Seeder
         Study::create([
             'name' => 'Monitoreo de murciélagos',
         ]);
+        Study::create([
+            'name' => 'Supervisión ambiental',
+        ]);
+        Study::create([
+            'name' => 'Técnico justificativo',
+        ]);
     }
 }

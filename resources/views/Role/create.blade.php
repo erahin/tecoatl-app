@@ -72,13 +72,5 @@
             }
         }
     });
-    // function validateInput() {
-    //     const rol = document.getElementById('name').value;
-    //     if(rol){
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
 </script>
 @endsection
