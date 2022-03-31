@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" class="body__form">
                         @csrf
                         <div class="input-group my-4">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
@@ -38,14 +38,26 @@
                             </span>
                             @enderror
                         </div>
+                        <div class="input-group my-4">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"
+                                    aria-hidden="true"></i></span>
+                            <input id="user_key" type="text"
+                                class="form-control @error('user_key') is-invalid @enderror" name="user_key"
+                                value="{{ old('user_key') }}" required placeholder="Llave">
+                            @error('user_key')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
                         <div class="d-flex flex-column mt-4 mb-2">
-                            <div class="mb-2">
+                            <div class="mb-2 captcha">
                                 <span>{!! captcha_img('default') !!}</span>
-                                <button type=" button" class="btn btn-secondary" class="reload" id="reload">
+                                {{-- <button type=" button" class="btn btn-secondary" class="reload" id="reload">
                                     &#x21bb;
-                                </button>
+                                </button> --}}
                             </div>
-                            <div class="captcha col-md-5">
+                            <div class="col-md-5">
                                 <input id="captcha" type="text" class="form-control" placeholder="Captcha"
                                     name="captcha">
                                 @error('captcha')
@@ -95,7 +107,7 @@
             localStorage.clear();
         })();
 </script>
-@push('scripts')
+{{-- @push('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
     $('#reload').click(function () {
@@ -108,4 +120,4 @@
         });
     });
 </script>
-@endpush
+@endpush --}}
