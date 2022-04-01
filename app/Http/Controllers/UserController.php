@@ -46,12 +46,14 @@ class UserController extends Controller
                 'unique:users',
             ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'user_key' => ['required'],
             'roles' => 'required|min:1'
         ]);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->user_key = $request->user_key;
         $user->save();
         $user->roles()->attach($request->roles);
         return redirect()->route('usuarios.index');
@@ -70,12 +72,14 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
+            'user_key' => ['required'],
             'roles' => 'required|min:1'
         ]);
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->user_key = $request->user_key;
         $user->save();
         $user->roles()->sync($request->roles);
         return redirect()->route('usuarios.index');

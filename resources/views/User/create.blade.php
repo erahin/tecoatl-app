@@ -69,6 +69,23 @@
                             </div>
                         </div>
                         <div class="row mb-3">
+                            <label for="key" class="col-md-4 col-form-label text-md-end">{{__('Llave')
+                                }}</label>
+                            <div class="col-md-6 d-flex flex-row">
+                                <div class="col-md-4 ancla">
+                                    <input id="user_key" type="text"
+                                        class="form-control @error('user_key') is-invalid @enderror ml-2"
+                                        name="user_key" required>
+                                </div>
+                                <a href="" class="btn btn-secondary" id="reload" title="Generar llave">&#x21bb;</a>
+                                @error('user_key')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             {!! Form::label('roles', 'Roles', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
                             <div class="col-md-6">
                                 <div class="form-check scroll-roles">
@@ -104,4 +121,12 @@
         </div>
     </div>
 </div>
+<script>
+    let reload = document.getElementById("reload");
+    reload.addEventListener('click', (e) => {
+        e.preventDefault();
+        let rand = Math.random().toString(16).substr(2, 8);
+        document.getElementById("user_key").value = rand;
+    });
+</script>
 @endsection
