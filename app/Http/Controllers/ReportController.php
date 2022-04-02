@@ -38,15 +38,13 @@ class ReportController extends Controller
         // $reports = DB::table('reports')
         //     ->join('studies', 'reports.studio_id', '=', 'studies.id')
         //     ->join('projects_studies', 'studies.id', '=', 'projects_studies.study_id')
-        //     ->join('projects', 'projects_studies.project_id', '=', 'projects.id')
-        //     ->join('regions', 'projects.region_id', '=', 'regions.id')
         //     ->select('reports.*')
-        //     ->where('projects.id', '=', $project->id)
-        //     ->where('regions.id', '=', $project->region_id)
-        //     ->where('studies.id', '=', $studio->id)
+        //     ->where('projects_studies.project_id', '=', $project->id)
+        //     ->where('reports.studio_id', '=', $studio->id)
         //     ->get();
         // $reports = DB::table('reports', 'projects')->where('studio_id', '=', 1)->get();
         $reports = DB::select('select * from reports where studio_id = ? and project_id = ?', [$studio->id, $project->id]);
+        // $reports = DB::select('select * from reports, projects where reports.studio_id = ? and projects.id = ?', [$studio->id, $project->id]);
         // return $reports;
         return view('Report.index-reports', compact('project', 'studio', 'reports', 'report_type'));
     }
