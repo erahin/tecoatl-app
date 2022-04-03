@@ -78,7 +78,7 @@ class UserSeeder extends Seeder
             'name' => 'vicko8148',
             'email' => 'vicko8148.tecoatl@gmail.com',
             'password' => bcrypt('Vicko8148'),
-            'phone' => '+529516129964'
+            'phone' => '9516129964'
         ])->assignRole('Coordinador de sub-área');
     }
 }
