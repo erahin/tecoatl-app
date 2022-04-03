@@ -39,12 +39,11 @@
                             @enderror
                         </div>
                         <div class="input-group my-4">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"
                                     aria-hidden="true"></i></span>
-                            <input id="user_key" type="text"
-                                class="form-control @error('user_key') is-invalid @enderror" name="user_key"
-                                value="{{ old('user_key') }}" required placeholder="Llave">
-                            @error('user_key')
+                            <input id="code" type="text" class="form-control @error('code') is-invalid @enderror"
+                                name="code" value="{{ old('code') }}" required placeholder="Código">
+                            @error('code')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

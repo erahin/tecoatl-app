@@ -64,8 +64,7 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" action="{{ route('sendMessage') }}" class="body__form">
-                                    @csrf
+                                <form method="GET" action="{{ route('sendMessage') }}" class="body__form">
                                     <div class="input-group my-4">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"
                                                 aria-hidden="true"></i></span>
