@@ -57,16 +57,13 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="key" class="col-md-4 col-form-label text-md-end">{{__('Llave')
+                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{__('Número de celular')
                                 }}</label>
-                            <div class="col-md-6 d-flex flex-row">
-                                <div class="col-md-4 ancla">
-                                    <input id="user_key" type="text"
-                                        class="form-control @error('user_key') is-invalid @enderror ml-2"
-                                        name="user_key" required value="{{ $user->user_key }}">
-                                </div>
-                                <a href="" class="btn btn-secondary" id="reload" title="Generar llave">&#x21bb;</a>
-                                @error('user_key')
+                            <div class="col-md-6">
+                                <input id="phone" type="number"
+                                    class="form-control @error('phone') is-invalid @enderror" name="phone" required
+                                    value="{{ $user->phone }}">
+                                @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -121,12 +118,4 @@
         </div>
     </div>
 </div>
-<script>
-    let reload = document.getElementById("reload");
-    reload.addEventListener('click', (e) => {
-        e.preventDefault();
-        let rand = Math.random().toString(16).substr(2, 8);
-        document.getElementById("user_key").value = rand;
-    });
-</script>
 @endsection

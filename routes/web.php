@@ -11,7 +11,6 @@ use App\Http\Controllers\StudyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,11 +31,21 @@ Auth::routes([
 
     'verify' => false, // Email Verification Routes...
 ]);
-Route::get('/reload-captcha', [App\Http\Controllers\Auth\LoginController::class, 'reloadCaptcha']);
+// /* -------------------------------------------------------------------------- */
+// /*                                 Login Route                                */
+// /* -------------------------------------------------------------------------- */
+// Route::get('/reload-captcha', [App\Http\Controllers\Auth\LoginController::class, 'reloadCaptcha']);
+/* -------------------------------------------------------------------------- */
+/*                                   / Route                                  */
+/* -------------------------------------------------------------------------- */
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/enviar-codigo', [App\Http\Controllers\Auth\LoginController::class, 'sendMessage'])->name('sendMessage');
 /* --------------------------------------------------------------------------  */
 /*                                 Home Routes                                 */
 /* --------------------------------------------------------------------------  */
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home')
     ->middleware('auth');
 /* -------------------------------------------------------------------------- */
