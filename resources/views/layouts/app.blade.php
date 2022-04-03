@@ -35,7 +35,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}" id="home">
+                <a class="navbar-brand" href="{{ url('home') }}" id="home">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
                     <img src="{{ asset('img/completo_positivo-negativo.svg') }}" class="navbar__logo"
                         alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
