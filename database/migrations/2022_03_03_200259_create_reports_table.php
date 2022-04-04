@@ -18,13 +18,14 @@ class CreateReportsTable extends Migration
             $table->integer('report_number');
             $table->date('start_date');
             $table->date('end_date');
-            $table->text('report_type');
-            $table
-                ->foreignId('project_id')
-                ->nullable()
-                ->constrained('projects')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+            $table->integer('report_type');
+            $table->integer('project_id');
+            // $table
+            //     ->foreignId('project_id')
+            //     ->nullable()
+            //     ->constrained('projects')
+            //     ->cascadeOnUpdate()
+            //     ->cascadeOnDelete();
             $table
                 ->foreignId('studio_id')
                 ->nullable()
