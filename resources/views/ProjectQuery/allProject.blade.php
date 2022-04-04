@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center text-primary">Gráfica del porcentaje de proyectos por región.
+                    <h1 class="text-center">Gráfica del porcentaje de proyectos por región.
                     </h1>
                 </div>
                 <div class="card-body">

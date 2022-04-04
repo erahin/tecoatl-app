@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center text-primary">Lista de Informes de {{ $studio->name }}.
+                    <h1 class="text-center">Lista de Informes de {{ $studio->name }}.
                     </h1>
                     <div>
                         <div class="input-group d-flex justify-content-end">

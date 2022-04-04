@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center text-primary">Lista de Estudios.
+                    <h1 class="text-center">Lista de Estudios.
                     </h1>
                     <div>
                         <form action="{{ route('estudios.index') }}" class="input-group d-flex justify-content-end">

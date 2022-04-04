@@ -45,8 +45,8 @@ Route::get('/enviar-codigo', [App\Http\Controllers\Auth\LoginController::class, 
 /* --------------------------------------------------------------------------  */
 /*                                 Home Routes                                 */
 /* --------------------------------------------------------------------------  */
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-    ->name('home')
+Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('inicio')
     ->middleware('auth');
 /* -------------------------------------------------------------------------- */
 /*                                 User Routes                                */

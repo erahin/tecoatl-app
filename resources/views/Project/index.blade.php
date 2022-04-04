@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center text-primary">Lista de Proyectos de la región {{ $region->name }}.
+                    <h1 class="text-center">Lista de Proyectos de la región {{ $region->name }}.
                     </h1>
                     <div>
                         <form action="{{ route('searchProjectByRegion', ['id' => $id]) }}"
@@ -64,12 +64,12 @@
                                 <td class="d-flex justify-content-start">
                                     @can('studies-list')
                                     <a href="{{ route('studies-list', $project->id) }}" class="btn btn-primary ancla">
-                                        <i class="fa fa-folder-open" aria-hidden="true"></i> Reportes</a>
+                                        <i class="fa fa-folder-open" aria-hidden="true"></i></a>
                                     @endcan
                                     @can('proyectos.edit')
                                     <a href="{{ route('proyectos.edit', $project->id) }}"
                                         class="btn btn-success ancla"><i class="fa fa-pencil-square-o"
-                                            aria-hidden="true"></i> Editar</a>
+                                            aria-hidden="true"></i></a>
                                     @endcan
                                     @can('proyectos.destroy')
                                     <form action="{{ route('destroyProjectByRegion',[ 'id' => $project->id]) }}"
@@ -78,8 +78,7 @@
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger"
                                             onclick="return confirm( '¿Está seguro de eliminar {{ $region->name }}?') "><i
-                                                class="fa fa-trash-o" aria-hidden="true"></i>
-                                            Eliminar</button>
+                                                class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </form>
                                     @endcan
                                 </td>

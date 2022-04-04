@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'super-admin',
             'email' => 'super-admin.tecoatl@gmail.com',
             'password' => bcrypt('super-admin'),
+            'phone' => '+529516129964'
         ])->assignRole('Administrador general');
         User::create([
             'name' => 'jefa-region',
@@ -75,10 +76,9 @@ class UserSeeder extends Seeder
             'password' => bcrypt('operativo'),
         ])->assignRole('Coordinador de sub-área');
         User::create([
-            'name' => 'vicko8148',
-            'email' => 'vicko8148.tecoatl@gmail.com',
-            'password' => bcrypt('Vicko8148'),
-            'phone' => '9516129964'
+            'name' => 'Víctor Rodríguez',
+            'email' => 'victor.tecoatl@gmail.com',
+            'password' => bcrypt('vicko8148'),
         ])->assignRole('Coordinador de sub-área');
     }
 }

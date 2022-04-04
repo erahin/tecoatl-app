@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center text-primary">Crear Rol.
+                    <h1 class="text-center">Crear Rol.
                     </h1>
                 </div>
                 <div class="card-body">
