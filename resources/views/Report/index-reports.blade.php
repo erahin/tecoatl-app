@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Lista de informes de {{ $studio->name }}
+                    <h1 class="text-center">Lista de informes de <span class="header_span">{{ $studio->name }}</span>
                     </h1>
                     <div>
                         <div class="input-group d-flex justify-content-end">
@@ -52,7 +52,7 @@
                             @foreach ($reports as $report)
                             <tr>
                                 <td>{{ $report->report_number }}° informe</td>
-                                <td>{{ $report->name }}</td>
+                                {{-- <td>{{ $report->name }}</td> --}}
                                 <td>{{ $report_type[$report->report_type] }}</td>
                                 <td>{{ $report->start_date }}</td>
                                 <td>{{ $report->end_date }}</td>
@@ -64,15 +64,13 @@
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('report-edit')
-                                    <a title="Agregar
-                                        más archivos"
+                                    <a title="Agregar más archivos"
                                         href="{{ route('report-edit', ['id' => $report->id, 'idStudio' => $studio->id, 'idProject' => $project->id]) }}"
                                         class="btn btn-outline-success"><i class="fa fa-file-pdf-o"
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('deleteReportsDirectory')
-                                    <a title="Eliminar
-                                        carpeta"
+                                    <a title="Eliminar carpeta"
                                         href="{{ route('deleteReportsDirectory', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id]) }}"
                                         class="btn btn-outline-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ $report->report_number }} informe, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i

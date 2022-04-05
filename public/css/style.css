@@ -49,14 +49,14 @@ h3 {
     border-width: 1.2px;
 }
 .btn-danger {
-    color: var(--pantone);
+    color: #fff;
     background-color: var(--orange);
-    border-color: var(--pantone);
+    border-color: #fff;
     border-width: 1.2px;
 }
 .btn-danger:hover {
     color: var(--orange);
-    background-color: var(--pantone);
+    background-color: #fff;
     border-color: var(--orange);
     border-width: 1.2px;
 }
@@ -236,4 +236,8 @@ main {
 .navbar__logo {
     width: 70px;
     border-radius: 7px;
+}
+.header_span {
+    text-transform: lowercase;
+    font-weight: inherit;
 }

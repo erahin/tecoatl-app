@@ -47,8 +47,7 @@
                                 <td>{{ $registre->name }}</td>
                                 <td>
                                     @can('upload-reports')
-                                    <a title="Agregar
-                                        informes"
+                                    <a title="Agregar informes"
                                         href="{{ route('upload-reports', ['id' => $project->id, 'idStudio' => $registre->id]) }}"
                                         class="btn btn-outline-primary"><i class="fa fa-file-pdf-o"
                                             aria-hidden="true"></i></a>
@@ -61,8 +60,7 @@
                                     </a>
                                     @endcan
                                     @can('deleteStudioDirectory')
-                                    <a title="Eliminar
-                                        carpeta"
+                                    <a title="Eliminar carpeta"
                                         href="{{ route('deleteStudioDirectory', ['idProject' => $project->id, 'idStudio' => $registre->id]) }}"
                                         class="btn btn-outline-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ $registre->name }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i

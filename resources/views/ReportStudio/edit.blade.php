@@ -6,7 +6,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Editar informe {{ $report->report_number }}
+                    <h1 class="text-center">Editar informe <span class="header_span"> {{
+                            $report_type[$report->report_type]}} </span>
                     </h1>
                 </div>
                 <div class="card-body">
@@ -46,6 +47,21 @@
                                 'form-control','required']) !!}
                                 @error('report_number')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo número de informe es
+                                    obligatorio'
+                                    }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            {!! Form::label('name', 'Nombre del informe', [
+                            'class' => 'col-md-4 col-form-label
+                            text-md-end',
+                            ]) !!}
+                            <div class=" col-md-6">
+                                {!! Form::text('name', $report->name, ['class' => 'form-control', 'autofocus',
+                                'required', 'autofocus']) !!}
+                                @error('name')
+                                <strong class="text-danger text-center mt-5">{{ 'El campo nombre del informe es
                                     obligatorio'
                                     }}</strong>
                                 @enderror

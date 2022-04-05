@@ -206,7 +206,7 @@
                                 <div class="gtr-menu__li">
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="{{ route('estudios.index') }}">
-                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                        <i class="fa fa-sitemap" aria-hidden="true"></i>
                                         {{ __('nueva categoría') }}
                                     </a>
                                 </div>
@@ -235,7 +235,8 @@
             </div>
         </nav>
 
-        <main class="py-4" style="background-image: url({{ asset('img/flores.jpg') }});background-repeat: repeat;">
+        <main class="py-4"
+            style="background-image: url({{ asset('img/serpiente-Fatima.JPG') }});background-repeat: repeat; background-attachment: fixed; background-position: center">
             @yield('content')
         </main>
     </div>

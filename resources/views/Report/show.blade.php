@@ -5,7 +5,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Archivos subidos del estudio {{ $studio->name }} del proyecto
+                    <h1 class="text-center">Archivos subidos del estudio <span class="header_span">{{ $studio->name
+                            }}</span> del proyecto
                         {{ $project->abbreviation }}
                     </h1>
                 </div>

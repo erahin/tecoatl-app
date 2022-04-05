@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Subir Informe
+                    <h1 class="text-center">Subir informe
                     </h1>
                 </div>
                 <div class="card-body">
@@ -129,7 +129,7 @@
                             !!}
                             <div class="col-md-6">
                                 {!! Form::file('reports[]', ['class' => 'form-control', 'multiple', 'id' => 'select',
-                                'required']) !!}
+                                'required', 'title' => 'Subir archivos']) !!}
                                 @error('reports')
                                 <strong class="text-danger text-center mt-5">{{ 'Suba al menos un archivo'
                                     }}</strong>

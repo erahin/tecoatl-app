@@ -1,6 +1,11 @@
 window.oncontextmenu = function () {
     return false;
 };
+
+function capitalizarPrimeraLetra(str) {
+    let value = str.value;
+    return (str.value = value.charAt(0).toUpperCase() + value.slice(1));
+}
 /* -------------------------------------------------------------------------- */
 /*                              Search with table                             */
 /* -------------------------------------------------------------------------- */

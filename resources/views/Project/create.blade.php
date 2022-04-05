@@ -5,7 +5,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Crear Proyecto
+                    <h1 class="text-center">Crear proyecto
                     </h1>
                 </div>
                 <div class="card-body">
@@ -16,7 +16,7 @@
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('place', '', ['class' => 'form-control', 'autofocus', 'required', 'id' =>
-                                'place']) !!}
+                                'place','onkeyup' => 'capitalizarPrimeraLetra(place);']) !!}
                                 @error('place')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo lugar es obligatorio'
                                     }}</strong>
