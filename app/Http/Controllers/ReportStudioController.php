@@ -21,6 +21,7 @@ class ReportStudioController extends Controller
         // /* -------------------------------------------------------------------------- */
         $request->validate([
             'report_number' => 'required',
+            'name' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
             'report_type' => 'required',
@@ -31,6 +32,7 @@ class ReportStudioController extends Controller
         /* -------------------------------------------------------------------------- */
         $report = new Report();
         $report->report_number = $request->report_number;
+        $report->name = $request->name;
         $report->start_date = $request->start_date;
         $report->end_date = $request->end_date;
         $report->report_type = $request->report_type;
@@ -73,6 +75,7 @@ class ReportStudioController extends Controller
         // /* -------------------------------------------------------------------------- */
         $request->validate([
             'report_number' => 'required',
+            'name' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
             'report_type' => 'required',
@@ -83,6 +86,7 @@ class ReportStudioController extends Controller
         /* -------------------------------------------------------------------------- */
         $report = Report::find($id);
         $report->report_number = $request->report_number;
+        $report->name = $request->name;
         $report->start_date = $request->start_date;
         $report->end_date = $request->end_date;
         $report->report_type = $request->report_type;

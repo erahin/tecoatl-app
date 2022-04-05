@@ -20,6 +20,7 @@ h2,
 h3 {
     color: var(--green) !important;
 }
+
 /* -------------------------------------------------------------------------- */
 /*                                 Custom btn                                 */
 /* -------------------------------------------------------------------------- */
@@ -123,7 +124,7 @@ h3 {
 .scroll-studies,
 .scroll-roles,
 .scroll-permissions {
-    height: 150px;
+    height: 140px;
     overflow-y: scroll;
 }
 .scroll-permissions {
