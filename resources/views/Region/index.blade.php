@@ -45,12 +45,13 @@
                             <tr>
                                 <td>{{ $region->name }}</td>
                                 <td class="d-flex justify-content-start">
-                                    <a href="{{ route('regiones.edit', $region->id) }}" class="btn btn-success ancla"><i
-                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a title="Editar" href="{{ route('regiones.edit', $region->id) }}"
+                                        class="btn btn-success ancla"><i class="fa fa-pencil-square-o"
+                                            aria-hidden="true"></i></a>
                                     <form action="{{ route('regiones.destroy', $region->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger"
+                                        <button title="Eliminar" type="submit" class="btn btn-danger"
                                             onclick="return confirm( '¿Está seguro de eliminar {{ $region->name }}?') "><i
                                                 class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </form>

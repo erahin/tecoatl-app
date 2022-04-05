@@ -16,7 +16,7 @@
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('place', '', ['class' => 'form-control', 'autofocus', 'required', 'id' =>
-                                'place','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                                'place']) !!}
                                 @error('place')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo lugar es obligatorio'
                                     }}</strong>

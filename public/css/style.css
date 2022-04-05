@@ -6,7 +6,7 @@
 * {
     font-family: "Montserrat", sans-serif;
     font-weight: bolder;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
 }
 /* * {
     text-transform: lowercase;

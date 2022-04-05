@@ -63,11 +63,12 @@
                                 <td>{{ $status[$project->status] }}</td>
                                 <td class="d-flex justify-content-start">
                                     @can('studies-list')
-                                    <a href="{{ route('studies-list', $project->id) }}" class="btn btn-primary ancla">
+                                    <a title="Reportes" href="{{ route('studies-list', $project->id) }}"
+                                        class="btn btn-primary ancla">
                                         <i class="fa fa-folder-open" aria-hidden="true"></i></a>
                                     @endcan
                                     @can('proyectos.edit')
-                                    <a href="{{ route('proyectos.edit', $project->id) }}"
+                                    <a title="Editar" href="{{ route('proyectos.edit', $project->id) }}"
                                         class="btn btn-success ancla"><i class="fa fa-pencil-square-o"
                                             aria-hidden="true"></i></a>
                                     @endcan
@@ -75,7 +76,7 @@
                                     <form action="{{ route('proyectos.destroy', $project->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger"
+                                        <button title="Eliminar" type="submit" class="btn btn-danger"
                                             onclick="return confirm( '¿Está seguro de eliminar {{ $region->name }}?') "><i
                                                 class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </form>
