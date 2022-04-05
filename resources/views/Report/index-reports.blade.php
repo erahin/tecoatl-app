@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Lista de Informes de {{ $studio->name }}.
+                    <h1 class="text-center">Lista de informes de {{ $studio->name }}
                     </h1>
                     <div>
                         <div class="input-group d-flex justify-content-end">
@@ -58,22 +58,25 @@
                                 <td>{{ $report->end_date }}</td>
                                 <td>
                                     @can('show-informs')
-                                    <a href="{{ route('show-informs', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id]) }}"
+                                    <a title="Lista de archivos"
+                                        href="{{ route('show-informs', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id]) }}"
                                         class="btn btn-outline-secondary"><i class="fa fa-list-alt"
-                                            aria-hidden="true"></i> Lista de archivos</a>
+                                            aria-hidden="true"></i></a>
                                     @endcan
                                     @can('report-edit')
-                                    <a href="{{ route('report-edit', ['id' => $report->id, 'idStudio' => $studio->id, 'idProject' => $project->id]) }}"
+                                    <a title="Agregar
+                                        más archivos"
+                                        href="{{ route('report-edit', ['id' => $report->id, 'idStudio' => $studio->id, 'idProject' => $project->id]) }}"
                                         class="btn btn-outline-success"><i class="fa fa-file-pdf-o"
-                                            aria-hidden="true"></i> Agregar
-                                        más archivos</a>
+                                            aria-hidden="true"></i></a>
                                     @endcan
                                     @can('deleteReportsDirectory')
-                                    <a href="{{ route('deleteReportsDirectory', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id]) }}"
+                                    <a title="Eliminar
+                                        carpeta"
+                                        href="{{ route('deleteReportsDirectory', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id]) }}"
                                         class="btn btn-outline-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ $report->report_number }} informe, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
-                                            class="fa fa-trash-o" aria-hidden="true"></i> Eliminar
-                                        carpeta</a>
+                                            class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     @endcan
                                 </td>
                             </tr>

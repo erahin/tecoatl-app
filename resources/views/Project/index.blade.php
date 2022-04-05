@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Lista de Proyectos de la región {{ $region->name }}.
+                    <h1 class="text-center">Lista de proyectos de la región {{ $region->name }}
                     </h1>
                     <div>
                         <form action="{{ route('searchProjectByRegion', ['id' => $id]) }}"
@@ -30,7 +30,7 @@
                         @can('proyectos.create')
                         <a class=" btn btn-primary my-2 ancla"
                             href="{{ route('createProjectByRegion', ['id' => $id]) }}" role="button">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Crear Proyectos</a>
+                            <i class="fa fa-plus" aria-hidden="true"></i> Crear proyectos</a>
                         @endcan
                         <a class=" btn btn-secondary my-2" href="{{ route('projectByRegion', ['id' => $id]) }}"
                             role="button">
@@ -85,7 +85,7 @@
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="4">No existen proyectos.</td>
+                                <td colspan="4">No existen proyectos</td>
                             </tr>
                             @endif
                         </tbody>

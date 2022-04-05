@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Modificar Usuario.
+                    <h1 class="text-center">Modificar usuario
                     </h1>
                 </div>
                 <div class="card-body">

@@ -46,23 +46,22 @@
                             <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td class="d-flex justify-content-start"><a
+                                <td class="d-flex justify-content-start"><a title="Editar"
                                         href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-success ancla"><i
-                                            class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     <form action="{{ route('usuarios.destroy', $user->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger"
+                                        <button title="Eliminar" type="submit" class="btn btn-danger"
                                             onclick="return confirm( '¿Está seguro de eliminar {{ $user->name }}?') "><i
-                                                class="fa fa-trash-o" aria-hidden="true"></i>
-                                            Eliminar</button>
+                                                class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="4">No existen usuarios.</td>
+                                <td colspan="4">No existen usuarios</td>
                             </tr>
                             @endif
                         </tbody>

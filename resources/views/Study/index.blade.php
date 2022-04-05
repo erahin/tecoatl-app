@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Lista de Estudios.
+                    <h1 class="text-center">Lista de estudios
                     </h1>
                     <div>
                         <form action="{{ route('estudios.index') }}" class="input-group d-flex justify-content-end">
@@ -44,23 +44,22 @@
                             @foreach ($studies as $study)
                             <tr>
                                 <td>{{ $study->name }}</td>
-                                <td class="d-flex justify-content-start"><a
+                                <td class="d-flex justify-content-start"><a title="Editar"
                                         href="{{ route('estudios.edit', $study->id) }}" class="btn btn-success ancla"><i
-                                            class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     <form action="{{ route('estudios.destroy', $study->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger"
+                                        <button title="Eliminar" type="submit" class="btn btn-danger"
                                             onclick="return confirm( '¿Está seguro de eliminar {{ $study->name }}?') "><i
-                                                class="fa fa-trash-o" aria-hidden="true"></i>
-                                            Eliminar</button>
+                                                class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="4">No existen estudios.</td>
+                                <td colspan="4">No existen estudios</td>
                             </tr>
                             @endif
                         </tbody>
