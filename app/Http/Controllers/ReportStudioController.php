@@ -90,7 +90,11 @@ class ReportStudioController extends Controller
         $report->start_date = $request->start_date;
         $report->end_date = $request->end_date;
         $report->report_type = $request->report_type;
-        $report->project_id = $request->project_id;
+        $projects_studies_id = DB::select(
+            'select * from projects_studies where study_id = ? and project_id = ? limit 1',
+            [$request->studio_id, $request->project_id]
+        );
+        $report->project_id = $projects_studies_id[0]->projects_studies_id;
         $report->studio_id = $request->studio_id;
         $report->user_id = $request->user_id;
         $report->save();
