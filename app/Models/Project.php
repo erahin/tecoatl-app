@@ -22,11 +22,11 @@ class Project extends Model
     {
         return $this->belongsToMany(Study::class, 'projects_studies');
     }
-    /* -------------------------------------------------------------------------- */
-    /*                        Relation project and reports                        */
-    /* -------------------------------------------------------------------------- */
-    public function reports()
-    {
-        return $this->hasMany(Report::class, 'id');
-    }
+    // /* -------------------------------------------------------------------------- */
+    // /*                        Relation project and reports                        */
+    // /* -------------------------------------------------------------------------- */
+    // public function reports()
+    // {
+    //     return $this->hasMany(Report::class, 'id');
+    // }
 }

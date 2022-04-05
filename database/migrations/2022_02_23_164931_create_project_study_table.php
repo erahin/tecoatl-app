@@ -27,6 +27,7 @@ class CreateProjectStudyTable extends Migration
                 ->constrained('studies')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->integer('projects_studies_id')->unique()->nullable();
             $table->timestamps();
         });
     }

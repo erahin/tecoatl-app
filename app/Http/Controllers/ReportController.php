@@ -35,17 +35,7 @@ class ReportController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                Find reports                                */
         /* -------------------------------------------------------------------------- */
-        // $reports = DB::table('reports')
-        //     ->join('studies', 'reports.studio_id', '=', 'studies.id')
-        //     ->join('projects_studies', 'studies.id', '=', 'projects_studies.study_id')
-        //     ->select('reports.*')
-        //     ->where('projects_studies.project_id', '=', $project->id)
-        //     ->where('reports.studio_id', '=', $studio->id)
-        //     ->get();
-        // $reports = DB::table('reports', 'projects')->where('studio_id', '=', 1)->get();
-        $reports = DB::select('select * from reports where studio_id = ? and project_id = ?', [$studio->id, $project->id]);
-        // $reports = DB::select('select * from reports, projects where reports.studio_id = ? and projects.id = ?', [$studio->id, $project->id]);
-        // return $reports;
+        $reports = DB::select('select * from reports where project_id = ?', [(int)($studio->id . $project->id)]);
         return view('Report.index-reports', compact('project', 'studio', 'reports', 'report_type'));
     }
     public function uploadReports($id, $idStudio)
@@ -106,16 +96,6 @@ class ReportController extends Controller
         /*                                Get all files                               */
         /* -------------------------------------------------------------------------- */
         $files = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $project->id . '/' . $idStudio . '/' . $idReport . '/');
-        // /* -------------------------------------------------------------------------- */
-        // /*                                Get file url                                */
-        // /* -------------------------------------------------------------------------- */
-        // if ($files) {
-        //     $urls = [];
-        //     foreach ($files as $file) {
-        //         $url = Storage::url($file);
-        //         array_push($urls, $url);
-        //     }
-        // }
         /* -------------------------------------------------------------------------- */
         /*                            Return view and data                            */
         /* -------------------------------------------------------------------------- */

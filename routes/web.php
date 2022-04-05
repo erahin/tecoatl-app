@@ -56,7 +56,7 @@ Route::resource('usuarios', UserController::class)->except('show')->middleware('
 /*                               Project Routes                               */
 /* -------------------------------------------------------------------------- */
 Route::resource('proyectos', ProjectController::class)
-    ->except('show', 'index', 'create', 'destroy')
+    ->except('show', 'index', 'create')
     ->middleware('auth');
 Route::get('/proyectos-por-region/{id}', [ProjectByRegion::class, 'projectByRegion'])
     ->middleware('can:proyectos.index')
@@ -72,10 +72,10 @@ Route::get('/proyectos/crear/region/{id}', [ProjectByRegion::class, 'createProje
     ->middleware('can:proyectos.create')
     ->name('createProjectByRegion')
     ->middleware('auth');
-Route::get('/proyectos/eliminar/region/{id}', [ProjectByRegion::class, 'destroyProjectByRegion'])
-    ->middleware('can:proyectos.destroy')
-    ->name('destroyProjectByRegion')
-    ->middleware('auth');
+// Route::post('/proyectos/eliminar/region/{id}', [ProjectByRegion::class, 'destroyProjectByRegion'])
+//     ->middleware('can:proyectos.destroy')
+//     ->name('destroyProjectByRegion')
+//     ->middleware('auth');
 
 /* -------------------------------------------------------------------------- */
 /*                                Region Routes                               */

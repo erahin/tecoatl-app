@@ -72,8 +72,7 @@
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('proyectos.destroy')
-                                    <form action="{{ route('destroyProjectByRegion',[ 'id' => $project->id]) }}"
-                                        method="post">
+                                    <form action="{{ route('proyectos.destroy', $project->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger"
