@@ -21,12 +21,24 @@ class ReportStudioController extends Controller
         // /* -------------------------------------------------------------------------- */
         $request->validate([
             'report_number' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:reports',
             'start_date' => 'required',
             'end_date' => 'required',
             'report_type' => 'required',
             'reports' => 'required'
         ]);
+        /* -------------------------------------------------------------------------- */
+        /*                               Validate report                              */
+        /* -------------------------------------------------------------------------- */
+        // $projects_studies_id = (int)($request->study_id . $request->project_id);
+        // $isCreateReport = DB::select(
+        //     'select * from reports where name = ?  and project_id = ?',
+        //     [$request->name, $projects_studies_id]
+        // );
+        // if (count($isCreateReport) >= 1) {
+        //     return redirect()->route('report-edit', $request->project_id)->with('success', 'No se puede crear el reporte con un nombre existente');
+        // } else {
+
         /* -------------------------------------------------------------------------- */
         /*                                Create report                               */
         /* -------------------------------------------------------------------------- */
@@ -66,6 +78,7 @@ class ReportStudioController extends Controller
         /*                                 Redirect to                                */
         /* -------------------------------------------------------------------------- */
         return redirect()->route('studies-list', $request->project_id);
+        // }
     }
 
     public function update(Request $request, $id)

@@ -17,6 +17,9 @@
                     @endif
                     <form method="POST" action="{{ route('informes.store') }}" enctype="multipart/form-data">
                         @csrf
+                        @if (session('success'))
+                        <h6 class="alert alert-warning">{{ session('success') }}</h6>
+                        @endif
                         @if ($reportsArray)
                         <div class="row mb-3" id="upload-reports">
                             {!! Form::label('', 'Informes subidos', ['class' => 'col-md-4 col-form-label text-md-end'])
