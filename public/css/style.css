@@ -186,8 +186,11 @@ div.active a:after {
     border-bottom: 2px solid var(--green);
     color: #fff !important;
 }
-a i.active {
-    color: var(--green);
+a i.fa__li.active {
+    color: var(--orange);
+}
+li a.nav-link.active {
+    color: var(--orange) !important;
 }
 /* -------------------------------------------------------------------------- */
 /*                                    Login                                   */

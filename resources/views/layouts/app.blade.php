@@ -78,7 +78,7 @@
                         <li class="nav-item dropdown text-uppercase">
                             <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class="fa fa-book active" aria-hidden="true"></i> {{ 'documentación' }}
+                                <i class="fa fa-book fa__li" aria-hidden="true"></i> {{ 'documentación' }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"
                                 id="dropdown-menu">
@@ -131,7 +131,7 @@
                         <li class="nav-item dropdown text-uppercase">
                             <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class="fa fa-line-chart" aria-hidden="true"></i> {{ 'estatus de proyecto' }}
+                                <i class="fa fa-line-chart fa__li" aria-hidden="true"></i> {{ 'estatus de proyecto' }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <div class="gtr-menu__li">
@@ -175,7 +175,7 @@
                         <li class="nav-item dropdown text-uppercase">
                             <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class="fa fa-cogs" aria-hidden="true"></i> {{ 'configuración' }}
+                                <i class="fa fa-cogs fa__li" aria-hidden="true"></i> {{ 'configuración' }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @can('config')

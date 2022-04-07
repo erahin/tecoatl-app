@@ -2,7 +2,7 @@ window.oncontextmenu = function () {
     return false;
 };
 
-function capitalizarPrimeraLetra(str) {
+function firstLetterToCapitalize(str) {
     let value = str.value;
     return (str.value = value.charAt(0).toUpperCase() + value.slice(1));
 }
@@ -35,6 +35,8 @@ function searchTable() {
 /* -------------------------------------------------------------------------- */
 let liActive = 0;
 let liMenu = document.querySelectorAll(".gtr-menu__li");
+let faMenu = document.querySelectorAll(".fa__li");
+let aMenu = document.querySelectorAll(".nav-link");
 
 liMenu.forEach((element, index) => {
     element.addEventListener("click", function () {
@@ -45,7 +47,21 @@ liMenu.forEach((element, index) => {
 function changeActive(index) {
     localStorage.setItem("index", index);
 }
-
+function changeActiveMenu(index) {
+    console.log(index);
+    if (index >= 0 && index < 3) {
+        faMenu[0].classList.add("active");
+        aMenu[0].classList.add("active");
+    }
+    if (index >= 3 && index < 7) {
+        faMenu[1].classList.add("active");
+        aMenu[1].classList.add("active");
+    }
+    if (index >= 7 && index < 11) {
+        faMenu[2].classList.add("active");
+        aMenu[2].classList.add("active");
+    }
+}
 (function () {
     if (
         localStorage.getItem("index") == -1 ||
@@ -56,6 +72,7 @@ function changeActive(index) {
         liMenu[liActive].classList.remove("active");
         liMenu[localStorage.getItem("index")].classList.add("active");
         liActive = localStorage.getItem("index");
+        changeActiveMenu(localStorage.getItem("index"));
     }
 })();
 
