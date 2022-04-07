@@ -9,8 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('/img/favicon.svg') }}">
-    <link rel="shortcut icon" sizes="192x192" href="{{ asset('/img/favicon.svg') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/img/completo_P5477-negativo.svg') }}">
+    <link rel="shortcut icon" sizes="192x192" href="{{ asset('/img/completo_P5477-negativo.svg') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
@@ -43,7 +43,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('inicio') }}" id="home">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
-                    <img src="{{ asset('img/serpiente_P1635-negativo.svg') }}" class="navbar__logo"
+                    <img src="{{ asset('img/serpiente_P5477-negativo.svg') }}" class="navbar__logo"
                         alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -78,7 +78,7 @@
                         <li class="nav-item dropdown text-uppercase">
                             <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class="fa fa-book" aria-hidden="true"></i> {{ 'documentación' }}
+                                <i class="fa fa-book active" aria-hidden="true"></i> {{ 'documentación' }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"
                                 id="dropdown-menu">
@@ -236,8 +236,24 @@
             </div>
         </nav>
 
-        <main class="py-4"
-            style="background-image: url({{ asset('img/serpiente-Fatima.JPG') }});background-repeat: repeat; background-attachment: fixed; background-position: center">
+        <main class="py-4">
+            <style>
+                main {
+                    background-image: url('{{ asset('img/serpiente-Fatima.JPG') }}');
+                    background-repeat: no-repeat;
+                    /* background-attachment: fixed; */
+                    background-position: 30% 60%;
+                }
+
+                @media (min-width: 768px) {
+                    main {
+                        background-image: url('{{ asset('img/serpiente-Fatima.JPG') }}');
+                        background-repeat: repeat;
+                        background-attachment: fixed;
+                        background-position: center;
+                    }
+                }
+            </style>
             @yield('content')
         </main>
     </div>

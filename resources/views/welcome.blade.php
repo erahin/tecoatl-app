@@ -34,7 +34,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#" id="welcome">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
-                    <img src="{{ asset('img/serpiente_positivo-negativo.svg') }}" class="navbar__logo"
+                    <img src="{{ asset('img/serpiente_P5477-negativo.svg') }}" class="navbar__logo"
                         alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -50,7 +50,24 @@
                 </div>
             </div>
         </nav>
-        <main class="py-4" style="background-image: url({{ asset('img/flores.jpg') }});background-repeat: repeat;">
+        <main class="py-4">
+            <style>
+                main {
+                    background-image: url('{{ asset('img/serpiente-Fatima.JPG') }}');
+                    background-repeat: no-repeat;
+                    /* background-attachment: fixed; */
+                    background-position: 30% 60%;
+                }
+
+                @media (min-width: 768px) {
+                    main {
+                        background-image: url('{{ asset('img/serpiente-Fatima.JPG') }}');
+                        background-repeat: repeat;
+                        background-attachment: fixed;
+                        background-position: center;
+                    }
+                }
+            </style>
             @yield('content')
             <div class="container">
                 <div class="row justify-content-center">
@@ -58,7 +75,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row mb-3">
-                                    <img src="{{ asset('img/completo_positivo-negativo.svg') }}" class="header__logo"
+                                    <img src="{{ asset('img/completo_P5477-negativo.svg') }}" class="header__logo"
                                         alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
                                 </div>
                             </div>

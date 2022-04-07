@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row mb-3">
-                        <img src="{{ asset('img/completo_positivo-negativo.svg') }}" class="header__logo"
+                        <img src="{{ asset('img/completo_P5477-negativo.svg') }}" class="header__logo"
                             alt="Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A De C.V">
                     </div>
                 </div>
