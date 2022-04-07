@@ -16,7 +16,9 @@
                             {!! Form::label('name', 'Nombre del estudio', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
-                                {!! Form::text('name', '', ['class' => 'form-control', 'required', 'autofocus']) !!}
+                                {!! Form::text('name', '', ['class' => 'form-control', 'required','id'=>'study'
+                                ,'autofocus','onkeyup'
+                                => 'firstLetterToCapitalize(study);']) !!}
                                 @error('name')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo nombre del estudio
                                     obligatorio'

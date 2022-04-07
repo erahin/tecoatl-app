@@ -62,7 +62,8 @@
                             ]) !!}
                             <div class=" col-md-6">
                                 {!! Form::text('name', '', ['class' => 'form-control', 'autofocus',
-                                'required', 'autofocus']) !!}
+                                'required', 'autofocus','id'=>'report','onkeyup' => 'firstLetterToCapitalize(report);'])
+                                !!}
                                 @error('name')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo nombre del informe es
                                     obligatorio'

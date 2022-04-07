@@ -18,7 +18,7 @@
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('place', $project->place, ['class' => 'form-control', 'autofocus',
-                                'required', 'id' => 'place']) !!}
+                                'required', 'id' => 'place', 'onkeyup' => 'firstLetterToCapitalize(place);']) !!}
                                 @error('place')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo lugar es obligatorio'
                                     }}</strong>
@@ -30,7 +30,8 @@
                             text-md-end',]) !!}
                             <div class="col-md-6">
                                 {!! Form::text('abbreviation', $project->abbreviation, ['class' => 'form-control',
-                                'required', 'id' => 'abbreviation']) !!}
+                                'required', 'id' => 'abbreviation','onkeyup' =>
+                                'javascript:this.value=this.value.toUpperCase();']) !!}
                                 @error('abbreviation')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo abreviación es obligatorio'
                                     }}</strong>

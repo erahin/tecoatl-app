@@ -17,7 +17,7 @@
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('name', '', ['class' => 'form-control', 'autofocus', 'required',
-                                'autofocus', 'id' => 'name']) !!}
+                                'autofocus', 'id' => 'rol', 'onkeyup' => 'firstLetterToCapitalize(rol);']) !!}
                                 @error('name')
                                 <strong class="text-danger text-center">{{ 'El campo nombre del rol es obligatorio'
                                     }}</strong>

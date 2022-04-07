@@ -59,7 +59,8 @@
                             ]) !!}
                             <div class=" col-md-6">
                                 {!! Form::text('name', $report->name, ['class' => 'form-control', 'autofocus',
-                                'required', 'autofocus']) !!}
+                                'required', 'autofocus','id'=>'report','onkeyup' => 'firstLetterToCapitalize(report);'])
+                                !!}
                                 @error('name')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo nombre del informe es
                                     obligatorio'
@@ -74,7 +75,8 @@
                             ]) !!}
                             <div class="col-md-6">
                                 {!! Form::text('project_name', $project->place, ['class' => 'form-control', 'required',
-                                'disabled']) !!}
+                                'disabled','id'=>'project_name','onkeyup' => 'firstLetterToCapitalize(project_name);'])
+                                !!}
                                 @error('project_name')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo nombre del proyecto es
                                     obligatorio'

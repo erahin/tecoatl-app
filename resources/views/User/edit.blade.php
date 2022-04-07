@@ -17,8 +17,9 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" required autocomplete="name" autofocus value="{{ $user->name }}">
+                                <input id="user" type="text" class="form-control @error('name') is-invalid @enderror"
+                                    name="name" required autocomplete="name" autofocus value="{{ $user->name }}"
+                                    onkeyup="firstLetterToCapitalize(user);">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

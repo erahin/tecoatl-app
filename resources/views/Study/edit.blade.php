@@ -18,7 +18,7 @@
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('name', $study->name, ['class' => 'form-control', 'required',
-                                'autofocus']) !!}
+                                'autofocus','id' => 'study','onkeyup' => 'firstLetterToCapitalize(study);']) !!}
                                 @error('name')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo nombre del estudio
                                     obligatorio'

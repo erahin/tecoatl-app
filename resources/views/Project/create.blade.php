@@ -30,7 +30,7 @@
                             ]) !!}
                             <div class="col-md-6">
                                 {!! Form::text('abbreviation', '', ['class' => 'form-control', 'required', 'id' =>
-                                'abbreviation']) !!}
+                                'abbreviation','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                                 @error('abbreviation')
                                 <strong class="text-danger text-center mt-5">{{ 'El campo abreviación es obligatorio'
                                     }}</strong>
