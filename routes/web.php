@@ -40,7 +40,7 @@ Auth::routes([
 /* -------------------------------------------------------------------------- */
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('root');
 Route::get('/enviar-codigo', [App\Http\Controllers\Auth\LoginController::class, 'sendMessage'])->name('sendMessage');
 /* --------------------------------------------------------------------------  */
 /*                                 Home Routes                                 */

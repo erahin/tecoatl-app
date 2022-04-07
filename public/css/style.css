@@ -4,21 +4,19 @@
     --pantone: rgb(239 219 178);
 }
 * {
-    font-family: "Montserrat", sans-serif;
-    font-weight: bolder;
-    /* text-transform: capitalize; */
+    font-family: arboria, sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
-/* * {
-    text-transform: lowercase;
-}
-*::first-letter {
-    text-transform: uppercase;
-} */
+/* -------------------------------------------------------------------------- */
+/*                                 Font family                                */
+/* -------------------------------------------------------------------------- */
 
 h1,
 h2,
 h3 {
     color: var(--green) !important;
+    font-weight: 900;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -179,7 +177,8 @@ li.active a:after {
     left: 12px;
     right: 12px;
     background-color: transparent;
-    border-bottom: 2px solid #6372ff;
+    border-bottom: 2px solid var(--green);
+    color: #fff !important;
 }
 div.active a:after {
     position: absolute;
@@ -188,7 +187,8 @@ div.active a:after {
     left: 12px;
     right: 12px;
     background-color: transparent;
-    border-bottom: 2px solid #6372ff;
+    border-bottom: 2px solid var(--green);
+    color: #fff !important;
 }
 /* Desktop only style */
 @media (min-width: 768px) {
@@ -201,8 +201,8 @@ div.active a:after {
     }
 
     ul.grt-menu li a:hover {
-        color: #fff;
-        box-shadow: inset 210px 0 0 0 #6372ff;
+        box-shadow: inset 210px 0 0 0 var(--green);
+        color: #fff !important;
     }
     .body__form {
         width: 70%;
