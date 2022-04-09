@@ -20,9 +20,8 @@
                                     name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
                                     onkeyup="firstLetterToCapitalize(user);">
                                 @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <strong class="text-danger text-center mt-5">{{ $message
+                                    }}</strong>
                                 @enderror
                             </div>
                         </div>
@@ -33,11 +32,9 @@
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                     name="email" value="{{ old('email') }}" required autocomplete="email">
-
                                 @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <strong class="text-danger text-center mt-5">{{ $message
+                                    }}</strong>
                                 @enderror
                             </div>
                         </div>
@@ -49,9 +46,8 @@
                                     class="form-control @error('password') is-invalid @enderror" name="password"
                                     required autocomplete="new-password">
                                 @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <strong class="text-danger text-center mt-5">{{ $message
+                                    }}</strong>
                                 @enderror
                             </div>
                         </div>
@@ -62,9 +58,8 @@
                                 <input id="password-confirm" type="password" class="form-control"
                                     name="password_confirmation" required autocomplete="new-password">
                                 @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <strong class="text-danger text-center mt-5">{{ $message
+                                    }}</strong>
                                 @enderror
                             </div>
                         </div>
@@ -75,9 +70,8 @@
                                 <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror"
                                     name="phone" required>
                                 @error('phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <strong class="text-danger text-center mt-5">{{ $message
+                                    }}</strong>
                                 @enderror
                             </div>
                         </div>
@@ -94,9 +88,8 @@
                                     @endforeach
                                 </div>
                                 @error('roles')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ 'Seleccione al menos un rol' }}</strong>
-                                </span>
+                                <strong class="text-danger text-center mt-5">{{ $message
+                                    }}</strong>
                                 @enderror
                             </div>
                         </div>

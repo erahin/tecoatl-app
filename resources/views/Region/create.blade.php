@@ -19,8 +19,7 @@
                                 {!! Form::text('name', '', ['class' => 'form-control', 'autofocus', 'required',
                                 'autofocus','id'=>'region','onkeyup' => 'firstLetterToCapitalize(region);']) !!}
                                 @error('name')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo nombre de la región es
-                                    obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>

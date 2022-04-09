@@ -85,7 +85,7 @@
                                     <div class="input-group my-4">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"
                                                 aria-hidden="true"></i></span>
-                                        <input id="phone" type="text"
+                                        <input id="phone" type="number"
                                             class="form-control @error('phone') is-invalid @enderror" name="phone"
                                             value="{{ old('phone') }}" required placeholder="9516129964">
                                         @error('phone')

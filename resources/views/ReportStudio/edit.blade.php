@@ -46,8 +46,7 @@
                                 {!! Form::number('report_number', $report->report_number , ['class' =>
                                 'form-control','required']) !!}
                                 @error('report_number')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo número de informe es
-                                    obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -62,8 +61,7 @@
                                 'required', 'autofocus','id'=>'report','onkeyup' => 'firstLetterToCapitalize(report);'])
                                 !!}
                                 @error('name')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo nombre del informe es
-                                    obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -78,8 +76,7 @@
                                 'disabled','id'=>'project_name','onkeyup' => 'firstLetterToCapitalize(project_name);'])
                                 !!}
                                 @error('project_name')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo nombre del proyecto es
-                                    obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -93,7 +90,7 @@
                                 'form-select', 'id' =>
                                 'status', 'placeholder' => 'Seleccione el tipo de reporte']) !!}
                                 @error('report_type')
-                                <strong class="text-danger text-center mt-5">{{ 'Seleccione el tipo de reporte'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -107,8 +104,7 @@
                                 {!! Form::date('start_date', $report->start_date, ['class' => 'form-control',
                                 'required']) !!}
                                 @error('start_date')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo fecha inicio
-                                    obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -122,8 +118,7 @@
                                 {!! Form::date('end_date', $report->end_date, ['class' => 'form-control', 'required'])
                                 !!}
                                 @error('end_date')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo fecha final
-                                    obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -136,7 +131,7 @@
                                 {!! Form::file('reports[]', ['class' => 'form-control', 'multiple', 'id' => 'select',
                                 'required']) !!}
                                 @error('reports')
-                                <strong class="text-danger text-center mt-5">{{ 'Suba al menos un archivo'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>

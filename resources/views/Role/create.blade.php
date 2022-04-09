@@ -19,7 +19,7 @@
                                 {!! Form::text('name', '', ['class' => 'form-control', 'autofocus', 'required',
                                 'autofocus', 'id' => 'rol', 'onkeyup' => 'firstLetterToCapitalize(rol);']) !!}
                                 @error('name')
-                                <strong class="text-danger text-center">{{ 'El campo nombre del rol es obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -40,7 +40,7 @@
                                     @endforeach
                                 </div>
                                 @error('permissions')
-                                <strong class="text-danger text-center">{{ 'Seleccione al menos un permiso'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>

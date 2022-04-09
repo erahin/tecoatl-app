@@ -20,8 +20,7 @@
                                 ,'autofocus','onkeyup'
                                 => 'firstLetterToCapitalize(study);']) !!}
                                 @error('name')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo nombre del estudio
-                                    obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -41,7 +40,7 @@
                                     @endforeach
                                 </div>
                                 @error('user_id')
-                                <strong class="text-danger text-center mt-5">{{ 'Seleccione al menos un encargado'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>

@@ -20,7 +20,7 @@
                                 {!! Form::text('place', $project->place, ['class' => 'form-control', 'autofocus',
                                 'required', 'id' => 'place', 'onkeyup' => 'firstLetterToCapitalize(place);']) !!}
                                 @error('place')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo lugar es obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -33,7 +33,7 @@
                                 'required', 'id' => 'abbreviation','onkeyup' =>
                                 'javascript:this.value=this.value.toUpperCase();']) !!}
                                 @error('abbreviation')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo abreviación es obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -46,7 +46,7 @@
                                 {!! Form::select('status', $status, $project->status, ['class' => 'form-select', 'id' =>
                                 'status', 'placeholder' => 'Seleccione el estatus']) !!}
                                 @error('status')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo estatus es obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -58,7 +58,7 @@
                                 {!! Form::select('region_id', $regions, $project->region_id, ['class' => 'form-select',
                                 'id' => 'region_id', 'placeholder' => 'Seleccione Región']) !!}
                                 @error('region_id')
-                                <strong class="text-danger text-center mt-5">{{ 'El campo región es obligatorio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
@@ -77,7 +77,7 @@
                                     @endforeach
                                 </div>
                                 @error('studie_id')
-                                <strong class="text-danger text-center mt-5">{{ 'Seleccione al menos un estudio'
+                                <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
                                 @enderror
                             </div>
