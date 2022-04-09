@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Report;
 use App\Models\Study;
+use Illuminate\Auth\Middleware\Authorize;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,13 +15,36 @@ class ReportController extends Controller
 
     public function studiesList($id)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user id                                */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get project                                */
+        /* -------------------------------------------------------------------------- */
         $project = Project::find($id);
+        foreach ($users as $user) {
+            if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
+                $projects_studies = $project->studys;
+            } else if ($user->role_id == 3) {
+                $projects_studies  = DB::table('users')
+                    ->join('users_studies', 'users.id', '=', 'users_studies.user_id')
+                    ->join('studies', 'users_studies.study_id', '=', 'studies.id')
+                    ->join('projects_studies', 'studies.id', '=', 'projects_studies.study_id')
+                    ->join('projects', 'projects_studies.project_id', '=', 'projects.id')
+                    ->select('studies.*')
+                    ->where('users.id', '=', $idUser)
+                    ->where('projects.id', '=', $project->id)
+                    ->get();
+            }
+        }
         $region_id = $project->region_id;
-        return view('Report.index', compact('project', 'region_id'));
+        return view('Report.index', compact('project', 'projects_studies', 'region_id'));
     }
     public function reportsList($id, $idStudio)
     {
-        // dd($idStudio);
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */
         /* -------------------------------------------------------------------------- */
@@ -41,43 +66,98 @@ class ReportController extends Controller
     public function uploadReports($id, $idStudio)
     {
         /* -------------------------------------------------------------------------- */
-        /*                            Find project with id                            */
+        /*                                 Get user id                                */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate                                  */
+        /* -------------------------------------------------------------------------- */
+        $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get project                                */
         /* -------------------------------------------------------------------------- */
         $project = Project::find($id);
         /* -------------------------------------------------------------------------- */
-        /*                              Report Type Array                             */
+        /*                            Find project with id                            */
         /* -------------------------------------------------------------------------- */
-        $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
-        /* -------------------------------------------------------------------------- */
-        /*                                 Get region                                 */
-        /* -------------------------------------------------------------------------- */
-        $region = strtolower($project->regions->name);
-        /* -------------------------------------------------------------------------- */
-        /*                                Get all files                               */
-        /* -------------------------------------------------------------------------- */
-        $files = Storage::disk('s3')->directories('tecnico/' . $region . '/' . $id . '/' . $idStudio);
-        // return $files;
-        /* -------------------------------------------------------------------------- */
-        /*                                Get only directory                          */
-        /* -------------------------------------------------------------------------- */
-        $fileDirectorie = [];
-        foreach ($files as $fileNameStorage) {
-            $fileArray = explode('/', $fileNameStorage);
-            array_push($fileDirectorie, (int)$fileArray[4]);
-        }
-        /* -------------------------------------------------------------------------- */
-        /*                                 Get reports                                */
-        /* -------------------------------------------------------------------------- */
-        $reportsArray = [];
-        if ($fileDirectorie) {
-            foreach ($fileDirectorie as $reports) {
-                $report_find = DB::select('select concat (report_number,"° Informe ", report_type) from reports where id = ?', [$reports]);
-                if ($report_find) {
-                    array_push($reportsArray, $report_find[0]);
+        foreach ($users as $user) {
+            if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
+                /* -------------------------------------------------------------------------- */
+                /*                              Report Type Array                             */
+                /* -------------------------------------------------------------------------- */
+                $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
+                /* -------------------------------------------------------------------------- */
+                /*                                 Get region                                 */
+                /* -------------------------------------------------------------------------- */
+                $region = strtolower($project->regions->name);
+                /* -------------------------------------------------------------------------- */
+                /*                                Get all files                               */
+                /* -------------------------------------------------------------------------- */
+                $files = Storage::disk('s3')->directories('tecnico/' . $region . '/' . $id . '/' . $idStudio);
+                /* -------------------------------------------------------------------------- */
+                /*                                Get only directory                          */
+                /* -------------------------------------------------------------------------- */
+                $fileDirectorie = [];
+                foreach ($files as $fileNameStorage) {
+                    $fileArray = explode('/', $fileNameStorage);
+                    array_push($fileDirectorie, (int)$fileArray[4]);
+                }
+                /* -------------------------------------------------------------------------- */
+                /*                                 Get reports                                */
+                /* -------------------------------------------------------------------------- */
+                $reportsArray = [];
+                if ($fileDirectorie) {
+                    foreach ($fileDirectorie as $reports) {
+                        $report_find = DB::select('select concat (report_number,"° Informe ", report_type) from reports where id = ?', [$reports]);
+                        if ($report_find) {
+                            array_push($reportsArray, $report_find[0]);
+                        }
+                    }
+                }
+                return view('ReportStudio.create', compact('project', 'idStudio', 'reportsArray', 'report_type'));
+            } else if ($user->role_id == 3) {
+                $users_authorize = DB::select('select * from users_studies where user_id = ? and study_id = ?', [$idUser, $idStudio]);
+                $project_study = DB::select('select * from projects_studies where projects_studies_id = ?', [(int)($id . $idStudio)]);
+                if (count($project_study) == 0 || count($users_authorize) == 0) {
+                    return view('errors.4032');
+                } else {
+                    /* -------------------------------------------------------------------------- */
+                    /*                              Report Type Array                             */
+                    /* -------------------------------------------------------------------------- */
+                    $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
+                    /* -------------------------------------------------------------------------- */
+                    /*                                 Get region                                 */
+                    /* -------------------------------------------------------------------------- */
+                    $region = strtolower($project->regions->name);
+                    /* -------------------------------------------------------------------------- */
+                    /*                                Get all files                               */
+                    /* -------------------------------------------------------------------------- */
+                    $files = Storage::disk('s3')->directories('tecnico/' . $region . '/' . $id . '/' . $idStudio);
+                    /* -------------------------------------------------------------------------- */
+                    /*                                Get only directory                          */
+                    /* -------------------------------------------------------------------------- */
+                    $fileDirectorie = [];
+                    foreach ($files as $fileNameStorage) {
+                        $fileArray = explode('/', $fileNameStorage);
+                        array_push($fileDirectorie, (int)$fileArray[4]);
+                    }
+                    /* -------------------------------------------------------------------------- */
+                    /*                                 Get reports                                */
+                    /* -------------------------------------------------------------------------- */
+                    $reportsArray = [];
+                    if ($fileDirectorie) {
+                        foreach ($fileDirectorie as $reports) {
+                            $report_find = DB::select('select concat (report_number,"° Informe ", report_type) from reports where id = ?', [$reports]);
+                            if ($report_find) {
+                                array_push($reportsArray, $report_find[0]);
+                            }
+                        }
+                    }
+                    return view('ReportStudio.create', compact('project', 'idStudio', 'reportsArray', 'report_type'));
                 }
             }
         }
-        return view('ReportStudio.create', compact('project', 'idStudio', 'reportsArray', 'report_type'));
     }
     public function showInforms($idProject, $idStudio,  $idReport)
     {

@@ -9,7 +9,7 @@ class ProjectPolicy
 {
     use HandlesAuthorization;
 
-    public function user_operator(User $user_auth)
+    public function user_operator(User $user)
     {
         return true;
         // $boolean = true;

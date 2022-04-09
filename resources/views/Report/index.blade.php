@@ -42,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($project->studys as $registre)
+                            @foreach ($projects_studies as $registre)
                             <tr>
                                 <td>{{ $registre->name }}</td>
                                 <td>

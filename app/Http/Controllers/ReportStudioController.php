@@ -40,11 +40,6 @@ class ReportStudioController extends Controller
             'select * from projects_studies where study_id = ? and project_id = ? limit 1',
             [$request->studio_id, $request->project_id]
         );
-        $report->project_id = $projects_studies_id[0]->projects_studies_id;
-        $report->studio_id = $request->studio_id;
-        $report->user_id = $request->user_id;
-        $report->save();
-        $report = Report::latest('id')->first();
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */
         /* -------------------------------------------------------------------------- */
@@ -53,6 +48,12 @@ class ReportStudioController extends Controller
         /*                                 Get region                                 */
         /* -------------------------------------------------------------------------- */
         $region = strtolower($project->regions->name);
+
+        $report->project_id = $projects_studies_id[0]->projects_studies_id;
+        $report->studio_id = $request->studio_id;
+        $report->user_id = $request->user_id;
+        $report->save();
+        $report = Report::latest('id')->first();
         /* -------------------------------------------------------------------------- */
         /*                          Insert files to directory                         */
         /* -------------------------------------------------------------------------- */
@@ -66,7 +67,6 @@ class ReportStudioController extends Controller
         /*                                 Redirect to                                */
         /* -------------------------------------------------------------------------- */
         return redirect()->route('studies-list', $request->project_id);
-        // }
     }
 
     public function update(Request $request, $id)
