@@ -66,6 +66,17 @@ class ReportController extends Controller
     public function uploadReports($id, $idStudio)
     {
         /* -------------------------------------------------------------------------- */
+        /*                                 Get project and study                      */
+        /* -------------------------------------------------------------------------- */
+        $project = Project::find($id);
+        $studio = Study::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($studio == null  || $project == null) {
+            return view('errors.4032');
+        }
+        /* -------------------------------------------------------------------------- */
         /*                                 Get user id                                */
         /* -------------------------------------------------------------------------- */
         $user = Auth::user();
@@ -74,10 +85,6 @@ class ReportController extends Controller
         /*                                  Validate                                  */
         /* -------------------------------------------------------------------------- */
         $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
-        /* -------------------------------------------------------------------------- */
-        /*                                 Get project                                */
-        /* -------------------------------------------------------------------------- */
-        $project = Project::find($id);
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */
         /* -------------------------------------------------------------------------- */
@@ -217,19 +224,55 @@ class ReportController extends Controller
     }
     public function reportEdit($id, $idStudio, $idProject)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
         $report = Report::find($id);
         $project = Project::find($idProject);
+        if ($report == null  || $project == null) {
+            return view('errors.4032');
+        }
         $region = strtolower($project->regions->name);
         $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
-        $allfiles = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $id . '/');
         /* -------------------------------------------------------------------------- */
-        /*                                Get file url                                */
+        /*                                 Get user id                                */
         /* -------------------------------------------------------------------------- */
-        $files = [];
-        foreach ($allfiles as $file) {
-            $url = Storage::url($file);
-            array_push($files, $url);
+        $user = Auth::user();
+        $idUser = $user->id;
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate                                  */
+        /* -------------------------------------------------------------------------- */
+        $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
+        foreach ($users as $user) {
+            if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
+                $allfiles = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $id . '/');
+                /* -------------------------------------------------------------------------- */
+                /*                                Get file url                                */
+                /* -------------------------------------------------------------------------- */
+                $files = [];
+                foreach ($allfiles as $file) {
+                    $url = Storage::url($file);
+                    array_push($files, $url);
+                }
+                return view('ReportStudio.edit', compact('report', 'files', 'project', 'idStudio', 'report_type'));
+            } else if ($user->role_id == 3) {
+                $users_authorize = DB::select('select * from users_studies where user_id = ? and study_id = ?', [$idUser, $idStudio]);
+                $project_study = DB::select('select * from projects_studies where projects_studies_id = ?', [(int)($idProject . $idStudio)]);
+                if (count($project_study) == 0 || count($users_authorize) == 0) {
+                    return view('errors.4032');
+                } else {
+                    $allfiles = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $id . '/');
+                    /* -------------------------------------------------------------------------- */
+                    /*                                Get file url                                */
+                    /* -------------------------------------------------------------------------- */
+                    $files = [];
+                    foreach ($allfiles as $file) {
+                        $url = Storage::url($file);
+                        array_push($files, $url);
+                    }
+                    return view('ReportStudio.edit', compact('report', 'files', 'project', 'idStudio', 'report_type'));
+                }
+            }
         }
-        return view('ReportStudio.edit', compact('report', 'files', 'project', 'idStudio', 'report_type'));
     }
 }
