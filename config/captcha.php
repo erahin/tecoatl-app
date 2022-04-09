@@ -10,7 +10,7 @@ return [
         'math' => false,
         'expire' => 60,
         'encrypt' => false,
-        'fontColors' => ['#000000'],
+        'fontColors' => ['#3E5D58'],
     ],
     'math' => [
         'length' => 9,

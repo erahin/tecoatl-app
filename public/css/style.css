@@ -1,3 +1,6 @@
+/* -------------------------------------------------------------------------- */
+/*                                custom style                                */
+/* -------------------------------------------------------------------------- */
 :root {
     --orange: rgb(251 141 109);
     --green: rgb(62 93 88);
@@ -15,7 +18,55 @@ h3 {
     color: var(--green) !important;
     font-weight: 900;
 }
+.body__logo img {
+    display: block;
+    width: 50vw;
+    max-width: 900px;
+    height: 40vh;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+.inline_label {
+    width: 100%;
+}
+.card-body {
+    overflow-x: scroll;
+}
+.scroll-studies,
+.scroll-roles,
+.scroll-permissions {
+    height: 140px;
+    overflow-y: scroll;
+}
+.scroll-permissions {
+    height: 200px;
+}
+.ancla {
+    display: inline-block;
+    margin-right: 10px;
+}
+.overflow-y {
+    overflow-y: scroll;
+    height: 50vh;
+}
+.blue-form {
+    display: inline-block;
+    color: #000000 !important;
+    line-height: 1.1em;
+    box-shadow: inset 0 0 0 0 #fff;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+    position: relative;
+    text-decoration: none;
+}
+.body__form {
+    width: 100%;
+}
+.blue-form:hover {
+    background-color: #6372ff !important;
+}
 /* -------------------------------------------------------------------------- */
 /*                                 Custom btn                                 */
 /* -------------------------------------------------------------------------- */
@@ -100,55 +151,6 @@ h3 {
     background-color: var(--orange);
     border-color: var(--orange);
     border-width: 1.2px;
-}
-.body__logo img {
-    display: block;
-    width: 50vw;
-    max-width: 900px;
-    height: 40vh;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.inline_label {
-    width: 100%;
-}
-.card-body {
-    overflow-x: scroll;
-}
-.scroll-studies,
-.scroll-roles,
-.scroll-permissions {
-    height: 140px;
-    overflow-y: scroll;
-}
-.scroll-permissions {
-    height: 200px;
-}
-.ancla {
-    display: inline-block;
-    margin-right: 10px;
-}
-.overflow-y {
-    overflow-y: scroll;
-    height: 50vh;
-}
-.blue-form {
-    display: inline-block;
-    color: #000000 !important;
-    line-height: 1.1em;
-    box-shadow: inset 0 0 0 0 #fff;
-    -webkit-transition: all ease 0.8s;
-    -moz-transition: all ease 0.8s;
-    transition: all ease 0.8s;
-    position: relative;
-    text-decoration: none;
-}
-.body__form {
-    width: 100%;
-}
-.blue-form:hover {
-    background-color: #6372ff !important;
 }
 /* -------------------------------------------------------------------------- */
 /*                                Change active                               */
@@ -244,8 +246,5 @@ main {
         width: 70%;
         margin-left: auto;
         margin-right: auto;
-    }
-    main {
-        background-position: center;
     }
 }

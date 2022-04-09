@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            {!! Form::label('region_id', 'Regíon', ['class' => 'col-md-4 col-form-label text-md-end'])
+                            {!! Form::label('region_id', 'Región', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
                             <div class="col-md-6">
                                 {!! Form::select('region_id', $regions, $id, ['class' => 'form-select', 'id' =>
