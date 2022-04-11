@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Report;
+use App\Models\Study;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,6 +30,25 @@ class ReportStudioController extends Controller
             'reports' => 'required'
         ]);
         /* -------------------------------------------------------------------------- */
+        /*                            Find project with id                            */
+        /* -------------------------------------------------------------------------- */
+        $project = Project::find($request->project_id);
+        /* -------------------------------------------------------------------------- */
+        /*                            Find study with id                              */
+        /* -------------------------------------------------------------------------- */
+        $study = Study::find($request->studio_id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($project == null || $study == null) {
+            return view('errors.4032');
+        }
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user id                                */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        /* -------------------------------------------------------------------------- */
         /*                                Create report                               */
         /* -------------------------------------------------------------------------- */
         $report = new Report();
@@ -41,26 +62,16 @@ class ReportStudioController extends Controller
         /* -------------------------------------------------------------------------- */
         $projects_studies_id = DB::select(
             'select * from projects_studies where study_id = ? and project_id = ? limit 1',
-            [$request->studio_id, $request->project_id]
+            [$study->id, $project->id]
         );
-        /* -------------------------------------------------------------------------- */
-        /*                            Find project with id                            */
-        /* -------------------------------------------------------------------------- */
-        $project = Project::find($request->project_id);
-        /* -------------------------------------------------------------------------- */
-        /*                              Initial Validate                              */
-        /* -------------------------------------------------------------------------- */
-        if ($project == null || $projects_studies_id == null) {
-            return view('errors.4032');
-        }
         /* -------------------------------------------------------------------------- */
         /*                                 Get region                                 */
         /* -------------------------------------------------------------------------- */
         $region = strtolower($project->regions->name);
 
         $report->project_id = $projects_studies_id[0]->projects_studies_id;
-        $report->studio_id = $request->studio_id;
-        $report->user_id = $request->user_id;
+        $report->studio_id = $study->id;
+        $report->user_id = $idUser;
         $report->save();
         $report = Report::latest('id')->first();
         /* -------------------------------------------------------------------------- */
@@ -100,11 +111,20 @@ class ReportStudioController extends Controller
         /* -------------------------------------------------------------------------- */
         $project = Project::find($request->project_id);
         /* -------------------------------------------------------------------------- */
+        /*                            Find study with id                              */
+        /* -------------------------------------------------------------------------- */
+        $study = Study::find($request->studio_id);
+        /* -------------------------------------------------------------------------- */
         /*                              Initial Validate                              */
         /* -------------------------------------------------------------------------- */
-        if ($report == null || $project == null) {
+        if ($report == null || $project == null || $study == null) {
             return view('errors.4032');
         }
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user id                                */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
         $report->report_number = $request->report_number;
         $report->name = $request->name;
         $report->start_date = $request->start_date;
@@ -112,11 +132,11 @@ class ReportStudioController extends Controller
         $report->report_type = $request->report_type;
         $projects_studies_id = DB::select(
             'select * from projects_studies where study_id = ? and project_id = ? limit 1',
-            [$request->studio_id, $request->project_id]
+            [$study->id, $project->id]
         );
         $report->project_id = $projects_studies_id[0]->projects_studies_id;
-        $report->studio_id = $request->studio_id;
-        $report->user_id = $request->user_id;
+        $report->studio_id = $study->id;
+        $report->user_id = $idUser;
         $report->save();
         /* -------------------------------------------------------------------------- */
         /*                                 Get region                                 */

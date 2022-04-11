@@ -136,8 +136,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {!! Form::number('user_id', Auth::user()->id, ['class' => 'form-control', 'hidden'])
-                        !!}
                         {!! Form::number('project_id', $project->id, ['class' => 'form-control', 'hidden'])
                         !!}
                         {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden']) !!}
