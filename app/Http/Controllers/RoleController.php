@@ -10,10 +10,6 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('can:roles.index')->only('index');
-        // $this->middleware('can:roles.create')->only('create', 'store');
-        // $this->middleware('can:roles.edit')->only('edit', 'update');
-        // $this->middleware('can:roles.destoy')->only('destoy');
         $this->middleware('can:config');
     }
     public function index(Request $request)
@@ -38,12 +34,6 @@ class RoleController extends Controller
             'name' => 'required',
             'permissions' => 'required|min:1'
         ]);
-        // $role = new Role();
-        // $role->name = $request->name;
-        // $role->save();
-        // $role = Role::latest('id')->first();
-        // $role->permissions()->attach($request->permissions);
-        // $role = Role::create(['name' => $request->name]);
         $role = Role::firstOrCreate(['name' => $request->name]);
         $role->permissions()->sync($request->permissions);
         return redirect()->route('roles.index');
@@ -51,8 +41,14 @@ class RoleController extends Controller
 
     public function edit($id)
     {
-        $permissions = Permission::all();
         $role = Role::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($role == null) {
+            return view('errors.4032');
+        }
+        $permissions = Permission::all();
         return view('Role.edit', compact('permissions', 'role'));
     }
 
@@ -64,9 +60,13 @@ class RoleController extends Controller
 
         ]);
         $role = Role::find($id);
-        // $role->update(['name' => $request->name]);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($role == null) {
+            return view('errors.4032');
+        }
         $role = Role::firstOrCreate([$role->name]);
-        // $role->save();
         $role->permissions()->sync($request->permissions);
         return redirect()->route('roles.index');
     }
@@ -74,6 +74,12 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $role = Role::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($role == null) {
+            return view('errors.4032');
+        }
         $role->delete();
         return redirect()->route('roles.index');
     }

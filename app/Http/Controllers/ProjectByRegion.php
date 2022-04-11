@@ -23,8 +23,14 @@ class ProjectByRegion extends Controller
         /* -------------------------------------------------------------------------- */
         /*                               Find view data                               */
         /* -------------------------------------------------------------------------- */
-        $status = ["Por iniciar", "En desarrollo", "Concluido"];
         $region = Region::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($region == null) {
+            return view('errors.4032');
+        }
+        $status = ["Por iniciar", "En desarrollo", "Concluido"];
         $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
         /* -------------------------------------------------------------------------- */
         /*                             Search data by user                            */
@@ -48,6 +54,17 @@ class ProjectByRegion extends Controller
     }
     public function searchProjectByRegion(Request $request, $id)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                               Find view data                               */
+        /* -------------------------------------------------------------------------- */
+        $region = Region::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($region == null) {
+            return view('errors.4032');
+        }
+        $status = ["Por iniciar", "En desarrollo", "Concluido"];
         /* -------------------------------------------------------------------------- */
         /*                                 Get user id                                */
         /* -------------------------------------------------------------------------- */
@@ -78,11 +95,7 @@ class ProjectByRegion extends Controller
                 }
             }
         }
-        /* -------------------------------------------------------------------------- */
-        /*                               Find view data                               */
-        /* -------------------------------------------------------------------------- */
-        $region = Region::find($id);
-        $status = ["Por iniciar", "En desarrollo", "Concluido"];
+
         return view('Project.index', compact('projects', 'region', 'status', 'id'));
     }
     public function createProjectByRegion($id)
@@ -92,25 +105,4 @@ class ProjectByRegion extends Controller
         $studies = Study::all();
         return view('Project.create', compact('regions', 'studies', 'status', 'id'));
     }
-    // public function destroyProjectByRegion($id)
-    // {
-    //     /* -------------------------------------------------------------------------- */
-    //     /*                                Find project                                */
-    //     /* -------------------------------------------------------------------------- */
-    //     $project = Project::find($id);
-    //     /* -------------------------------------------------------------------------- */
-    //     /*                                 Get region                                 */
-    //     /* -------------------------------------------------------------------------- */
-    //     $region = Region::find($project->region_id);
-    //     $region = strtolower($region->name);
-    //     /* -------------------------------------------------------------------------- */
-    //     /*                              Delete directory                              */
-    //     /* -------------------------------------------------------------------------- */
-    //     Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $project->id . '/');
-    //     /* -------------------------------------------------------------------------- */
-    //     /*                               Delete project                               */
-    //     /* -------------------------------------------------------------------------- */
-    //     $project->delete();
-    //     return redirect()->route('projectByRegion', ['id' => $project->region_id]);
-    // }
 }

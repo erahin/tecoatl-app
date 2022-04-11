@@ -10,10 +10,6 @@ class RegionController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('can:regiones.index')->only('index');
-        // $this->middleware('can:regiones.create')->only('create', 'store');
-        // $this->middleware('can:regiones.edit')->only('edit', 'update');
-        // $this->middleware('can:regiones.destoy')->only('destoy');
         $this->middleware('can:config');
     }
 
@@ -69,6 +65,12 @@ class RegionController extends Controller
     public function edit($id)
     {
         $region = Region::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($region == null) {
+            return view('errors.4032');
+        }
         return view('Region.edit', compact('region'));
     }
 
@@ -78,6 +80,12 @@ class RegionController extends Controller
             'name' => 'required',
         ]);
         $region = Region::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($region == null) {
+            return view('errors.4032');
+        }
         $region->name = $request->name;
         $region->save();
         return redirect()->route('regiones.index');
@@ -86,6 +94,12 @@ class RegionController extends Controller
     public function destroy($id)
     {
         $region = Region::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($region == null) {
+            return view('errors.4032');
+        }
         $region->delete();
         /* -------------------------------------------------------------------------- */
         /*                           Destry region directory                          */

@@ -11,10 +11,6 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('can:usuarios.index')->only('index');
-        // $this->middleware('can:usuarios.create')->only('create', 'store');
-        // $this->middleware('can:usuarios.edit')->only('edit', 'update');
-        // $this->middleware('can:usuarios.destoy')->only('destoy');
         $this->middleware('can:config');
     }
 
@@ -61,8 +57,14 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $roles = Role::all();
         $user = User::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($user == null) {
+            return view('errors.4032');
+        }
+        $roles = Role::all();
         return view('User.edit', compact('user', 'roles'));
     }
 
@@ -76,6 +78,12 @@ class UserController extends Controller
             'roles' => 'required|min:1'
         ]);
         $user = User::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($user == null) {
+            return view('errors.4032');
+        }
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -88,6 +96,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($user == null) {
+            return view('errors.4032');
+        }
         $user->delete();
         return redirect()->route('usuarios.index');
     }

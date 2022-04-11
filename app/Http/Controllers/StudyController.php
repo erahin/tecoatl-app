@@ -11,10 +11,6 @@ class StudyController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('can:estudios.index')->only('index');
-        // $this->middleware('can:estudios.create')->only('create', 'store');
-        // $this->middleware('can:estudios.edit')->only('edit', 'update');
-        // $this->middleware('can:estudios.destoy')->only('destoy');
         $this->middleware('can:config');
     }
 
@@ -30,7 +26,9 @@ class StudyController extends Controller
 
     public function create()
     {
-        // $users = User::all();
+        /* -------------------------------------------------------------------------- */
+        /*                           Return coordinator user                          */
+        /* -------------------------------------------------------------------------- */
         $users = DB::select('select * from model_has_roles where role_id = ?', [3]);
         $userArray = [];
         foreach ($users as $user) {
@@ -57,6 +55,12 @@ class StudyController extends Controller
     public function edit($id)
     {
         $study = Study::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($study == null) {
+            return view('errors.4032');
+        }
         $users = DB::select('select * from model_has_roles where role_id = ?', [3]);
         $userArray = [];
         foreach ($users as $user) {
@@ -73,6 +77,12 @@ class StudyController extends Controller
             'user_id' => 'required|min:1',
         ]);
         $study = Study::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($study == null) {
+            return view('errors.4032');
+        }
         $study->name = $request->name;
         $study->save();
         $study->users()->sync($request->user_id);
@@ -82,6 +92,12 @@ class StudyController extends Controller
     public function destroy($id)
     {
         $study = Study::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($study == null) {
+            return view('errors.4032');
+        }
         $study->delete();
         return redirect()->route('estudios.index');
     }

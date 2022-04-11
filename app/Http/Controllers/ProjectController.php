@@ -13,7 +13,6 @@ class ProjectController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('can:proyectos.index')->only('index');
         $this->middleware('can:proyectos.create')->only('store');
         $this->middleware('can:proyectos.edit')->only('edit', 'update');
         $this->middleware('can:proyectos.destoy')->only('destoy');
@@ -65,10 +64,16 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
+        $project = Project::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($project == null) {
+            return view('errors.4032');
+        }
         $regions = Region::pluck('name', 'id');
         $studies = Study::all();
         $status = ["Por iniciar", "En desarrollo", "Concluido", "Cancelado"];
-        $project = Project::find($id);
         return view(
             'Project.edit',
             compact('regions', 'project', 'studies', 'status', 'id')
@@ -88,9 +93,23 @@ class ProjectController extends Controller
             'studie_id' => 'required|min:1'
         ]);
         /* -------------------------------------------------------------------------- */
-        /*                                create projet                               */
+        /*                                 Get project                                */
         /* -------------------------------------------------------------------------- */
         $project = Project::find($id);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get region                                 */
+        /* -------------------------------------------------------------------------- */
+        $region = Region::find($request->region_id);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($project == null || $region == null) {
+            return view('errors.4032');
+        }
+        $region = strtolower($region->name);
+        /* -------------------------------------------------------------------------- */
+        /*                                create projet                               */
+        /* -------------------------------------------------------------------------- */
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;
         $project->status = $request->status;
@@ -98,11 +117,6 @@ class ProjectController extends Controller
         $project->user_id = $request->user_id;
         $project->save();
         $project->studys()->sync($request->studie_id);
-        /* -------------------------------------------------------------------------- */
-        /*                                 Get region                                 */
-        /* -------------------------------------------------------------------------- */
-        $region = Region::find($request->region_id);
-        $region = strtolower($region->name);
         /* -------------------------------------------------------------------------- */
         /*                               Make directory                               */
         /* -------------------------------------------------------------------------- */
@@ -130,6 +144,12 @@ class ProjectController extends Controller
         /* -------------------------------------------------------------------------- */
         $region = Region::find($project->region_id);
         $region = strtolower($region->name);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($region == null || $project == null) {
+            return view('errors.4032');
+        }
         /* -------------------------------------------------------------------------- */
         /*                              Delete directory                              */
         /* -------------------------------------------------------------------------- */
