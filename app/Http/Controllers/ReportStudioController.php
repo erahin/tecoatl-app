@@ -80,13 +80,13 @@ class ReportStudioController extends Controller
         foreach ($request->file('reports') as $fileRequest) {
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
-            $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $request->studio_id . '/' . $report->id . '/' . $fileName;
+            $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $study->id . '/' . $report->id . '/' . $fileName;
             Storage::disk('s3')->put($filePath, file_get_contents($file));
         }
         /* -------------------------------------------------------------------------- */
         /*                                 Redirect to                                */
         /* -------------------------------------------------------------------------- */
-        return redirect()->route('studies-list', $request->project_id);
+        return redirect()->route('studies-list', $project->id);
     }
 
     public function update(Request $request, $id)
@@ -148,12 +148,12 @@ class ReportStudioController extends Controller
         foreach ($request->file('reports') as $fileRequest) {
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
-            $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $request->studio_id . '/' . $id . '/' . $fileName;
+            $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $study->id . '/' . $id . '/' . $fileName;
             Storage::disk('s3')->put($filePath, file_get_contents($file));
         }
         /* -------------------------------------------------------------------------- */
         /*                                 Redirect to                                */
         /* -------------------------------------------------------------------------- */
-        return redirect()->route('reports-list', [$project->id, $request->studio_id]);
+        return redirect()->route('reports-list', [$project->id, $study->id]);
     }
 }

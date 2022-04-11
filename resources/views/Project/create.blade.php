@@ -9,7 +9,7 @@
                     </h1>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('proyectos.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('proyectos.store') }}">
                         @csrf
                         <div class="row mb-3">
                             {!! Form::label('place', 'Nombre del proyecto', ['class' => 'col-md-4 col-form-label
@@ -81,8 +81,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {!! Form::number('user_id', Auth::user()->id, ['class' => 'form-control', 'hidden', 'required'])
-                        !!}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Crear', ['type' =>

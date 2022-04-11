@@ -9,8 +9,7 @@
                     </h1>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('proyectos.update', $project->id) }}"
-                        enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('proyectos.update', $project->id) }}">
                         @csrf
                         @method('PUT')
                         <div class="row mb-3">
@@ -99,8 +98,6 @@
                         @endif
                         @endforeach
                         @endforeach
-                        {!! Form::number('user_id', Auth::user()->id, ['class' => 'form-control', 'hidden', 'required'])
-                        !!}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {{ Form::button('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar',

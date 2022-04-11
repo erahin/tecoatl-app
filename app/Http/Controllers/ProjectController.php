@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Region;
 use App\Models\Study;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,6 +31,11 @@ class ProjectController extends Controller
             'studie_id' => 'required|min:1'
         ]);
         /* -------------------------------------------------------------------------- */
+        /*                                 Get user id                                */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        /* -------------------------------------------------------------------------- */
         /*                                create projet                               */
         /* -------------------------------------------------------------------------- */
         $project = new Project();
@@ -37,7 +43,7 @@ class ProjectController extends Controller
         $project->abbreviation = $request->abbreviation;
         $project->status = $request->status;
         $project->region_id = $request->region_id;
-        $project->user_id = $request->user_id;
+        $project->user_id = $idUser;
         $project->save();
         $project = Project::latest('id')->first();
         $project->studys()->attach($request->studie_id);
@@ -108,13 +114,18 @@ class ProjectController extends Controller
         }
         $region = strtolower($region->name);
         /* -------------------------------------------------------------------------- */
+        /*                                 Get user id                                */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        /* -------------------------------------------------------------------------- */
         /*                                create projet                               */
         /* -------------------------------------------------------------------------- */
         $project->place = $request->place;
         $project->abbreviation = $request->abbreviation;
         $project->status = $request->status;
         $project->region_id = $request->region_id;
-        $project->user_id = $request->user_id;
+        $project->user_id = $idUser;
         $project->save();
         $project->studys()->sync($request->studie_id);
         /* -------------------------------------------------------------------------- */
