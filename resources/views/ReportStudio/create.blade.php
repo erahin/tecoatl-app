@@ -135,7 +135,6 @@
                                 @enderror
                             </div>
                         </div>
-                        !!}
                         {!! Form::number('project_id', $project->id, ['class' => 'form-control', 'hidden', 'required'])
                         !!}
                         {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden', 'required']) !!}

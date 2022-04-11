@@ -31,7 +31,7 @@ return [
         'array' => 'El campo debe tener entre :min y :max elementos.',
     ],
     'boolean' => 'El campo debe ser verdadero o falso.',
-    'confirmed' => 'El campo de confirmación de  no coincide.',
+    'confirmed' => 'El campo de confirmación no coincide.',
     'current_password' => 'La contraseña actual no es correcta',
     'date' => 'El campo no es una fecha válida.',
     'date_equals' => 'El campo debe ser una fecha igual a :date.',

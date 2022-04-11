@@ -9,8 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('/img/completo_P5477-negativo.svg') }}">
-    <link rel="shortcut icon" sizes="192x192" href="{{ asset('/img/completo_P5477-negativo.svg') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/img/favicon.svg') }}">
+    <link rel="shortcut icon" sizes="192x192" href="{{ asset('/img/favicon.svg') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
@@ -26,8 +26,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    {{--
-    <link href="{{ asset('css/normalize.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.11.5/kt-2.6.4/datatables.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
