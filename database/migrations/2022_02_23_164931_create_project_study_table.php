@@ -20,13 +20,13 @@ class CreateProjectStudyTable extends Migration
                 ->nullable()
                 ->constrained('projects')
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table
                 ->foreignId('study_id')
                 ->nullable()
                 ->constrained('studies')
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->integer('projects_studies_id')->unique()->nullable();
             $table->timestamps();
         });

@@ -8,13 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     use HasFactory;
-    // /* -------------------------------------------------------------------------- */
-    // /*                         Relation report and project                        */
-    // /* -------------------------------------------------------------------------- */
-    // public function projects()
-    // {
-    //     return $this->belongsTo(Project::class, 'project_id');
-    // }
     /* -------------------------------------------------------------------------- */
     /*                          Relation user and report                          */
     /* -------------------------------------------------------------------------- */

@@ -20,13 +20,13 @@ class CreateUsersStudiesTable extends Migration
                 ->nullable()
                 ->constrained('users')
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table
                 ->foreignId('study_id')
                 ->nullable()
                 ->constrained('studies')
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->timestamps();
         });
     }

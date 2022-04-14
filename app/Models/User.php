@@ -37,11 +37,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     /* -------------------------------------------------------------------------- */
-    /*                        Relation reports and project                        */
+    /*                        Relation reports and user                           */
     /* -------------------------------------------------------------------------- */
     public function reports()
     {
         return $this->hasMany(Report::class, 'id');
+    }
+    /* -------------------------------------------------------------------------- */
+    /*                        Relation project and user                           */
+    /* -------------------------------------------------------------------------- */
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'id');
     }
     /* -------------------------------------------------------------------------- */
     /*                           Relation user and study                          */

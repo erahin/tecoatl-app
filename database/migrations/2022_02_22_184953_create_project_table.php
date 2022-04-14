@@ -23,13 +23,13 @@ class CreateProjectTable extends Migration
                 ->nullable()
                 ->constrained('regions')
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table
                 ->foreignId('user_id')
                 ->nullable()
                 ->constrained('users')
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->timestamps();
         });
     }
