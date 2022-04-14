@@ -166,6 +166,13 @@
                                         {{ __('gráfica por región') }}
                                     </a>
                                 </div>
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('reportWithUser') }}">
+                                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                        {{ __('Informes por usuario') }}
+                                    </a>
+                                </div>
                             </div>
                         </li>
                         @endcan
