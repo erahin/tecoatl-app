@@ -316,29 +316,12 @@ class ReportController extends Controller
             $coordinator = User::find($user->model_id);
             array_push($userArray, $coordinator);
         }
-        // return $userArray[0]->id;
-        // $reportArray = [];
-        // foreach ($userArray as $user) {
-        //     // return $user->name;
-        //     $reports = Report::find($user->id);
-        //     // $report = DB::select('select * from reports where user_id = ?', [$user->id]);
-        //     foreach ($reports as $report) {
-        //         array_push($reportArray, $report);
-        //     }
-        // }
         for ($i = 0; $i < count($userArray); $i++) {
             $reportArray = DB::table('reports')
                 ->join('users', 'reports.user_id', '=', 'users.id')
                 ->select('reports.*', 'users.name as user')
-                // ->orderBy('user', 'desc');
                 ->get();
-            // $users = DB::select('select * from reports where user_id = ?', [$userArray[$i]->id]);
-            // for ($j = 0; $j < count($report); $j++) {
-            // array_push($reportArray, $users[$i]);
-            //     # code...
-            // }
         }
-        // return $users;
         return view('Report.report-query', compact('reportArray', 'report_type'));
     }
 }
