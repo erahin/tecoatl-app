@@ -115,6 +115,12 @@ Route::resource('informes', ReportStudioController::class)->only(['store', 'upda
 Route::get('informes-editar/{id}/estudio/{idStudio}/proyecto/{idProject}', [ReportController::class, 'reportEdit'])
     ->name('report-edit')->middleware('can:report-edit')->middleware('auth');
 /* -------------------------------------------------------------------------- */
+/*                             Query report Route                             */
+/* -------------------------------------------------------------------------- */
+Route::get('/lista-informes-por-usuario', [ReportController::class, 'reportWithUser'])
+    ->name('reportWithUser')->middleware('can:deleteReportsDirectory')
+    ->middleware('auth');
+/* -------------------------------------------------------------------------- */
 /*                                 Roles Route                                */
 /* -------------------------------------------------------------------------- */
 Route::resource('roles', RoleController::class)->except('show')->middleware('auth');

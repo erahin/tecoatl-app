@@ -27,13 +27,13 @@ class CreateReportsTable extends Migration
                 ->constrained('studies')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
-            $table->timestamps();
             $table
                 ->foreignId('user_id')
                 ->nullable()
                 ->constrained('users')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
+            $table->timestamps();
         });
     }
 
