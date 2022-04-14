@@ -41,7 +41,7 @@ class StudyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required', 'string',
             'user_id' => 'required|min:1',
         ]);
         $study = new Study();
@@ -73,7 +73,7 @@ class StudyController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required', 'string',
             'user_id' => 'required|min:1',
         ]);
         $study = Study::find($id);

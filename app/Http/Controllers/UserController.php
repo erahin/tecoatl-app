@@ -42,7 +42,7 @@ class UserController extends Controller
                 'unique:users',
             ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required'],
+            'phone' => ['required', 'unique'],
             'roles' => 'required|min:1'
         ]);
         $user = new User();
@@ -72,9 +72,15 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:8'],
-            'phone' => ['required'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+            ],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['required', 'unique'],
             'roles' => 'required|min:1'
         ]);
         $user = User::find($id);

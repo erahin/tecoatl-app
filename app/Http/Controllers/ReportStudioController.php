@@ -20,14 +20,14 @@ class ReportStudioController extends Controller
     {
         /* -------------------------------------------------------------------------- */
         /*                                  Validate                                  */
-        // /* -------------------------------------------------------------------------- */
+        /* -------------------------------------------------------------------------- */
         $request->validate([
-            'report_number' => 'required',
-            'name' => 'required|unique:reports',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'report_type' => 'required',
-            'reports' => 'required'
+            'report_number' => ['required', 'integer'],
+            'name' => ['required|unique:reports', 'string'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date'],
+            'report_type' => ['required', 'integer'],
+            'reports' => ['required']
         ]);
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */
@@ -95,12 +95,12 @@ class ReportStudioController extends Controller
         /*                                  Validate                                  */
         // /* -------------------------------------------------------------------------- */
         $request->validate([
-            'report_number' => 'required',
-            'name' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'report_type' => 'required',
-            'reports' => 'required'
+            'report_number' => ['required', 'integer'],
+            'name' => ['required|unique:reports', 'string'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date'],
+            'report_type' => ['required', 'integer'],
+            'reports' => ['required']
         ]);
         /* -------------------------------------------------------------------------- */
         /*                                Create report                               */

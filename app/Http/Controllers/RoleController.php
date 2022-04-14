@@ -31,8 +31,8 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'permissions' => 'required|min:1'
+            'name' => ['required', 'string'],
+            'permissions' => ['required|min:1'],
         ]);
         $role = Role::firstOrCreate(['name' => $request->name]);
         $role->permissions()->sync($request->permissions);
@@ -55,9 +55,8 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'permissions' => 'required|min:1'
-
+            'name' => ['required', 'string'],
+            'permissions' => ['required|min:1'],
         ]);
         $role = Role::find($id);
         /* -------------------------------------------------------------------------- */

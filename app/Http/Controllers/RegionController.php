@@ -50,7 +50,7 @@ class RegionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', 'string'],
         ]);
         $region = new Region();
         $region->name = $request->name;
@@ -77,7 +77,7 @@ class RegionController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', 'string'],
         ]);
         $region = Region::find($id);
         /* -------------------------------------------------------------------------- */

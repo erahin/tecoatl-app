@@ -24,11 +24,11 @@ class ProjectController extends Controller
         /*                                  validate                                  */
         /* -------------------------------------------------------------------------- */
         $request->validate([
-            'place' => 'required',
-            'abbreviation' => 'required',
-            'status' => 'required',
-            'region_id' => 'required',
-            'studie_id' => 'required|min:1'
+            'place' => ['required', 'string'],
+            'abbreviation' => ['required', 'string'],
+            'status' => ['required', 'integer'],
+            'region_id' => ['required', 'integer'],
+            'studie_id' => ['required|min:1'],
         ]);
         /* -------------------------------------------------------------------------- */
         /*                                 Get user id                                */
@@ -92,11 +92,11 @@ class ProjectController extends Controller
         /*                                  validate                                  */
         /* -------------------------------------------------------------------------- */
         $request->validate([
-            'place' => 'required',
-            'abbreviation' => 'required',
-            'status' => 'required',
-            'region_id' => 'required',
-            'studie_id' => 'required|min:1'
+            'place' => ['required', 'string'],
+            'abbreviation' => ['required', 'string'],
+            'status' => ['required', 'integer'],
+            'region_id' => ['required', 'integer'],
+            'studie_id' => ['required|min:1'],
         ]);
         /* -------------------------------------------------------------------------- */
         /*                                 Get project                                */
