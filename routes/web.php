@@ -41,7 +41,8 @@ Auth::routes([
 Route::get('/', function () {
     return view('welcome');
 })->name('root');
-Route::get('/enviar-codigo', [App\Http\Controllers\Auth\LoginController::class, 'sendMessage'])->name('sendMessage');
+Route::get('/enviar-codigo', [App\Http\Controllers\Auth\LoginController::class, 'sendCode'])->name('sendCode');
+Route::get('/intentar-enviar-codigo', [App\Http\Controllers\Auth\LoginController::class, 'trySendCode'])->name('trySendCode');
 /* --------------------------------------------------------------------------  */
 /*                                 Home Routes                                 */
 /* --------------------------------------------------------------------------  */
@@ -118,7 +119,7 @@ Route::get('informes-editar/{id}/estudio/{idStudio}/proyecto/{idProject}', [Repo
 /*                             Query report Route                             */
 /* -------------------------------------------------------------------------- */
 Route::get('/lista-informes-por-usuario', [ReportController::class, 'reportWithUser'])
-    ->name('reportWithUser')->middleware('can:deleteReportsDirectory')
+    ->name('reportWithUser')->middleware('can:show.reports')
     ->middleware('auth');
 /* -------------------------------------------------------------------------- */
 /*                                 Roles Route                                */
@@ -127,29 +128,20 @@ Route::resource('roles', RoleController::class)->except('show')->middleware('aut
 /* -------------------------------------------------------------------------- */
 /*                                 Query Route                                */
 /* -------------------------------------------------------------------------- */
-Route::get('/consulta-proyectos-iniciar', [
-    ProjectReportController::class,
-    'projectStart'
-])->middleware('can:show.reports')
+Route::get('/consulta-proyectos-iniciar', [ProjectReportController::class, 'projectStart'])->middleware('can:show.reports')
     ->name('projectStart')
     ->middleware('auth');
-Route::get('/consulta-proyectos-en-procesos', [
-    ProjectReportController::class,
-    'projectInProcess'
-])->middleware('can:show.reports')
+Route::get('/consulta-proyectos-en-procesos', [ProjectReportController::class, 'projectInProcess'])->middleware('can:show.reports')
     ->name('projectInProcess')
     ->middleware('auth');
 
-Route::get('/consulta-proyectos-concluidos', [
-    ProjectReportController::class,
-    'completedProject'
-])->middleware('can:show.reports')
+Route::get('/consulta-proyectos-concluidos', [ProjectReportController::class, 'completedProject'])->middleware('can:show.reports')
     ->name('completedProject')
     ->middleware('auth');
 
-Route::get('/grafica-proyectos-por-region', [
-    ProjectReportController::class,
-    'showPiechartbyRegion'
-])->middleware('can:show.reports')
+Route::get('/grafica-proyectos-por-region', [ProjectReportController::class, 'showPiechartbyRegion'])->middleware('can:show.reports')
     ->name('showPiechartbyRegion')
+    ->middleware('auth');
+Route::get('/lista-proyectos-por-usuario', [ProjectReportController::class, 'projectWithUser'])
+    ->name('projectWithUser')->middleware('can:show.reports')
     ->middleware('auth');

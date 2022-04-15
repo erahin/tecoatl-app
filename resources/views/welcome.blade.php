@@ -55,7 +55,6 @@
                 main {
                     background-image: url('{{ asset('img/serpiente-Fatima.JPG') }}');
                     background-repeat: no-repeat;
-                    /* background-attachment: fixed; */
                     background-position: 30% 60%;
                 }
 
@@ -81,7 +80,7 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="GET" action="{{ route('sendMessage') }}" class="body__form">
+                                <form method="GET" action="{{ route('sendCode') }}" class="body__form">
                                     <div class="input-group my-4">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"
                                                 aria-hidden="true"></i></span>

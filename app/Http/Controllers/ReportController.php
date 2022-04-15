@@ -310,18 +310,18 @@ class ReportController extends Controller
     public function reportWithUser()
     {
         $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
-        $users = DB::select('select * from model_has_roles where role_id = ?', [3]);
-        $userArray = [];
-        foreach ($users as $user) {
-            $coordinator = User::find($user->model_id);
-            array_push($userArray, $coordinator);
-        }
-        for ($i = 0; $i < count($userArray); $i++) {
-            $reportArray = DB::table('reports')
-                ->join('users', 'reports.user_id', '=', 'users.id')
-                ->select('reports.*', 'users.name as user')
-                ->get();
-        }
+        // $users = DB::select('select * from model_has_roles where role_id = ?', [3]);
+        // $userArray = [];
+        // foreach ($users as $user) {
+        //     $coordinator = User::find($user->model_id);
+        //     array_push($userArray, $coordinator);
+        // }
+        // for ($i = 0; $i < count($userArray); $i++) {
+        $reportArray = DB::table('reports')
+            ->join('users', 'reports.user_id', '=', 'users.id')
+            ->select('reports.*', 'users.name as user')
+            ->get();
+        // }
         return view('Report.report-query', compact('reportArray', 'report_type'));
     }
 }

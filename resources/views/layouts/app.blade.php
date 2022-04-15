@@ -173,6 +173,13 @@
                                         {{ __('Informes por usuario') }}
                                     </a>
                                 </div>
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="{{ route('projectWithUser') }}">
+                                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                        {{ __('reportes por usuario') }}
+                                    </a>
+                                </div>
                             </div>
                         </li>
                         @endcan

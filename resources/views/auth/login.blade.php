@@ -83,12 +83,9 @@
                                 <button type="submit" class="btn btn-primary button_login">
                                     <i class="fa fa-unlock-alt" aria-hidden="true"></i> {{ __('INGRESAR') }}
                                 </button>
-
-                                @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('¿OLVIDÓ SU CONTRASEÑA?') }}
+                                <a class="btn btn-link" href="{{ route('trySendCode') }}">
+                                    {{ __('¿No has recibido el código?') }}
                                 </a>
-                                @endif
                             </div>
                         </div>
                     </form>
@@ -106,17 +103,3 @@
             localStorage.clear();
         })();
 </script>
-{{-- @push('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-    $('#reload').click(function () {
-        $.ajax({
-            type: 'GET',
-            url: 'reload-captcha',
-            success: function (data) {
-                $(".captcha span").html(data.captcha);
-            }
-        });
-    });
-</script>
-@endpush --}}

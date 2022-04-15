@@ -53,11 +53,11 @@ function changeActiveMenu(index) {
         faMenu[0].classList.add("active");
         aMenu[0].classList.add("active");
     }
-    if (index >= 3 && index < 8) {
+    if (index >= 3 && index < 9) {
         faMenu[1].classList.add("active");
         aMenu[1].classList.add("active");
     }
-    if (index >= 8 && index < 12) {
+    if (index >= 9 && index < 13) {
         faMenu[2].classList.add("active");
         aMenu[2].classList.add("active");
     }

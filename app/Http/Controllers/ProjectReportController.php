@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Region;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ProjectReportController extends Controller
 {
@@ -37,5 +39,13 @@ class ProjectReportController extends Controller
             $percentArray[] = ['name' => $regions[$i]->name, 'y' => $percent];
         }
         return view('ProjectQuery.allProject', ["data" => json_encode($percentArray)]);
+    }
+    public function projectWithUser()
+    {
+        $projects = DB::table('projects')
+            ->join('users', 'projects.user_id', '=', 'users.id')
+            ->select('projects.*', 'users.name as user')
+            ->get();
+        return view('ProjectQuery.project-query', compact('projects'));
     }
 }
