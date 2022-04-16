@@ -214,8 +214,6 @@
                                 </div>
                                 @endcan
                                 @can('config')
-                                @endcan
-                                @can('config')
                                 <div class="gtr-menu__li">
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="{{ route('estudios.index') }}">
@@ -253,7 +251,6 @@
                 main {
                     background-image: url('{{ asset('img/serpiente-Fatima.JPG') }}');
                     background-repeat: no-repeat;
-                    /* background-attachment: fixed; */
                     background-position: 30% 60%;
                 }
 
@@ -284,13 +281,13 @@
             let menu = "";
                 for (let index = 0; index < idRegions.length; index++) {
                     if (index == (idRegions.length - 1)) {
-                        menu += `<div class="gtr-menu__li">
+                        menu += `<div class="gtr-menu__li menu-region">
                                     <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}">
                                         <i class="fa fa-folder" aria-hidden="true"></i> región ${nameRegions[index]}
                                     </a>
                                 </div>`;
                     } else {
-                        menu += `<div class="gtr-menu__li">
+                        menu += `<div class="gtr-menu__li menu-region">
                                     <a class="dropdown-item" href="/proyectos-por-region/${idRegions[index]}">
                                         <i class="fa fa-folder" aria-hidden="true"></i> región ${nameRegions[index]}
                                     </a>

@@ -37,7 +37,7 @@ let liActive = 0;
 let liMenu = document.querySelectorAll(".gtr-menu__li");
 let faMenu = document.querySelectorAll(".fa__li");
 let aMenu = document.querySelectorAll(".nav-link");
-
+let menuRegion = document.querySelectorAll(".menu-region");
 liMenu.forEach((element, index) => {
     element.addEventListener("click", function () {
         changeActive(index);
@@ -48,16 +48,16 @@ function changeActive(index) {
     localStorage.setItem("index", index);
 }
 function changeActiveMenu(index) {
-    console.log(index);
-    if (index >= 0 && index < 3) {
+    let region = menuRegion.length;
+    if (index >= 0 && index < region) {
         faMenu[0].classList.add("active");
         aMenu[0].classList.add("active");
     }
-    if (index >= 3 && index < 9) {
+    if (index >= region && index < region + 6) {
         faMenu[1].classList.add("active");
         aMenu[1].classList.add("active");
     }
-    if (index >= 9 && index < 13) {
+    if (index >= region + 6 && index < region + 10) {
         faMenu[2].classList.add("active");
         aMenu[2].classList.add("active");
     }
