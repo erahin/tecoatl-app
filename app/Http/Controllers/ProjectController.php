@@ -28,7 +28,7 @@ class ProjectController extends Controller
             'abbreviation' => ['required', 'string'],
             'status' => ['required', 'integer'],
             'region_id' => ['required', 'integer'],
-            'studie_id' => ['required|min:1'],
+            'studie_id' => 'required|min:1',
         ]);
         /* -------------------------------------------------------------------------- */
         /*                                 Get user id                                */
@@ -96,7 +96,7 @@ class ProjectController extends Controller
             'abbreviation' => ['required', 'string'],
             'status' => ['required', 'integer'],
             'region_id' => ['required', 'integer'],
-            'studie_id' => ['required|min:1'],
+            'studie_id' => 'required|min:1',
         ]);
         /* -------------------------------------------------------------------------- */
         /*                                 Get project                                */

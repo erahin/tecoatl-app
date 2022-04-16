@@ -38,7 +38,7 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="input-group my-4">
+                        {{-- <div class="input-group my-4">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"
                                     aria-hidden="true"></i></span>
                             <input id="code" type="text" class="form-control @error('code') is-invalid @enderror"
@@ -52,9 +52,6 @@
                         <div class="d-flex flex-column mt-4 mb-2">
                             <div class="mb-2 captcha">
                                 <span>{!! captcha_img('default') !!}</span>
-                                {{-- <button type=" button" class="btn btn-secondary" class="reload" id="reload">
-                                    &#x21bb;
-                                </button> --}}
                             </div>
                             <div class="col-md-5">
                                 <input id="captcha" type="text" class="form-control" placeholder="Captcha"
@@ -77,7 +74,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <div class="">
                                 <button type="submit" class="btn btn-primary button_login">

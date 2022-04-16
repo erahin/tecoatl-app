@@ -23,7 +23,7 @@ class ReportStudioController extends Controller
         /* -------------------------------------------------------------------------- */
         $request->validate([
             'report_number' => ['required', 'integer'],
-            'name' => ['required|unique:reports', 'string'],
+            'name' => ['required', 'unique:reports', 'string'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             'report_type' => ['required', 'integer'],
@@ -96,7 +96,7 @@ class ReportStudioController extends Controller
         // /* -------------------------------------------------------------------------- */
         $request->validate([
             'report_number' => ['required', 'integer'],
-            'name' => ['required|unique:reports', 'string'],
+            'name' => ['required', 'unique:reports', 'string'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             'report_type' => ['required', 'integer'],

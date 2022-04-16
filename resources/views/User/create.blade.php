@@ -68,7 +68,7 @@
                                 }}</label>
                             <div class="col-md-6">
                                 <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror"
-                                    name="phone" required>
+                                    name="phone" required value="{{ old('phone') }}">
                                 @error('phone')
                                 <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>
@@ -81,7 +81,7 @@
                                 <div class="form-check scroll-roles">
                                     @foreach ($roles as $rol)
                                     <label class="form-check-label inline_label">
-                                        {!! Form::checkbox('roles[]', $rol->id, null, ['class' => 'form-check-input',
+                                        {!! Form::checkbox('roles', $rol->id, null, ['class' => 'form-check-input',
                                         'id' => $rol->id]) !!}
                                         {{ $rol->name }}
                                     </label>

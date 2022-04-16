@@ -177,7 +177,7 @@
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="{{ route('projectWithUser') }}">
                                         <i class="fa fa-user-circle" aria-hidden="true"></i>
-                                        {{ __('reportes por usuario') }}
+                                        {{ __('proyectos por usuario') }}
                                     </a>
                                 </div>
                             </div>

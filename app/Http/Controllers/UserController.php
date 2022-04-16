@@ -42,7 +42,7 @@ class UserController extends Controller
                 'unique:users',
             ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', 'unique'],
+            'phone' => ['required', 'unique:users'],
             'roles' => 'required|min:1'
         ]);
         $user = new User();
@@ -80,7 +80,7 @@ class UserController extends Controller
                 'unique:users',
             ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', 'unique'],
+            'phone' => ['required', 'unique:users'],
             'roles' => 'required|min:1'
         ]);
         $user = User::find($id);

@@ -32,7 +32,7 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string'],
-            'permissions' => ['required|min:1'],
+            'permissions' => 'required|min:1',
         ]);
         $role = Role::firstOrCreate(['name' => $request->name]);
         $role->permissions()->sync($request->permissions);
@@ -56,7 +56,7 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string'],
-            'permissions' => ['required|min:1'],
+            'permissions' => 'required|min:1',
         ]);
         $role = Role::find($id);
         /* -------------------------------------------------------------------------- */
