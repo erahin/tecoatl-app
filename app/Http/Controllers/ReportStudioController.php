@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ReportStudioController extends Controller
 {
@@ -81,7 +82,8 @@ class ReportStudioController extends Controller
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
             $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $study->id . '/' . $report->id . '/' . $fileName;
-            Storage::disk('s3')->put($filePath, file_get_contents($file));
+            // Storage::disk('s3')->put($filePath, file_get_contents($file));
+            File::streamUpload($filePath, $fileName, $file, true);
         }
         /* -------------------------------------------------------------------------- */
         /*                                 Redirect to                                */
@@ -96,11 +98,11 @@ class ReportStudioController extends Controller
         // /* -------------------------------------------------------------------------- */
         $request->validate([
             'report_number' => ['required', 'integer'],
-            'name' => ['required', 'unique:reports', 'string'],
+            'name' => ['required', 'string'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             'report_type' => ['required', 'integer'],
-            'reports' => ['required']
+            'reports' => ['required', 'size:40000']
         ]);
         /* -------------------------------------------------------------------------- */
         /*                                Create report                               */
@@ -149,7 +151,9 @@ class ReportStudioController extends Controller
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
             $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $study->id . '/' . $id . '/' . $fileName;
-            Storage::disk('s3')->put($filePath, file_get_contents($file));
+            // Storage::disk('s3')->put($filePath, file_get_contents($file));
+            File::streamUpload($filePath, $fileName, $file, true);
+            set_time_limit(60);
         }
         /* -------------------------------------------------------------------------- */
         /*                                 Redirect to                                */
