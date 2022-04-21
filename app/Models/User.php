@@ -57,4 +57,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Study::class, 'users_studies');
     }
+    /* -------------------------------------------------------------------------- */
+    /*                         Relation departament and user                      */
+    /* -------------------------------------------------------------------------- */
+    public function departaments()
+    {
+        return $this->belongsTo(Departament::class, 'departament_id');
+    }
 }
