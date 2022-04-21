@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartamentController;
 use App\Http\Controllers\ProjectByRegion;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
@@ -145,3 +146,7 @@ Route::get('/grafica-proyectos-por-region', [ProjectReportController::class, 'sh
 Route::get('/lista-proyectos-por-usuario', [ProjectReportController::class, 'projectWithUser'])
     ->name('projectWithUser')->middleware('can:show.reports')
     ->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                              Route departament                             */
+/* -------------------------------------------------------------------------- */
+Route::resource('departamentos', DepartamentController::class)->middleware('auth');
