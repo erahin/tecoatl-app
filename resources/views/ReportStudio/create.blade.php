@@ -140,7 +140,7 @@
                         {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden', 'required']) !!}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Crear', ['type' =>
+                                {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Subir', ['type' =>
                                 'submit', 'class' =>
                                 'btn btn-primary'] ) }}
                                 <a class="btn btn-danger" href="{{ route('studies-list', $project->id) }}"><i

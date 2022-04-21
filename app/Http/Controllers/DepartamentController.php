@@ -12,9 +12,13 @@ class DepartamentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $departaments = Departament::paginate(10);
+        if ($request->search) {
+            $regions = Departament::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+        } else {
+            $departaments = Departament::paginate(10);
+        }
         return view('Departament.index', compact('departaments'));
     }
 
