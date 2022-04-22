@@ -62,6 +62,6 @@ class User extends Authenticatable
     /* -------------------------------------------------------------------------- */
     public function departaments()
     {
-        return $this->belongsTo(Departament::class, 'departament_id');
+        return $this->belongsTo(Administrative::class, 'departament_id');
     }
 }

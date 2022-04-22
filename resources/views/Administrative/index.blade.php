@@ -9,7 +9,7 @@
                     <h1 class="text-center">Lista de departamentos
                     </h1>
                     <div>
-                        <form action="{{ route('departamentos.index') }}"
+                        <form action="{{ route('administrativos.index') }}"
                             class="input-group d-flex justify-content-end">
                             <div class="form-outline">
                                 <input type="text" name="search" class="form-control" placeholder="Buscar" required />
@@ -27,10 +27,10 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap">
-                        <a class="btn btn-primary my-2 ancla" href="{{ route('departamentos.create') }}"
+                        <a class="btn btn-primary my-2 ancla" href="{{ route('administrativos.create') }}"
                             role="button"><i class="fa fa-plus" aria-hidden="true"></i> Crear
                             departamento</a>
-                        <a class=" btn btn-secondary my-2" href="{{ route('departamentos.index') }}" role="button">
+                        <a class=" btn btn-secondary my-2" href="{{ route('administrativos.index') }}" role="button">
                             <i class="fa fa-list" aria-hidden="true"></i> Lista completa</a>
                     </div>
                     <table class="table table-hover table-bordered">
@@ -41,22 +41,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($departaments) != 0)
-                            @foreach ($departaments as $departament)
+                            @if (count($administratives) != 0)
+                            @foreach ($administratives as $administrative)
                             <tr>
-                                <td>{{ $departament->name }}</td>
+                                <td>{{ $administrative->name }}</td>
                                 <td class="d-flex justify-content-start">
-                                    <a title="Reportes" href="{{ route('studies-list', $departament->id) }}"
+                                    <a title="Reportes" href="{{ route('studies-list', $administrative->id) }}"
                                         class="btn btn-primary ancla">
                                         <i class="fa fa-folder-open" aria-hidden="true"></i></a>
-                                    <a title="Editar" href="{{ route('departamentos.edit', $departament->id) }}"
+                                    <a title="Editar" href="{{ route('administrativos.edit', $administrative->id) }}"
                                         class="btn btn-success ancla"><i class="fa fa-pencil-square-o"
                                             aria-hidden="true"></i></a>
-                                    <form action="{{ route('departamentos.destroy', $departament->id) }}" method="post">
+                                    <form action="{{ route('administrativos.destroy', $administrative->id) }}"
+                                        method="post">
                                         @csrf
                                         @method('delete')
                                         <button title="Eliminar" type="submit" class="btn btn-danger"
-                                            onclick="return confirm( '¿Está seguro de eliminar {{ $departament->name }}?') "><i
+                                            onclick="return confirm( '¿Está seguro de eliminar {{ $administrative->name }}?') "><i
                                                 class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
@@ -69,7 +70,7 @@
                             @endif
                         </tbody>
                     </table>
-                    {{ $departaments->links() }}
+                    {{ $administratives->links() }}
                 </div>
             </div>
         </div>

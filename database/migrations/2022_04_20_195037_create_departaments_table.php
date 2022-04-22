@@ -18,6 +18,7 @@ class CreateDepartamentsTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+        Schema::rename('departaments', 'administratives');
     }
 
     /**
@@ -27,6 +28,6 @@ class CreateDepartamentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departaments');
+        Schema::dropIfExists('administratives');
     }
 }

@@ -18,7 +18,7 @@ class AddDepartamentidToUsersTable extends Migration
                 ->foreignId('departament_id')
                 ->after('region_id')
                 ->nullable()
-                ->constrained('departaments')
+                ->constrained('administratives')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
         });

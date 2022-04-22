@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministrativeController;
 use App\Http\Controllers\DepartamentController;
 use App\Http\Controllers\ProjectByRegion;
 use App\Http\Controllers\ProjectController;
@@ -149,4 +150,4 @@ Route::get('/lista-proyectos-por-usuario', [ProjectReportController::class, 'pro
 /* -------------------------------------------------------------------------- */
 /*                              Route departament                             */
 /* -------------------------------------------------------------------------- */
-Route::resource('departamentos', DepartamentController::class)->middleware('auth');
+Route::resource('administrativos', AdministrativeController::class)->middleware('auth');

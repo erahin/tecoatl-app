@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Departament;
+use App\Models\Administrative;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class DepartamentController extends Controller
+class AdministrativeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,11 @@ class DepartamentController extends Controller
     public function index(Request $request)
     {
         if ($request->search) {
-            $departaments = Departament::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+            $administratives = Administrative::where('name', 'like', '%' . $request->search . '%')->paginate(10);
         } else {
-            $departaments = Departament::paginate(10);
+            $administratives = Administrative::paginate(10);
         }
-        return view('Departament.index', compact('departaments'));
+        return view('Administrative.index', compact('administratives'));
     }
 
     /**
@@ -30,7 +30,7 @@ class DepartamentController extends Controller
      */
     public function create()
     {
-        return view('Departament.create');
+        return view('Administrative.create');
     }
 
     /**
@@ -44,14 +44,14 @@ class DepartamentController extends Controller
         $request->validate([
             'name' => 'required'
         ]);
-        $departamet = new Departament();
-        $departamet->name = $request->name;
-        $departamet->save();
+        $administrative = new Administrative();
+        $administrative->name = $request->name;
+        $administrative->save();
         /* -------------------------------------------------------------------------- */
         /*                           Create departamet directory                      */
         /* -------------------------------------------------------------------------- */
         Storage::disk('s3')->makeDirectory('administrativo/' . strtolower($request->name));
-        return redirect()->route('departamentos.index');
+        return redirect()->route('administrativos.index');
     }
 
     /**
@@ -73,11 +73,11 @@ class DepartamentController extends Controller
      */
     public function edit($id)
     {
-        $departament = Departament::find($id);
-        if ($departament == null) {
+        $administrative = Administrative::find($id);
+        if ($administrative == null) {
             return view('errors.4032');
         }
-        return view('Departament.edit', compact('departament'));
+        return view('Administrative.edit', compact('administrative'));
     }
 
     /**
@@ -89,13 +89,13 @@ class DepartamentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $departamet = Departament::find($id);
-        if ($departamet == null) {
+        $administrative = Administrative::find($id);
+        if ($administrative == null) {
             return view('errors.4032');
         }
-        $departamet->name = $request->name;
-        $departamet->save();
-        return redirect()->route('departamentos.index');
+        $administrative->name = $request->name;
+        $administrative->save();
+        return redirect()->route('administrativos.index');
     }
 
     /**
@@ -106,11 +106,11 @@ class DepartamentController extends Controller
      */
     public function destroy($id)
     {
-        $departamet = Departament::find($id);
-        if ($departamet == null) {
+        $administrative = Administrative::find($id);
+        if ($administrative == null) {
             return view('errors.4032');
         }
-        $departamet->delete();
-        return redirect()->route('departamentos.index');
+        $administrative->delete();
+        return redirect()->route('administrativos.index');
     }
 }

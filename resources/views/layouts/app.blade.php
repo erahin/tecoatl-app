@@ -72,6 +72,10 @@
                         </li>
                         @endif
                         @else
+                        <li class="nav-item text-uppercase gtr-menu__li">
+                            <a class="nav-link" href="{{ route('administrativos.index') }}"><i class="fa fa-book fa__li"
+                                    aria-hidden="true"></i> {{ __('Administración') }}</a>
+                        </li>
                         @can('proyectos.index')
                         <li class="nav-item dropdown text-uppercase">
                             <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -80,23 +84,6 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"
                                 id="dropdown-menu">
-                                <div class="gtr-menu__li">
-                                    <a class="dropdown-item" href="{{ route('projectStart') }}">
-                                        <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región norte') }}
-                                    </a>
-                                </div>
-                                <div class="gtr-menu__li">
-                                    <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="{{ route('projectInProcess') }}">
-                                        <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región sur') }}
-                                    </a>
-                                </div>
-                                <div class="gtr-menu__li">
-                                    <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="{{ route('projectInProcess') }}">
-                                        <i class="fa fa-folder" aria-hidden="true"></i> {{ __('región centro') }}
-                                    </a>
-                                </div>
                             </div>
                         </li>
                         @endcan
