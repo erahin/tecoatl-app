@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Departament;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DepartamentController extends Controller
 {
@@ -15,7 +16,7 @@ class DepartamentController extends Controller
     public function index(Request $request)
     {
         if ($request->search) {
-            $regions = Departament::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+            $departaments = Departament::where('name', 'like', '%' . $request->search . '%')->paginate(10);
         } else {
             $departaments = Departament::paginate(10);
         }
@@ -46,6 +47,10 @@ class DepartamentController extends Controller
         $departamet = new Departament();
         $departamet->name = $request->name;
         $departamet->save();
+        /* -------------------------------------------------------------------------- */
+        /*                           Create departamet directory                      */
+        /* -------------------------------------------------------------------------- */
+        Storage::disk('s3')->makeDirectory('administrativo/' . strtolower($request->name));
         return redirect()->route('departamentos.index');
     }
 

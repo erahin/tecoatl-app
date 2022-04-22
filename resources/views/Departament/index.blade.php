@@ -46,6 +46,9 @@
                             <tr>
                                 <td>{{ $departament->name }}</td>
                                 <td class="d-flex justify-content-start">
+                                    <a title="Reportes" href="{{ route('studies-list', $departament->id) }}"
+                                        class="btn btn-primary ancla">
+                                        <i class="fa fa-folder-open" aria-hidden="true"></i></a>
                                     <a title="Editar" href="{{ route('departamentos.edit', $departament->id) }}"
                                         class="btn btn-success ancla"><i class="fa fa-pencil-square-o"
                                             aria-hidden="true"></i></a>
