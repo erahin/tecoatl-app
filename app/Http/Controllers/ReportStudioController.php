@@ -8,7 +8,6 @@ use App\Models\Study;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
 class ReportStudioController extends Controller
@@ -28,7 +27,7 @@ class ReportStudioController extends Controller
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             'report_type' => ['required', 'integer'],
-            'reports' => ['required']
+            'reports' => ['required', 'size:40000']
         ]);
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrative;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,6 +19,10 @@ class DocumentAdministrativeController extends Controller
     }
     public function storeFolder(Request $request, $idAdministrative)
     {
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null) {
+            return view('errors.4032');
+        }
         $request->validate([
             'name' => ['string', 'confirmed']
         ]);
@@ -33,15 +38,44 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
-        $directories = Storage::disk('s3')->allDirectories('administrativo/' . $idAdministrative . '/');
+        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/');
         $folderArray = [];
         foreach ($directories as $directorie) {
             array_push($folderArray, $directorie);
         }
         return view('Administrative.index-folder', compact('folderArray', 'idAdministrative'));
     }
-    public function uploadFile()
+    public function showFormUploadFile($idAdministrative, $folder)
     {
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null) {
+            return view('errors.4032');
+        }
+        /* -------------------------------------------------------------------------- */
+        /*                                Get all files                               */
+        /* -------------------------------------------------------------------------- */
+        $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        return view('Administrative.upload-file', compact('idAdministrative', 'administrative', 'files', 'folder'));
+    }
+    public function uploadFile(Request $request, $idAdministrative, $folder)
+    {
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null) {
+            return view('errors.4032');
+        }
+        $request->validate([
+            'files-upload' => ['required'],
+        ]);
+        /* -------------------------------------------------------------------------- */
+        /*                          Insert files to directory                         */
+        /* -------------------------------------------------------------------------- */
+        foreach ($request->file('files-upload') as $fileRequest) {
+            $file = $fileRequest;
+            $fileName = $fileRequest->getClientOriginalName();
+            $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $fileName;
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+        }
+        return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
     }
     public function fileList($idAdministrative, $folder)
     {
@@ -49,30 +83,86 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
-        $files = Storage::disk('s3')->allFiles('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/');
         return view('Administrative.file-list', compact('files', 'idAdministrative'));
     }
-    public function subFolderList()
-    {
-    }
-    public function createSubFolder($idAdministrative)
+    public function createSubFolder($idAdministrative, $folder)
     {
         $administrative = Administrative::find($idAdministrative);
         if ($administrative == null) {
             return view('errors.4032');
         }
-        return view('DocumentAdministrative.create', compact('idAdministrative'));
+        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        return view('DocumentAdministrative.create-subfolder', compact('idAdministrative', 'folder', 'directories'));
     }
-    public function storeSubFolder(Request $request, $idAdministrative)
+    public function storeSubFolder(Request $request, $idAdministrative, $folder)
     {
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null) {
+            return view('errors.4032');
+        }
         $request->validate([
             'name' => ['string', 'confirmed']
         ]);
         /* -------------------------------------------------------------------------- */
         /*                           Create sub departamet subdirectory               */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->makeDirectory('administrativo/' . $idAdministrative . '/' . $request->name);
-        return redirect()->route('administrativos.index');
+        Storage::disk('s3')->makeDirectory('administrativo/' . $idAdministrative . '/' . $folder . '/' . $request->name . '/');
+        return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
+    }
+    public function subFolderList($idAdministrative, $folder)
+    {
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null) {
+            return view('errors.4032');
+        }
+        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        $folderArray = [];
+        foreach ($directories as $directorie) {
+            array_push($folderArray, $directorie);
+        }
+        return view('DocumentAdministrative.index-subfolder', compact('administrative', 'folderArray', 'folder', 'idAdministrative'));
+    }
+    public function showFormUploadFileSubFolder($idAdministrative, $folder, $subfolder)
+    {
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null) {
+            return view('errors.4032');
+        }
+        /* -------------------------------------------------------------------------- */
+        /*                                Get all files                               */
+        /* -------------------------------------------------------------------------- */
+        $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
+        return view('DocumentAdministrative.upload-file-subfolder', compact('idAdministrative', 'administrative', 'files', 'folder', 'subfolder'));
+    }
+    public function uploadFileSubFolder(Request $request, $idAdministrative, $folder, $subfolder)
+    {
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null) {
+            return view('errors.4032');
+        }
+        $request->validate([
+            'files-upload' => ['required'],
+        ]);
+        /* -------------------------------------------------------------------------- */
+        /*                          Insert files to directory                         */
+        /* -------------------------------------------------------------------------- */
+        foreach ($request->file('files-upload') as $fileRequest) {
+            $file = $fileRequest;
+            $fileName = $fileRequest->getClientOriginalName();
+            $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/' . $fileName;
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+        }
+        return redirect()->route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => $folder]);
+    }
+    public function subFolderFileList($idAdministrative, $folder, $subfolder)
+    {
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null) {
+            return view('errors.4032');
+        }
+        $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
+        return view('DocumentAdministrative.file-list-subfolder', compact('files', 'idAdministrative', 'folder', 'subfolder'));
     }
     public function deleteFolder($idAdministrative, $folder)
     {

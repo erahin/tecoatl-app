@@ -154,14 +154,30 @@ Route::resource('administrativos', AdministrativeController::class)->middleware(
 /* -------------------------------------------------------------------------- */
 /*                         Route folder and subfolder                         */
 /* -------------------------------------------------------------------------- */
-Route::get('/crear-subcarpeta/administrativo/{idAdministrative}', [DocumentAdministrativeController::class, 'createFolder'])
+Route::get('/crear-carpeta/administrativo/{idAdministrative}', [DocumentAdministrativeController::class, 'createFolder'])
     ->name('createFolder')->middleware('auth');
 Route::post('/store/{idAdministrative}', [DocumentAdministrativeController::class, 'storeFolder'])->name('storeFolder')
     ->middleware('auth');
 Route::get('/lista-carpetas/administrativo/{idAdministrative}', [DocumentAdministrativeController::class, 'folderList'])
     ->name('folderList')->middleware('auth');
+Route::get('/subir-archivo/administrativo/{idAdministrative}/{folder}', [DocumentAdministrativeController::class, 'showFormUploadFile'])
+    ->name('showFormUploadFile')->middleware('auth');
+Route::post('/upload-file/{idAdministrative}/{folder}', [DocumentAdministrativeController::class, 'uploadFile'])->name('uploadFile')
+    ->middleware('auth');
 Route::get('/lista-archivos/administrativo/{idAdministrative}/{folder}', [DocumentAdministrativeController::class, 'fileList'])
     ->name('fileList')->middleware('auth');
+Route::get('/crear-subcarpeta/administrativo/{idAdministrative}/{folder}', [DocumentAdministrativeController::class, 'createSubFolder'])
+    ->name('createSubFolder')->middleware('auth');
+Route::post('/store-sub-folder/{idAdministrative}/{folder}', [DocumentAdministrativeController::class, 'storeSubFolder'])->name('storeSubFolder')
+    ->middleware('auth');
+Route::get('/lista-subcarpetas/administrativo/{idAdministrative}/{folder}', [DocumentAdministrativeController::class, 'subFolderList'])
+    ->name('subFolderList')->middleware('auth');
+Route::get('/subir-archivo/administrativo/{idAdministrative}/{folder}/{subfolder}', [DocumentAdministrativeController::class, 'showFormUploadFileSubFolder'])
+    ->name('showFormUploadFileSubFolder')->middleware('auth');
+Route::post('/upload-file/administrativo/{idAdministrative}/{folder}/{subfolder}', [DocumentAdministrativeController::class, 'uploadFileSubFolder'])
+    ->name('uploadFileSubFolder')->middleware('auth');
+Route::get('/lista-archivos/administrativo/{idAdministrative}/{folder}/{subfolder}', [DocumentAdministrativeController::class, 'subFolderFileList'])
+    ->name('subFolderFileList')->middleware('auth');
 Route::get('descargar-archivo/{idAdministrative}/{folder}/{file}', [DocumentAdministrativeController::class, 'downloadFileFolder'])
     ->name('downloadFileFolder')->middleware('auth');
 Route::get('eliminar-archivo/{idAdministrative}/{folder}/{file}', [DocumentAdministrativeController::class, 'deleteFileFolder'])

@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Lista de carpetas
+                    <h1 class="text-center">Lista de subcarpetas
                     </h1>
                     <div>
                         <div class="input-group d-flex justify-content-end">
@@ -27,7 +27,8 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap mb-2">
-                        <a class="btn btn-outline-primary" href="{{ route('administrativos.index') }}"><i
+                        <a class="btn btn-outline-primary"
+                            href="{{ route('folderList', ['idAdministrative' => $idAdministrative]) }}"><i
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
@@ -42,23 +43,16 @@
                             @if (count($folderArray) != 0)
                             @foreach ($folderArray as $directorie)
                             <tr>
-                                <td>{{ explode('/', $directorie)[2] }}</td>
+                                <td>{{ explode('/', $directorie)[3] }}</td>
                                 <td class="d-flex justify-content-start">
                                     <a title="Subir archivos"
-                                        href="{{ route('showFormUploadFile', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"
+                                        href="{{ route('showFormUploadFileSubFolder', ['idAdministrative' => $idAdministrative,
+                                        'folder' => explode('/', $directorie)[2], 'subfolder' => explode('/', $directorie)[3]] ) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
                                     <a title="Lista de archivos"
-                                        href="{{ route('fileList', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"
+                                        href="{{ route('subFolderFileList', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2], 'subfolder' => explode('/', $directorie)[3]]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-list-alt"
-                                            aria-hidden="true"></i></a>
-                                    <a title="Nueva carpeta"
-                                        href="{{ route('createSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"
-                                        class="btn btn-danger ancla"> <i class="fa fa-folder-open"
-                                            aria-hidden="true"></i></a>
-                                    <a title="Lista de carpetas"
-                                        href="{{ route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"
-                                        class="btn btn-success ancla"><i class="fa fa-server"
                                             aria-hidden="true"></i></a>
                                     <a title="Eliminar carpeta"
                                         href="{{ route('deleteFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"

@@ -6,14 +6,32 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Crear carpeta administrativa
+                    <h1 class="text-center">Crear sub carpeta administrativa
                     </h1>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('storeFolder', ['idAdministrative' => $idAdministrative]) }}">
+                    <form method="POST"
+                        action="{{ route('storeSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => $folder]) }}">
                         @csrf
+                        @if ($directories)
                         <div class="row mb-3">
-                            {!! Form::label('name', 'Nombre de la carpeta', ['class' => 'col-md-4 col-form-label
+                            {!! Form::label('', 'Carpetas creadas', ['class' => 'col-md-4 col-form-label text-md-end'])
+                            !!}
+                            <div class="col-md-6 scroll-studies">
+                                <ul class="list-group">
+                                    @foreach ($directories as $directorie)
+                                    <li class="list-group-item">
+                                        {!! Form::checkbox('directorie', $directorie, 'true', ['class' =>
+                                        'form-check-input']) !!}
+                                        {{explode('/', $directorie)[3]}} </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                        @endif
+                        <div class="row mb-3">
+                            {!! Form::label('name', 'Nombre de la sub carpeta', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('name', '', ['class' => 'form-control', 'autofocus', 'required',
@@ -46,7 +64,8 @@
                                 {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Crear', ['type' =>
                                 'submit', 'class' =>
                                 'btn btn-primary'] ) }}
-                                <a class="btn btn-danger" href="{{ route('administrativos.index') }}"><i
+                                <a class="btn btn-danger"
+                                    href="{{ route('folderList', ['idAdministrative' => $idAdministrative]) }}"><i
                                         class="fa fa-ban" aria-hidden="true"></i> Cancelar
                                 </a>
                             </div>

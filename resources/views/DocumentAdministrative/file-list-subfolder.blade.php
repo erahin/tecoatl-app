@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Lista de carpetas
+                    <h1 class="text-center">Lista de archivos
                     </h1>
                     <div>
                         <div class="input-group d-flex justify-content-end">
@@ -27,7 +27,8 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap mb-2">
-                        <a class="btn btn-outline-primary" href="{{ route('administrativos.index') }}"><i
+                        <a class="btn btn-outline-primary"
+                            href="{{ route('folderList', ['idAdministrative' => $idAdministrative]) }}"><i
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
@@ -39,33 +40,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($folderArray) != 0)
-                            @foreach ($folderArray as $directorie)
+                            @if (count($files) != 0)
+                            @foreach ($files as $file)
                             <tr>
-                                <td>{{ explode('/', $directorie)[2] }}</td>
-                                <td class="d-flex justify-content-start">
-                                    <a title="Subir archivos"
-                                        href="{{ route('showFormUploadFile', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"
-                                        class="btn btn-secondary ancla"> <i class="fa fa-upload"
+                                <td>{{ explode('/', $file)[4] }}</td>
+                                {{-- <td class="d-flex justify-content-start">
+                                    <a title="Abrir archivos" target="_blank"
+                                        href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}"
+                                        class="btn btn-secondary ancla"><i class="fa fa-external-link"
                                             aria-hidden="true"></i></a>
-                                    <a title="Lista de archivos"
-                                        href="{{ route('fileList', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"
-                                        class="btn btn-primary ancla"><i class="fa fa-list-alt"
+                                    <a title="Descargar archivo"
+                                        href="{{ route('downloadFileFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2], 'file' => explode('/', $file)[3]]) }}"
+                                        class="btn btn-primary ancla"><i class="fa fa-download"
                                             aria-hidden="true"></i></a>
-                                    <a title="Nueva carpeta"
-                                        href="{{ route('createSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"
-                                        class="btn btn-danger ancla"> <i class="fa fa-folder-open"
-                                            aria-hidden="true"></i></a>
-                                    <a title="Lista de carpetas"
-                                        href="{{ route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"
-                                        class="btn btn-success ancla"><i class="fa fa-server"
-                                            aria-hidden="true"></i></a>
-                                    <a title="Eliminar carpeta"
-                                        href="{{ route('deleteFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"
-                                        class="btn btn-outline-danger"
-                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $directorie)[2] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
+                                    <a title="Eliminar archivo"
+                                        href="{{ route('deleteFileFolder',['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2], 'file' => explode('/', $file)[3]]) }}"
+                                        class="btn btn-danger"
+                                        onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[3] }} ?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                </td>
+                                </td> --}}
                             </tr>
                             @endforeach
                             @else
