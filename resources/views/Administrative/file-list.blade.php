@@ -63,7 +63,7 @@
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="4">No existen directorios.</td>
+                                <td colspan="4">No existen archivos.</td>
                             </tr>
                             @endif
                         </tbody>

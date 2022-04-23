@@ -28,7 +28,7 @@
                     @endif
                     <div class="d-flex justify-content-start flex-wrap mb-2">
                         <a class="btn btn-outline-primary"
-                            href="{{ route('folderList', ['idAdministrative' => $idAdministrative]) }}"><i
+                            href="{{ route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => $folder]) }}"><i
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
@@ -63,7 +63,7 @@
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="4">No existen directorios.</td>
+                                <td colspan="4">No existen archivos.</td>
                             </tr>
                             @endif
                         </tbody>
