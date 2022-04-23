@@ -44,21 +44,21 @@
                             @foreach ($files as $file)
                             <tr>
                                 <td>{{ explode('/', $file)[4] }}</td>
-                                {{-- <td class="d-flex justify-content-start">
+                                <td class="d-flex justify-content-start">
                                     <a title="Abrir archivos" target="_blank"
                                         href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}"
                                         class="btn btn-secondary ancla"><i class="fa fa-external-link"
                                             aria-hidden="true"></i></a>
                                     <a title="Descargar archivo"
-                                        href="{{ route('downloadFileFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2], 'file' => explode('/', $file)[3]]) }}"
+                                        href="{{ route('downloadFileSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2], 'subfolder' => $subfolder ,'file' => explode('/', $file)[4]]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-download"
                                             aria-hidden="true"></i></a>
                                     <a title="Eliminar archivo"
-                                        href="{{ route('deleteFileFolder',['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2], 'file' => explode('/', $file)[3]]) }}"
+                                        href="{{ route('deleteFileSubFolder',['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2],'subfolder' => $subfolder ,'file' => explode('/', $file)[4]]) }}"
                                         class="btn btn-danger"
-                                        onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[3] }} ?') "><i
+                                        onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[4] }} ?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                </td> --}}
+                                </td>
                             </tr>
                             @endforeach
                             @else

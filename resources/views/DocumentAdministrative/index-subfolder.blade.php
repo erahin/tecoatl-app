@@ -55,9 +55,9 @@
                                         class="btn btn-primary ancla"><i class="fa fa-list-alt"
                                             aria-hidden="true"></i></a>
                                     <a title="Eliminar carpeta"
-                                        href="{{ route('deleteFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2]]) }}"
+                                        href="{{ route('deleteSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2], 'subfolder' => explode('/', $directorie)[3]]) }}"
                                         class="btn btn-outline-danger"
-                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $directorie)[2] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
+                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $directorie)[3] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 </td>
                             </tr>

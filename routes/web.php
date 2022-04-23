@@ -180,8 +180,14 @@ Route::get('/lista-archivos/administrativo/{idAdministrative}/{folder}/{subfolde
     ->name('subFolderFileList')->middleware('auth');
 Route::get('descargar-archivo/{idAdministrative}/{folder}/{file}', [DocumentAdministrativeController::class, 'downloadFileFolder'])
     ->name('downloadFileFolder')->middleware('auth');
+Route::get('descargar-archivo-sub-folder/{idAdministrative}/{folder}/{subfolder}/{file}', [DocumentAdministrativeController::class, 'downloadFileSubFolder'])
+    ->name('downloadFileSubFolder')->middleware('auth');
 Route::get('eliminar-archivo/{idAdministrative}/{folder}/{file}', [DocumentAdministrativeController::class, 'deleteFileFolder'])
     ->name('deleteFileFolder')->middleware('auth');
+Route::get('eliminar-archivo-sub-folder/{idAdministrative}/{folder}/{subfolder}/{file}', [DocumentAdministrativeController::class, 'deleteFileSubFolder'])
+    ->name('deleteFileSubFolder')->middleware('auth');
 Route::get('eliminar-directorio/{idAdministrative}/{folder}', [DocumentAdministrativeController::class, 'deleteFolder'])
-    ->name('deleteFolder')
+    ->name('deleteFolder');
+Route::get('eliminar-directorio/{idAdministrative}/{folder}/{subfolder}', [DocumentAdministrativeController::class, 'deleteSubFolder'])
+    ->name('deleteSubFolder')
     ->middleware('auth');
