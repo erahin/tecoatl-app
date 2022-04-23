@@ -177,7 +177,7 @@ class DocumentAdministrativeController extends Controller
         /*                              Delete directory                              */
         /* -------------------------------------------------------------------------- */
         Storage::disk('s3')->deleteDirectory('administrativo/' . $idAdministrative . '/' . $folder . '/');
-        return redirect()->route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => $folder]);
+        return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
     }
     public function deleteSubFolder($idAdministrative, $folder, $subfolder)
     {

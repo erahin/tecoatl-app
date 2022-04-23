@@ -188,6 +188,6 @@ Route::get('eliminar-archivo-sub-folder/{idAdministrative}/{folder}/{subfolder}/
     ->name('deleteFileSubFolder')->middleware('auth');
 Route::get('eliminar-directorio/{idAdministrative}/{folder}', [DocumentAdministrativeController::class, 'deleteFolder'])
     ->name('deleteFolder');
-Route::get('eliminar-directorio/{idAdministrative}/{folder}/{subfolder}', [DocumentAdministrativeController::class, 'deleteSubFolder'])
+Route::get('eliminar-directorio-sub-folder/{idAdministrative}/{folder}/{subfolder}', [DocumentAdministrativeController::class, 'deleteSubFolder'])
     ->name('deleteSubFolder')
     ->middleware('auth');
