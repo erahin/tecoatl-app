@@ -46,9 +46,18 @@
                             <tr>
                                 <td>{{ $administrative->name }}</td>
                                 <td class="d-flex justify-content-start">
-                                    <a title="Reportes" href="{{ route('studies-list', $administrative->id) }}"
-                                        class="btn btn-primary ancla">
-                                        <i class="fa fa-folder-open" aria-hidden="true"></i></a>
+                                    <a title="Nueva carpeta"
+                                        href="{{ route('createFolder', ['idAdministrative' => $administrative->id]) }}"
+                                        class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
+                                            aria-hidden="true"></i></a>
+                                    {{-- <a title="Lista de archivos"
+                                        href="{{ route('upload-reports', ['id' => 1, 'idStudio' => 2]) }}"
+                                        class="btn btn-outline-primary ancla"><i class="fa fa-list-alt"
+                                            aria-hidden="true"></i></a> --}}
+                                    <a title="Lista de carpetas"
+                                        href="{{ route('folderList', ['idAdministrative' => $administrative->id]) }}"
+                                        class="btn btn-primary ancla"><i class="fa fa-folder"
+                                            aria-hidden="true"></i></a>
                                     <a title="Editar" href="{{ route('administrativos.edit', $administrative->id) }}"
                                         class="btn btn-success ancla"><i class="fa fa-pencil-square-o"
                                             aria-hidden="true"></i></a>

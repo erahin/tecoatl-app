@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdministrativeController;
-use App\Http\Controllers\DepartamentController;
+use App\Http\Controllers\DocumentAdministrativeController;
 use App\Http\Controllers\ProjectByRegion;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
@@ -151,3 +151,21 @@ Route::get('/lista-proyectos-por-usuario', [ProjectReportController::class, 'pro
 /*                              Route departament                             */
 /* -------------------------------------------------------------------------- */
 Route::resource('administrativos', AdministrativeController::class)->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                         Route folder and subfolder                         */
+/* -------------------------------------------------------------------------- */
+Route::get('/crear-subcarpeta/administrativo/{idAdministrative}', [DocumentAdministrativeController::class, 'createFolder'])
+    ->name('createFolder')->middleware('auth');
+Route::post('/store/{idAdministrative}', [DocumentAdministrativeController::class, 'storeFolder'])->name('storeFolder')
+    ->middleware('auth');
+Route::get('/lista-carpetas/administrativo/{idAdministrative}', [DocumentAdministrativeController::class, 'folderList'])
+    ->name('folderList')->middleware('auth');
+Route::get('/lista-archivos/administrativo/{idAdministrative}/{folder}', [DocumentAdministrativeController::class, 'fileList'])
+    ->name('fileList')->middleware('auth');
+Route::get('descargar-archivo/{idAdministrative}/{folder}/{file}', [DocumentAdministrativeController::class, 'downloadFileFolder'])
+    ->name('downloadFileFolder')->middleware('auth');
+Route::get('eliminar-archivo/{idAdministrative}/{folder}/{file}', [DocumentAdministrativeController::class, 'deleteFileFolder'])
+    ->name('deleteFileFolder')->middleware('auth');
+Route::get('eliminar-directorio/{idAdministrative}/{folder}', [DocumentAdministrativeController::class, 'deleteFolder'])
+    ->name('deleteFolder')
+    ->middleware('auth');

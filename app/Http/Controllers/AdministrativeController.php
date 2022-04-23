@@ -47,10 +47,11 @@ class AdministrativeController extends Controller
         $administrative = new Administrative();
         $administrative->name = $request->name;
         $administrative->save();
+        $administrative = Administrative::latest('id')->first();
         /* -------------------------------------------------------------------------- */
         /*                           Create departamet directory                      */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->makeDirectory('administrativo/' . strtolower($request->name));
+        Storage::disk('s3')->makeDirectory('administrativo/' . $administrative->id);
         return redirect()->route('administrativos.index');
     }
 
@@ -111,6 +112,10 @@ class AdministrativeController extends Controller
             return view('errors.4032');
         }
         $administrative->delete();
+        /* -------------------------------------------------------------------------- */
+        /*                              Delete directory                              */
+        /* -------------------------------------------------------------------------- */
+        Storage::disk('s3')->deleteDirectory('administrativo/' . $id . '/');
         return redirect()->route('administrativos.index');
     }
 }
