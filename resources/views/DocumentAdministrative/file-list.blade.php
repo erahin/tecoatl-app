@@ -45,19 +45,25 @@
                             <tr>
                                 <td>{{ explode('/', $file)[3] }}</td>
                                 <td class="d-flex justify-content-start">
-                                    <a title="Abrir archivos" target="_blank"
+                                    @can('operFile')
+                                    <a title="Abrir archivo" target="_blank"
                                         href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}"
                                         class="btn btn-secondary ancla"><i class="fa fa-external-link"
                                             aria-hidden="true"></i></a>
+                                    @endcan
+                                    @can('downloadFileFolder')
                                     <a title="Descargar archivo"
                                         href="{{ route('downloadFileFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2], 'file' => explode('/', $file)[3]]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-download"
                                             aria-hidden="true"></i></a>
+                                    @endcan
+                                    @can('deleteFileFolder')
                                     <a title="Eliminar archivo"
                                         href="{{ route('deleteFileFolder',['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2], 'file' => explode('/', $file)[3]]) }}"
                                         class="btn btn-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[3] }} ?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

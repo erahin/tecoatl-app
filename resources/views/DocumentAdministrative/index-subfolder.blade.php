@@ -45,20 +45,26 @@
                             <tr>
                                 <td>{{ explode('/', $directorie)[3] }}</td>
                                 <td class="d-flex justify-content-start">
+                                    @can('showFormUploadFile')
                                     <a title="Subir archivos"
                                         href="{{ route('showFormUploadFileSubFolder', ['idAdministrative' => $idAdministrative,
                                         'folder' => explode('/', $directorie)[2], 'subfolder' => explode('/', $directorie)[3]] ) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
+                                    @endcan
+                                    @can('fileList')
                                     <a title="Lista de archivos"
                                         href="{{ route('subFolderFileList', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2], 'subfolder' => explode('/', $directorie)[3]]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-list-alt"
                                             aria-hidden="true"></i></a>
+                                    @endcan
+                                    @can('deleteFolder')
                                     <a title="Eliminar carpeta"
                                         href="{{ route('deleteSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $directorie)[2], 'subfolder' => explode('/', $directorie)[3]]) }}"
                                         class="btn btn-outline-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $directorie)[3] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

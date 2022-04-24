@@ -81,5 +81,15 @@ class UserSeeder extends Seeder
             'email' => 'victor.tecoatl@gmail.com',
             'password' => bcrypt('vicko8148'),
         ])->assignRole('Coordinador de sub-área');
+        User::create([
+            'name' => 'jefa-administrativa',
+            'email' => 'jefa-administrativa.tecoatl@gmail.com',
+            'password' => bcrypt('jefa-admin'),
+        ])->assignRole('Jefa administrativa');
+        User::create([
+            'name' => 'jefa-compras',
+            'email' => 'jefa-compras.tecoatl@gmail.com',
+            'password' => bcrypt('jefa-compras'),
+        ])->assignRole('Jefa subadministrativa');
     }
 }

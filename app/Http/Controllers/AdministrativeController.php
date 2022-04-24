@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class AdministrativeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:administrativos.index')->only('index');
+        $this->middleware('can:administrativos.create')->only('create', 'store');
+        $this->middleware('can:administrativos.edit')->only('edit', 'update');
+        $this->middleware('can:administrativos.destoy')->only('destoy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +42,7 @@ class AdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                           Return subarea user                              */
         /* -------------------------------------------------------------------------- */
-        $users = DB::select('select * from model_has_roles where role_id = ?', [3]);
+        $users = DB::select('select * from model_has_roles where role_id = ?', [6]);
         $userArray = [];
         foreach ($users as $user) {
             $coordinator = User::find($user->model_id);
@@ -57,6 +64,7 @@ class AdministrativeController extends Controller
         ]);
         $administrative = new Administrative();
         $administrative->name = $request->name;
+        $administrative->user_id = $request->user_id;
         $administrative->save();
         $administrative = Administrative::latest('id')->first();
         /* -------------------------------------------------------------------------- */
@@ -85,11 +93,20 @@ class AdministrativeController extends Controller
      */
     public function edit($id)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                           Return subarea user                              */
+        /* -------------------------------------------------------------------------- */
+        $users = DB::select('select * from model_has_roles where role_id = ?', [6]);
+        $userArray = [];
+        foreach ($users as $user) {
+            $coordinator = User::find($user->model_id);
+            array_push($userArray, $coordinator);
+        }
         $administrative = Administrative::find($id);
         if ($administrative == null) {
             return view('errors.4032');
         }
-        return view('Administrative.edit', compact('administrative'));
+        return view('Administrative.edit', compact('administrative', 'userArray'));
     }
 
     /**
@@ -106,6 +123,7 @@ class AdministrativeController extends Controller
             return view('errors.4032');
         }
         $administrative->name = $request->name;
+        $administrative->user_id = $request->user_id;
         $administrative->save();
         return redirect()->route('administrativos.index');
     }

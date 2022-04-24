@@ -72,10 +72,12 @@
                         </li>
                         @endif
                         @else
+                        @can('administrativos.index')
                         <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('administrativos.index') }}"><i class="fa fa-book fa__li"
                                     aria-hidden="true"></i> {{ __('Administración') }}</a>
                         </li>
+                        @endcan
                         @can('proyectos.index')
                         <li class="nav-item dropdown text-uppercase">
                             <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

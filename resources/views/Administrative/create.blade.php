@@ -33,7 +33,7 @@
                                 <div class="form-check scroll-studies">
                                     @foreach ($userArray as $user)
                                     <label class="form-check-label inline_label">
-                                        {!! Form::checkbox('user_id[]', $user->id, null, ['class' =>
+                                        {!! Form::checkbox('user_id', $user->id, null, ['class' =>
                                         'form-check-input']) !!}
                                         {{ $user->name }}
                                     </label>

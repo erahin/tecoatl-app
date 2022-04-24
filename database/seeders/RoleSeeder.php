@@ -21,8 +21,13 @@ class RoleSeeder extends Seeder
         $role1 = Role::create(['name' => 'Administrador general']); //super admin
         $role2 = Role::create(['name' => 'Jefa de sub-departamento técnico']); //jefas de region
         $role3 = Role::create(['name' => 'Coordinador de sub-área']); //operador
-        $role4 = Role::create(['name' => 'Técnico informatico']); //ti
-        $role5 = Role::create(['name' => 'Coordinador de área']); //sub jefa de region
+        $role4 = Role::create(['name' => 'Técnico informático']); //ti
+        // $role5 = Role::create(['name' => 'Coordinador de área']); //sub jefa de region
+        $role6 = Role::create(['name' => 'Jefa administrativa']);
+        $role7 = Role::create(['name' => 'Jefa subadministrativa']);
+        /* -------------------------------------------------------------------------- */
+        /*                                 Permission                                 */
+        /* -------------------------------------------------------------------------- */
         /* Projects Module */
         Permission::create(['name' => 'proyectos', 'description' => 'Ver menú proyectos'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'proyectos.index', 'description' => 'Ver lista de proyectos'])->syncRoles([$role1, $role2, $role3, $role4]);
@@ -46,5 +51,29 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'show.reports', 'description' => 'Ver reportes'])->syncRoles([$role1, $role2, $role4]);
         /* Config Module */
         Permission::create(['name' => 'config', 'description' => 'Ver menú de configuración'])->syncRoles([$role1, $role4]);
+        /* Administrative Module */
+        // First nivel //
+        Permission::create(['name' => 'administrativos.index', 'description' => 'Ver lista de departamentos'])->syncRoles([$role1, $role6, $role7]);
+        Permission::create(['name' => 'administrativos.create', 'description' => 'Crear un nuevo departamento'])->syncRoles([$role1, $role6]);
+        Permission::create(['name' => 'administrativos.edit', 'description' => 'Editar departamento'])->syncRoles([$role1, $role6]);
+        Permission::create(['name' => 'administrativos.destroy', 'description' => 'Eliminar departamento'])->syncRoles([$role1, $role6]);
+        Permission::create(['name' => 'createFolder', 'description' => 'Crear una carpeta'])->syncRoles([$role1, $role6, $role7]);
+        Permission::create(['name' => 'folderList', 'description' => 'Ver lista de carpetas'])->syncRoles([$role1, $role6, $role7]);
+        // Second nivel //
+        Permission::create(['name' => 'showFormUploadFile', 'description' => 'Subir archivos a carpeta'])->syncRoles([$role1, $role6, $role7]);
+        Permission::create(['name' => 'fileList', 'description' => 'Ver lista de archivos de una carpeta'])->syncRoles([$role1, $role6, $role7]);
+        // Permission::create(['name' => 'createSubFolder', 'description' => 'Crear nueva subcarpeta'])->syncRoles([$role1, $role6, $role7]);
+        // Permission::create(['name' => 'subFolderList', 'description' => 'Ver lista de subcarpetas'])->syncRoles([$role1, $role6, $role7]);
+        Permission::create(['name' => 'deleteFolder', 'description' => 'Eliminar carpeta'])->syncRoles([$role1, $role6]);
+        // Third level //
+        Permission::create(['name' => 'operFile', 'description' => 'Abrir archivo de una carpeta'])->syncRoles([$role1, $role6, $role7]);
+        Permission::create(['name' => 'downloadFileFolder', 'description' => 'Descargar archivo de una carpeta'])->syncRoles([$role1, $role6, $role7]);
+        Permission::create(['name' => 'deleteFileFolder', 'description' => 'Eliminar archivo de una carpeta'])->syncRoles([$role1, $role6]);
+        // Fourth level //
+        // Permission::create(['name' => 'deleteFileFolder', 'description' => 'Subir archivo a subcarpeta'])->syncRoles([$role1, $role6, $role7]);
+        // Permission::create(['name' => 'subFolderFileList', 'description' => 'Ver lista de archivos de una subcarpeta'])->syncRoles([$role1, $role6, $role7]);
+        // Permission::create(['name' => 'deleteSubFolder', 'description' => 'Eliminar subcarpeta'])->syncRoles([$role1, $role6]);
+        // Permission::create(['name' => 'downloadFileSubFolder', 'description' => 'Descargar archivo de una subcarpeta'])->syncRoles([$role1, $role6, $role7]);
+        // Permission::create(['name' => 'deleteFileSubFolder', 'description' => 'Eliminar archivo de una subcarpeta'])->syncRoles([$role1, $role6]);
     }
 }
