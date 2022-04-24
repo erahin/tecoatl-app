@@ -60,8 +60,12 @@ class User extends Authenticatable
     /* -------------------------------------------------------------------------- */
     /*                         Relation departament and user                      */
     /* -------------------------------------------------------------------------- */
-    public function departaments()
+    // public function departaments()
+    // {
+    //     return $this->belongsTo(Administrative::class, 'departament_id');
+    // }
+    public function administratives()
     {
-        return $this->belongsTo(Administrative::class, 'departament_id');
+        return $this->hasMany(Administrative::class, 'id');
     }
 }

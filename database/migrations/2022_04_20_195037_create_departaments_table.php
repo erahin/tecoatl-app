@@ -16,6 +16,12 @@ class CreateDepartamentsTable extends Migration
         Schema::create('departaments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table
+                ->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             $table->timestamps();
         });
         Schema::rename('departaments', 'administratives');

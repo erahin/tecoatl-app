@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Administrative extends Model
 {
     use HasFactory;
+    /* -------------------------------------------------------------------------- */
+    /*                          Relation user and Administrative                  */
+    /* -------------------------------------------------------------------------- */
     public function users()
     {
-        return $this->hasMany(User::class, 'id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
