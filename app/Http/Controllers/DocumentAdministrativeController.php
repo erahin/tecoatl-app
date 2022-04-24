@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DocumentAdministrativeController extends Controller
 {
+
     public function createFolder($idAdministrative)
     {
         $administrative = Administrative::find($idAdministrative);
@@ -43,7 +44,7 @@ class DocumentAdministrativeController extends Controller
         foreach ($directories as $directorie) {
             array_push($folderArray, $directorie);
         }
-        return view('Administrative.index-folder', compact('folderArray', 'idAdministrative'));
+        return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative'));
     }
     public function showFormUploadFile($idAdministrative, $folder)
     {
@@ -55,7 +56,7 @@ class DocumentAdministrativeController extends Controller
         /*                                Get all files                               */
         /* -------------------------------------------------------------------------- */
         $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/');
-        return view('Administrative.upload-file', compact('idAdministrative', 'administrative', 'files', 'folder'));
+        return view('DocumentAdministrative.upload-file', compact('idAdministrative', 'administrative', 'files', 'folder'));
     }
     public function uploadFile(Request $request, $idAdministrative, $folder)
     {
@@ -84,7 +85,31 @@ class DocumentAdministrativeController extends Controller
             return view('errors.4032');
         }
         $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/');
-        return view('Administrative.file-list', compact('files', 'idAdministrative'));
+        return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative'));
+    }
+    public function deleteFolder($idAdministrative, $folder)
+    {
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate                                  */
+        /* -------------------------------------------------------------------------- */
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null) {
+            return view('errors.4032');
+        }
+        /* -------------------------------------------------------------------------- */
+        /*                              Delete directory                              */
+        /* -------------------------------------------------------------------------- */
+        Storage::disk('s3')->deleteDirectory('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
+    }
+    public function downloadFileFolder($idAdministrative, $folder, $file)
+    {
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null) {
+            return view('errors.4032');
+        }
+        $pathToFile = Storage::disk('s3')->path('administrativo/' . $idAdministrative . '/' . $folder . '/' . $file);
+        return Storage::disk('s3')->download($pathToFile);
     }
     public function createSubFolder($idAdministrative, $folder)
     {
@@ -164,21 +189,6 @@ class DocumentAdministrativeController extends Controller
         $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
         return view('DocumentAdministrative.file-list-subfolder', compact('files', 'idAdministrative', 'folder', 'subfolder'));
     }
-    public function deleteFolder($idAdministrative, $folder)
-    {
-        /* -------------------------------------------------------------------------- */
-        /*                                  Validate                                  */
-        /* -------------------------------------------------------------------------- */
-        $administrative = Administrative::find($idAdministrative);
-        if ($administrative == null) {
-            return view('errors.4032');
-        }
-        /* -------------------------------------------------------------------------- */
-        /*                              Delete directory                              */
-        /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->deleteDirectory('administrativo/' . $idAdministrative . '/' . $folder . '/');
-        return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
-    }
     public function deleteSubFolder($idAdministrative, $folder, $subfolder)
     {
         /* -------------------------------------------------------------------------- */
@@ -193,15 +203,6 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         Storage::disk('s3')->deleteDirectory('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
         return redirect()->route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => $folder]);
-    }
-    public function downloadFileFolder($idAdministrative, $folder, $file)
-    {
-        $administrative = Administrative::find($idAdministrative);
-        if ($administrative == null) {
-            return view('errors.4032');
-        }
-        $pathToFile = Storage::disk('s3')->path('administrativo/' . $idAdministrative . '/' . $folder . '/' . $file);
-        return Storage::disk('s3')->download($pathToFile);
     }
     public function downloadFileSubFolder($idAdministrative, $folder, $subfolder, $file)
     {
