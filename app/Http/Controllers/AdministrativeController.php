@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrative;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class AdministrativeController extends Controller
@@ -30,7 +32,16 @@ class AdministrativeController extends Controller
      */
     public function create()
     {
-        return view('Administrative.create');
+        /* -------------------------------------------------------------------------- */
+        /*                           Return subarea user                              */
+        /* -------------------------------------------------------------------------- */
+        $users = DB::select('select * from model_has_roles where role_id = ?', [3]);
+        $userArray = [];
+        foreach ($users as $user) {
+            $coordinator = User::find($user->model_id);
+            array_push($userArray, $coordinator);
+        }
+        return view('Administrative.create', compact('userArray'));
     }
 
     /**

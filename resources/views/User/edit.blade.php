@@ -71,12 +71,12 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            {!! Form::label('roles', 'Roles', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
+                            {!! Form::label('roles', 'Rol', ['class' => 'col-md-4 col-form-label text-md-end']) !!}
                             <div class="col-md-6">
                                 <div class="form-check scroll-roles">
                                     @foreach ($roles as $rol)
                                     <label class="form-check-label inline_label">
-                                        {!! Form::checkbox('roles[]', $rol->id, null, ['class' => 'form-check-input',
+                                        {!! Form::checkbox('roles', $rol->id, null, ['class' => 'form-check-input',
                                         'id' => $rol->id])
                                         !!}
                                         {{ $rol->name }}

@@ -77,10 +77,9 @@ class UserController extends Controller
                 'string',
                 'email',
                 'max:255',
-                'unique:users',
             ],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'phone' => ['required'],
             'roles' => 'required|min:1'
         ]);
         $user = User::find($id);
