@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Administrative;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,10 +25,33 @@ class AdministrativeController extends Controller
      */
     public function index(Request $request)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user id                                */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $user = $user->roles[0]->name;
         if ($request->search) {
-            $administratives = Administrative::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+            if ($user == "Jefa subadministrativa") {
+                $administratives = DB::table('users')
+                    ->join('administratives', 'users.id', '=', 'administratives.user_id')
+                    ->select('administratives.*')
+                    ->where('administratives.user_id', '=', $idUser)
+                    ->where('administratives.name', 'like', '%' . $request->search . '%')
+                    ->paginate(10);
+            } else {
+                $administratives = Administrative::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+            }
         } else {
-            $administratives = Administrative::paginate(10);
+            if ($user == "Jefa subadministrativa") {
+                $administratives = DB::table('users')
+                    ->join('administratives', 'users.id', '=', 'administratives.user_id')
+                    ->select('administratives.*')
+                    ->where('administratives.user_id', '=', $idUser)
+                    ->paginate(10);
+            } else {
+                $administratives = Administrative::paginate(10);
+            }
         }
         return view('Administrative.index', compact('administratives'));
     }

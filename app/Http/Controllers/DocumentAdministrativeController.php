@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrative;
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentAdministrativeController extends Controller
@@ -12,11 +13,27 @@ class DocumentAdministrativeController extends Controller
 
     public function createFolder($idAdministrative)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate                                  */
+        /* -------------------------------------------------------------------------- */
         $administrative = Administrative::find($idAdministrative);
         if ($administrative == null) {
             return view('errors.4032');
         }
-        return view('DocumentAdministrative.create', compact('idAdministrative'));
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user                                   */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $user = $user->roles[0]->name;
+        if ($user == "Jefa administrativa") {
+            return view('DocumentAdministrative.create', compact('idAdministrative'));
+        }
+        if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
+            return view('DocumentAdministrative.create', compact('idAdministrative'));
+        } else {
+            return view('errors.4032');
+        }
     }
     public function storeFolder(Request $request, $idAdministrative)
     {
@@ -35,28 +52,77 @@ class DocumentAdministrativeController extends Controller
     }
     public function folderList($idAdministrative)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate                                  */
+        /* -------------------------------------------------------------------------- */
         $administrative = Administrative::find($idAdministrative);
         if ($administrative == null) {
             return view('errors.4032');
         }
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user                                   */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $user = $user->roles[0]->name;
+        /* -------------------------------------------------------------------------- */
+        /*                                  Get data                                  */
+        /* -------------------------------------------------------------------------- */
         $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/');
         $folderArray = [];
         foreach ($directories as $directorie) {
             array_push($folderArray, $directorie);
         }
-        return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative'));
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate user                             */
+        /* -------------------------------------------------------------------------- */
+        if ($user == "Jefa administrativa") {
+            return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative'));
+        }
+        if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
+            return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative'));
+        } else {
+            return view('errors.4032');
+        }
     }
     public function showFormUploadFile($idAdministrative, $folder)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate                                  */
+        /* -------------------------------------------------------------------------- */
         $administrative = Administrative::find($idAdministrative);
-        if ($administrative == null) {
+        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/');
+        $isDirectorie = false;
+        for ($i = 0; $i < count($directories); $i++) {
+            if (explode('/', $directories[$i])[2] == $folder) {
+                $isDirectorie = true;
+                break;
+            }
+        }
+        if ($administrative == null || $isDirectorie == false) {
             return view('errors.4032');
         }
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user                                   */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $user = $user->roles[0]->name;
         /* -------------------------------------------------------------------------- */
         /*                                Get all files                               */
         /* -------------------------------------------------------------------------- */
         $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/');
-        return view('DocumentAdministrative.upload-file', compact('idAdministrative', 'administrative', 'files', 'folder'));
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate user                             */
+        /* -------------------------------------------------------------------------- */
+        if ($user == "Jefa administrativa") {
+            return view('DocumentAdministrative.upload-file', compact('idAdministrative', 'administrative', 'files', 'folder'));
+        }
+        if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
+            return view('DocumentAdministrative.upload-file', compact('idAdministrative', 'administrative', 'files', 'folder'));
+        } else {
+            return view('errors.4032');
+        }
     }
     public function uploadFile(Request $request, $idAdministrative, $folder)
     {
@@ -84,8 +150,27 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user                                   */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $user = $user->roles[0]->name;
+        /* -------------------------------------------------------------------------- */
+        /*                                Get all files                               */
+        /* -------------------------------------------------------------------------- */
         $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/');
-        return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative'));
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate user                             */
+        /* -------------------------------------------------------------------------- */
+        if ($user == "Jefa administrativa") {
+            return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative'));
+        }
+        if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
+            return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative'));
+        } else {
+            return view('errors.4032');
+        }
     }
     public function deleteFolder($idAdministrative, $folder)
     {
@@ -109,15 +194,51 @@ class DocumentAdministrativeController extends Controller
             return view('errors.4032');
         }
         $pathToFile = Storage::disk('s3')->path('administrativo/' . $idAdministrative . '/' . $folder . '/' . $file);
-        return Storage::disk('s3')->download($pathToFile);
+        if (Storage::disk('s3')->exists($pathToFile)) {
+            return Storage::disk('s3')->download($pathToFile);
+        } else {
+            return view('errors.4032');
+        }
     }
     public function createSubFolder($idAdministrative, $folder)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate                                  */
+        /* -------------------------------------------------------------------------- */
         $administrative = Administrative::find($idAdministrative);
-        if ($administrative == null) {
+        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/');
+        $isDirectorie = false;
+        for ($i = 0; $i < count($directories); $i++) {
+            if (explode('/', $directories[$i])[2] == $folder) {
+                $isDirectorie = true;
+                break;
+            }
+        }
+        $administrative = Administrative::find($idAdministrative);
+        if ($administrative == null || $isDirectorie == false) {
             return view('errors.4032');
         }
+        /* -------------------------------------------------------------------------- */
+        /*                                 Get user                                   */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $user = $user->roles[0]->name;
+        /* -------------------------------------------------------------------------- */
+        /*                                Get all directories                         */
+        /* -------------------------------------------------------------------------- */
         $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        /* -------------------------------------------------------------------------- */
+        /*                                  Validate user                             */
+        /* -------------------------------------------------------------------------- */
+        if ($user == "Jefa administrativa") {
+            return view('DocumentAdministrative.create-subfolder', compact('idAdministrative', 'folder', 'directories'));
+        }
+        if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
+            return view('DocumentAdministrative.create-subfolder', compact('idAdministrative', 'folder', 'directories'));
+        } else {
+            return view('errors.4032');
+        }
         return view('DocumentAdministrative.create-subfolder', compact('idAdministrative', 'folder', 'directories'));
     }
     public function storeSubFolder(Request $request, $idAdministrative, $folder)
@@ -219,6 +340,7 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
+
         Storage::disk('s3')->delete('administrativo/' . $idAdministrative . '/' . $folder . '/' . $file);
         return redirect()->route('fileList', ['idAdministrative' => $idAdministrative, 'folder' => $folder]);
     }
