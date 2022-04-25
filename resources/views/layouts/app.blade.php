@@ -257,6 +257,7 @@
     </div>
     @push('scripts')@stack('scripts')
 </body>
+@can('proyectos.index')
 @if (!Auth::guest())
 <script>
     /* -------------------------------------------------------------------------- */
@@ -289,8 +290,7 @@
         }
     })();
 </script>
-
-
 @endif
+@endcan
 
 </html>
