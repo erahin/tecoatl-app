@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Region;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(StudioSeeder::class);
         $this->call(RegionSeeder::class);
+        $this->call(AdministrativeSeeder::class);
     }
 }

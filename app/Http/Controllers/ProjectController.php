@@ -65,6 +65,10 @@ class ProjectController extends Controller
             $query = 'update projects_studies set projects_studies_id =' . $projects_studies_id . ' where project_id = ? and study_id = ?';
             DB::update($query, [$project->id, $studie]);
         }
+        /* -------------------------------------------------------------------------- */
+        /*                        Make administrative directory                       */
+        /* -------------------------------------------------------------------------- */
+        Storage::disk('s3')->makeDirectory('administrativo/' . 1 . '/' . $project->id);
         return redirect()->route('projectByRegion', ['id' => $request->region_id]);
     }
 

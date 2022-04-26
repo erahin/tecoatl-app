@@ -24,6 +24,8 @@ class RegionSeeder extends Seeder
         Region::create([
             'name' => 'Centro',
         ]);
+        Storage::disk('s3')->deleteDirectory('administrativo');
+        Storage::disk('s3')->makeDirectory('administrativo');
         Storage::disk('s3')->deleteDirectory('tecnico/centro');
         Storage::disk('s3')->deleteDirectory('tecnico/norte');
         Storage::disk('s3')->deleteDirectory('tecnico/sur');

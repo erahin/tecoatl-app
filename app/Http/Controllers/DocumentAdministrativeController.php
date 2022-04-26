@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrative;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -69,17 +70,28 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/');
         $folderArray = [];
+        $idArray = [];
         foreach ($directories as $directorie) {
             array_push($folderArray, $directorie);
+            if ($administrative->id === 1) {
+                array_push($idArray, explode('/', $directorie)[2]);
+            }
+        }
+        $projectArray = [];
+        if ($administrative->id === 1) {
+            foreach ($idArray as $id) {
+                $project = Project::find($id);
+                array_push($projectArray, $project);
+            }
         }
         /* -------------------------------------------------------------------------- */
         /*                                  Validate user                             */
         /* -------------------------------------------------------------------------- */
         if ($user == "Jefa administrativa") {
-            return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative'));
+            return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative', 'projectArray'));
         }
         if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
-            return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative'));
+            return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative', 'projectArray'));
         } else {
             return view('errors.4032');
         }

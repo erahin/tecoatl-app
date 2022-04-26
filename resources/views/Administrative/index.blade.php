@@ -57,7 +57,7 @@
                                     @can('folderList')
                                     <a title="Lista de carpetas"
                                         href="{{ route('folderList', ['idAdministrative' => $administrative->id]) }}"
-                                        class="btn btn-primary ancla"><i class="fa fa-folder"
+                                        class="btn btn-primary ancla"><i class="fa fa-archive"
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('administrativos.edit')
