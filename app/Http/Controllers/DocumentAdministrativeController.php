@@ -123,14 +123,18 @@ class DocumentAdministrativeController extends Controller
         /*                                Get all files                               */
         /* -------------------------------------------------------------------------- */
         $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        $project = null;
+        if ($administrative->id === 1) {
+            $project = Project::find($folder);
+        }
         /* -------------------------------------------------------------------------- */
         /*                                  Validate user                             */
         /* -------------------------------------------------------------------------- */
         if ($user == "Jefa administrativa" || $user == "Administrador general") {
-            return view('DocumentAdministrative.upload-file', compact('idAdministrative', 'administrative', 'files', 'folder'));
+            return view('DocumentAdministrative.upload-file', compact('idAdministrative', 'administrative', 'files', 'folder', 'project'));
         }
         if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
-            return view('DocumentAdministrative.upload-file', compact('idAdministrative', 'administrative', 'files', 'folder'));
+            return view('DocumentAdministrative.upload-file', compact('idAdministrative', 'administrative', 'files', 'folder', 'project'));
         } else {
             return view('errors.4032');
         }
@@ -168,17 +172,21 @@ class DocumentAdministrativeController extends Controller
         $idUser = $user->id;
         $user = $user->roles[0]->name;
         /* -------------------------------------------------------------------------- */
-        /*                                Get all files                               */
+        /*                                Get data                                    */
         /* -------------------------------------------------------------------------- */
+        $project = null;
+        if ($administrative->id === 1) {
+            $project = Project::find($folder);
+        }
         $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/');
         /* -------------------------------------------------------------------------- */
         /*                                  Validate user                             */
         /* -------------------------------------------------------------------------- */
         if ($user == "Jefa administrativa" || $user == "Administrador general") {
-            return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative', 'administrative'));
+            return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative', 'administrative', 'project'));
         }
         if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
-            return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative', 'administrative'));
+            return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative', 'administrative', 'project'));
         } else {
             return view('errors.4032');
         }
@@ -377,7 +385,7 @@ class DocumentAdministrativeController extends Controller
         $idUser = $user->id;
         $user = $user->roles[0]->name;
         /* -------------------------------------------------------------------------- */
-        /*                               Get directories                              */
+        /*                               Get data                                     */
         /* -------------------------------------------------------------------------- */
         $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
         /* -------------------------------------------------------------------------- */

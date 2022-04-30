@@ -27,9 +27,13 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap mb-2">
-                        <a class="btn btn-outline-primary"
+                        <a class="btn btn-outline-primary ancla"
                             href="{{ route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => $folder]) }}"><i
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
+                        </a>
+                        <a class="btn btn-outline-primary"
+                            href="{{ route('folderList', ['idAdministrative' => $administrative->id]) }}"><i
+                                class="fa fa-home" aria-hidden="true"></i> Directorio principal
                         </a>
                     </div>
                     <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ $folder }}/{{

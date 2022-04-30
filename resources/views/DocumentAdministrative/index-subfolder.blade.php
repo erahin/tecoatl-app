@@ -27,13 +27,15 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap mb-2">
-                        <a class="btn btn-outline-primary"
+                        <a class="btn btn-outline-primary ancla"
                             href="{{ route('folderList', ['idAdministrative' => $idAdministrative]) }}"><i
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
+                    @if (count($folderArray) > 0)
                     <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ explode('/',
                         $folderArray[0])[2] }}/</h2>
+                    @endif
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>
