@@ -14,7 +14,7 @@
                         @csrf
                         @method('PUT')
                         <div class="row mb-3">
-                            {!! Form::label('name', 'Nombre de la región', ['class' => 'col-md-4 col-form-label
+                            {!! Form::label('name', 'Nombre del departamento', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('name', $administrative->name, ['class' => 'form-control', 'required',

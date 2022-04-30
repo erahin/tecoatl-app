@@ -32,6 +32,8 @@
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
+                    <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ $folder }}/{{
+                        $subfolder }}/</h2>
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>
@@ -53,13 +55,13 @@
                                     @endcan
                                     @can('downloadFileFolder')
                                     <a title="Descargar archivo"
-                                        href="{{ route('downloadFileSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2], 'subfolder' => $subfolder ,'file' => explode('/', $file)[4]]) }}"
+                                        href="{{ route('downloadFileSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => $folder, 'subfolder' => $subfolder ,'file' => explode('/', $file)[4]]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-download"
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('deleteFolder')
                                     <a title="Eliminar archivo"
-                                        href="{{ route('deleteFileSubFolder',['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2],'subfolder' => $subfolder ,'file' => explode('/', $file)[4]]) }}"
+                                        href="{{ route('deleteFileSubFolder',['idAdministrative' => $idAdministrative, 'folder' => $folder,'subfolder' => $subfolder ,'file' => explode('/', $file)[4]]) }}"
                                         class="btn btn-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[4] }} ?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>

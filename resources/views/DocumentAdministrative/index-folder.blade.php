@@ -31,6 +31,7 @@
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
+                    <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/</h2>
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>

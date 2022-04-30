@@ -27,10 +27,10 @@ class DocumentAdministrativeController extends Controller
         $idUser = $user->id;
         $user = $user->roles[0]->name;
         if ($user == "Jefa administrativa" || $user == "Administrador general") {
-            return view('DocumentAdministrative.create', compact('idAdministrative'));
+            return view('DocumentAdministrative.create', compact('idAdministrative', 'administrative'));
         }
         if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
-            return view('DocumentAdministrative.create', compact('idAdministrative'));
+            return view('DocumentAdministrative.create', compact('idAdministrative', 'administrative'));
         } else {
             return view('errors.4032');
         }
@@ -88,10 +88,10 @@ class DocumentAdministrativeController extends Controller
         /*                                  Validate user                             */
         /* -------------------------------------------------------------------------- */
         if ($user == "Jefa administrativa" || $user == "Administrador general") {
-            return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative', 'projectArray'));
+            return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative', 'projectArray', 'administrative'));
         }
         if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
-            return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative', 'projectArray'));
+            return view('DocumentAdministrative.index-folder', compact('folderArray', 'idAdministrative', 'projectArray', 'administrative'));
         } else {
             return view('errors.4032');
         }
@@ -175,10 +175,10 @@ class DocumentAdministrativeController extends Controller
         /*                                  Validate user                             */
         /* -------------------------------------------------------------------------- */
         if ($user == "Jefa administrativa" || $user == "Administrador general") {
-            return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative'));
+            return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative', 'administrative'));
         }
         if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
-            return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative'));
+            return view('DocumentAdministrative.file-list', compact('files', 'idAdministrative', 'administrative'));
         } else {
             return view('errors.4032');
         }
@@ -243,10 +243,10 @@ class DocumentAdministrativeController extends Controller
         /*                                  Validate user                             */
         /* -------------------------------------------------------------------------- */
         if ($user == "Jefa administrativa" || $user == "Administrador general") {
-            return view('DocumentAdministrative.create-subfolder', compact('idAdministrative', 'folder', 'directories'));
+            return view('DocumentAdministrative.create-subfolder', compact('idAdministrative', 'folder', 'directories', 'administrative'));
         }
         if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
-            return view('DocumentAdministrative.create-subfolder', compact('idAdministrative', 'folder', 'directories'));
+            return view('DocumentAdministrative.create-subfolder', compact('idAdministrative', 'folder', 'directories', 'administrative'));
         } else {
             return view('errors.4032');
         }
@@ -293,10 +293,10 @@ class DocumentAdministrativeController extends Controller
         /*                                  Validate user                             */
         /* -------------------------------------------------------------------------- */
         if ($user == "Jefa administrativa" || $user == "Administrador general") {
-            return view('DocumentAdministrative.index-subfolder', compact('administrative', 'folderArray', 'folder', 'idAdministrative'));
+            return view('DocumentAdministrative.index-subfolder', compact('administrative', 'folderArray', 'folder', 'idAdministrative', 'administrative'));
         }
         if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
-            return view('DocumentAdministrative.index-subfolder', compact('administrative', 'folderArray', 'folder', 'idAdministrative'));
+            return view('DocumentAdministrative.index-subfolder', compact('administrative', 'folderArray', 'folder', 'idAdministrative', 'administrative'));
         } else {
             return view('errors.4032');
         }
@@ -384,10 +384,10 @@ class DocumentAdministrativeController extends Controller
         /*                                  Validate user                             */
         /* -------------------------------------------------------------------------- */
         if ($user == "Jefa administrativa" || $user == "Administrador general") {
-            return view('DocumentAdministrative.file-list-subfolder', compact('files', 'idAdministrative', 'folder', 'subfolder'));
+            return view('DocumentAdministrative.file-list-subfolder', compact('files', 'idAdministrative', 'folder', 'subfolder', 'administrative'));
         }
         if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
-            return view('DocumentAdministrative.file-list-subfolder', compact('files', 'idAdministrative', 'folder', 'subfolder'));
+            return view('DocumentAdministrative.file-list-subfolder', compact('files', 'idAdministrative', 'folder', 'subfolder', 'administrative'));
         } else {
             return view('errors.4032');
         }

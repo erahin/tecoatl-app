@@ -8,6 +8,7 @@
                 <div class="card-header">
                     <h1 class="text-center">Crear carpeta administrativa
                     </h1>
+                    <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('storeFolder', ['idAdministrative' => $idAdministrative]) }}">
