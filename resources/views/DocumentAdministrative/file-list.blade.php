@@ -32,12 +32,14 @@
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
+                    @if (count($files) > 0)
                     @if ($project!= null)
                     <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ $project->place }}/
                     </h2>
                     @else
                     <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ explode('/',
                         $files[0])[2] }}/</h2>
+                    @endif
                     @endif
                     <table class="table table-hover table-bordered" id="table">
                         <thead>

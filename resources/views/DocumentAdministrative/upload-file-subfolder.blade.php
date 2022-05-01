@@ -8,8 +8,14 @@
                 <div class="card-header">
                     <h1 class="text-center">Subir archivo
                     </h1>
+                    @if ($project!= null)
+                    <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ $project->place }}/{{
+                        $subfolder }}
+                    </h2>
+                    @else
                     <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ $folder }}/{{
                         $subfolder }}</h2>
+                    @endif
                 </div>
                 <div class="card-body">
                     <form method="POST"

@@ -36,8 +36,14 @@
                                 class="fa fa-home" aria-hidden="true"></i> Directorio principal
                         </a>
                     </div>
+                    @if ($project!= null)
+                    <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ $project->place }}/{{
+                        $subfolder }}
+                    </h2>
+                    @else
                     <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ $folder }}/{{
                         $subfolder }}/</h2>
+                    @endif
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>

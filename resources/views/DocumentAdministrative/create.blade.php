@@ -13,6 +13,41 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('storeFolder', ['idAdministrative' => $idAdministrative]) }}">
                         @csrf
+                        @if ($directories)
+                        @if (count($projects) > 0)
+                        <div class="row mb-3">
+                            {!! Form::label('', 'Carpetas creadas', ['class' => 'col-md-4 col-form-label text-md-end'])
+                            !!}
+                            <div class="col-md-6 scroll-studies">
+                                <ul class="list-group">
+                                    @foreach ($projects as $project)
+                                    <li class="list-group-item">
+                                        {!! Form::checkbox('directorie', $project, 'true', ['class' =>
+                                        'form-check-input']) !!}
+                                        {{ $project }} </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                        @else
+                        <div class="row mb-3">
+                            {!! Form::label('', 'Carpetas creadas', ['class' => 'col-md-4 col-form-label text-md-end'])
+                            !!}
+                            <div class="col-md-6 scroll-studies">
+                                <ul class="list-group">
+                                    @foreach ($directories as $directorie)
+                                    <li class="list-group-item">
+                                        {!! Form::checkbox('directorie', $directorie, 'true', ['class' =>
+                                        'form-check-input']) !!}
+                                        {{explode('/', $directorie)[2]}} </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                        @endif
+                        @endif
                         <div class="row mb-3">
                             {!! Form::label('name', 'Nombre de la carpeta', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
