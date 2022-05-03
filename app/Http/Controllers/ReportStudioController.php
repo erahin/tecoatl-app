@@ -27,7 +27,7 @@ class ReportStudioController extends Controller
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             'report_type' => ['required', 'integer'],
-            'reports' => ['required', 'size:40000']
+            'reports' => ['required']
         ]);
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */

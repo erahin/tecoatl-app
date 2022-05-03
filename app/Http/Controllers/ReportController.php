@@ -31,10 +31,12 @@ class ReportController extends Controller
         $user = Auth::user();
         $idUser = $user->id;
         $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
+        $projects_studies = $project->studys;
         foreach ($users as $user) {
-            if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
-                $projects_studies = $project->studys;
-            } else if ($user->role_id == 3) {
+            // if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
+            //     $projects_studies = $project->studys;
+            // } else
+            if ($user->role_id == 3) {
                 $projects_studies  = DB::table('users')
                     ->join('users_studies', 'users.id', '=', 'users_studies.user_id')
                     ->join('studies', 'users_studies.study_id', '=', 'studies.id')
