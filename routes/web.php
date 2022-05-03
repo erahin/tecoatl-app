@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdministrativeController;
 use App\Http\Controllers\DocumentAdministrativeController;
+use App\Http\Controllers\LegalController;
 use App\Http\Controllers\ProjectByRegion;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
@@ -194,3 +195,7 @@ Route::get('descargar-archivo-sub-folder/{idAdministrative}/{folder}/{subfolder}
     ->name('downloadFileSubFolder')->middleware('can:downloadFileFolder')->middleware('auth');
 Route::get('eliminar-archivo-sub-folder/{idAdministrative}/{folder}/{subfolder}/{file}', [DocumentAdministrativeController::class, 'deleteFileSubFolder'])
     ->name('deleteFileSubFolder')->middleware('can:deleteFileFolder')->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                                 Route legal                                */
+/* -------------------------------------------------------------------------- */
+Route::resource('legal', LegalController::class)->middleware('auth')->except('show');

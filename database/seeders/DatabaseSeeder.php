@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StudioSeeder::class);
         $this->call(RegionSeeder::class);
         $this->call(AdministrativeSeeder::class);
+        $this->call(LegalSeeder::class);
     }
 }
