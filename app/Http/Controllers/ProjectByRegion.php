@@ -34,10 +34,12 @@ class ProjectByRegion extends Controller
         /* -------------------------------------------------------------------------- */
         /*                             Search data by user                            */
         /* -------------------------------------------------------------------------- */
+        $projects = Project::where('region_id', '=', $id)->paginate(10);
         foreach ($users as $user) {
-            if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
-                $projects = Project::where('region_id', '=', $id)->paginate(10);
-            } else if ($user->role_id == 3) {
+            // if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5 || $user->role_id == 7) {
+            //     $projects = Project::where('region_id', '=', $id)->paginate(10);
+            // } else
+            if ($user->role_id == 3) {
                 $projects = DB::table('users')
                     ->join('users_studies', 'users.id', '=', 'users_studies.user_id')
                     ->join('studies', 'users_studies.study_id', '=', 'studies.id')
@@ -74,13 +76,18 @@ class ProjectByRegion extends Controller
         /* -------------------------------------------------------------------------- */
         $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
         if ($request->search) {
+            $projects = DB::table('projects')
+                ->where('place', 'like', '%' . $request->search . '%')
+                ->where('region_id', '=', $id)
+                ->paginate(10);
             foreach ($users as $user) {
-                if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
-                    $projects = DB::table('projects')
-                        ->where('place', 'like', '%' . $request->search . '%')
-                        ->where('region_id', '=', $id)
-                        ->paginate(10);
-                } else if ($user->role_id == 3) {
+                // if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
+                // $projects = DB::table('projects')
+                //     ->where('place', 'like', '%' . $request->search . '%')
+                //     ->where('region_id', '=', $id)
+                //     ->paginate(10);
+                // } else
+                if ($user->role_id == 3) {
                     $projects = DB::table('users')
                         ->join('users_studies', 'users.id', '=', 'users_studies.user_id')
                         ->join('studies', 'users_studies.study_id', '=', 'studies.id')

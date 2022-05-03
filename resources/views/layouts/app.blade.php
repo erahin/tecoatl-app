@@ -72,13 +72,13 @@
                         </li>
                         @endif
                         @else
-                        {{-- @can('administrativos.index') --}}
+                        @can('legal.index')
                         <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('legal.index') }}"><i class="fa fa-book fa__li"
+                            <a class="nav-link" href="{{ route('legal.index') }}"><i class="fa fa-university fa__li"
                                     aria-hidden="true"></i>
                                 {{ __('legal') }}</a>
                         </li>
-                        {{-- @endcan --}}
+                        @endcan
                         @can('administrativos.index')
                         <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('administrativos.index') }}"><i class="fa fa-book fa__li"

@@ -91,5 +91,15 @@ class UserSeeder extends Seeder
             'email' => 'jefa-compras.tecoatl@gmail.com',
             'password' => bcrypt('jefa-compras'),
         ])->assignRole('Jefa subadministrativa');
+        User::create([
+            'name' => 'jefa-operativa-legal',
+            'email' => 'jefa-operativa-legal.tecoatl@gmail.com',
+            'password' => bcrypt('corporativa'),
+        ])->assignRole('Jefa sublegal');
+        User::create([
+            'name' => 'jefa-corporativa-legal',
+            'email' => 'jefa-corporativa-legal.tecoatl@gmail.com',
+            'password' => bcrypt('corporativa'),
+        ])->assignRole('Jefa sublegal');
     }
 }

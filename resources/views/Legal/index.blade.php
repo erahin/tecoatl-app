@@ -26,11 +26,11 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap">
-                        {{-- @can('legal.create') --}}
+                        @can('legal.create')
                         <a class="btn btn-primary my-2 ancla" href="{{ route('legal.create') }}" role="button"><i
                                 class="fa fa-plus" aria-hidden="true"></i> Crear
                             departamento</a>
-                        {{-- @endcan --}}
+                        @endcan
                         <a class=" btn btn-secondary my-2" href="{{ route('legal.index') }}" role="button">
                             <i class="fa fa-list" aria-hidden="true"></i> Lista completa</a>
                     </div>
@@ -59,12 +59,12 @@
                                         class="btn btn-primary ancla"><i class="fa fa-archive"
                                             aria-hidden="true"></i></a>
                                     @endcan --}}
-                                    {{-- @can('legal.edit') --}}
+                                    @can('legal.edit')
                                     <a title="Editar" href="{{ route('legal.edit', $legal->id) }}"
                                         class="btn btn-success ancla"><i class="fa fa-pencil-square-o"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('legal.destroy') --}}
+                                    @endcan
+                                    @can('legal.destroy')
                                     <form action="{{ route('legal.destroy', $legal->id) }}" method="post">
                                         @csrf
                                         @method('delete')
@@ -72,7 +72,7 @@
                                             onclick="return confirm( '¿Está seguro de eliminar {{ $legal->name }}?') "><i
                                                 class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </form>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
