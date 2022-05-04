@@ -6,6 +6,7 @@ use App\Http\Controllers\LegalController;
 use App\Http\Controllers\ProjectByRegion;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportStudioController;
@@ -199,3 +200,13 @@ Route::get('eliminar-archivo-sub-folder/{idAdministrative}/{folder}/{subfolder}/
 /*                                 Route legal                                */
 /* -------------------------------------------------------------------------- */
 Route::resource('legal', LegalController::class)->middleware('auth')->except('show');
+/* -------------------------------------------------------------------------- */
+/*                                Route public                                */
+/* -------------------------------------------------------------------------- */
+Route::get('público', [PublicController::class, 'index'])->name('publico.index')->middleware('auth');
+Route::get('público/crear', [PublicController::class, 'create'])->name('create')->middleware('auth');
+Route::post('público/store-carpeta', [PublicController::class, 'store'])->name('store')->middleware('auth');
+Route::get('público/crear-carpeta/{path}', [PublicController::class, 'createFolder'])->name('publico.create')->middleware('auth');
+Route::post('público/store-carpeta/{path}/{route}', [PublicController::class, 'storeFolder'])->name('publico.store')->middleware('auth');
+Route::get('público/eliminar-carpeta/{path}', [PublicController::class, 'deleteFolder'])->name('publico.destroy')->middleware('auth');
+Route::get('público/subir-archivos/{path}', [PublicController::class, 'uploadFileForm'])->name('uploadFileForm')->middleware('auth');

@@ -83,6 +83,7 @@ class ReportStudioController extends Controller
             $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $study->id . '/' . $report->id . '/' . $fileName;
             // Storage::disk('s3')->put($filePath, file_get_contents($file));
             File::streamUpload($filePath, $fileName, $file, true);
+            set_time_limit(60);
         }
         /* -------------------------------------------------------------------------- */
         /*                                 Redirect to                                */

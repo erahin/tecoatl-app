@@ -72,6 +72,13 @@
                         </li>
                         @endif
                         @else
+                        {{-- @can('legal.index') --}}
+                        <li class="nav-item text-uppercase gtr-menu__li">
+                            <a class="nav-link" href="{{ route('publico.index') }}"><i class="fa fa-users fa__li"
+                                    aria-hidden="true"></i>
+                                {{ __('Público') }}</a>
+                        </li>
+                        {{-- @endcan --}}
                         @can('legal.index')
                         <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('legal.index') }}"><i class="fa fa-university fa__li"
