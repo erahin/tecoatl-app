@@ -53,6 +53,9 @@ class RoleSeeder extends Seeder
         /* Config Module */
         Permission::create(['name' => 'config', 'description' => 'Ver menú de configuración'])->syncRoles([$role1, $role4]);
         /* Administrative Module */
+        Permission::create(['name' => 'departaments.show', 'description' => 'Ver menú de departamentos'])->syncRoles([
+            $role1, $role4, $role6, $role7, $role8
+        ]);
         // First nivel //
         Permission::create(['name' => 'administrativos.index', 'description' => 'Ver lista de departamentos'])->syncRoles([$role1, $role6, $role7, $role4]);
         Permission::create(['name' => 'administrativos.create', 'description' => 'Crear un nuevo departamento'])->syncRoles([$role1, $role6, $role4]);

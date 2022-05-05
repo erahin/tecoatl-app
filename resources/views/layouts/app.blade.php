@@ -72,24 +72,36 @@
                         </li>
                         @endif
                         @else
-                        {{-- @can('legal.index') --}}
+                        @can('publico.index')
                         <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('publico.index') }}"><i class="fa fa-users fa__li"
                                     aria-hidden="true"></i>
                                 {{ __('Público') }}</a>
                         </li>
-                        {{-- @endcan --}}
-                        @can('legal.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('legal.index') }}"><i class="fa fa-university fa__li"
-                                    aria-hidden="true"></i>
-                                {{ __('legal') }}</a>
-                        </li>
                         @endcan
-                        @can('administrativos.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('administrativos.index') }}"><i class="fa fa-book fa__li"
-                                    aria-hidden="true"></i> {{ __('Administración') }}</a>
+                        @can('departaments.show')
+                        <li class="nav-item dropdown text-uppercase">
+                            <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <i class="fa fa-building" aria-hidden="true"></i> {{ 'departamentos' }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                @can('administrativos.index')
+                                <div class="gtr-menu__li">
+                                    <a class="nav-link" href="{{ route('administrativos.index') }}"><i
+                                            class="fa fa-book fa__li" aria-hidden="true"></i> {{
+                                        __('Administración') }}</a>
+                                </div>
+                                @endcan
+                                @can('legal.index')
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="nav-link" href="{{ route('legal.index') }}"><i
+                                            class="fa fa-university fa__li" aria-hidden="true"></i>
+                                        {{ __('legal') }}</a>
+                                </div>
+                                @endcan
+                            </div>
                         </li>
                         @endcan
                         @can('proyectos.index')
@@ -103,31 +115,6 @@
                             </div>
                         </li>
                         @endcan
-                        {{-- @can('proyectos.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('proyectos.index') }}">{{ __('proyectos') }}</a>
-                        </li>
-                        @endcan --}}
-                        {{-- @can('estudios.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('estudios.index') }}">{{ __('crear categoría') }}</a>
-                        </li>
-                        @endcan
-                        @can('regiones.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('regiones.index') }}">{{ __('nueva región') }}</a>
-                        </li>
-                        @endcan
-                        @can('usuarios.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('usuarios.index') }}">{{ __('USUARIOS') }}</a>
-                        </li>
-                        @endcan
-                        @can('roles.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('roles.index') }}">{{ __('roles') }}</a>
-                        </li>
-                        @endcan --}}
                         @can('show.reports')
                         <li class="nav-item dropdown text-uppercase">
                             <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
