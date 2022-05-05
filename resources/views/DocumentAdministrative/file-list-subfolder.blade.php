@@ -47,7 +47,7 @@
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>
-                                <th scope="col">Carpeta</th>
+                                <th scope="col">Archivo</th>
                                 <th scope="col" colspan="2">Acciones</th>
                             </tr>
                         </thead>

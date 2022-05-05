@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Crear sub carpeta administrativa
+                    <h1 class="text-center">Crear subcarpeta administrativa
                     </h1>
                     @if ($project!= null)
                     <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ $project->place }}/

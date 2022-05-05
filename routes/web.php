@@ -210,3 +210,7 @@ Route::get('público/crear-carpeta/{path}', [PublicController::class, 'createFol
 Route::post('público/store-carpeta/{path}/{route}', [PublicController::class, 'storeFolder'])->name('publico.store')->middleware('auth');
 Route::get('público/eliminar-carpeta/{path}', [PublicController::class, 'deleteFolder'])->name('publico.destroy')->middleware('auth');
 Route::get('público/subir-archivos/{path}', [PublicController::class, 'uploadFileForm'])->name('uploadFileForm')->middleware('auth');
+Route::post('público/store-archivos/{path}', [PublicController::class, 'uploadPublicFile'])->name('uploadPublicFile')->middleware('auth');
+Route::get('público/listar-archivos/{path}', [PublicController::class, 'publicFilesList'])->name('publicFilesList')->middleware('auth');
+Route::get('público/descargar/{folder}/{subfolder}/{file}', [PublicController::class, 'downloadPublicFile'])->name('downloadPublicFile')->middleware('auth');
+Route::get('público/eliminar/{folder}/{subfolder}/{file}', [PublicController::class, 'deletePublicFile'])->name('deletePublicFile')->middleware('auth');

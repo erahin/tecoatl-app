@@ -8,12 +8,12 @@
                 <div class="card-header">
                     <h1 class="text-center">Subir archivo
                     </h1>
-                    <h2 class="h6 text-center">Ruta: {{ $path }}/
+                    <h2 class="h6 text-center">Ruta: {{ str_replace('-', '/', $path) }}/
                     </h2>
                 </div>
-                {{-- <div class="card-body">
+                <div class="card-body">
                     <form method="POST"
-                        action="{{ route('uploadFile', ['idAdministrative' => $administrative->id, 'folder' => $folder]) }}"
+                        action="{{ route('uploadPublicFile', ['path' => str_replace('/', '-', $path)]) }}"
                         enctype="multipart/form-data">
                         @csrf
                         @if ($files)
@@ -26,7 +26,7 @@
                                     <li class="list-group-item">
                                         {!! Form::checkbox('files[]', $file, 'true', ['class' =>
                                         'form-check-input']) !!}
-                                        {{explode('/', $file)[3]}} </li>
+                                        {{explode('/', $file)[2]}} </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -52,14 +52,13 @@
                                 {{ Form::button('<i class="fa fa-upload" aria-hidden="true"></i> Subir', ['type' =>
                                 'submit', 'class' =>
                                 'btn btn-primary'] ) }}
-                                <a class="btn btn-danger"
-                                    href="{{ route('folderList', ['idAdministrative' => $administrative->id]) }}"><i
-                                        class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                                <a class="btn btn-danger" href="{{ route('publico.index') }}"><i class="fa fa-ban"
+                                        aria-hidden="true"></i> Cancelar
                                 </a>
                             </div>
                         </div>
                     </form>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>

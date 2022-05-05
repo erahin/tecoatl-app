@@ -49,13 +49,18 @@
                                 <td>{{ explode('/', $folder)[1] }}</td>
                                 <td class="d-flex justify-content-start">
                                     {{-- @can('createFolder') --}}
-                                    <a title="Nueva carpeta"
+                                    {{-- <a title="Nueva carpeta"
                                         href="{{ route('publico.create', ['path' => str_replace('/', '-', $folder)]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
-                                            aria-hidden="true"></i></a>
+                                            aria-hidden="true"></i></a> --}}
                                     <a title="Subir archivos"
                                         href="{{ route('uploadFileForm', ['path' => str_replace('/', '-', $folder)]) }}"
-                                        class="btn btn-primary ancla"> <i class="fa fa-upload"
+                                        class="btn btn-secondary ancla"> <i class="fa fa-upload"
+                                            aria-hidden="true"></i></a>
+
+                                    <a title="Lista de archivos"
+                                        href="{{ route('publicFilesList', ['path' => str_replace('/', '-', $folder)]) }}"
+                                        class="btn btn-primary ancla"><i class="fa fa-list-alt"
                                             aria-hidden="true"></i></a>
                                     {{-- @endcan --}}
                                     {{-- @can('folderList')

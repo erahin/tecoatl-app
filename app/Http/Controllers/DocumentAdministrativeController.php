@@ -449,7 +449,11 @@ class DocumentAdministrativeController extends Controller
             return view('errors.4032');
         }
         $pathToFile = Storage::disk('s3')->path('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/' . $file);
-        return Storage::disk('s3')->download($pathToFile);
+        if (Storage::disk('s3')->exists($pathToFile)) {
+            return Storage::disk('s3')->download($pathToFile);
+        } else {
+            return view('errors.4032');
+        }
     }
     public function deleteFileFolder($idAdministrative, $folder, $file)
     {

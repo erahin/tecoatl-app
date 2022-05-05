@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ReportStudioController extends Controller
 {
@@ -81,8 +82,8 @@ class ReportStudioController extends Controller
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
             $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $study->id . '/' . $report->id . '/' . $fileName;
-            // Storage::disk('s3')->put($filePath, file_get_contents($file));
-            File::streamUpload($filePath, $fileName, $file, true);
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+            // File::streamUpload($filePath, $fileName, $file, true);
             set_time_limit(60);
         }
         /* -------------------------------------------------------------------------- */
@@ -151,8 +152,8 @@ class ReportStudioController extends Controller
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
             $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $study->id . '/' . $id . '/' . $fileName;
-            // Storage::disk('s3')->put($filePath, file_get_contents($file));
-            File::streamUpload($filePath, $fileName, $file, true);
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+            // File::streamUpload($filePath, $fileName, $file, true);
             set_time_limit(60);
         }
         /* -------------------------------------------------------------------------- */

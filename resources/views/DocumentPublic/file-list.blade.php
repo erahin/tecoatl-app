@@ -27,24 +27,17 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap mb-2">
-                        <a class="btn btn-outline-primary"
-                            href="{{ route('folderList', ['idAdministrative' => $idAdministrative]) }}"><i
+                        <a class="btn btn-outline-primary" href="{{ route('publico.index') }}"><i
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
                     @if (count($files) > 0)
-                    @if ($project!= null)
-                    <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ $project->place }}/
-                    </h2>
-                    @else
-                    <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ explode('/',
-                        $files[0])[2] }}/</h2>
-                    @endif
+                    <h2 class="h6 text-center">Ruta: {{ $path }}</h2>
                     @endif
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>
-                                <th scope="col">Carpeta</th>
+                                <th scope="col">Archivo</th>
                                 <th scope="col" colspan="2">Acciones</th>
                             </tr>
                         </thead>
@@ -52,27 +45,27 @@
                             @if (count($files) != 0)
                             @foreach ($files as $file)
                             <tr>
-                                <td>{{ explode('/', $file)[3] }}</td>
+                                <td>{{ explode('/', $file)[2] }}</td>
                                 <td class="d-flex justify-content-start">
-                                    @can('operFile')
+                                    {{-- @can('operFile') --}}
                                     <a title="Abrir archivo" target="_blank"
                                         href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}"
                                         class="btn btn-secondary ancla"><i class="fa fa-external-link"
                                             aria-hidden="true"></i></a>
-                                    @endcan
-                                    @can('downloadFileFolder')
+                                    {{-- @endcan --}}
+                                    {{-- @can('downloadFileFolder') --}}
                                     <a title="Descargar archivo"
-                                        href="{{ route('downloadFileFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2], 'file' => explode('/', $file)[3]]) }}"
+                                        href="{{ route('downloadPublicFile', ['folder' => explode('/', $file)[0],'subfolder' => explode('/', $file)[1], 'file' => explode('/', $file)[2]]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-download"
                                             aria-hidden="true"></i></a>
-                                    @endcan
-                                    @can('deleteFileFolder')
+                                    {{-- @endcan --}}
+                                    {{-- @can('deleteFileFolder') --}}
                                     <a title="Eliminar archivo"
-                                        href="{{ route('deleteFileFolder',['idAdministrative' => $idAdministrative, 'folder' => explode('/', $file)[2], 'file' => explode('/', $file)[3]]) }}"
+                                        href="{{ route('deletePublicFile',['folder' => explode('/', $file)[0],'subfolder' => explode('/', $file)[1], 'file' => explode('/', $file)[2]]) }}"
                                         class="btn btn-danger"
-                                        onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[3] }} ?') "><i
+                                        onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[2] }} ?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    @endcan
+                                    {{-- @endcan --}}
                                 </td>
                             </tr>
                             @endforeach
