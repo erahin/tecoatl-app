@@ -203,14 +203,17 @@ Route::resource('legal', LegalController::class)->middleware('auth')->except('sh
 /* -------------------------------------------------------------------------- */
 /*                                Route public                                */
 /* -------------------------------------------------------------------------- */
-Route::get('público', [PublicController::class, 'index'])->name('publico.index')->middleware('auth');
-Route::get('público/crear', [PublicController::class, 'create'])->name('create')->middleware('auth');
-Route::post('público/store-carpeta', [PublicController::class, 'store'])->name('store')->middleware('auth');
-Route::get('público/crear-carpeta/{path}', [PublicController::class, 'createFolder'])->name('publico.create')->middleware('auth');
-Route::post('público/store-carpeta/{path}/{route}', [PublicController::class, 'storeFolder'])->name('publico.store')->middleware('auth');
-Route::get('público/eliminar-carpeta/{path}', [PublicController::class, 'deleteFolder'])->name('publico.destroy')->middleware('auth');
-Route::get('público/subir-archivos/{path}', [PublicController::class, 'uploadFileForm'])->name('uploadFileForm')->middleware('auth');
-Route::post('público/store-archivos/{path}', [PublicController::class, 'uploadPublicFile'])->name('uploadPublicFile')->middleware('auth');
-Route::get('público/listar-archivos/{path}', [PublicController::class, 'publicFilesList'])->name('publicFilesList')->middleware('auth');
-Route::get('público/descargar/{folder}/{subfolder}/{file}', [PublicController::class, 'downloadPublicFile'])->name('downloadPublicFile')->middleware('auth');
-Route::get('público/eliminar/{folder}/{subfolder}/{file}', [PublicController::class, 'deletePublicFile'])->name('deletePublicFile')->middleware('auth');
+Route::get('público', [PublicController::class, 'index'])->name('publico.index')->middleware('can:publico.index')->middleware('auth');
+Route::get('público/crear', [PublicController::class, 'create'])->name('createFolderPublic')->middleware('can:createFolderPublic')->middleware('auth');
+Route::post('público/store-carpeta', [PublicController::class, 'store'])->name('store')->middleware('can:createFolderPublic')->middleware('auth');
+Route::get('público/eliminar-carpeta/{path}', [PublicController::class, 'deleteFolder'])->name('publico.destroy')->middleware('can:destroy')->middleware('auth');
+Route::get('público/subir-archivos/{path}', [PublicController::class, 'uploadFileForm'])->name('uploadFileForm')->middleware('can:uploadFileForm')->middleware('auth');
+Route::post('público/store-archivos/{path}', [PublicController::class, 'uploadPublicFile'])->name('uploadPublicFile')->middleware('can:uploadFileForm')->middleware('auth');
+Route::get('público/listar-archivos/{path}', [PublicController::class, 'publicFilesList'])->name('publicFilesList')->middleware('can:publicFilesList')->middleware('auth');
+Route::get('público/descargar/{folder}/{subfolder}/{file}', [PublicController::class, 'downloadPublicFile'])->name('downloadPublicFile')->middleware('can:downloadPublicFile')->middleware('auth');
+Route::get('público/eliminar/{folder}/{subfolder}/{file}', [PublicController::class, 'deletePublicFile'])->name('deletePublicFile')->middleware('can:deletePublicFile')->middleware('auth');
+// Route::get('público/crear-carpeta/{path}', [PublicController::class, 'createFolder'])->name('publico.create')->middleware('auth');
+// Route::post('público/store-carpeta/{path}/{route}', [PublicController::class, 'storeFolder'])->name('publico.store')->middleware('auth');
+/* -------------------------------------------------------------------------- */
+/*                               Route executive                              */
+/* -------------------------------------------------------------------------- */

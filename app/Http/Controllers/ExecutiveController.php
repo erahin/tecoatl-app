@@ -5,53 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class PublicController extends Controller
+class ExecutiveController extends Controller
 {
     public function index()
     {
-        $folders = Storage::disk('s3')->directories('publico/');
-        return view('DocumentPublic.index', compact('folders'));
+        $folders = Storage::disk('s3')->directories('directivo/');
+        return view('DocumentExecutive.index', compact('folders'));
     }
     public function create()
     {
         $folders = Storage::disk('s3')->directories('publico/');
-        return view('DocumentPublic.showForm', compact('folders'));
+        return view('DocumentExecutive.showForm', compact('folders'));
     }
-    public function store(Request $request)
+    public function storeFolder(Request $request, $path, $route)
     {
         $request->validate([
             'name' => ['required', 'confirmed']
         ]);
-        Storage::disk('s3')->makeDirectory('publico/' . $request->name);
-        return redirect()->route('publico.index');
+        $path = str_replace('-', '/', $path);
+        Storage::disk('s3')->makeDirectory($path . '/' . $request->name);
+        return redirect()->route($route);
     }
-    // public function createFolder($path)
-    // {
-    //     $path = str_replace('-', '/', $path);
-    //     $array = explode('/', $path);
-    //     $index = -1;
-    //     for ($i = 0; $i < count($array); $i++) {
-    //         if ($i == count($array) - 1) {
-    //             $index = $i;
-    //         }
-    //     }
-    //     $folders = Storage::disk('s3')->directories($path . '/');
-    //     return view('DocumentPublic.create', compact('path', 'folders', 'index'));
-    // }
-    // public function storeFolder(Request $request, $path, $route)
-    // {
-    //     $request->validate([
-    //         'name' => ['required', 'confirmed']
-    //     ]);
-    //     $path = str_replace('-', '/', $path);
-    //     Storage::disk('s3')->makeDirectory($path . '/' . $request->name);
-    //     return redirect()->route($route);
-    // }
     public function uploadFileForm($path)
     {
         $path = str_replace('-', '/', $path);
         $files = Storage::disk('s3')->allFiles($path . '/');
-        return view('DocumentPublic.upload-file', compact('path', 'files'));
+        return view('DocumentExecutive.upload-file', compact('path', 'files'));
     }
     public function uploadPublicFile(Request $request, $path)
     {
@@ -72,7 +51,7 @@ class PublicController extends Controller
     {
         $path = str_replace('-', '/', $path);
         $files = Storage::disk('s3')->allFiles($path . '/');
-        return view('DocumentPublic.file-list', compact('path', 'files'));
+        return view('DocumentExecutive.file-list', compact('path', 'files'));
     }
     public function deleteFolder($path)
     {

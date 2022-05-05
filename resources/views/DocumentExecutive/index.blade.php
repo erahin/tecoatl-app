@@ -27,11 +27,11 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap">
-                        @can('createFolderPublic')
-                        <a class="btn btn-primary my-2 ancla" href="{{ route('createFolderPublic') }}" role="button"><i
+                        {{-- @can('administrativos.create') --}}
+                        <a class="btn btn-primary my-2 ancla" href="{{ route('create') }}" role="button"><i
                                 class="fa fa-plus" aria-hidden="true"></i> Crear
                             carpeta</a>
-                        @endcan
+                        {{-- @endcan --}}
                         <a class=" btn btn-secondary my-2" href="{{ route('publico.index') }}" role="button">
                             <i class="fa fa-list" aria-hidden="true"></i> Lista completa</a>
                     </div>
@@ -48,25 +48,39 @@
                             <tr>
                                 <td>{{ explode('/', $folder)[1] }}</td>
                                 <td class="d-flex justify-content-start">
-                                    @can('uploadFileForm')
+                                    {{-- @can('createFolder') --}}
+                                    {{-- <a title="Nueva carpeta"
+                                        href="{{ route('publico.create', ['path' => str_replace('/', '-', $folder)]) }}"
+                                        class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
+                                            aria-hidden="true"></i></a> --}}
                                     <a title="Subir archivos"
                                         href="{{ route('uploadFileForm', ['path' => str_replace('/', '-', $folder)]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
-                                    @endcan
-                                    @can('publicFilesList')
+
                                     <a title="Lista de archivos"
                                         href="{{ route('publicFilesList', ['path' => str_replace('/', '-', $folder)]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-list-alt"
                                             aria-hidden="true"></i></a>
+                                    {{-- @endcan --}}
+                                    {{-- @can('folderList')
+                                    <a title="Lista de carpetas"
+                                        href="{{ route('folderList', ['idfolder' => $folder->id]) }}"
+                                        class="btn btn-primary ancla"><i class="fa fa-archive"
+                                            aria-hidden="true"></i></a>
                                     @endcan
-                                    @can('publico.destroy')
+                                    @can('administrativos.edit')
+                                    <a title="Editar" href="{{ route('administrativos.edit', $folder->id) }}"
+                                        class="btn btn-success ancla"><i class="fa fa-pencil-square-o"
+                                            aria-hidden="true"></i></a>
+                                    @endcan --}}
+                                    {{-- @can('administrativos.destroy') --}}
                                     <a title="Eliminar"
                                         onclick="return confirm( '¿Está seguro de eliminar {{ explode('/', $folder)[1] }}?') "
                                         href="{{ route('publico.destroy', ['path' => str_replace('/', '-', $folder)]) }}"
                                         class="btn btn-danger ancla"><i class="fa fa-trash-o"
                                             aria-hidden="true"></i></a>
-                                    @endcan
+                                    {{-- @endcan --}}
                                 </td>
                             </tr>
                             @endforeach

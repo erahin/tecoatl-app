@@ -46,7 +46,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'downloadFile', 'description' => 'Descargar archivos de los informes'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
         Permission::create(['name' => 'deleteFile', 'description' => 'Eliminar archivos de los informes'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'deleteStudioDirectory', 'description' => 'Eliminar directorio de un estudio'])->syncRoles([$role1, $role2, $role4]);
-        Permission::create(['name' => 'deleteReportsDirectory', 'description' => 'Eliminar directorio de un reporte'])->syncRoles([$role1, $role2, $role4]);
+        Permission::create(['name' => 'deleteReportsDirectory', 'description' => 'Eliminar directorio de un informe'])->syncRoles([$role1, $role2, $role4]);
         Permission::create(['name' => 'report-edit', 'description' => 'Editar informe'])->syncRoles([$role1, $role2, $role3, $role4]);
         /* Reports Module */
         Permission::create(['name' => 'show.reports', 'description' => 'Ver reportes'])->syncRoles([$role1, $role2, $role4]);
@@ -58,21 +58,27 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'administrativos.create', 'description' => 'Crear un nuevo departamento'])->syncRoles([$role1, $role6, $role4]);
         Permission::create(['name' => 'administrativos.edit', 'description' => 'Editar departamento'])->syncRoles([$role1, $role6, $role4]);
         Permission::create(['name' => 'administrativos.destroy', 'description' => 'Eliminar departamento'])->syncRoles([$role1, $role6, $role4]);
-        Permission::create(['name' => 'createFolder', 'description' => 'Crear una carpeta'])->syncRoles([$role1, $role6, $role7, $role4]);
-        Permission::create(['name' => 'folderList', 'description' => 'Ver lista de carpetas'])->syncRoles([$role1, $role6, $role7, $role4]);
+        Permission::create(['name' => 'createFolder', 'description' => 'Crear una carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
+        Permission::create(['name' => 'folderList', 'description' => 'Ver lista de carpetas administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
         // Second nivel //
-        Permission::create(['name' => 'showFormUploadFile', 'description' => 'Subir archivos a carpeta'])->syncRoles([$role1, $role6, $role7, $role4]);
-        Permission::create(['name' => 'fileList', 'description' => 'Ver lista de archivos de una carpeta'])->syncRoles([$role1, $role6, $role7, $role4]);
-        // Permission::create(['name' => 'createSubFolder', 'description' => 'Crear nueva subcarpeta'])->syncRoles([$role1, $role6, $role7]);
-        // Permission::create(['name' => 'subFolderList', 'description' => 'Ver lista de subcarpetas'])->syncRoles([$role1, $role6, $role7]);
-        Permission::create(['name' => 'deleteFolder', 'description' => 'Eliminar carpeta'])->syncRoles([$role1, $role6]);
+        Permission::create(['name' => 'showFormUploadFile', 'description' => 'Subir archivos a carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
+        Permission::create(['name' => 'fileList', 'description' => 'Ver lista de archivos de una carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
+        Permission::create(['name' => 'deleteFolder', 'description' => 'Eliminar carpeta administrativa'])->syncRoles([$role1, $role6]);
         // Third level //
-        Permission::create(['name' => 'operFile', 'description' => 'Abrir archivo de una carpeta'])->syncRoles([$role1, $role6, $role7, $role4]);
-        Permission::create(['name' => 'downloadFileFolder', 'description' => 'Descargar archivo de una carpeta'])->syncRoles([$role1, $role6, $role7, $role4]);
-        Permission::create(['name' => 'deleteFileFolder', 'description' => 'Eliminar archivo de una carpeta'])->syncRoles([$role1, $role6, $role4]);
+        Permission::create(['name' => 'operFile', 'description' => 'Abrir archivo de una carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
+        Permission::create(['name' => 'downloadFileFolder', 'description' => 'Descargar archivo de una carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
+        Permission::create(['name' => 'deleteFileFolder', 'description' => 'Eliminar archivo de una carpeta administrativa'])->syncRoles([$role1, $role6, $role4]);
         /* Legal Module */
         Permission::create(['name' => 'legal.index', 'description' => 'Ver lista de departamentos legales'])->syncRoles([$role1, $role4, $role8]);
         Permission::create(['name' => 'legal.create', 'description' => 'Crear un nuevo departamento legal'])->syncRoles([$role1, $role4, $role8]);
-        Permission::create(['name' => 'legal.destroy', 'description' => 'Crear un nuevo departamento legal'])->syncRoles([$role1, $role4, $role8]);
+        Permission::create(['name' => 'legal.destroy', 'description' => 'Eliminar un departamento legal'])->syncRoles([$role1, $role4, $role8]);
+        /* Public Module */
+        Permission::create(['name' => 'publico.index', 'description' => 'Ver lista de carpetas públicas'])->syncRoles([$role1, $role2, $role4, $role6, $role8]);
+        Permission::create(['name' => 'createFolderPublic', 'description' => 'Crear una carpeta pública'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'uploadFileForm', 'description' => 'Subir archivos a una carpeta pública'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'publicFilesList', 'description' => 'Listar archivos de una carpeta pública'])->syncRoles([$role1, $role2, $role4, $role6, $role8]);
+        Permission::create(['name' => 'publico.destroy', 'description' => 'Eliminar una carpeta pública'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'downloadPublicFile', 'description' => 'Descargar archivo de carpeta pública'])->syncRoles([$role1, $role2, $role4, $role6, $role8]);
+        Permission::create(['name' => 'deletePublicFile', 'description' => 'Eliminar archivo de carpeta pública'])->syncRoles([$role1, $role4]);
     }
 }

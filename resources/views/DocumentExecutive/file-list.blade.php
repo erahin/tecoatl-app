@@ -47,23 +47,25 @@
                             <tr>
                                 <td>{{ explode('/', $file)[2] }}</td>
                                 <td class="d-flex justify-content-start">
+                                    {{-- @can('operFile') --}}
                                     <a title="Abrir archivo" target="_blank"
                                         href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}"
                                         class="btn btn-secondary ancla"><i class="fa fa-external-link"
                                             aria-hidden="true"></i></a>
-                                    @can('downloadPublicFile')
+                                    {{-- @endcan --}}
+                                    {{-- @can('downloadFileFolder') --}}
                                     <a title="Descargar archivo"
                                         href="{{ route('downloadPublicFile', ['folder' => explode('/', $file)[0],'subfolder' => explode('/', $file)[1], 'file' => explode('/', $file)[2]]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-download"
                                             aria-hidden="true"></i></a>
-                                    @endcan
-                                    @can('deletePublicFile')
+                                    {{-- @endcan --}}
+                                    {{-- @can('deleteFileFolder') --}}
                                     <a title="Eliminar archivo"
                                         href="{{ route('deletePublicFile',['folder' => explode('/', $file)[0],'subfolder' => explode('/', $file)[1], 'file' => explode('/', $file)[2]]) }}"
                                         class="btn btn-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[2] }} ?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    @endcan
+                                    {{-- @endcan --}}
                                 </td>
                             </tr>
                             @endforeach
