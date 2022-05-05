@@ -25,6 +25,41 @@ class ExecutiveController extends Controller
         Storage::disk('s3')->makeDirectory('directivo/' . $request->name);
         return redirect()->route('directivo.index');
     }
+    public function createFolder($path)
+    {
+        $path = str_replace('-', '/', $path);
+        $array = explode('/', $path);
+        $index = -1;
+        for ($i = 0; $i < count($array); $i++) {
+            if ($i == count($array) - 1) {
+                $index = $i;
+            }
+        }
+        $folders = Storage::disk('s3')->directories($path . '/');
+        return view('DocumentExecutive.create', compact('path', 'folders', 'index'));
+    }
+    public function storeFolder(Request $request, $path)
+    {
+        $request->validate([
+            'name' => ['required', 'confirmed']
+        ]);
+        $path = str_replace('-', '/', $path);
+        Storage::disk('s3')->makeDirectory($path . '/' . $request->name);
+        return redirect()->route('directivo.index');
+    }
+    public function folderList($path)
+    {
+        $path = str_replace('-', '/', $path);
+        $array = explode('/', $path);
+        $index = -1;
+        for ($i = 0; $i < count($array); $i++) {
+            if ($i == count($array) - 1) {
+                $index = $i;
+            }
+        }
+        $directories = Storage::disk('s3')->directories($path);
+        return view('DocumentExecutive.index-folder', compact('directories', 'index', 'path'));
+    }
     public function uploadFileForm($path)
     {
         $path = str_replace('-', '/', $path);
@@ -70,6 +105,6 @@ class ExecutiveController extends Controller
     public function deleteExecutiveFile($folder, $subfolder, $file)
     {
         Storage::disk('s3')->delete($folder . '/' . $subfolder . '/' . $file);
-        return redirect()->route('publicFilesList', ['path' => $folder . '-' . $subfolder]);
+        return redirect()->route('directivo.fileList', ['path' => $folder . '-' . $subfolder]);
     }
 }

@@ -25,28 +25,6 @@ class PublicController extends Controller
         Storage::disk('s3')->makeDirectory('publico/' . $request->name);
         return redirect()->route('publico.index');
     }
-    // public function createFolder($path)
-    // {
-    //     $path = str_replace('-', '/', $path);
-    //     $array = explode('/', $path);
-    //     $index = -1;
-    //     for ($i = 0; $i < count($array); $i++) {
-    //         if ($i == count($array) - 1) {
-    //             $index = $i;
-    //         }
-    //     }
-    //     $folders = Storage::disk('s3')->directories($path . '/');
-    //     return view('DocumentPublic.create', compact('path', 'folders', 'index'));
-    // }
-    // public function storeFolder(Request $request, $path, $route)
-    // {
-    //     $request->validate([
-    //         'name' => ['required', 'confirmed']
-    //     ]);
-    //     $path = str_replace('-', '/', $path);
-    //     Storage::disk('s3')->makeDirectory($path . '/' . $request->name);
-    //     return redirect()->route($route);
-    // }
     public function uploadFileForm($path)
     {
         $path = str_replace('-', '/', $path);

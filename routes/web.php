@@ -227,3 +227,7 @@ Route::get('directivo/listar-archivos/{path}', [ExecutiveController::class, 'exe
 Route::get('directivo/descargar/{folder}/{subfolder}/{file}', [ExecutiveController::class, 'downloadExecutiveFile'])->name('directivo.download')->middleware('can:directivo.download')->middleware('auth');
 Route::get('directivo/eliminar/{folder}/{subfolder}/{file}', [ExecutiveController::class, 'deleteExecutiveFile'])->name('directivo.deleteFile')->middleware('can:directivo.deleteFile')->middleware('auth');
 Route::get('directivo/eliminar-carpeta/{path}', [ExecutiveController::class, 'deleteFolder'])->name('directivo.destroy')->middleware('can:directivo.destroy')->middleware('auth');
+/* Second Module */
+Route::get('directivo/crear-carpeta/{path}', [ExecutiveController::class, 'createFolder'])->name('directivo.create-subfolder')->middleware('auth');
+Route::post('directivo/store-carpeta/{path}', [ExecutiveController::class, 'storeFolder'])->name('directivo.store-subfolder')->middleware('auth');
+Route::get('directivo/lista-carpetas/{path}', [ExecutiveController::class, 'folderList'])->name('directivo.folder-list')->middleware('auth');

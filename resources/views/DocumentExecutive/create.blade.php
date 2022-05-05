@@ -8,11 +8,11 @@
                 <div class="card-header">
                     <h1 class="text-center">Crear carpeta
                     </h1>
-                    <h2 class="h6 text-center">Ruta: Público/{{ explode('-', $path)[1] }}/</h2>
+                    <h2 class="h6 text-center">Ruta: Directivo/{{ explode('/', $path)[1] }}/</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST"
-                        action="{{ route('publico.store', ['path' => str_replace('/', '-', $path), 'route' => 'publico.index']) }}">
+                        action="{{ route('directivo.store-subfolder', ['path' => str_replace('/', '-', $path)]) }}">
                         @csrf
                         @if ($folders)
                         <div class="row mb-3">
