@@ -8,8 +8,7 @@
                 <div class="card-header">
                     <h1 class="text-center">Subir archivo
                     </h1>
-                    <h2 class="h6 text-center">Ruta: {{ str_replace('-', '/', $path) }}/
-                    </h2>
+                    <h2 class="h6 text-center">Ruta: Público/{{ explode('/', $path)[1] }}/</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST"

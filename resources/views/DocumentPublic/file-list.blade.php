@@ -32,7 +32,7 @@
                         </a>
                     </div>
                     @if (count($files) > 0)
-                    <h2 class="h6 text-center">Ruta: {{ $path }}</h2>
+                    <h2 class="h6 text-center">Ruta: Público/{{ explode('/', $path)[1] }}/</h2>
                     @endif
                     <table class="table table-hover table-bordered" id="table">
                         <thead>

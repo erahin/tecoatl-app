@@ -9,15 +9,15 @@
                     <h1 class="text-center">Lista de carpetas
                     </h1>
                     <div>
-                        <form action="{{ route('administrativos.index') }}"
-                            class="input-group d-flex justify-content-end">
+                        <div class="input-group d-flex justify-content-end">
                             <div class="form-outline">
-                                <input type="text" name="search" class="form-control" placeholder="Buscar" required />
+                                <input type="search" id="search" class="form-control" placeholder="Buscar"
+                                    onkeyup='searchTable()' />
                             </div>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary">
                                 <i class="fa fa-search"></i>
                             </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -32,10 +32,10 @@
                                 class="fa fa-plus" aria-hidden="true"></i> Crear
                             carpeta</a>
                         {{-- @endcan --}}
-                        <a class=" btn btn-secondary my-2" href="{{ route('administrativos.index') }}" role="button">
+                        <a class=" btn btn-secondary my-2" href="{{ route('publico.index') }}" role="button">
                             <i class="fa fa-list" aria-hidden="true"></i> Lista completa</a>
                     </div>
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>
                                 <th scope="col">Carpeta</th>
