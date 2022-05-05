@@ -63,8 +63,20 @@ class ExecutiveController extends Controller
     public function uploadFileForm($path)
     {
         $path = str_replace('-', '/', $path);
-        $files = Storage::disk('s3')->allFiles($path . '/');
-        return view('DocumentExecutive.upload-file', compact('path', 'files'));
+        $array = explode('/', $path);
+        $index = -1;
+        $previousPath = "";
+        for ($i = 0; $i < count($array); $i++) {
+            if ($i == count($array) - 1) {
+                $index = $i;
+            } else {
+                $previousPath .= $array[$i] . '/';
+            }
+        }
+        $previousPath = rtrim($previousPath, '/');
+        $files = Storage::disk('s3')->files($path . '/');
+        // dd($files);
+        return view('DocumentExecutive.upload-file', compact('path', 'files', 'index', 'previousPath', 'array'));
     }
     public function uploadExecutiveFile(Request $request, $path)
     {
@@ -79,12 +91,29 @@ class ExecutiveController extends Controller
             Storage::disk('s3')->put($filePath, file_get_contents($file));
             set_time_limit(60);
         }
-        return redirect()->route('directivo.index');
+        $array = explode('/', $path);
+        if (count($array) == 2) {
+            return redirect()->route('directivo.index');
+        } else {
+            // $index = -1;
+            $previousPath = "";
+            for ($i = 0; $i < count($array); $i++) {
+                if ($i == count($array) - 1) {
+                    $index = $i;
+                    // $previousPath .= $array[$i] . '/';
+                } else {
+                    $previousPath .= $array[$i] . '/';
+                }
+            }
+            $previousPath = rtrim($previousPath, '/');
+            // dd($previousPath);
+            return redirect()->route('directivo.folder-list', ['path' => str_replace('/', '-', $previousPath)]);
+        }
     }
     public function executiveFilesList($path)
     {
         $path = str_replace('-', '/', $path);
-        $files = Storage::disk('s3')->allFiles($path . '/');
+        $files = Storage::disk('s3')->files($path . '/');
         return view('DocumentExecutive.file-list', compact('path', 'files'));
     }
     public function deleteFolder($path)

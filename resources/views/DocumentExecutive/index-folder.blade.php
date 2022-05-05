@@ -27,7 +27,7 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap mb-2">
-                        <a class="btn btn-outline-primary" href="{{ route('administrativos.index') }}"><i
+                        <a class="btn btn-outline-primary" href="{{ route('directivo.index') }}"><i
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
@@ -46,8 +46,10 @@
                                 <td>{{ explode('/', $directorie)[$index+1] }}</td>
                                 <td class="d-flex justify-content-start">
                                     {{-- @can('showFormUploadFile') --}}
-                                    <a title="Subir archivos" href="" class="btn btn-secondary ancla"> <i
-                                            class="fa fa-upload" aria-hidden="true"></i></a>
+                                    <a title="Subir archivos"
+                                        href="{{ route('directivo.createUpload', ['path' => str_replace('/', '-', $directorie)]) }}"
+                                        class="btn btn-success ancla"> <i class="fa fa-upload"
+                                            aria-hidden="true"></i></a>
                                     {{-- @endcan --}}
                                     {{-- @can('fileList') --}}
                                     <a title="Lista de archivos" href="" class="btn btn-primary ancla"><i
@@ -55,7 +57,7 @@
                                     {{-- @endcan --}}
                                     {{-- @can('deleteFolder') --}}
                                     <a title="Eliminar carpeta" href="" class="btn btn-outline-danger"
-                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $directorie)[2] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
+                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $directorie)[$index+1] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     {{-- @endcan --}}
                                 </td>

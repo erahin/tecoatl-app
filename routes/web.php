@@ -222,7 +222,7 @@ Route::get('directivo', [ExecutiveController::class, 'index'])->name('directivo.
 Route::get('directivo/crear', [ExecutiveController::class, 'create'])->name('directivo.create')->middleware('can:directivo.create')->middleware('auth');
 Route::post('directivo/store', [ExecutiveController::class, 'store'])->name('directivo.store')->middleware('can:directivo.create')->middleware('auth');
 Route::get('directivo/subir-archivos/{path}', [ExecutiveController::class, 'uploadFileForm'])->name('directivo.createUpload')->middleware('can:directivo.createUpload')->middleware('auth');
-Route::post('directivo/store-archivos/{path}', [ExecutiveController::class, 'uploadExecutiveFile'])->name('directivo.upload')->middleware('can:directivo.upload')->middleware('auth');
+Route::post('directivo/store-archivos/{path}', [ExecutiveController::class, 'uploadExecutiveFile'])->name('directivo.upload')->middleware('can:directivo.createUpload')->middleware('auth');
 Route::get('directivo/listar-archivos/{path}', [ExecutiveController::class, 'executiveFilesList'])->name('directivo.fileList')->middleware('can:directivo.fileList')->middleware('auth');
 Route::get('directivo/descargar/{folder}/{subfolder}/{file}', [ExecutiveController::class, 'downloadExecutiveFile'])->name('directivo.download')->middleware('can:directivo.download')->middleware('auth');
 Route::get('directivo/eliminar/{folder}/{subfolder}/{file}', [ExecutiveController::class, 'deleteExecutiveFile'])->name('directivo.deleteFile')->middleware('can:directivo.deleteFile')->middleware('auth');

@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <h1 class="text-center">Subir archivo
                     </h1>
-                    <h2 class="h6 text-center">Ruta: Directivo/{{ explode('/', $path)[1] }}/</h2>
+                    <h2 class="h6 text-center">Ruta: {{ $path }}/</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST"
@@ -25,7 +25,7 @@
                                     <li class="list-group-item">
                                         {!! Form::checkbox('files[]', $file, 'true', ['class' =>
                                         'form-check-input']) !!}
-                                        {{explode('/', $file)[2]}} </li>
+                                        {{explode('/', $file)[$index+1]}} </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -51,9 +51,16 @@
                                 {{ Form::button('<i class="fa fa-upload" aria-hidden="true"></i> Subir', ['type' =>
                                 'submit', 'class' =>
                                 'btn btn-primary'] ) }}
+                                @if (count($array) == 2)
                                 <a class="btn btn-danger" href="{{ route('directivo.index') }}"><i class="fa fa-ban"
                                         aria-hidden="true"></i> Cancelar
                                 </a>
+                                @else
+                                <a class="btn btn-danger"
+                                    href="{{ route('directivo.folder-list', ['path' => str_replace('/', '-', $previousPath)]) }}"><i
+                                        class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                                </a>
+                                @endif
                             </div>
                         </div>
                     </form>
