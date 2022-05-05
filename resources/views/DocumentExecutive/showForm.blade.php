@@ -8,10 +8,10 @@
                 <div class="card-header">
                     <h1 class="text-center">Crear carpeta
                     </h1>
-                    <h2 class="h6 text-center">Ruta: Público/</h2>
+                    <h2 class="h6 text-center">Ruta: Directivo/</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('store') }}">
+                    <form method="POST" action="{{ route('directivo.store') }}">
                         @csrf
                         @if ($folders)
                         <div class="row mb-3">
@@ -64,7 +64,7 @@
                                 {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Crear', ['type' =>
                                 'submit', 'class' =>
                                 'btn btn-primary'] ) }}
-                                <a class="btn btn-danger" href="{{ route('publico.index') }}"><i class="fa fa-ban"
+                                <a class="btn btn-danger" href="{{ route('directivo.index') }}"><i class="fa fa-ban"
                                         aria-hidden="true"></i> Cancelar
                                 </a>
                             </div>

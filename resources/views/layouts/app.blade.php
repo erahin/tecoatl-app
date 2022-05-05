@@ -72,6 +72,13 @@
                         </li>
                         @endif
                         @else
+                        @can('directivo.index')
+                        <li class="nav-item text-uppercase gtr-menu__li">
+                            <a class="nav-link" href="{{ route('directivo.index') }}"><i class="fa fa-star"
+                                    aria-hidden="true"></i>
+                                {{ __('directivo') }}</a>
+                        </li>
+                        @endcan
                         @can('publico.index')
                         <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('publico.index') }}"><i class="fa fa-users fa__li"
@@ -83,7 +90,7 @@
                         <li class="nav-item dropdown text-uppercase">
                             <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class="fa fa-building" aria-hidden="true"></i> {{ 'departamentos' }}
+                                <i class="fa fa-building fa__li" aria-hidden="true"></i> {{ 'departamentos' }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @can('administrativos.index')

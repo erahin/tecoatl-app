@@ -8,11 +8,11 @@
                 <div class="card-header">
                     <h1 class="text-center">Subir archivo
                     </h1>
-                    <h2 class="h6 text-center">Ruta: Público/{{ explode('/', $path)[1] }}/</h2>
+                    <h2 class="h6 text-center">Ruta: Directivo/{{ explode('/', $path)[1] }}/</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST"
-                        action="{{ route('uploadPublicFile', ['path' => str_replace('/', '-', $path)]) }}"
+                        action="{{ route('directivo.upload', ['path' => str_replace('/', '-', $path)]) }}"
                         enctype="multipart/form-data">
                         @csrf
                         @if ($files)
@@ -51,7 +51,7 @@
                                 {{ Form::button('<i class="fa fa-upload" aria-hidden="true"></i> Subir', ['type' =>
                                 'submit', 'class' =>
                                 'btn btn-primary'] ) }}
-                                <a class="btn btn-danger" href="{{ route('publico.index') }}"><i class="fa fa-ban"
+                                <a class="btn btn-danger" href="{{ route('directivo.index') }}"><i class="fa fa-ban"
                                         aria-hidden="true"></i> Cancelar
                                 </a>
                             </div>

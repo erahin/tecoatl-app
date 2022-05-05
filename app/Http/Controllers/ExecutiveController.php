@@ -14,17 +14,16 @@ class ExecutiveController extends Controller
     }
     public function create()
     {
-        $folders = Storage::disk('s3')->directories('publico/');
+        $folders = Storage::disk('s3')->directories('directivo/');
         return view('DocumentExecutive.showForm', compact('folders'));
     }
-    public function storeFolder(Request $request, $path, $route)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => ['required', 'confirmed']
         ]);
-        $path = str_replace('-', '/', $path);
-        Storage::disk('s3')->makeDirectory($path . '/' . $request->name);
-        return redirect()->route($route);
+        Storage::disk('s3')->makeDirectory('directivo/' . $request->name);
+        return redirect()->route('directivo.index');
     }
     public function uploadFileForm($path)
     {
@@ -32,7 +31,7 @@ class ExecutiveController extends Controller
         $files = Storage::disk('s3')->allFiles($path . '/');
         return view('DocumentExecutive.upload-file', compact('path', 'files'));
     }
-    public function uploadPublicFile(Request $request, $path)
+    public function uploadExecutiveFile(Request $request, $path)
     {
         $request->validate([
             'files-upload' => ['required']
@@ -45,9 +44,9 @@ class ExecutiveController extends Controller
             Storage::disk('s3')->put($filePath, file_get_contents($file));
             set_time_limit(60);
         }
-        return redirect()->route('publico.index');
+        return redirect()->route('directivo.index');
     }
-    public function publicFilesList($path)
+    public function executiveFilesList($path)
     {
         $path = str_replace('-', '/', $path);
         $files = Storage::disk('s3')->allFiles($path . '/');
@@ -57,9 +56,9 @@ class ExecutiveController extends Controller
     {
         $path = str_replace('-', '/', $path);
         Storage::disk('s3')->deleteDirectory($path);
-        return redirect()->route('publico.index');
+        return redirect()->route('directivo.index');
     }
-    public function downloadPublicFile($folder, $subfolder, $file)
+    public function downloadExecutiveFile($folder, $subfolder, $file)
     {
         $pathToFile = Storage::disk('s3')->path($folder . '/' . $subfolder . '/' . $file);
         if (Storage::disk('s3')->exists($pathToFile)) {
@@ -68,7 +67,7 @@ class ExecutiveController extends Controller
             return view('errors.4032');
         }
     }
-    public function deletePublicFile($folder, $subfolder, $file)
+    public function deleteExecutiveFile($folder, $subfolder, $file)
     {
         Storage::disk('s3')->delete($folder . '/' . $subfolder . '/' . $file);
         return redirect()->route('publicFilesList', ['path' => $folder . '-' . $subfolder]);

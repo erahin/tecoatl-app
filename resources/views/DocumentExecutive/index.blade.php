@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Lista de carpetas
+                    <h1 class="text-center">Lista de carpetas directivas
                     </h1>
                     <div>
                         <div class="input-group d-flex justify-content-end">
@@ -27,12 +27,12 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap">
-                        {{-- @can('administrativos.create') --}}
-                        <a class="btn btn-primary my-2 ancla" href="{{ route('create') }}" role="button"><i
+                        @can('directivo.create')
+                        <a class="btn btn-primary my-2 ancla" href="{{ route('directivo.create') }}" role="button"><i
                                 class="fa fa-plus" aria-hidden="true"></i> Crear
                             carpeta</a>
-                        {{-- @endcan --}}
-                        <a class=" btn btn-secondary my-2" href="{{ route('publico.index') }}" role="button">
+                        @endcan
+                        <a class=" btn btn-secondary my-2" href="{{ route('directivo.index') }}" role="button">
                             <i class="fa fa-list" aria-hidden="true"></i> Lista completa</a>
                     </div>
                     <table class="table table-hover table-bordered" id="table">
@@ -53,16 +53,26 @@
                                         href="{{ route('publico.create', ['path' => str_replace('/', '-', $folder)]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
                                             aria-hidden="true"></i></a> --}}
+                                    {{-- @endcan --}}
+                                    @can('directivo.createUpload')
                                     <a title="Subir archivos"
-                                        href="{{ route('uploadFileForm', ['path' => str_replace('/', '-', $folder)]) }}"
+                                        href="{{ route('directivo.createUpload', ['path' => str_replace('/', '-', $folder)]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
-
+                                    @endcan
+                                    @can('directivo.fileList')
                                     <a title="Lista de archivos"
-                                        href="{{ route('publicFilesList', ['path' => str_replace('/', '-', $folder)]) }}"
+                                        href="{{ route('directivo.fileList', ['path' => str_replace('/', '-', $folder)]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-list-alt"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
+                                    @endcan
+                                    @can('directivo.destroy')
+                                    <a title="Eliminar"
+                                        onclick="return confirm( '¿Está seguro de eliminar {{ explode('/', $folder)[1] }}?') "
+                                        href="{{ route('directivo.destroy', ['path' => str_replace('/', '-', $folder)]) }}"
+                                        class="btn btn-danger ancla"><i class="fa fa-trash-o"
+                                            aria-hidden="true"></i></a>
+                                    @endcan
                                     {{-- @can('folderList')
                                     <a title="Lista de carpetas"
                                         href="{{ route('folderList', ['idfolder' => $folder->id]) }}"
@@ -75,11 +85,6 @@
                                             aria-hidden="true"></i></a>
                                     @endcan --}}
                                     {{-- @can('administrativos.destroy') --}}
-                                    <a title="Eliminar"
-                                        onclick="return confirm( '¿Está seguro de eliminar {{ explode('/', $folder)[1] }}?') "
-                                        href="{{ route('publico.destroy', ['path' => str_replace('/', '-', $folder)]) }}"
-                                        class="btn btn-danger ancla"><i class="fa fa-trash-o"
-                                            aria-hidden="true"></i></a>
                                     {{-- @endcan --}}
                                 </td>
                             </tr>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdministrativeController;
 use App\Http\Controllers\DocumentAdministrativeController;
+use App\Http\Controllers\ExecutiveController;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\ProjectByRegion;
 use App\Http\Controllers\ProjectController;
@@ -206,7 +207,7 @@ Route::resource('legal', LegalController::class)->middleware('auth')->except('sh
 Route::get('público', [PublicController::class, 'index'])->name('publico.index')->middleware('can:publico.index')->middleware('auth');
 Route::get('público/crear', [PublicController::class, 'create'])->name('createFolderPublic')->middleware('can:createFolderPublic')->middleware('auth');
 Route::post('público/store-carpeta', [PublicController::class, 'store'])->name('store')->middleware('can:createFolderPublic')->middleware('auth');
-Route::get('público/eliminar-carpeta/{path}', [PublicController::class, 'deleteFolder'])->name('publico.destroy')->middleware('can:destroy')->middleware('auth');
+Route::get('público/eliminar-carpeta/{path}', [PublicController::class, 'deleteFolder'])->name('publico.destroy')->middleware('can:publico.destroy')->middleware('auth');
 Route::get('público/subir-archivos/{path}', [PublicController::class, 'uploadFileForm'])->name('uploadFileForm')->middleware('can:uploadFileForm')->middleware('auth');
 Route::post('público/store-archivos/{path}', [PublicController::class, 'uploadPublicFile'])->name('uploadPublicFile')->middleware('can:uploadFileForm')->middleware('auth');
 Route::get('público/listar-archivos/{path}', [PublicController::class, 'publicFilesList'])->name('publicFilesList')->middleware('can:publicFilesList')->middleware('auth');
@@ -217,3 +218,12 @@ Route::get('público/eliminar/{folder}/{subfolder}/{file}', [PublicController::c
 /* -------------------------------------------------------------------------- */
 /*                               Route executive                              */
 /* -------------------------------------------------------------------------- */
+Route::get('directivo', [ExecutiveController::class, 'index'])->name('directivo.index')->middleware('can:directivo.index')->middleware('auth');
+Route::get('directivo/crear', [ExecutiveController::class, 'create'])->name('directivo.create')->middleware('can:directivo.create')->middleware('auth');
+Route::post('directivo/store', [ExecutiveController::class, 'store'])->name('directivo.store')->middleware('can:directivo.create')->middleware('auth');
+Route::get('directivo/subir-archivos/{path}', [ExecutiveController::class, 'uploadFileForm'])->name('directivo.createUpload')->middleware('can:directivo.createUpload')->middleware('auth');
+Route::post('directivo/store-archivos/{path}', [ExecutiveController::class, 'uploadExecutiveFile'])->name('directivo.upload')->middleware('can:directivo.upload')->middleware('auth');
+Route::get('directivo/listar-archivos/{path}', [ExecutiveController::class, 'executiveFilesList'])->name('directivo.fileList')->middleware('can:directivo.fileList')->middleware('auth');
+Route::get('directivo/descargar/{folder}/{subfolder}/{file}', [ExecutiveController::class, 'downloadExecutiveFile'])->name('directivo.download')->middleware('can:directivo.download')->middleware('auth');
+Route::get('directivo/eliminar/{folder}/{subfolder}/{file}', [ExecutiveController::class, 'deleteExecutiveFile'])->name('directivo.deleteFile')->middleware('can:directivo.deleteFile')->middleware('auth');
+Route::get('directivo/eliminar-carpeta/{path}', [ExecutiveController::class, 'deleteFolder'])->name('directivo.destroy')->middleware('can:directivo.destroy')->middleware('auth');
