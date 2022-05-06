@@ -143,18 +143,38 @@ class ExecutiveController extends Controller
             return redirect()->route('directivo.folder-list', ['path' => str_replace('/', '-', $previousPath)]);
         }
     }
-    public function downloadExecutiveFile($folder, $subfolder, $file)
+    public function downloadExecutiveFile($path)
     {
-        $pathToFile = Storage::disk('s3')->path($folder . '/' . $subfolder . '/' . $file);
+        $path = str_replace('+', '/', $path);
+        $pathToFile = Storage::disk('s3')->path($path);
         if (Storage::disk('s3')->exists($pathToFile)) {
             return Storage::disk('s3')->download($pathToFile);
         } else {
             return view('errors.4032');
         }
     }
-    public function deleteExecutiveFile($folder, $subfolder, $file)
+    public function deleteExecutiveFile($path)
     {
-        Storage::disk('s3')->delete($folder . '/' . $subfolder . '/' . $file);
-        return redirect()->route('directivo.fileList', ['path' => $folder . '-' . $subfolder]);
+        $path = str_replace('+', '/', $path);
+        $array = explode('/', $path);
+        Storage::disk('s3')->delete($path);
+        if (count($array) == 2) {
+            return redirect()->route('directivo.fileList', ['path' => str_replace('/', '-', $path)]);
+        } else {
+            $previousPath = "";
+            for ($i = 0; $i < count($array); $i++) {
+                if ($i == count($array) - 1) {
+                    $index = $i;
+                } else {
+                    $previousPath .= $array[$i] . '/';
+                }
+            }
+            $previousPath = rtrim($previousPath, '/');
+            // dd($previousPath);
+            $files = Storage::disk('s3')->files($path . '/');
+            // return view('DocumentExecutive.file-list', compact('path', 'files', 'index', 'previousPath', 'array'));
+            // executiveFilesList($path);
+            return redirect()->route('directivo.fileList', ['path' => str_replace('/', '-', $previousPath)]);
+        }
     }
 }

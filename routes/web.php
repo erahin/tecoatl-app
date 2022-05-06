@@ -224,8 +224,8 @@ Route::post('directivo/store', [ExecutiveController::class, 'store'])->name('dir
 Route::get('directivo/subir-archivos/{path}', [ExecutiveController::class, 'uploadFileForm'])->name('directivo.createUpload')->middleware('can:directivo.createUpload')->middleware('auth');
 Route::post('directivo/store-archivos/{path}', [ExecutiveController::class, 'uploadExecutiveFile'])->name('directivo.upload')->middleware('can:directivo.createUpload')->middleware('auth');
 Route::get('directivo/listar-archivos/{path}', [ExecutiveController::class, 'executiveFilesList'])->name('directivo.fileList')->middleware('can:directivo.fileList')->middleware('auth');
-Route::get('directivo/descargar/{folder}/{subfolder}/{file}', [ExecutiveController::class, 'downloadExecutiveFile'])->name('directivo.download')->middleware('can:directivo.download')->middleware('auth');
-Route::get('directivo/eliminar/{folder}/{subfolder}/{file}', [ExecutiveController::class, 'deleteExecutiveFile'])->name('directivo.deleteFile')->middleware('can:directivo.deleteFile')->middleware('auth');
+Route::get('directivo/descargar/{path}', [ExecutiveController::class, 'downloadExecutiveFile'])->name('directivo.download')->middleware('can:directivo.download')->middleware('auth');
+Route::get('directivo/eliminar/{path}', [ExecutiveController::class, 'deleteExecutiveFile'])->name('directivo.deleteFile')->middleware('can:directivo.deleteFile')->middleware('auth');
 Route::get('directivo/eliminar-carpeta/{path}', [ExecutiveController::class, 'deleteFolder'])->name('directivo.destroy')->middleware('can:directivo.destroy')->middleware('auth');
 /* Second Module */
 Route::get('directivo/crear-carpeta/{path}', [ExecutiveController::class, 'createFolder'])->name('directivo.create-subfolder')->middleware('auth');

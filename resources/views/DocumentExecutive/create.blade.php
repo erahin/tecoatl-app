@@ -65,7 +65,7 @@
                                 {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Crear', ['type' =>
                                 'submit', 'class' =>
                                 'btn btn-primary'] ) }}
-                                <a class="btn btn-danger" href="{{ route('publico.index') }}"><i class="fa fa-ban"
+                                <a class="btn btn-danger" href="{{ route('directivo.index') }}"><i class="fa fa-ban"
                                         aria-hidden="true"></i> Cancelar
                                 </a>
                             </div>

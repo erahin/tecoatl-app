@@ -31,7 +31,7 @@
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
-                    <h2 class="h6 text-center">Ruta: Directivo/{{ explode('/', $path)[$index] }}/</h2>
+                    <h2 class="h6 text-center">Ruta: {{ $path }}</h2>
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>
