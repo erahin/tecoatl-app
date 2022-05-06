@@ -75,7 +75,6 @@ class ExecutiveController extends Controller
         }
         $previousPath = rtrim($previousPath, '/');
         $files = Storage::disk('s3')->files($path . '/');
-        // dd($files);
         return view('DocumentExecutive.upload-file', compact('path', 'files', 'index', 'previousPath', 'array'));
     }
     public function uploadExecutiveFile(Request $request, $path)
@@ -95,32 +94,54 @@ class ExecutiveController extends Controller
         if (count($array) == 2) {
             return redirect()->route('directivo.index');
         } else {
-            // $index = -1;
             $previousPath = "";
             for ($i = 0; $i < count($array); $i++) {
                 if ($i == count($array) - 1) {
                     $index = $i;
-                    // $previousPath .= $array[$i] . '/';
                 } else {
                     $previousPath .= $array[$i] . '/';
                 }
             }
             $previousPath = rtrim($previousPath, '/');
-            // dd($previousPath);
             return redirect()->route('directivo.folder-list', ['path' => str_replace('/', '-', $previousPath)]);
         }
     }
     public function executiveFilesList($path)
     {
         $path = str_replace('-', '/', $path);
+        $array = explode('/', $path);
+        $index = -1;
+        $previousPath = "";
+        for ($i = 0; $i < count($array); $i++) {
+            if ($i == count($array) - 1) {
+                $index = $i;
+            } else {
+                $previousPath .= $array[$i] . '/';
+            }
+        }
+        $previousPath = rtrim($previousPath, '/');
         $files = Storage::disk('s3')->files($path . '/');
-        return view('DocumentExecutive.file-list', compact('path', 'files'));
+        return view('DocumentExecutive.file-list', compact('path', 'files', 'index', 'previousPath', 'array'));
     }
     public function deleteFolder($path)
     {
         $path = str_replace('-', '/', $path);
+        $array = explode('/', $path);
         Storage::disk('s3')->deleteDirectory($path);
-        return redirect()->route('directivo.index');
+        if (count($array) == 2) {
+            return redirect()->route('directivo.index');
+        } else {
+            $previousPath = "";
+            for ($i = 0; $i < count($array); $i++) {
+                if ($i == count($array) - 1) {
+                    $index = $i;
+                } else {
+                    $previousPath .= $array[$i] . '/';
+                }
+            }
+            $previousPath = rtrim($previousPath, '/');
+            return redirect()->route('directivo.folder-list', ['path' => str_replace('/', '-', $previousPath)]);
+        }
     }
     public function downloadExecutiveFile($folder, $subfolder, $file)
     {

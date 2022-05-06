@@ -52,11 +52,15 @@
                                             aria-hidden="true"></i></a>
                                     {{-- @endcan --}}
                                     {{-- @can('fileList') --}}
-                                    <a title="Lista de archivos" href="" class="btn btn-primary ancla"><i
-                                            class="fa fa-list-alt" aria-hidden="true"></i></a>
+                                    <a title="Lista de archivos"
+                                        href="{{ route('directivo.fileList', ['path' => str_replace('/', '-', $directorie)]) }}"
+                                        class="btn btn-primary ancla"><i class="fa fa-list-alt"
+                                            aria-hidden="true"></i></a>
                                     {{-- @endcan --}}
                                     {{-- @can('deleteFolder') --}}
-                                    <a title="Eliminar carpeta" href="" class="btn btn-outline-danger"
+                                    <a title="Eliminar carpeta"
+                                        href="{{ route('directivo.destroy', ['path' => str_replace('/', '-', $directorie)]) }}"
+                                        class="btn btn-outline-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $directorie)[$index+1] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     {{-- @endcan --}}

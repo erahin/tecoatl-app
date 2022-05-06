@@ -27,12 +27,19 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-start flex-wrap mb-2">
+                        @if (count($array) == 2)
                         <a class="btn btn-outline-primary" href="{{ route('directivo.index') }}"><i
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
+                        @else
+                        <a class="btn btn-outline-primary"
+                            href="{{ route('directivo.folder-list', ['path' => str_replace('/', '-', $previousPath)]) }}"><i
+                                class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
+                        </a>
+                        @endif
                     </div>
                     @if (count($files) > 0)
-                    <h2 class="h6 text-center">Ruta: Directivo/{{ explode('/', $path)[1] }}/</h2>
+                    <h2 class="h6 text-center">Ruta: {{ $path }}/</h2>
                     @endif
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
@@ -45,23 +52,19 @@
                             @if (count($files) != 0)
                             @foreach ($files as $file)
                             <tr>
-                                <td>{{ explode('/', $file)[2] }}</td>
+                                <td>{{ explode('/', $file)[$index+1] }}</td>
                                 <td class="d-flex justify-content-start">
                                     <a title="Abrir archivo" target="_blank"
                                         href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}"
                                         class="btn btn-secondary ancla"><i class="fa fa-external-link"
                                             aria-hidden="true"></i></a>
                                     @can('directivo.download')
-                                    <a title="Descargar archivo"
-                                        href="{{ route('directivo.download', ['folder' => explode('/', $file)[0],'subfolder' => explode('/', $file)[1], 'file' => explode('/', $file)[2]]) }}"
-                                        class="btn btn-primary ancla"><i class="fa fa-download"
+                                    <a title="Descargar archivo" class="btn btn-primary ancla"><i class="fa fa-download"
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('directivo.deleteFile')
-                                    <a title="Eliminar archivo"
-                                        href="{{ route('directivo.deleteFile',['folder' => explode('/', $file)[0],'subfolder' => explode('/', $file)[1], 'file' => explode('/', $file)[2]]) }}"
-                                        class="btn btn-danger"
-                                        onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[2] }} ?') "><i
+                                    <a title="Eliminar archivo" class="btn btn-danger"
+                                        onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[$index+1] }} ?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     @endcan
                                 </td>
