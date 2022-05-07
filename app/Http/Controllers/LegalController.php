@@ -13,9 +13,12 @@ class LegalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $legals = Legal::paginate(10);
+        if ($request->search) {
+            $legals = Legal::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+        }
         return view('Legal.index', compact('legals'));
     }
 
@@ -105,7 +108,7 @@ class LegalController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                              Delete directory                              */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->deleteDirectory('legal/' . $id . '/');
+        Storage::disk('s3')->deleteDirectory('legal/' . $legal->name . '/');
         return redirect()->route('legal.index');
     }
 }
