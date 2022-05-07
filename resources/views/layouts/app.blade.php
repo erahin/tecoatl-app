@@ -72,13 +72,6 @@
                         </li>
                         @endif
                         @else
-                        @can('directivo.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('directivo.index') }}"><i class="fa fa-star"
-                                    aria-hidden="true"></i>
-                                {{ __('directivo') }}</a>
-                        </li>
-                        @endcan
                         @can('publico.index')
                         <li class="nav-item text-uppercase gtr-menu__li">
                             <a class="nav-link" href="{{ route('publico.index') }}"><i class="fa fa-users fa__li"
@@ -219,6 +212,14 @@
                                     </a>
                                 </div>
                                 @endcan
+                                @can('config')
+                                <div class="gtr-menu__li">
+                                    <hr class="dropdown-divider">
+                                    <a class="nav-link" href="{{ route('directivo.index') }}"><i class="fa fa-star"
+                                            aria-hidden="true"></i>
+                                        {{ __('directivo') }}</a>
+                                </div>
+                                @endcan
                             </div>
                         </li>
                         @endcan
@@ -242,7 +243,6 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             <style>
                 main {

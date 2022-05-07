@@ -5,31 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ExecutiveController extends Controller
+class DocumentLegalController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('can:config');
-    }
-
-    public function index()
-    {
-        $folders = Storage::disk('s3')->directories('directivo/');
-        return view('DocumentExecutive.index', compact('folders'));
-    }
-    public function create()
-    {
-        $folders = Storage::disk('s3')->directories('directivo/');
-        return view('DocumentExecutive.showForm', compact('folders'));
-    }
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', 'confirmed']
-        ]);
-        Storage::disk('s3')->makeDirectory('directivo/' . $request->name);
-        return redirect()->route('directivo.index');
-    }
     public function createFolder($path)
     {
         $path = str_replace('-', '/', $path);
@@ -41,7 +18,7 @@ class ExecutiveController extends Controller
             }
         }
         $folders = Storage::disk('s3')->directories($path . '/');
-        return view('DocumentExecutive.create', compact('path', 'folders', 'index'));
+        return view('DocumentLegal.create', compact('path', 'folders', 'index'));
     }
     public function storeFolder(Request $request, $path)
     {
@@ -50,7 +27,7 @@ class ExecutiveController extends Controller
         ]);
         $path = str_replace('-', '/', $path);
         Storage::disk('s3')->makeDirectory($path . '/' . $request->name);
-        return redirect()->route('directivo.index');
+        return redirect()->route('legal.index');
     }
     public function folderList($path)
     {
@@ -63,7 +40,7 @@ class ExecutiveController extends Controller
             }
         }
         $directories = Storage::disk('s3')->directories($path);
-        return view('DocumentExecutive.index-folder', compact('directories', 'index', 'path'));
+        return view('DocumentLegal.index-folder', compact('directories', 'index', 'path'));
     }
     public function uploadFileForm($path)
     {
@@ -80,9 +57,9 @@ class ExecutiveController extends Controller
         }
         $previousPath = rtrim($previousPath, '/');
         $files = Storage::disk('s3')->files($path . '/');
-        return view('DocumentExecutive.upload-file', compact('path', 'files', 'index', 'previousPath', 'array'));
+        return view('DocumentLegal.upload-file', compact('path', 'files', 'index', 'previousPath', 'array'));
     }
-    public function uploadExecutiveFile(Request $request, $path)
+    public function uploadLegalFile(Request $request, $path)
     {
         $request->validate([
             'files-upload' => ['required']
@@ -97,7 +74,7 @@ class ExecutiveController extends Controller
         }
         $array = explode('/', $path);
         if (count($array) == 2) {
-            return redirect()->route('directivo.index');
+            return redirect()->route('legal.index');
         } else {
             $previousPath = "";
             for ($i = 0; $i < count($array); $i++) {
@@ -108,10 +85,10 @@ class ExecutiveController extends Controller
                 }
             }
             $previousPath = rtrim($previousPath, '/');
-            return redirect()->route('directivo.folder-list', ['path' => str_replace('/', '-', $previousPath)]);
+            return redirect()->route('legal.folder-list', ['path' => str_replace('/', '-', $previousPath)]);
         }
     }
-    public function executiveFilesList($path)
+    public function legalFilesList($path)
     {
         $path = str_replace('-', '/', $path);
         $array = explode('/', $path);
@@ -126,7 +103,7 @@ class ExecutiveController extends Controller
         }
         $previousPath = rtrim($previousPath, '/');
         $files = Storage::disk('s3')->files($path . '/');
-        return view('DocumentExecutive.file-list', compact('path', 'files', 'index', 'previousPath', 'array'));
+        return view('DocumentLegal.file-list', compact('path', 'files', 'index', 'previousPath', 'array'));
     }
     public function deleteFolder($path)
     {
@@ -134,7 +111,7 @@ class ExecutiveController extends Controller
         $array = explode('/', $path);
         Storage::disk('s3')->deleteDirectory($path);
         if (count($array) == 2) {
-            return redirect()->route('directivo.index');
+            return redirect()->route('legal.index');
         } else {
             $previousPath = "";
             for ($i = 0; $i < count($array); $i++) {
@@ -145,10 +122,10 @@ class ExecutiveController extends Controller
                 }
             }
             $previousPath = rtrim($previousPath, '/');
-            return redirect()->route('directivo.folder-list', ['path' => str_replace('/', '-', $previousPath)]);
+            return redirect()->route('legal.folder-list', ['path' => str_replace('/', '-', $previousPath)]);
         }
     }
-    public function downloadExecutiveFile($path)
+    public function downloadLegalFile($path)
     {
         $path = str_replace('+', '/', $path);
         $pathToFile = Storage::disk('s3')->path($path);
@@ -158,13 +135,13 @@ class ExecutiveController extends Controller
             return view('errors.4032');
         }
     }
-    public function deleteExecutiveFile($path)
+    public function deleteLegalFile($path)
     {
         $path = str_replace('+', '/', $path);
         $array = explode('/', $path);
         Storage::disk('s3')->delete($path);
         if (count($array) == 2) {
-            return redirect()->route('directivo.fileList', ['path' => str_replace('/', '-', $path)]);
+            return redirect()->route('legal.fileList', ['path' => str_replace('/', '-', $path)]);
         } else {
             $previousPath = "";
             for ($i = 0; $i < count($array); $i++) {
@@ -175,7 +152,8 @@ class ExecutiveController extends Controller
                 }
             }
             $previousPath = rtrim($previousPath, '/');
-            return redirect()->route('directivo.fileList', ['path' => str_replace('/', '-', $previousPath)]);
+            $files = Storage::disk('s3')->files($path . '/');
+            return redirect()->route('legal.fileList', ['path' => str_replace('/', '-', $previousPath)]);
         }
     }
 }

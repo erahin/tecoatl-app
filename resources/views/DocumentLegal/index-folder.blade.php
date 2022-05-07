@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Lista de carpetas directivas
+                    <h1 class="text-center">Lista de carpetas
                     </h1>
                     <div>
                         <div class="input-group d-flex justify-content-end">
@@ -26,15 +26,12 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <div class="d-flex justify-content-start flex-wrap">
-                        @can('directivo.create')
-                        <a class="btn btn-primary my-2 ancla" href="{{ route('directivo.create') }}" role="button"><i
-                                class="fa fa-plus" aria-hidden="true"></i> Crear
-                            carpeta</a>
-                        @endcan
-                        <a class=" btn btn-secondary my-2" href="{{ route('directivo.index') }}" role="button">
-                            <i class="fa fa-list" aria-hidden="true"></i> Lista completa</a>
+                    <div class="d-flex justify-content-start flex-wrap mb-2">
+                        <a class="btn btn-outline-primary" href="{{ route('legal.index') }}"><i
+                                class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
+                        </a>
                     </div>
+                    <h2 class="h6 text-center">Ruta: <span class="text-capitalize">{{ $path }}/</span></h2>
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>
@@ -43,48 +40,48 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($folders) != 0)
-                            @foreach ($folders as $folder)
+                            @if (count($directories) != 0)
+                            @foreach ($directories as $directorie)
                             <tr>
-                                <td>{{ explode('/', $folder)[1] }}</td>
+                                <td>{{ explode('/', $directorie)[$index+1] }}</td>
                                 <td class="d-flex justify-content-start">
-                                    @can('directivo.create')
+                                    {{-- @can('createFolder') --}}
                                     <a title="Nueva carpeta"
-                                        href="{{ route('directivo.create-subfolder', ['path' => str_replace('/', '-', $folder)]) }}"
+                                        href="{{ route('legal.create-subfolder', ['path' => str_replace('/', '-', $directorie)]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
                                             aria-hidden="true"></i></a>
-                                    @endcan
-                                    @can('directivo.index')
+                                    {{-- @endcan --}}
+                                    {{-- @can('directivo.index') --}}
                                     <a title="Lista de carpetas"
-                                        href="{{ route('directivo.folder-list', ['path' => str_replace('/', '-', $folder)]) }}"
+                                        href="{{ route('legal.folder-list', ['path' => str_replace('/', '-', $directorie)]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-archive"
                                             aria-hidden="true"></i></a>
-                                    @endcan
-                                    @can('directivo.createUpload')
+                                    {{-- @endcan --}}
+                                    {{-- @can('showFormUploadFile') --}}
                                     <a title="Subir archivos"
-                                        href="{{ route('directivo.createUpload', ['path' => str_replace('/', '-', $folder)]) }}"
+                                        href="{{ route('legal.createUpload', ['path' => str_replace('/', '-', $directorie)]) }}"
                                         class="btn btn-success ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
-                                    @endcan
-                                    @can('directivo.fileList')
+                                    {{-- @endcan --}}
+                                    {{-- @can('fileList') --}}
                                     <a title="Lista de archivos"
-                                        href="{{ route('directivo.fileList', ['path' => str_replace('/', '-', $folder)]) }}"
+                                        href="{{ route('legal.fileList', ['path' => str_replace('/', '-', $directorie)]) }}"
                                         class="btn btn-outline-primary ancla"><i class="fa fa-list-alt"
                                             aria-hidden="true"></i></a>
-                                    @endcan
-                                    @can('directivo.destroy')
-                                    <a title="Eliminar"
-                                        onclick="return confirm( '¿Está seguro de eliminar {{ explode('/', $folder)[1] }}?') "
-                                        href="{{ route('directivo.destroy', ['path' => str_replace('/', '-', $folder)]) }}"
-                                        class="btn btn-danger ancla"><i class="fa fa-trash-o"
-                                            aria-hidden="true"></i></a>
-                                    @endcan
+                                    {{-- @endcan --}}
+                                    {{-- @can('deleteFolder') --}}
+                                    <a title="Eliminar carpeta"
+                                        href="{{ route('legal.destroy-subfolder', ['path' => str_replace('/', '-', $directorie)]) }}"
+                                        class="btn btn-outline-danger"
+                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $directorie)[$index+1] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
+                                            class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    {{-- @endcan --}}
                                 </td>
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="4">No existen carpetas.</td>
+                                <td colspan="4">No existen directorios.</td>
                             </tr>
                             @endif
                         </tbody>

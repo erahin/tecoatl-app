@@ -23,7 +23,7 @@ class LegalSeeder extends Seeder
         ]);
         Storage::disk('s3')->deleteDirectory('legal');
         Storage::disk('s3')->makeDirectory('legal');
-        Storage::disk('s3')->makeDirectory('legal/1');
-        Storage::disk('s3')->makeDirectory('legal/2');
+        Storage::disk('s3')->makeDirectory('legal/Corporativa');
+        Storage::disk('s3')->makeDirectory('legal/Operativa');
     }
 }
