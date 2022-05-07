@@ -12,13 +12,17 @@ class DocumentLegalController extends Controller
         $path = str_replace('-', '/', $path);
         $array = explode('/', $path);
         $index = -1;
+        $previousPath = "";
         for ($i = 0; $i < count($array); $i++) {
             if ($i == count($array) - 1) {
                 $index = $i;
+            } else {
+                $previousPath .= $array[$i] . '/';
             }
         }
+        $previousPath = rtrim($previousPath, '/');
         $folders = Storage::disk('s3')->directories($path . '/');
-        return view('DocumentLegal.create', compact('path', 'folders', 'index'));
+        return view('DocumentLegal.create', compact('path', 'folders', 'index', 'previousPath', 'array'));
     }
     public function storeFolder(Request $request, $path)
     {
@@ -27,20 +31,43 @@ class DocumentLegalController extends Controller
         ]);
         $path = str_replace('-', '/', $path);
         Storage::disk('s3')->makeDirectory($path . '/' . $request->name);
-        return redirect()->route('legal.index');
+        $array = explode('/', $path);
+        if (count($array) == 2) {
+            return redirect()->route('legal.index');
+        } else {
+            $previousPath = "";
+            for ($i = 0; $i < count($array); $i++) {
+                if ($i == count($array) - 1) {
+                    $index = $i;
+                } else {
+                    $previousPath .= $array[$i] . '/';
+                }
+            }
+            $previousPath = rtrim($previousPath, '/');
+            return redirect()->route('legal.folder-list', ['path' => str_replace('/', '-', $previousPath)]);
+        }
     }
     public function folderList($path)
     {
         $path = str_replace('-', '/', $path);
         $array = explode('/', $path);
         $index = -1;
+        $previousPath = "";
         for ($i = 0; $i < count($array); $i++) {
             if ($i == count($array) - 1) {
                 $index = $i;
+            } else {
+                $previousPath .= $array[$i] . '/';
             }
         }
+        $previousPath = rtrim($previousPath, '/');
+        if (count($array) == 2) {
+            $homepath = "";
+        } else {
+            $homepath = explode('/', $previousPath)[0] . '/' . explode('/', $previousPath)[1];
+        }
         $directories = Storage::disk('s3')->directories($path);
-        return view('DocumentLegal.index-folder', compact('directories', 'index', 'path'));
+        return view('DocumentLegal.index-folder', compact('directories', 'index', 'path', 'previousPath', 'array', 'homepath'));
     }
     public function uploadFileForm($path)
     {
@@ -102,8 +129,13 @@ class DocumentLegalController extends Controller
             }
         }
         $previousPath = rtrim($previousPath, '/');
+        if (count($array) == 2) {
+            $homepath = "";
+        } else {
+            $homepath = explode('/', $previousPath)[0] . '/' . explode('/', $previousPath)[1];
+        }
         $files = Storage::disk('s3')->files($path . '/');
-        return view('DocumentLegal.file-list', compact('path', 'files', 'index', 'previousPath', 'array'));
+        return view('DocumentLegal.file-list', compact('path', 'files', 'index', 'previousPath', 'array', 'homepath'));
     }
     public function deleteFolder($path)
     {

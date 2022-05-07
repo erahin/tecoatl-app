@@ -32,15 +32,17 @@
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                         @else
-                        <a class="btn btn-outline-primary"
+                        <a class="btn btn-outline-primary ancla"
                             href="{{ route('legal.folder-list', ['path' => str_replace('/', '-', $previousPath)]) }}"><i
                                 class=" fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
+                        <a class="btn btn-outline-primary"
+                            href="{{ route('legal.folder-list', ['path' => str_replace('/', '-', $homepath)]) }}"><i
+                                class="fa fa-home" aria-hidden="true"></i> Directorio principal
+                        </a>
                         @endif
                     </div>
-                    {{-- @if (count($files) > 0) --}}
                     <h2 class="h6 text-center">Ruta: <span class="text-capitalize">{{ $path }}/</span></h2>
-                    {{-- @endif --}}
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>

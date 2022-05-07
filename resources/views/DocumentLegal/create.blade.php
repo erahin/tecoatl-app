@@ -65,9 +65,16 @@
                                 {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Crear', ['type' =>
                                 'submit', 'class' =>
                                 'btn btn-primary'] ) }}
+                                @if (count($array) == 2)
                                 <a class="btn btn-danger" href="{{ route('legal.index') }}"><i class="fa fa-ban"
                                         aria-hidden="true"></i> Cancelar
                                 </a>
+                                @else
+                                <a class="btn btn-danger"
+                                    href="{{ route('legal.folder-list', ['path' => str_replace('/', '-', $previousPath)]) }}"><i
+                                        class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                                </a>
+                                @endif
                             </div>
                         </div>
                     </form>
