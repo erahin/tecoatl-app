@@ -58,18 +58,18 @@
                                         href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}"
                                         class="btn btn-secondary ancla"><i class="fa fa-external-link"
                                             aria-hidden="true"></i></a>
-                                    @can('directivo.download')
+                                    {{-- @can('directivo.download') --}}
                                     <a title="Descargar archivo"
                                         href="{{ route('directivo.download', ['path' => str_replace('/', '+', $file)]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-download"
                                             aria-hidden="true"></i></a>
-                                    @endcan
-                                    @can('directivo.deleteFile')
+                                    {{-- @endcan --}}
+                                    {{-- @can('directivo.deleteFile') --}}
                                     <a title="Eliminar archivo" class="btn btn-danger"
                                         href="{{ route('directivo.deleteFile', ['path' => str_replace('/', '+', $file)]) }}"
                                         onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[$index+1] }} ?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    @endcan
+                                    {{-- @endcan --}}
                                 </td>
                             </tr>
                             @endforeach

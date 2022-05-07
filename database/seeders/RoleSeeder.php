@@ -71,10 +71,18 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'operFile', 'description' => 'Abrir archivo de una carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
         Permission::create(['name' => 'downloadFileFolder', 'description' => 'Descargar archivo de una carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
         Permission::create(['name' => 'deleteFileFolder', 'description' => 'Eliminar archivo de una carpeta administrativa'])->syncRoles([$role1, $role6, $role4]);
-        /* Legal Module */
+        // /* Legal Module */
         Permission::create(['name' => 'legal.index', 'description' => 'Ver lista de departamentos legales'])->syncRoles([$role1, $role4, $role8]);
-        Permission::create(['name' => 'legal.create', 'description' => 'Crear un nuevo departamento legal'])->syncRoles([$role1, $role4, $role8]);
-        Permission::create(['name' => 'legal.destroy', 'description' => 'Eliminar un departamento legal'])->syncRoles([$role1, $role4, $role8]);
+        Permission::create(['name' => 'legal.create', 'description' => 'Crear un nuevo departamento legal'])->syncRoles([$role4, $role8]);
+        Permission::create(['name' => 'legal.edit', 'description' => 'Editar departamento legal'])->syncRoles([$role4, $role8]);
+        Permission::create(['name' => 'legal.destroy', 'description' => 'Eliminar un departamento legal'])->syncRoles([$role4, $role8]);
+        Permission::create(['name' => 'legal.folder-list', 'description' => 'Ver lista de carpetas legales'])->syncRoles([$role1, $role4, $role8]);
+        Permission::create(['name' => 'legal.create-subfolder', 'description' => 'Crear una carpeta legal'])->syncRoles([$role1, $role4, $role8]);
+        Permission::create(['name' => 'legal.createUpload', 'description' => 'Subir archivos a una carpeta legal'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'legal.fileList', 'description' => 'Listar archivos de una carpeta legal'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'legal.destroy-folder', 'description' => 'Eliminar una carpeta legal'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'legal.download', 'description' => 'Descargar archivo de una carpeta legal'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'legal.deleteFile', 'description' => 'Eliminar archivo de una carpeta legal'])->syncRoles([$role1, $role4]);
         /* Public Module */
         Permission::create(['name' => 'publico.index', 'description' => 'Ver lista de carpetas públicas'])->syncRoles([$role1, $role2, $role4, $role6, $role8]);
         Permission::create(['name' => 'createFolderPublic', 'description' => 'Crear una carpeta pública'])->syncRoles([$role1, $role4]);
@@ -83,13 +91,5 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'publico.destroy', 'description' => 'Eliminar una carpeta pública'])->syncRoles([$role1, $role4]);
         Permission::create(['name' => 'downloadPublicFile', 'description' => 'Descargar archivo de una carpeta pública'])->syncRoles([$role1, $role2, $role4, $role6, $role8]);
         Permission::create(['name' => 'deletePublicFile', 'description' => 'Eliminar archivo de una carpeta pública'])->syncRoles([$role1, $role4]);
-        /* Executive Module */
-        Permission::create(['name' => 'directivo.index', 'description' => 'Ver lista de carpetas directivas'])->syncRoles([$role1, $role4]);
-        Permission::create(['name' => 'directivo.create', 'description' => 'Crear una carpeta directiva'])->syncRoles([$role1, $role4]);
-        Permission::create(['name' => 'directivo.createUpload', 'description' => 'Subir archivos a una carpeta directiva'])->syncRoles([$role1, $role4]);
-        Permission::create(['name' => 'directivo.fileList', 'description' => 'Listar archivos de una carpeta directiva'])->syncRoles([$role1, $role4]);
-        Permission::create(['name' => 'directivo.destroy', 'description' => 'Eliminar una carpeta directiva'])->syncRoles([$role1, $role4]);
-        Permission::create(['name' => 'directivo.download', 'description' => 'Descargar archivo de una carpeta directiva'])->syncRoles([$role1, $role4]);
-        Permission::create(['name' => 'directivo.deleteFile', 'description' => 'Eliminar archivo de una carpeta directiva'])->syncRoles([$role1, $role4]);
     }
 }
