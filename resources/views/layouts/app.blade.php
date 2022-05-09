@@ -93,9 +93,13 @@
                                         __('Administración') }}</a>
                                 </div>
                                 @endcan
+                                @can('administrativos.index')
+                                @can('legal.index')
+                                <hr class="dropdown-divider">
+                                @endcan
+                                @endcan
                                 @can('legal.index')
                                 <div class="gtr-menu__li">
-                                    <hr class="dropdown-divider">
                                     <a class="nav-link" href="{{ route('legal.index') }}"><i
                                             class="fa fa-university fa__li" aria-hidden="true"></i>
                                         {{ __('legal') }}</a>
