@@ -209,8 +209,8 @@ Route::get('legal/descargar/{path}', [DocumentLegalController::class, 'downloadL
 Route::get('legal/eliminar/{path}', [DocumentLegalController::class, 'deleteLegalFile'])->name('legal.deleteFile')->middleware('can:legal.deleteFile')->middleware('auth');
 Route::get('legal/eliminar-carpeta/{path}', [DocumentLegalController::class, 'deleteFolder'])->name('legal.destroy-subfolder')->middleware('can:legal.destroy-folder')->middleware('auth');
 /* Second */
-Route::get('legal/crear-carpeta/{path}', [DocumentLegalController::class, 'createFolder'])->name('legal.create-subfolder')->middleware('auth');
-Route::post('legal/store-carpeta/{path}', [DocumentLegalController::class, 'storeFolder'])->name('legal.create-subfolder')->middleware('auth');
+Route::get('legal/crear-carpeta/{path}', [DocumentLegalController::class, 'createFolder'])->name('legal.create-subfolder')->middleware('can:legal.create-subfolder')->middleware('auth');
+Route::post('legal/store-carpeta/{path}', [DocumentLegalController::class, 'storeFolder'])->name('legal.store-subfolder')->middleware('can:legal.create-subfolder')->middleware('auth');
 Route::get('legal/lista-carpetas/{path}', [DocumentLegalController::class, 'folderList'])->name('legal.folder-list')->middleware('auth');
 
 /* -------------------------------------------------------------------------- */

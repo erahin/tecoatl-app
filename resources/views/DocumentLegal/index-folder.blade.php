@@ -56,37 +56,37 @@
                             <tr>
                                 <td>{{ explode('/', $directorie)[$index+1] }}</td>
                                 <td class="d-flex justify-content-start">
-                                    {{-- @can('createFolder') --}}
+                                    @can('legal.create-subfolder')
                                     <a title="Nueva carpeta"
                                         href="{{ route('legal.create-subfolder', ['path' => str_replace('/', '-', $directorie)]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('directivo.index') --}}
+                                    @endcan
+                                    @can('legal.folder-list')
                                     <a title="Lista de carpetas"
                                         href="{{ route('legal.folder-list', ['path' => str_replace('/', '-', $directorie)]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-archive"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('showFormUploadFile') --}}
+                                    @endcan
+                                    @can('legal.createUpload')
                                     <a title="Subir archivos"
                                         href="{{ route('legal.createUpload', ['path' => str_replace('/', '-', $directorie)]) }}"
                                         class="btn btn-success ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('fileList') --}}
+                                    @endcan
+                                    @can('legal.fileList')
                                     <a title="Lista de archivos"
                                         href="{{ route('legal.fileList', ['path' => str_replace('/', '-', $directorie)]) }}"
                                         class="btn btn-outline-primary ancla"><i class="fa fa-list-alt"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('deleteFolder') --}}
+                                    @endcan
+                                    @can('legal.destroy-folder')
                                     <a title="Eliminar carpeta"
                                         href="{{ route('legal.destroy-subfolder', ['path' => str_replace('/', '-', $directorie)]) }}"
                                         class="btn btn-outline-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $directorie)[$index+1] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

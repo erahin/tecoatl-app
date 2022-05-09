@@ -16,7 +16,7 @@ class AdministrativeController extends Controller
         $this->middleware('can:administrativos.index')->only('index');
         $this->middleware('can:administrativos.create')->only('create', 'store');
         $this->middleware('can:administrativos.edit')->only('edit', 'update');
-        $this->middleware('can:administrativos.destoy')->only('destoy');
+        $this->middleware('can:administrativos.destroy')->only('destroy');
     }
     /**
      * Display a listing of the resource.

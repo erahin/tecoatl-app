@@ -16,7 +16,7 @@ class ProjectController extends Controller
     {
         $this->middleware('can:proyectos.create')->only('store');
         $this->middleware('can:proyectos.edit')->only('edit', 'update');
-        $this->middleware('can:proyectos.destoy')->only('destoy');
+        $this->middleware('can:proyectos.destroy')->only('destroy');
     }
     public function store(Request $request)
     {

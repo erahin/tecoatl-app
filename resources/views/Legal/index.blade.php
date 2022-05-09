@@ -47,30 +47,30 @@
                             <tr>
                                 <td>{{ $legal->name }}</td>
                                 <td class="d-flex justify-content-start">
-                                    {{-- @can('createFolder') --}}
+                                    @can('legal.create-subfolder')
                                     <a title="Nueva carpeta"
                                         href="{{ route('legal.create-subfolder', ['path' => 'legal'. '-' . $legal->name]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('directivo.index') --}}
+                                    @endcan
+                                    @can('legal.fileList')
                                     <a title="Lista de carpetas"
                                         href="{{ route('legal.folder-list', ['path' => 'legal'. '-' . $legal->name]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-archive"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('directivo.createUpload') --}}
+                                    @endcan
+                                    @can('legal.createUpload')
                                     <a title="Subir archivos"
                                         href="{{ route('legal.createUpload', ['path' => 'legal'. '-' . $legal->name]) }}"
-                                        class="btn btn-success ancla"> <i class="fa fa-upload"
+                                        class="btn btn-outline-success ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('folderList') --}}
+                                    @endcan
+                                    @can('legal.createUpload')
                                     <a title="Lista de archivos"
                                         href="{{ route('legal.fileList', ['path' => 'legal'. '-' . $legal->name]) }}"
                                         class="btn btn-outline-primary ancla"><i class="fa fa-list-alt"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
+                                    @endcan
                                     @can('legal.edit')
                                     <a title="Editar" href="{{ route('legal.edit', $legal->id) }}"
                                         class="btn btn-success ancla"><i class="fa fa-pencil-square-o"

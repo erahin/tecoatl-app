@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Storage;
 
 class LegalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('can:legal.index')->only('index');
+        $this->middleware('can:legal.create')->only('create', 'store');
+        $this->middleware('can:legal.edit')->only('edit', 'update');
+        $this->middleware('can:legal.destroy')->only('destroy');
+    }
     public function index(Request $request)
     {
         $legals = Legal::paginate(10);
@@ -22,22 +24,11 @@ class LegalController extends Controller
         return view('Legal.index', compact('legals'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('Legal.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -54,56 +45,35 @@ class LegalController extends Controller
         return redirect()->route('legal.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $legal = Legal::find($id);
+        if ($legal == null) {
+            return view('errors.4032');
+        }
         return view('Legal.edit', compact('legal'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required'
         ]);
         $legal = Legal::find($id);
+        if ($legal == null) {
+            return view('errors.4032');
+        }
         $legal->name = $request->name;
         $legal->save();
         return redirect()->route('legal.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $legal = Legal::find($id);
+        if ($legal == null) {
+            return view('errors.4032');
+        }
         $legal->delete();
         /* -------------------------------------------------------------------------- */
         /*                              Delete directory                              */
