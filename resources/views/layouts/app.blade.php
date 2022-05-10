@@ -73,19 +73,19 @@
                         @endif
                         @else
                         @can('publico.index')
-                        <li class="nav-item text-uppercase gtr-menu__li">
-                            <a class="nav-link" href="{{ route('publico.index') }}"><i class="fa fa-users fa__li"
-                                    aria-hidden="true"></i>
+                        <li class="nav-item text-uppercase gtr-menu__li" id="li1">
+                            <a id="a1" class="nav-link" href="{{ route('publico.index') }}"><i
+                                    class="fa fa-users fa__li" aria-hidden="true"></i>
                                 {{ __('Público') }}</a>
                         </li>
                         @endcan
                         @can('departaments.show')
-                        <li class="nav-item dropdown text-uppercase">
-                            <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <li class="nav-item dropdown text-uppercase" id="li2">
+                            <a id="a2" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" v-pre>
                                 <i class="fa fa-building fa__li" aria-hidden="true"></i> {{ 'departamentos' }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="div2">
                                 @can('administrativos.index')
                                 <div class="gtr-menu__li">
                                     <a class="nav-link" href="{{ route('administrativos.index') }}"><i
@@ -109,23 +109,22 @@
                         </li>
                         @endcan
                         @can('proyectos.index')
-                        <li class="nav-item dropdown text-uppercase">
-                            <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        <li class="nav-item dropdown text-uppercase" id="li3">
+                            <a id="li3" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <i class="fa fa-book fa__li" aria-hidden="true"></i> {{ 'documentación' }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"
-                                id="dropdown-menu">
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="div3">
                             </div>
                         </li>
                         @endcan
                         @can('show.reports')
-                        <li class="nav-item dropdown text-uppercase">
-                            <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <li class="nav-item dropdown text-uppercase" id="li4">
+                            <a id="a4" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" v-pre>
                                 <i class="fa fa-line-chart fa__li" aria-hidden="true"></i> {{ 'estatus de proyecto' }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="div4">
                                 <div class="gtr-menu__li">
                                     <a class="dropdown-item" href="{{ route('projectStart') }}">
                                         <i class="fa fa-hourglass-start" aria-hidden="true"></i>
@@ -178,12 +177,12 @@
                         </li>
                         @endcan
                         @can('config')
-                        <li class="nav-item dropdown text-uppercase">
-                            <a id=" navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <li class="nav-item dropdown text-uppercase" id="li5">
+                            <a id="a5" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" v-pre>
                                 <i class="fa fa-cogs fa__li" aria-hidden="true"></i> {{ 'configuración' }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="div5">
                                 @can('config')
                                 <div class="gtr-menu__li">
                                     <a class="dropdown-item" href="{{ route('roles.index') }}">
@@ -279,7 +278,7 @@
         if (localStorage.getItem("regions") != null) {
             let idRegions = localStorage.getItem("regions").split(",");
             let nameRegions = localStorage.getItem("namesRegions").split(",");
-            const dropdown_menu = document.getElementById("dropdown-menu");
+            const dropdown_menu = document.getElementById("div3");
             let menu = "";
                 for (let index = 0; index < idRegions.length; index++) {
                     if (index == (idRegions.length - 1)) {

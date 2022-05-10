@@ -48,19 +48,19 @@ function changeActive(index) {
     localStorage.setItem("index", index);
 }
 function changeActiveMenu(index) {
-    let region = menuRegion.length;
-    if (index >= 0 && index < region) {
-        faMenu[0].classList.add("active");
-        aMenu[0].classList.add("active");
-    }
-    if (index >= region && index < region + 6) {
-        faMenu[1].classList.add("active");
-        aMenu[1].classList.add("active");
-    }
-    if (index >= region + 6 && index < region + 10) {
-        faMenu[2].classList.add("active");
-        aMenu[2].classList.add("active");
-    }
+    // let region = menuRegion.length;
+    // if (index >= 0 && index < region) {
+    //     faMenu[0].classList.add("active");
+    //     aMenu[0].classList.add("active");
+    // }
+    // if (index >= region && index < region + 6) {
+    //     faMenu[1].classList.add("active");
+    //     aMenu[1].classList.add("active");
+    // }
+    // if (index >= region + 6 && index < region + 10) {
+    //     faMenu[2].classList.add("active");
+    //     aMenu[2].classList.add("active");
+    // }
 }
 (function () {
     if (
