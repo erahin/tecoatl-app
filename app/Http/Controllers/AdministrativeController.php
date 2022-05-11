@@ -84,7 +84,8 @@ class AdministrativeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'user_id' => 'required|min:1'
         ]);
         $administrative = new Administrative();
         $administrative->name = $request->name;
@@ -146,6 +147,10 @@ class AdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
+        $request->validate([
+            'name' => 'required',
+            'user_id' => 'required|min:1'
+        ]);
         $administrative->name = $request->name;
         $administrative->user_id = $request->user_id;
         $administrative->save();

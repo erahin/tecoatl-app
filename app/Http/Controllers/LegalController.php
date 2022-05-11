@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Legal;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class LegalController extends Controller
@@ -17,25 +20,48 @@ class LegalController extends Controller
     }
     public function index(Request $request)
     {
-        $legals = Legal::paginate(10);
+        /* -------------------------------------------------------------------------- */
+        /*                                Validate user                               */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $isLegalUser = false;
+        $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
+        foreach ($users as $user) {
+            if ($user->role_id == 7) {
+                $isLegalUser = true;
+            }
+        }
         if ($request->search) {
             $legals = Legal::where('name', 'like', '%' . $request->search . '%')->paginate(10);
         }
-        return view('Legal.index', compact('legals'));
+        $legals = Legal::paginate(10);
+        return view('Legal.index', compact('legals', 'isLegalUser'));
     }
 
     public function create()
     {
-        return view('Legal.create');
+        /* -------------------------------------------------------------------------- */
+        /*                           Return subarea legal user                        */
+        /* -------------------------------------------------------------------------- */
+        $users = DB::select('select * from model_has_roles where role_id = ?', [7]);
+        $userArray = [];
+        foreach ($users as $user) {
+            $coordinator = User::find($user->model_id);
+            array_push($userArray, $coordinator);
+        }
+        return view('Legal.create', compact('userArray'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'user_id' => 'required|min:1'
         ]);
         $legal = new Legal();
         $legal->name = $request->name;
+        $legal->user_id = $request->user_id;
         $legal->save();
         $legal = Legal::latest('id')->first();
         /* -------------------------------------------------------------------------- */
@@ -51,19 +77,30 @@ class LegalController extends Controller
         if ($legal == null) {
             return view('errors.4032');
         }
-        return view('Legal.edit', compact('legal'));
+        /* -------------------------------------------------------------------------- */
+        /*                           Return subarea legal user                        */
+        /* -------------------------------------------------------------------------- */
+        $users = DB::select('select * from model_has_roles where role_id = ?', [7]);
+        $userArray = [];
+        foreach ($users as $user) {
+            $coordinator = User::find($user->model_id);
+            array_push($userArray, $coordinator);
+        }
+        return view('Legal.edit', compact('legal', 'userArray'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'user_id' => 'required|min:1'
         ]);
         $legal = Legal::find($id);
         if ($legal == null) {
             return view('errors.4032');
         }
         $legal->name = $request->name;
+        $legal->user_id = $request->user_id;
         $legal->save();
         return redirect()->route('legal.index');
     }

@@ -48,22 +48,51 @@
                                 <td>{{ $legal->name }}</td>
                                 <td class="d-flex justify-content-start">
                                     @can('legal.create-subfolder')
+                                    @if ($isLegalUser == true)
+                                    @if ($legal->user_id == Auth::user()->id)
                                     <a title="Nueva carpeta"
                                         href="{{ route('legal.create-subfolder', ['path' => 'legal'. '-' . $legal->name]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
                                             aria-hidden="true"></i></a>
+                                    @endif
+                                    @else
+                                    <a title="Nueva carpeta"
+                                        href="{{ route('legal.create-subfolder', ['path' => 'legal'. '-' . $legal->name]) }}"
+                                        class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
+                                            aria-hidden="true"></i></a>
+                                    @endif
                                     @endcan
+                                    {{-- start --}}
                                     @can('legal.fileList')
+                                    @if ($isLegalUser == true)
+                                    @if ($legal->user_id == Auth::user()->id)
                                     <a title="Lista de carpetas"
                                         href="{{ route('legal.folder-list', ['path' => 'legal'. '-' . $legal->name]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-archive"
                                             aria-hidden="true"></i></a>
+                                    @endif
+                                    @else
+                                    <a title="Lista de carpetas"
+                                        href="{{ route('legal.folder-list', ['path' => 'legal'. '-' . $legal->name]) }}"
+                                        class="btn btn-primary ancla"><i class="fa fa-archive"
+                                            aria-hidden="true"></i></a>
+                                    @endif
                                     @endcan
+                                    {{-- start --}}
                                     @can('legal.createUpload')
+                                    @if ($isLegalUser == true)
+                                    @if ($legal->user_id == Auth::user()->id)
                                     <a title="Subir archivos"
                                         href="{{ route('legal.createUpload', ['path' => 'legal'. '-' . $legal->name]) }}"
                                         class="btn btn-outline-success ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
+                                    @endif
+                                    @else
+                                    <a title="Subir archivos"
+                                        href="{{ route('legal.createUpload', ['path' => 'legal'. '-' . $legal->name]) }}"
+                                        class="btn btn-outline-success ancla"> <i class="fa fa-upload"
+                                            aria-hidden="true"></i></a>
+                                    @endif
                                     @endcan
                                     @can('legal.createUpload')
                                     <a title="Lista de archivos"

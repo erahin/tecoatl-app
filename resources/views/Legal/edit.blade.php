@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="row mb-3">
+                        <div class="row mb-3">
                             {!! Form::label('', 'Encargado', ['class' => 'col-md-4 col-form-label
                             text-md-end'])
                             !!}
@@ -60,7 +60,7 @@
                                 }
                         </script>
                         @endif
-                        @endforeach --}}
+                        @endforeach
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {{ Form::button('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar',

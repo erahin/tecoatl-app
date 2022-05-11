@@ -84,12 +84,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'legal.download', 'description' => 'Descargar archivo de una carpeta legal'])->syncRoles([$role1, $role4, $role8]);
         Permission::create(['name' => 'legal.deleteFile', 'description' => 'Eliminar archivo de una carpeta legal'])->syncRoles([$role1, $role4]);
         /* Public Module */
-        Permission::create(['name' => 'publico.index', 'description' => 'Ver lista de carpetas públicas'])->syncRoles([$role1, $role2, $role4, $role6, $role8]);
+        Permission::create(['name' => 'publico.index', 'description' => 'Ver lista de carpetas públicas'])->syncRoles([$role1, $role2, $role3, $role4, $role6, $role7, $role8]);
         Permission::create(['name' => 'createFolderPublic', 'description' => 'Crear una carpeta pública'])->syncRoles([$role1, $role4]);
         Permission::create(['name' => 'uploadFileForm', 'description' => 'Subir archivos a una carpeta pública'])->syncRoles([$role1, $role4]);
-        Permission::create(['name' => 'publicFilesList', 'description' => 'Listar archivos de una carpeta pública'])->syncRoles([$role1, $role2, $role4, $role6, $role8]);
+        Permission::create(['name' => 'publicFilesList', 'description' => 'Listar archivos de una carpeta pública'])->syncRoles([$role1, $role2, $role3, $role4, $role6, $role7, $role8]);
         Permission::create(['name' => 'publico.destroy', 'description' => 'Eliminar una carpeta pública'])->syncRoles([$role1, $role4]);
-        Permission::create(['name' => 'downloadPublicFile', 'description' => 'Descargar archivo de una carpeta pública'])->syncRoles([$role1, $role2, $role4, $role6, $role8]);
+        Permission::create(['name' => 'downloadPublicFile', 'description' => 'Descargar archivo de una carpeta pública'])->syncRoles([$role1, $role2, $role3, $role4, $role6, $role7, $role8]);
         Permission::create(['name' => 'deletePublicFile', 'description' => 'Eliminar archivo de una carpeta pública'])->syncRoles([$role1, $role4]);
     }
 }

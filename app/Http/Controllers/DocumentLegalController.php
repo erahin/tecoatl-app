@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Legal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentLegalController extends Controller
@@ -22,6 +25,24 @@ class DocumentLegalController extends Controller
         }
         $previousPath = rtrim($previousPath, '/');
         $folders = Storage::disk('s3')->directories($path . '/');
+        /* -------------------------------------------------------------------------- */
+        /*                                Validate user                               */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $isLegalUser = false;
+        $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
+        foreach ($users as $user) {
+            if ($user->role_id == 7) {
+                $isLegalUser = true;
+                $legal = DB::select('select user_id from legals where name = ?', [$array[1]]);
+                if ($idUser == $legal[0]->user_id) {
+                    return view('DocumentLegal.create', compact('path', 'folders', 'index', 'previousPath', 'array'));
+                } else {
+                    return view('errors.4032');
+                }
+            }
+        }
         return view('DocumentLegal.create', compact('path', 'folders', 'index', 'previousPath', 'array'));
     }
     public function storeFolder(Request $request, $path)
@@ -67,6 +88,24 @@ class DocumentLegalController extends Controller
             $homepath = explode('/', $previousPath)[0] . '/' . explode('/', $previousPath)[1];
         }
         $directories = Storage::disk('s3')->directories($path);
+        /* -------------------------------------------------------------------------- */
+        /*                                Validate user                               */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $isLegalUser = false;
+        $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
+        foreach ($users as $user) {
+            if ($user->role_id == 7) {
+                $isLegalUser = true;
+                $legal = DB::select('select user_id from legals where name = ?', [$array[1]]);
+                if ($idUser == $legal[0]->user_id) {
+                    return view('DocumentLegal.index-folder', compact('directories', 'index', 'path', 'previousPath', 'array', 'homepath'));
+                } else {
+                    return view('errors.4032');
+                }
+            }
+        }
         return view('DocumentLegal.index-folder', compact('directories', 'index', 'path', 'previousPath', 'array', 'homepath'));
     }
     public function uploadFileForm($path)
@@ -84,6 +123,24 @@ class DocumentLegalController extends Controller
         }
         $previousPath = rtrim($previousPath, '/');
         $files = Storage::disk('s3')->files($path . '/');
+        /* -------------------------------------------------------------------------- */
+        /*                                Validate user                               */
+        /* -------------------------------------------------------------------------- */
+        $user = Auth::user();
+        $idUser = $user->id;
+        $isLegalUser = false;
+        $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
+        foreach ($users as $user) {
+            if ($user->role_id == 7) {
+                $isLegalUser = true;
+                $legal = DB::select('select user_id from legals where name = ?', [$array[1]]);
+                if ($idUser == $legal[0]->user_id) {
+                    return view('DocumentLegal.upload-file', compact('path', 'files', 'index', 'previousPath', 'array'));
+                } else {
+                    return view('errors.4032');
+                }
+            }
+        }
         return view('DocumentLegal.upload-file', compact('path', 'files', 'index', 'previousPath', 'array'));
     }
     public function uploadLegalFile(Request $request, $path)

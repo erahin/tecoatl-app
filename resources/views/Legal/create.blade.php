@@ -25,7 +25,7 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="row mb-3">
+                        <div class="row mb-3">
                             {!! Form::label('', 'Encargado', ['class' => 'col-md-4 col-form-label
                             text-md-end'])
                             !!}
@@ -44,7 +44,7 @@
                                     }}</strong>
                                 @enderror
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Crear', ['type' =>
