@@ -1,7 +1,26 @@
+let a1 = document.getElementById("a1");
+let a2 = document.getElementById("a2");
+let a3 = document.getElementById("a3");
+let a4 = document.getElementById("a4");
+let a5 = document.getElementById("a5");
+let a6 = document.getElementById("a6");
+
+let liActive = 0;
+let liMenu = document.querySelectorAll(".gtr-menu__li");
+let faMenu = document.querySelectorAll(".fa__li");
+let aMenu = document.querySelectorAll(".nav-link");
+let menuRegion = document.querySelectorAll(".menu-region");
+const home = document.getElementById("home");
+
+/* -------------------------------------------------------------------------- */
+/*                               Initial script                               */
+/* -------------------------------------------------------------------------- */
 window.oncontextmenu = function () {
     return false;
 };
-
+/* -------------------------------------------------------------------------- */
+/*                           first letter capitalize                          */
+/* -------------------------------------------------------------------------- */
 function firstLetterToCapitalize(str) {
     let value = str.value;
     return (str.value = value.charAt(0).toUpperCase() + value.slice(1));
@@ -33,11 +52,6 @@ function searchTable() {
 /* -------------------------------------------------------------------------- */
 /*                             Change class active                            */
 /* -------------------------------------------------------------------------- */
-let liActive = 0;
-let liMenu = document.querySelectorAll(".gtr-menu__li");
-let faMenu = document.querySelectorAll(".fa__li");
-let aMenu = document.querySelectorAll(".nav-link");
-let menuRegion = document.querySelectorAll(".menu-region");
 liMenu.forEach((element, index) => {
     element.addEventListener("click", function () {
         changeActive(index);
@@ -47,21 +61,57 @@ liMenu.forEach((element, index) => {
 function changeActive(index) {
     localStorage.setItem("index", index);
 }
-function changeActiveMenu(index) {
-    // let region = menuRegion.length;
-    // if (index >= 0 && index < region) {
-    //     faMenu[0].classList.add("active");
-    //     aMenu[0].classList.add("active");
-    // }
-    // if (index >= region && index < region + 6) {
-    //     faMenu[1].classList.add("active");
-    //     aMenu[1].classList.add("active");
-    // }
-    // if (index >= region + 6 && index < region + 10) {
-    //     faMenu[2].classList.add("active");
-    //     aMenu[2].classList.add("active");
-    // }
+function changeActiveMenu(name) {
+    if (name != "") {
+        if (localStorage.getItem("a") != null) {
+            let old = document.getElementById(localStorage.getItem("a"));
+            old.classList.remove("active");
+        }
+        localStorage.setItem("a", name);
+    }
 }
+function activeMenu() {
+    if (localStorage.getItem("a") != null) {
+        let new_menu = document.getElementById(localStorage.getItem("a"));
+        new_menu.classList.add("active");
+    }
+}
+if (a1 != null) {
+    a1.addEventListener("click", () => {
+        localStorage.removeItem("a");
+    });
+}
+if (a2 != null) {
+    a2.addEventListener("click", () => {
+        a2.classList.add("active");
+        changeActiveMenu("a2");
+    });
+}
+if (a3 != null) {
+    a3.addEventListener("click", () => {
+        a3.classList.add("active");
+        changeActiveMenu("a3");
+    });
+}
+if (a4 != null) {
+    a4.addEventListener("click", () => {
+        a4.classList.add("active");
+        changeActiveMenu("a4");
+    });
+}
+if (a5 != null) {
+    a5.addEventListener("click", () => {
+        a5.classList.add("active");
+        changeActiveMenu("a5");
+    });
+}
+if (a6 != null) {
+    a6.addEventListener("click", () => {
+        a6.classList.add("active");
+        changeActiveMenu("a6");
+    });
+}
+
 (function () {
     if (
         localStorage.getItem("index") == -1 ||
@@ -72,14 +122,15 @@ function changeActiveMenu(index) {
         liMenu[liActive].classList.remove("active");
         liMenu[localStorage.getItem("index")].classList.add("active");
         liActive = localStorage.getItem("index");
-        changeActiveMenu(localStorage.getItem("index"));
+        changeActiveMenu("");
+        activeMenu();
     }
 })();
 
-const home = document.getElementById("home");
 home.addEventListener("click", () => {
     liMenu[liActive].classList.remove("active");
     localStorage.setItem("index", -1);
     localStorage.removeItem("index");
+    localStorage.removeItem("a");
     localStorage.clear();
 });

@@ -85,6 +85,7 @@
             localStorage.removeItem("index");
             localStorage.removeItem("regionArray");
             localStorage.removeItem("namesRegions");
+            localStorage.removeItem("a");
             localStorage.clear();
         })();
 </script>

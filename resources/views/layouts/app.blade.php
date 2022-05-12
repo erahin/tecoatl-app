@@ -110,8 +110,8 @@
                         @endcan
                         @can('proyectos.index')
                         <li class="nav-item dropdown text-uppercase" id="li3">
-                            <a id="li3" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="a3" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" v-pre>
                                 <i class="fa fa-book fa__li" aria-hidden="true"></i> {{ 'documentación' }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="div3">
@@ -227,8 +227,8 @@
                         </li>
                         @endcan
                         <li class="nav-item dropdown text-uppercase">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="a6" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" v-pre>
                                 <i class="fa fa-user-circle" aria-hidden="true"></i> {{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
