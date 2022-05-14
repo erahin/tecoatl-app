@@ -81,7 +81,7 @@
                                 <div class="form-check scroll-roles">
                                     @foreach ($roles as $rol)
                                     <label class="form-check-label inline_label">
-                                        {!! Form::checkbox('roles', $rol->id, null, ['class' => 'form-check-input',
+                                        {!! Form::checkbox('roles[]', $rol->id, null, ['class' => 'form-check-input',
                                         'id' => $rol->id]) !!}
                                         {{ $rol->name }}
                                     </label>

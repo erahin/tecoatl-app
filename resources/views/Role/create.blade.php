@@ -65,7 +65,7 @@
 <script>
     const button = document.getElementById('btn-submit');
     button.addEventListener('click', function (e) {
-        let rol = document.getElementById('name').value;
+        let rol = document.getElementById('rol').value;
         if(rol){
             if (!window.confirm('¿Desea confirmar el nombre del rol? Una ves agregado no se podrá modificar el nombre')) {
                 e.preventDefault();

@@ -42,14 +42,14 @@ class UserController extends Controller
                 'unique:users',
             ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', 'unique:users'],
-            'roles' => 'required|min:1'
+            'phone' => ['required', 'unique:users,phone'],
+            'roles' => 'required|min:1|max:1'
         ]);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->phone = '+52' . $request->phone;
+        $user->phone = $request->phone;
         $user->save();
         $user->roles()->attach($request->roles);
         return redirect()->route('usuarios.index');
@@ -92,7 +92,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->phone = '+52' . $request->phone;
+        $user->phone = $request->phone;
         $user->save();
         $user->roles()->sync($request->roles);
         return redirect()->route('usuarios.index');

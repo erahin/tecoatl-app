@@ -6,9 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    {{-- <h1 class="text-center text-primary">Tecoatl Asesoría Ambiental y Soluciones Alternativas S.A
-                        De C.V
-                    </h1> --}}
                 </div>
 
                 <div class="card-body">

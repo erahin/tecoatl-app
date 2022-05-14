@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'super-admin',
             'email' => 'super-admin.tecoatl@gmail.com',
             'password' => bcrypt('super-admin'),
-            'phone' => '+529516129964'
+            'phone' => '9516129964'
         ])->assignRole('Administrador general');
         User::create([
             'name' => 'jefa-region',
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'name' => 'coordinador-aves',
             'email' => 'coordinador-aves.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-            'phone' => '+529513642226'
+            'phone' => '9513642226'
         ])->assignRole('Coordinador de sub-área');
         User::create([
             'name' => 'coordinador-murcielagos',
