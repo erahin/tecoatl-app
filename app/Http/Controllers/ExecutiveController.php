@@ -88,12 +88,19 @@ class ExecutiveController extends Controller
             'files-upload' => ['required']
         ]);
         $path = str_replace('-', '/', $path);
+        // foreach ($request->file('files-upload') as $fileRequest) {
+        //     $file = $fileRequest;
+        //     $fileName = $fileRequest->getClientOriginalName();
+        //     $filePath = $path . '/' . $fileName;
+        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
+        //     set_time_limit(60);
+        // }
         foreach ($request->file('files-upload') as $fileRequest) {
+            set_time_limit(0);
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
-            $filePath = $path . '/' . $fileName;
-            Storage::disk('s3')->put($filePath, file_get_contents($file));
-            set_time_limit(60);
+            $filePath = $path;
+            Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
         }
         $array = explode('/', $path);
         if (count($array) == 2) {

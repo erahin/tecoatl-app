@@ -32,10 +32,10 @@ class LegalController extends Controller
                 $isLegalUser = true;
             }
         }
+        $legals = Legal::paginate(10);
         if ($request->search) {
             $legals = Legal::where('name', 'like', '%' . $request->search . '%')->paginate(10);
         }
-        $legals = Legal::paginate(10);
         return view('Legal.index', compact('legals', 'isLegalUser'));
     }
 

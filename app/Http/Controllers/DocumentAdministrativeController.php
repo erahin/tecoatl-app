@@ -162,11 +162,18 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                          Insert files to directory                         */
         /* -------------------------------------------------------------------------- */
+        // foreach ($request->file('files-upload') as $fileRequest) {
+        //     $file = $fileRequest;
+        //     $fileName = $fileRequest->getClientOriginalName();
+        //     $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $fileName;
+        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
+        // }
         foreach ($request->file('files-upload') as $fileRequest) {
+            set_time_limit(0);
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
-            $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $fileName;
-            Storage::disk('s3')->put($filePath, file_get_contents($file));
+            $filePath = 'administrativo/' . $idAdministrative . '/' . $folder;
+            Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
         }
         return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
     }
@@ -384,11 +391,18 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                          Insert files to directory                         */
         /* -------------------------------------------------------------------------- */
+        // foreach ($request->file('files-upload') as $fileRequest) {
+        //     $file = $fileRequest;
+        //     $fileName = $fileRequest->getClientOriginalName();
+        //     $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/' . $fileName;
+        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
+        // }
         foreach ($request->file('files-upload') as $fileRequest) {
+            set_time_limit(0);
             $file = $fileRequest;
             $fileName = $fileRequest->getClientOriginalName();
-            $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/' . $fileName;
-            Storage::disk('s3')->put($filePath, file_get_contents($file));
+            $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder;
+            Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
         }
         return redirect()->route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => $folder]);
     }
