@@ -29,7 +29,7 @@ class ProjectByRegion extends Controller
         if ($region == null) {
             return view('errors.4032');
         }
-        $status = ["Por iniciar", "En desarrollo", "Concluido"];
+        $status = ["Por iniciar", "En desarrollo", "Concluido", "Cancelado"];
         $users = DB::select('select * from model_has_roles where model_id = ?', [$idUser]);
         /* -------------------------------------------------------------------------- */
         /*                             Search data by user                            */
