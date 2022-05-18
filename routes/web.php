@@ -212,6 +212,8 @@ Route::get('legal/eliminar-carpeta/{path}', [DocumentLegalController::class, 'de
 Route::get('legal/crear-carpeta/{path}', [DocumentLegalController::class, 'createFolder'])->name('legal.create-subfolder')->middleware('can:legal.create-subfolder')->middleware('auth');
 Route::post('legal/store-carpeta/{path}', [DocumentLegalController::class, 'storeFolder'])->name('legal.store-subfolder')->middleware('can:legal.create-subfolder')->middleware('auth');
 Route::get('legal/lista-carpetas/{path}', [DocumentLegalController::class, 'folderList'])->name('legal.folder-list')->middleware('auth');
+// Other
+Route::post('legal/subir-archivos/{path}', [DocumentLegalController::class, 'uploadFile'])->name('legal.file')->middleware('can:legal.createUpload')->middleware('auth');
 
 /* -------------------------------------------------------------------------- */
 /*                                Route public                                */
