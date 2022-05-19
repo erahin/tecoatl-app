@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 
 class PublicController extends Controller
 {
@@ -33,25 +35,32 @@ class PublicController extends Controller
     }
     public function uploadPublicFile(Request $request, $path)
     {
-        $request->validate([
-            'files-upload' => ['required']
-        ]);
         $path = str_replace('-', '/', $path);
-        // foreach ($request->file('files-upload') as $fileRequest) {
-        //     $file = $fileRequest;
-        //     $fileName = $fileRequest->getClientOriginalName();
-        //     $filePath = $path . '/' . $fileName;
-        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
-        //     set_time_limit(60);
-        // }
-        foreach ($request->file('files-upload') as $fileRequest) {
-            set_time_limit(0);
-            $file = $fileRequest;
-            $fileName = $fileRequest->getClientOriginalName();
-            $filePath = $path;
-            Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+        if (!$receiver->isUploaded()) {
+            return 'error';
         }
-        return redirect()->route('publico.index');
+        $fileReceived = $receiver->receive();
+        if ($fileReceived->isFinished()) {
+            $file = $fileReceived->getFile();
+            $extension = $file->getClientOriginalExtension();
+            $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName());
+            $fileName .= '.' . $extension;
+            $pathToFile = $path;
+            $path = Storage::disk('s3')->putFileAs($pathToFile, $file, $fileName);
+            unlink($file->getPathname());
+            return [
+                'path' => asset('storage/' . $path),
+                'filename' => $fileName
+            ];
+        }
+
+        // otherwise return percentage information
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
     }
     public function publicFilesList($path)
     {

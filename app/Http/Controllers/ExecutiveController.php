@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 
 class ExecutiveController extends Controller
 {
@@ -84,39 +86,30 @@ class ExecutiveController extends Controller
     }
     public function uploadExecutiveFile(Request $request, $path)
     {
-        $request->validate([
-            'files-upload' => ['required']
-        ]);
         $path = str_replace('-', '/', $path);
-        // foreach ($request->file('files-upload') as $fileRequest) {
-        //     $file = $fileRequest;
-        //     $fileName = $fileRequest->getClientOriginalName();
-        //     $filePath = $path . '/' . $fileName;
-        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
-        //     set_time_limit(60);
-        // }
-        foreach ($request->file('files-upload') as $fileRequest) {
-            set_time_limit(0);
-            $file = $fileRequest;
-            $fileName = $fileRequest->getClientOriginalName();
-            $filePath = $path;
-            Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+        if (!$receiver->isUploaded()) {
+            return 'error';
         }
-        $array = explode('/', $path);
-        if (count($array) == 2) {
-            return redirect()->route('directivo.index');
-        } else {
-            $previousPath = "";
-            for ($i = 0; $i < count($array); $i++) {
-                if ($i == count($array) - 1) {
-                    $index = $i;
-                } else {
-                    $previousPath .= $array[$i] . '/';
-                }
-            }
-            $previousPath = rtrim($previousPath, '/');
-            return redirect()->route('directivo.folder-list', ['path' => str_replace('/', '-', $previousPath)]);
+        $fileReceived = $receiver->receive();
+        if ($fileReceived->isFinished()) {
+            $file = $fileReceived->getFile();
+            $extension = $file->getClientOriginalExtension();
+            $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName());
+            $fileName .= '.' . $extension;
+            $pathToFile = $path;
+            $path = Storage::disk('s3')->putFileAs($pathToFile, $file, $fileName);
+            unlink($file->getPathname());
+            return [
+                'path' => asset('storage/' . $path),
+                'filename' => $fileName
+            ];
         }
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
     }
     public function executiveFilesList($path)
     {
