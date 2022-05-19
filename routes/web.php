@@ -203,7 +203,7 @@ Route::get('eliminar-archivo-sub-folder/{idAdministrative}/{folder}/{subfolder}/
 /* -------------------------------------------------------------------------- */
 Route::resource('legal', LegalController::class)->middleware('auth')->except('show');
 Route::get('legal/subir-archivos/{path}', [DocumentLegalController::class, 'uploadFileForm'])->name('legal.createUpload')->middleware('can:legal.createUpload')->middleware('auth');
-Route::post('legal/store-archivos/{path}', [DocumentLegalController::class, 'uploadLegalFile'])->name('legal.upload')->middleware('can:legal.createUpload')->middleware('auth');
+// Route::post('legal/store-archivos/{path}', [DocumentLegalController::class, 'uploadLegalFile'])->name('legal.upload')->middleware('can:legal.createUpload')->middleware('auth');
 Route::get('legal/listar-archivos/{path}', [DocumentLegalController::class, 'legalFilesList'])->name('legal.fileList')->middleware('can:legal.fileList')->middleware('auth');
 Route::get('legal/descargar/{path}', [DocumentLegalController::class, 'downloadLegalFile'])->name('legal.download')->middleware('can:legal.download')->middleware('auth');
 Route::get('legal/eliminar/{path}', [DocumentLegalController::class, 'deleteLegalFile'])->name('legal.deleteFile')->middleware('can:legal.deleteFile')->middleware('auth');

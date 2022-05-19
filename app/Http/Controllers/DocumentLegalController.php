@@ -158,7 +158,8 @@ class DocumentLegalController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName());
             $fileName .= '.' . $extension;
-            $path = Storage::disk('s3')->putFileAs($path, $file, $fileName);
+            $pathToFile = $path;
+            $path = Storage::disk('s3')->putFileAs($pathToFile, $file, $fileName);
             unlink($file->getPathname());
             return [
                 'path' => asset('storage/' . $path),
