@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Report;
 use App\Models\Study;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 
 class ReportController extends Controller
 {
@@ -300,13 +303,13 @@ class ReportController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                Get file url                                */
         /* -------------------------------------------------------------------------- */
-        $allfiles = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $id . '/');
-        $files = [];
-        foreach ($allfiles as $file) {
-            $url = Storage::url($file);
-            array_push($files, $url);
-        }
-        return view('ReportStudio.edit', compact('report', 'files', 'project', 'idStudio', 'report_type'));
+        // $allfiles = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $id . '/');
+        // $files = [];
+        // foreach ($allfiles as $file) {
+        //     $url = Storage::url($file);
+        //     array_push($files, $url);
+        // }
+        return view('ReportStudio.edit', compact('report', 'project', 'idStudio', 'report_type'));
     }
     public function reportWithUser()
     {
@@ -316,5 +319,56 @@ class ReportController extends Controller
             ->select('reports.*', 'users.name as user')
             ->get();
         return view('Report.report-query', compact('reportArray', 'report_type'));
+    }
+    public function uploadFormFile($idReport, $idStudio, $idProject)
+    {
+        $report = Report::find($idReport);
+        $project = Project::find($idProject);
+        $studio = Study::find($idProject);
+        /* -------------------------------------------------------------------------- */
+        /*                              Initial Validate                              */
+        /* -------------------------------------------------------------------------- */
+        if ($report == null  || $project == null) {
+            return view('errors.4032');
+        }
+        $region = strtolower($project->regions->name);
+        /* -------------------------------------------------------------------------- */
+        /*                                Get file url                                */
+        /* -------------------------------------------------------------------------- */
+        $files = Storage::disk('s3')->files('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/');
+        // $files = [];
+        // foreach ($allfiles as $file) {
+        //     $url = Storage::url($file);
+        //     array_push($files, $url);
+        // }
+        return view('Report.upload-file', compact('project', 'studio', 'report', 'files'));
+    }
+    public function uploadFileReport(Request $request, $idProject, $idStudio, $idReport)
+    {
+        $project = Project::find($idProject);
+        $region = strtolower($project->regions->name);
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+        if (!$receiver->isUploaded()) {
+            return 'error';
+        }
+        $fileReceived = $receiver->receive();
+        if ($fileReceived->isFinished()) {
+            $file = $fileReceived->getFile();
+            $extension = $file->getClientOriginalExtension();
+            $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName());
+            $fileName .= '.' . $extension;
+            $pathToFile = 'tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/';
+            $path = Storage::disk('s3')->putFileAs($pathToFile, $file, $fileName);
+            unlink($file->getPathname());
+            return [
+                'path' => asset('storage/' . $path),
+                'filename' => $fileName
+            ];
+        }
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
     }
 }

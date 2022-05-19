@@ -69,8 +69,12 @@
                                         class="btn btn-outline-success"><i class="fa fa-pencil-square-o"
                                             aria-hidden="true"></i></a>
                                     @endcan
-                                    <a title="Agregar archivos" href="" class="btn btn-outline-primary"><i
-                                            class="fa fa-upload" aria-hidden="true"></i></a>
+                                    @can('uploadFileReport')
+                                    <a title="Agregar archivos"
+                                        href="{{ route('uploadFormFile', ['idReport' => $report->id, 'idStudio' => $studio->id, 'idProject' => $project->id]) }}"
+                                        class="btn btn-outline-primary"><i class="fa fa-upload"
+                                            aria-hidden="true"></i></a>
+                                    @endcan
                                     @can('deleteReportsDirectory')
                                     <a title="Eliminar carpeta"
                                         href="{{ route('deleteReportsDirectory', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id]) }}"

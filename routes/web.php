@@ -115,6 +115,10 @@ Route::get('eliminar-directorio-estudio/{idProject}/{idStudio}', [ReportControll
 Route::get('eliminar-directorio-reporte/{idProject}/{idStudio}/{idReport}', [ReportController::class, 'deleteReportsDirectory'])
     ->name('deleteReportsDirectory')->middleware('can:deleteReportsDirectory')
     ->middleware('auth');
+Route::get('/subir-archivo/reporte/{idReport}/estudio/{idStudio}/proyecto/{idProject}', [ReportController::class, 'uploadFormFile'])
+    ->name('uploadFormFile')->middleware('can:uploadFileReport')->middleware('auth');
+Route::post('/store-archivo/reporte/{idReport}/estudio/{idStudio}/proyecto/{idProject}', [ReportController::class, 'uploadFileReport'])
+    ->name('uploadFileReport')->middleware('can:uploadFileReport')->middleware('auth');
 /* -------------------------------------------------------------------------- */
 /*                                Report Route                                */
 /* -------------------------------------------------------------------------- */
