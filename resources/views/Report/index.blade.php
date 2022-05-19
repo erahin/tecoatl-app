@@ -49,7 +49,7 @@
                                     @can('upload-reports')
                                     <a title="Agregar informes"
                                         href="{{ route('upload-reports', ['id' => $project->id, 'idStudio' => $registre->id]) }}"
-                                        class="btn btn-outline-primary"><i class="fa fa-file-pdf-o"
+                                        class="btn btn-outline-primary"><i class="fa fa-plus-circle"
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('reports-list')

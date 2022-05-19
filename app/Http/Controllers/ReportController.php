@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Report;
 use App\Models\Study;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -151,34 +150,34 @@ class ReportController extends Controller
         /*                                 Get region                                 */
         /* -------------------------------------------------------------------------- */
         $region = strtolower($project->regions->name);
-        /* -------------------------------------------------------------------------- */
-        /*                                Get all files                               */
-        /* -------------------------------------------------------------------------- */
-        $files = Storage::disk('s3')->directories('tecnico/' . $region . '/' . $id . '/' . $idStudio);
-        /* -------------------------------------------------------------------------- */
-        /*                                Get only directory                          */
-        /* -------------------------------------------------------------------------- */
-        $fileDirectorie = [];
-        foreach ($files as $fileNameStorage) {
-            $fileArray = explode('/', $fileNameStorage);
-            array_push($fileDirectorie, (int)$fileArray[4]);
-        }
+        // /* -------------------------------------------------------------------------- */
+        // /*                                Get all files                               */
+        // /* -------------------------------------------------------------------------- */
+        // $files = Storage::disk('s3')->directories('tecnico/' . $region . '/' . $id . '/' . $idStudio);
+        // /* -------------------------------------------------------------------------- */
+        // /*                                Get only directory                          */
+        // /* -------------------------------------------------------------------------- */
+        // $fileDirectorie = [];
+        // foreach ($files as $fileNameStorage) {
+        //     $fileArray = explode('/', $fileNameStorage);
+        //     array_push($fileDirectorie, (int)$fileArray[4]);
+        // }
         /* -------------------------------------------------------------------------- */
         /*                                 Get reports                                */
         /* -------------------------------------------------------------------------- */
-        $reportsArray = [];
-        if ($fileDirectorie) {
-            foreach ($fileDirectorie as $reports) {
-                $report_find = DB::select('select concat (report_number,"° Informe ", report_type) from reports where id = ?', [$reports]);
-                if ($report_find) {
-                    array_push($reportsArray, $report_find[0]);
-                }
-            }
-        }
+        // $reportsArray = [];
+        // if ($fileDirectorie) {
+        //     foreach ($fileDirectorie as $reports) {
+        //         $report_find = DB::select('select concat (report_number,"° Informe ", report_type) from reports where id = ?', [$reports]);
+        //         if ($report_find) {
+        //             array_push($reportsArray, $report_find[0]);
+        //         }
+        //     }
+        // }
         return view('ReportStudio.create', compact(
             'project',
             'idStudio',
-            'reportsArray',
+            // 'reportsArray',
             'report_type'
         ));
     }
@@ -298,10 +297,10 @@ class ReportController extends Controller
                 }
             }
         }
-        $allfiles = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $id . '/');
         /* -------------------------------------------------------------------------- */
         /*                                Get file url                                */
         /* -------------------------------------------------------------------------- */
+        $allfiles = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $id . '/');
         $files = [];
         foreach ($allfiles as $file) {
             $url = Storage::url($file);

@@ -35,6 +35,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (count($files) == 0)
+                                <tr>
+                                    <td colspan="2">
+                                        No existen archivos
+                                    </td>
+                                </tr>
+                                @else
                                 @foreach ($files as $file)
                                 <tr>
                                     <td>
@@ -58,6 +65,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

@@ -20,7 +20,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        @if ($files)
+                        {{-- @if ($files)
                         <div class="row mb-3">
                             {!! Form::label('', 'Archivos subidos', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
@@ -35,8 +35,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <hr>
-                        @endif
+                        <hr> --}}
+                        {{-- @endif --}}
                         <div class="row mb-3">
                             {!! Form::label('report_number', 'Número de informe', [
                             'class' => 'col-md-4 col-form-label
@@ -123,7 +123,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             {!! Form::label('select', 'Subir archivos', ['class' => 'col-md-4 col-form-label
                             text-md-end'])
                             !!}
@@ -135,7 +135,7 @@
                                     }}</strong>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         {!! Form::number('project_id', $project->id, ['class' => 'form-control', 'hidden'])
                         !!}
                         {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden']) !!}

@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Subir informe
+                    <h1 class="text-center">Agregar informe
                     </h1>
                 </div>
                 <div class="card-body">
@@ -15,12 +15,12 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <form method="POST" action="{{ route('informes.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('informes.store') }}">
                         @csrf
                         @if (session('success'))
                         <h6 class="alert alert-warning">{{ session('success') }}</h6>
                         @endif
-                        @if ($reportsArray)
+                        {{-- @if ($reportsArray)
                         <div class="row mb-3" id="upload-reports">
                             {!! Form::label('', 'Informes subidos', ['class' => 'col-md-4 col-form-label text-md-end'])
                             !!}
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <hr>
-                        @endif
+                        @endif --}}
                         <div class="row mb-3">
                             {!! Form::label('report_number', 'Número de informe', [
                             'class' => 'col-md-4 col-form-label
@@ -122,7 +122,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             {!! Form::label('reports', 'Subir archivos', ['class' => 'col-md-4 col-form-label
                             text-md-end'])
                             !!}
@@ -134,13 +134,14 @@
                                     }}</strong>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         {!! Form::number('project_id', $project->id, ['class' => 'form-control', 'hidden', 'required'])
                         !!}
                         {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden', 'required']) !!}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Subir', ['type' =>
+                                {{ Form::button('<i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar', ['type'
+                                =>
                                 'submit', 'class' =>
                                 'btn btn-primary'] ) }}
                                 <a class="btn btn-danger" href="{{ route('studies-list', $project->id) }}"><i
