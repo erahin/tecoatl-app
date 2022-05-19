@@ -88,8 +88,8 @@
                         text-md-end'])
                         !!}
                         <div class="col-md-6">
-                            <button id="browseFile" class="btn btn-primary"><i class="fa fa-upload"
-                                    aria-hidden="true"></i>Subir</button>
+                            <button id="browseFile" class="btn btn-primary ancla"><i class="fa fa-upload"
+                                    aria-hidden="true"></i> Subir</button>
                             @if (count($array) == 2)
                             <a class="btn btn-danger" href="{{ route('legal.index') }}"><i class="fa fa-ban"
                                     aria-hidden="true"></i> Cancelar

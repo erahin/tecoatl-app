@@ -7,6 +7,8 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 
 class DocumentAdministrativeController extends Controller
 {
@@ -156,9 +158,9 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
-        $request->validate([
-            'files-upload' => ['required'],
-        ]);
+        // $request->validate([
+        //     'files-upload' => ['required'],
+        // ]);
         /* -------------------------------------------------------------------------- */
         /*                          Insert files to directory                         */
         /* -------------------------------------------------------------------------- */
@@ -168,14 +170,39 @@ class DocumentAdministrativeController extends Controller
         //     $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $fileName;
         //     Storage::disk('s3')->put($filePath, file_get_contents($file));
         // }
-        foreach ($request->file('files-upload') as $fileRequest) {
-            set_time_limit(0);
-            $file = $fileRequest;
-            $fileName = $fileRequest->getClientOriginalName();
-            $filePath = 'administrativo/' . $idAdministrative . '/' . $folder;
-            Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
+        // foreach ($request->file('files-upload') as $fileRequest) {
+        //     set_time_limit(0);
+        //     $file = $fileRequest;
+        //     $fileName = $fileRequest->getClientOriginalName();
+        //     $filePath = 'administrativo/' . $idAdministrative . '/' . $folder;
+        //     Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
+        // }
+        // return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+        if (!$receiver->isUploaded()) {
+            return 'error';
         }
-        return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
+        $fileReceived = $receiver->receive();
+        if ($fileReceived->isFinished()) {
+            $file = $fileReceived->getFile();
+            $extension = $file->getClientOriginalExtension();
+            $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName());
+            $fileName .= '.' . $extension;
+            $pathToFile = 'administrativo/' . $idAdministrative . '/' . $folder;
+            $path = Storage::disk('s3')->putFileAs($pathToFile, $file, $fileName);
+            unlink($file->getPathname());
+            return [
+                'path' => asset('storage/' . $path),
+                'filename' => $fileName
+            ];
+        }
+
+        // otherwise return percentage information
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
     }
     public function fileList($idAdministrative, $folder)
     {
@@ -385,26 +412,31 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
-        $request->validate([
-            'files-upload' => ['required'],
-        ]);
-        /* -------------------------------------------------------------------------- */
-        /*                          Insert files to directory                         */
-        /* -------------------------------------------------------------------------- */
-        // foreach ($request->file('files-upload') as $fileRequest) {
-        //     $file = $fileRequest;
-        //     $fileName = $fileRequest->getClientOriginalName();
-        //     $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/' . $fileName;
-        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
-        // }
-        foreach ($request->file('files-upload') as $fileRequest) {
-            set_time_limit(0);
-            $file = $fileRequest;
-            $fileName = $fileRequest->getClientOriginalName();
-            $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder;
-            Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+        if (!$receiver->isUploaded()) {
+            return 'error';
         }
-        return redirect()->route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => $folder]);
+        $fileReceived = $receiver->receive();
+        if ($fileReceived->isFinished()) {
+            $file = $fileReceived->getFile();
+            $extension = $file->getClientOriginalExtension();
+            $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName());
+            $fileName .= '.' . $extension;
+            $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder;
+            $path = Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
+            unlink($file->getPathname());
+            return [
+                'path' => asset('storage/' . $path),
+                'filename' => $fileName
+            ];
+        }
+
+        // otherwise return percentage information
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
     }
     public function subFolderFileList($idAdministrative, $folder, $subfolder)
     {
