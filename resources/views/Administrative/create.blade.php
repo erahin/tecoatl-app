@@ -25,7 +25,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             {!! Form::label('', 'Encargado', ['class' => 'col-md-4 col-form-label
                             text-md-end'])
                             !!}
@@ -38,6 +38,24 @@
                                         {{ $user->name }}
                                     </label>
                                     @endforeach
+                                </div>
+                                @error('user_id')
+                                <strong class="text-danger text-center mt-5">{{ $message
+                                    }}</strong>
+                                @enderror
+                            </div>
+                        </div> --}}
+                        <div class="row mb-3">
+                            <label for="exampleFormControlSelect1"
+                                class="col-md-4 col-form-label text-md-end">Encargado</label>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select class="form-select" id="exampleFormControlSelect1" name="user_id">
+                                        <option selected disabled value="">Escoja el encargado</option>
+                                        @foreach ($userArray as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 @error('user_id')
                                 <strong class="text-danger text-center mt-5">{{ $message
