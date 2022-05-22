@@ -27,7 +27,6 @@ class ReportStudioController extends Controller
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             'report_type' => ['required', 'integer'],
-            // 'reports' => ['required']
         ]);
         /* -------------------------------------------------------------------------- */
         /*                            Find project with id                            */
@@ -74,16 +73,6 @@ class ReportStudioController extends Controller
         $report->user_id = $idUser;
         $report->save();
         $report = Report::latest('id')->first();
-        // /* -------------------------------------------------------------------------- */
-        // /*                          Insert files to directory                         */
-        // /* -------------------------------------------------------------------------- */
-        // foreach ($request->file('reports') as $fileRequest) {
-        //     set_time_limit(0);
-        //     $file = $fileRequest;
-        //     $fileName = $fileRequest->getClientOriginalName();
-        //     $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $study->id . '/' . $report->id;
-        //     Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
-        // }
         /* -------------------------------------------------------------------------- */
         /*                                 Redirect to                                */
         /* -------------------------------------------------------------------------- */
@@ -139,20 +128,6 @@ class ReportStudioController extends Controller
         $report->studio_id = $study->id;
         $report->user_id = $idUser;
         $report->save();
-        /* -------------------------------------------------------------------------- */
-        /*                                 Get region                                 */
-        /* -------------------------------------------------------------------------- */
-        $region = strtolower($project->regions->name);
-        /* -------------------------------------------------------------------------- */
-        /*                          Insert files to directory                         */
-        /* -------------------------------------------------------------------------- */
-        // foreach ($request->file('reports') as $fileRequest) {
-        //     set_time_limit(0);
-        //     $file = $fileRequest;
-        //     $fileName = $fileRequest->getClientOriginalName();
-        //     $filePath = 'tecnico/' . $region . '/' . $project->id . '/' . $study->id . '/' . $id;
-        //     Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
-        // }
         /* -------------------------------------------------------------------------- */
         /*                                 Redirect to                                */
         /* -------------------------------------------------------------------------- */

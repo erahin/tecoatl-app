@@ -54,8 +54,6 @@ class PublicController extends Controller
                 'filename' => $fileName
             ];
         }
-
-        // otherwise return percentage information
         $handler = $fileReceived->handler();
         return [
             'done' => $handler->getPercentageDone(),

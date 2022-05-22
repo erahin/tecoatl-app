@@ -36,9 +36,6 @@ class ProjectByRegion extends Controller
         /* -------------------------------------------------------------------------- */
         $projects = Project::where('region_id', '=', $id)->paginate(10);
         foreach ($users as $user) {
-            // if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5 || $user->role_id == 7) {
-            //     $projects = Project::where('region_id', '=', $id)->paginate(10);
-            // } else
             if ($user->role_id == 3) {
                 $projects = DB::table('users')
                     ->join('users_studies', 'users.id', '=', 'users_studies.user_id')
@@ -81,12 +78,6 @@ class ProjectByRegion extends Controller
                 ->where('region_id', '=', $id)
                 ->paginate(10);
             foreach ($users as $user) {
-                // if ($user->role_id == 1 || $user->role_id == 2 || $user->role_id == 4 || $user->role_id == 5) {
-                // $projects = DB::table('projects')
-                //     ->where('place', 'like', '%' . $request->search . '%')
-                //     ->where('region_id', '=', $id)
-                //     ->paginate(10);
-                // } else
                 if ($user->role_id == 3) {
                     $projects = DB::table('users')
                         ->join('users_studies', 'users.id', '=', 'users_studies.user_id')

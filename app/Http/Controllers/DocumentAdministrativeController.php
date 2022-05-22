@@ -158,26 +158,6 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
-        // $request->validate([
-        //     'files-upload' => ['required'],
-        // ]);
-        /* -------------------------------------------------------------------------- */
-        /*                          Insert files to directory                         */
-        /* -------------------------------------------------------------------------- */
-        // foreach ($request->file('files-upload') as $fileRequest) {
-        //     $file = $fileRequest;
-        //     $fileName = $fileRequest->getClientOriginalName();
-        //     $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $fileName;
-        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
-        // }
-        // foreach ($request->file('files-upload') as $fileRequest) {
-        //     set_time_limit(0);
-        //     $file = $fileRequest;
-        //     $fileName = $fileRequest->getClientOriginalName();
-        //     $filePath = 'administrativo/' . $idAdministrative . '/' . $folder;
-        //     Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
-        // }
-        // return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
         $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
         if (!$receiver->isUploaded()) {
             return 'error';
@@ -196,8 +176,6 @@ class DocumentAdministrativeController extends Controller
                 'filename' => $fileName
             ];
         }
-
-        // otherwise return percentage information
         $handler = $fileReceived->handler();
         return [
             'done' => $handler->getPercentageDone(),
@@ -430,8 +408,6 @@ class DocumentAdministrativeController extends Controller
                 'filename' => $fileName
             ];
         }
-
-        // otherwise return percentage information
         $handler = $fileReceived->handler();
         return [
             'done' => $handler->getPercentageDone(),
