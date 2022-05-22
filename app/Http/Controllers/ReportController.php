@@ -218,7 +218,11 @@ class ReportController extends Controller
         $project = Project::find($idProject);
         $region = strtolower($project->regions->name);
         $pathToFile = Storage::disk('s3')->path('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile);
-        return Storage::disk('s3')->download($pathToFile);
+        if (Storage::disk('s3')->exists($pathToFile)) {
+            return Storage::disk('s3')->download($pathToFile);
+        } else {
+            return view('errors.4032');
+        }
     }
     public function deleteFile($idProject, $idStudio,  $idReport, $nameFile)
     {
