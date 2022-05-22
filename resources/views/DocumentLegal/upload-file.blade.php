@@ -10,7 +10,6 @@
                     </h1>
                     <h2 class="h6 text-center">Ruta: <span class="text-capitalize">{{ $path }}/</span></h2>
                 </div>
-                {{-- --}}
                 <div class="card-body">
                     <div id="div_file">
                     </div>

@@ -38,9 +38,7 @@
                         </a>
                         @endif
                     </div>
-                    {{-- @if (count($files) > 0) --}}
                     <h2 class="h6 text-center">Ruta: {{ $path }}/</h2>
-                    {{-- @endif --}}
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>
@@ -58,18 +56,14 @@
                                         href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}"
                                         class="btn btn-secondary ancla"><i class="fa fa-external-link"
                                             aria-hidden="true"></i></a>
-                                    {{-- @can('directivo.download') --}}
                                     <a title="Descargar archivo"
                                         href="{{ route('directivo.download', ['path' => str_replace('/', '+', $file)]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-download"
                                             aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('directivo.deleteFile') --}}
                                     <a title="Eliminar archivo" class="btn btn-danger"
                                         href="{{ route('directivo.deleteFile', ['path' => str_replace('/', '+', $file)]) }}"
                                         onclick="return confirm( '¿Está seguro de eliminar el archivo {{ explode('/', $file)[$index+1] }} ?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    {{-- @endcan --}}
                                 </td>
                             </tr>
                             @endforeach

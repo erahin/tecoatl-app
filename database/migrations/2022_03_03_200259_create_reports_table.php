@@ -16,7 +16,7 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->integer('report_number');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->date('start_date');
             $table->date('end_date');
             $table->integer('report_type');

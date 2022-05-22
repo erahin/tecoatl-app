@@ -34,6 +34,11 @@
                         </a>
                     </div>
                     @endcan
+                    <div class="mb-3">
+                        <h2 class="h6 text-center">Ruta: Técnico/{{ $project->regions->name }}/{{ $project->abbreviation
+                            }}/
+                        </h2>
+                    </div>
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
                             <tr>

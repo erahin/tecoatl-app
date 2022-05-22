@@ -22,10 +22,14 @@
                                 class="fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
-                    <h2 class="h6 text-center">Ruta:
-                        {{ $project->abbreviation }}/{{ $studio->name }}/{{ $report->report_number }}° Informe {{
-                        $report_type[$report->report_type] }}
-                    </h2>
+                    <div class="mb-3">
+                        <h2 class="h6 text-center">Ruta:
+                            Técnico/{{ $project->regions->name }}/{{ $project->abbreviation }}/{{ $studio->name }}/{{
+                            $report->report_number }}°
+                            Informe {{
+                            $report_type[$report->report_type] }} - {{ $report->name }}
+                        </h2>
+                    </div>
                     <div class="overflow-y">
                         <table class="table table-hover table-bordered">
                             <thead>

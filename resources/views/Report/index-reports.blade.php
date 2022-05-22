@@ -31,6 +31,12 @@
                                 class="fa fa-chevron-left" aria-hidden="true"></i> Regresar
                         </a>
                     </div>
+                    <div class="mb-3">
+                        <h2 class="h6 text-center">Ruta: Técnico/{{ $project->regions->name }}/{{
+                            $project->abbreviation
+                            }}/{{ $studio->name }}
+                        </h2>
+                    </div>
                     <table class="table table-hover table-bordered display" id="table">
                         <thead>
                             <tr>

@@ -16,27 +16,18 @@
                         {{ session('status') }}
                     </div>
                     @endif
+                    <div class="mb-3">
+                        <h2 class="h6 text-center">Ruta: Técnico/{{ $project->regions->name }}/{{ $project->abbreviation
+                            }}/{{ $studio->name }}/{{
+                            $report->report_number }}°
+                            Informe {{
+                            $report_type[$report->report_type] }} - {{ $report->name }}
+                        </h2>
+                    </div>
                     <form method="POST" action="{{ route('informes.update', $report->id) }}"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        {{-- @if ($files)
-                        <div class="row mb-3">
-                            {!! Form::label('', 'Archivos subidos', ['class' => 'col-md-4 col-form-label text-md-end'])
-                            !!}
-                            <div class="col-md-6 scroll-studies">
-                                <ul class="list-group">
-                                    @foreach ($files as $file)
-                                    <li class="list-group-item">
-                                        {!! Form::checkbox('files[]', $file, 'true', ['class' =>
-                                        'form-check-input']) !!}
-                                        {{explode('/', $file)[7]}} </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                        <hr> --}}
-                        {{-- @endif --}}
                         <div class="row mb-3">
                             {!! Form::label('report_number', 'Número de informe', [
                             'class' => 'col-md-4 col-form-label
@@ -123,22 +114,9 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="row mb-3">
-                            {!! Form::label('select', 'Subir archivos', ['class' => 'col-md-4 col-form-label
-                            text-md-end'])
-                            !!}
-                            <div class="col-md-6">
-                                {!! Form::file('reports[]', ['class' => 'form-control', 'multiple', 'id' => 'select',
-                                'required']) !!}
-                                @error('reports')
-                                <strong class="text-danger text-center mt-5">{{ $message
-                                    }}</strong>
-                                @enderror
-                            </div>
-                        </div> --}}
                         {!! Form::number('project_id', $project->id, ['class' => 'form-control', 'hidden'])
                         !!}
-                        {!! Form::number('studio_id', $idStudio, ['class' => 'form-control', 'hidden']) !!}
+                        {!! Form::number('studio_id', $studio->id, ['class' => 'form-control', 'hidden']) !!}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {{ Form::button('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar',
@@ -146,7 +124,7 @@
                                 'submit', 'class' =>
                                 'btn btn-primary'] ) }}
                                 <a class="btn btn-danger"
-                                    href="{{ route('reports-list',[ 'id' => $project->id, 'idStudio' => $idStudio]) }}"><i
+                                    href="{{ route('reports-list',[ 'id' => $project->id, 'idStudio' => $studio->id]) }}"><i
                                         class="fa fa-ban" aria-hidden="true"></i>
                                     Cancelar
                                 </a>
