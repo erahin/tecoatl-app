@@ -56,7 +56,7 @@ class LegalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', 'confirmed'],
             'user_id' => 'required|min:1'
         ]);
         $legal = new Legal();
@@ -67,7 +67,7 @@ class LegalController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                           Create departamet directory                      */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->makeDirectory('legal/' . $legal->id);
+        Storage::disk('s3')->makeDirectory('legal/' . $legal->name);
         return redirect()->route('legal.index');
     }
 
