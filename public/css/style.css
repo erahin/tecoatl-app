@@ -155,6 +155,18 @@ h3 {
     border-color: var(--orange) !important;
     border-width: 1.2px;
 }
+.btn-outline-secondary {
+    color: var(--pantone) !important;
+    background-color: #fff !important;
+    border-color: var(--pantone) !important;
+    border-width: 1.2px;
+}
+.btn-outline-secondary:hover {
+    color: #fff !important;
+    background-color: var(--pantone) !important;
+    border-color: var(--pantone) !important;
+    border-width: 1.2px;
+}
 /* -------------------------------------------------------------------------- */
 /*                                  Custom bg                                 */
 /* -------------------------------------------------------------------------- */
