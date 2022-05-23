@@ -10,14 +10,15 @@
                     </h1>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('roles.store') }}">
+                    <form method="POST" action="{{ route('roles.update', $role )  }}">
                         @csrf
+                        @method('PUT')
                         <div class="row mb-3">
                             {!! Form::label('', 'Nombre del rol', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('name', $role->name, ['class' => 'form-control', 'autofocus',
-                                'autofocus', 'id' => 'rol', 'readOnly','onkeyup' => 'firstLetterToCapitalize(rol);'])
+                                'autofocus', 'id' => 'rol','onkeyup' => 'firstLetterToCapitalize(rol);'])
                                 !!}
                                 @error('name')
                                 <strong class="text-danger text-center mt-5">{{ $message
@@ -31,7 +32,7 @@
                             <div class="col-md-6">
                                 <div class="form-check scroll-permissions">
                                     @foreach ($permissions as $permission)
-                                    <label class="form-check-label inline_label" required>
+                                    <label class="form-check-label inline_label">
                                         {!! Form::checkbox('permissions[]', $permission->id, null, ['class' =>
                                         'form-check-input',
                                         'id' => $permission->id])
@@ -79,9 +80,9 @@
         </div>
     </div>
 </div>
-<script>
+{{-- <script>
     (function(){
         let rol = document.getElementById('name').readOnly = true;
     })();
-</script>
+</script> --}}
 @endsection

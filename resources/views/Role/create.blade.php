@@ -25,6 +25,22 @@
                             </div>
                         </div>
                         <div class="row mb-3">
+                            {!! Form::label('name', 'Confirmar nombre', ['class' => 'col-md-4
+                            col-form-label
+                            text-md-end']) !!}
+                            <div class="col-md-6">
+                                {!! Form::text('name_confirmation', '', ['class' => 'form-control', 'autofocus',
+                                'required',
+                                'autofocus','id'=>'name_confirmation','onkeyup' =>
+                                'firstLetterToCapitalize(name_confirmation);'])
+                                !!}
+                                @error('name_confirmation')
+                                <strong class="text-danger text-center mt-5">{{ $message
+                                    }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             {!! Form::label('permissions', 'Permisos', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
@@ -62,7 +78,7 @@
         </div>
     </div>
 </div>
-<script>
+{{-- <script>
     const button = document.getElementById('btn-submit');
     button.addEventListener('click', function (e) {
         let rol = document.getElementById('rol').value;
@@ -72,5 +88,5 @@
             }
         }
     });
-</script>
+</script> --}}
 @endsection

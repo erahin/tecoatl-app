@@ -31,7 +31,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string', 'confirmed'],
             'permissions' => 'required|min:1',
         ]);
         $role = Role::firstOrCreate(['name' => $request->name]);
@@ -39,9 +39,9 @@ class RoleController extends Controller
         return redirect()->route('roles.index');
     }
 
-    public function edit($id)
+    public function edit(Role $role)
     {
-        $role = Role::find($id);
+        // $role = Role::find($id);
         /* -------------------------------------------------------------------------- */
         /*                              Initial Validate                              */
         /* -------------------------------------------------------------------------- */
@@ -52,21 +52,23 @@ class RoleController extends Controller
         return view('Role.edit', compact('permissions', 'role'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
         $request->validate([
-            'name' => ['required', 'string'],
+            'name' => ['string'],
             'permissions' => 'required|min:1',
         ]);
-        $role = Role::find($id);
+        // $role = Role::find($id);
         /* -------------------------------------------------------------------------- */
         /*                              Initial Validate                              */
         /* -------------------------------------------------------------------------- */
         if ($role == null) {
             return view('errors.4032');
         }
-        $role = Role::firstOrCreate([$role->name]);
+        $role->update($request->all());
         $role->permissions()->sync($request->permissions);
+        // $role = Role::firstOrCreate([$role->name]);
+        // $role->permissions()->sync($request->permissions);
         return redirect()->route('roles.index');
     }
 
