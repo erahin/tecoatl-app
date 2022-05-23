@@ -79,13 +79,11 @@
 
     resumable.on('fileSuccess', function(file, response) { // trigger when file upload complete
         response = JSON.parse(response)
-        $('#videoPreview').attr('src', response.path);
-        $('.card-footer').show();
         addFileToList(file.fileName);
     });
 
     resumable.on('fileError', function(file, response) { // trigger when there is any error
-        alert('file uploading error.')
+        alert('Error al cargar el archivo.')
     });
 
 

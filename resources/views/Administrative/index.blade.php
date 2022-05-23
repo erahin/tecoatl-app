@@ -49,10 +49,12 @@
                                 <td>{{ $administrative->name }}</td>
                                 <td class="d-flex justify-content-start">
                                     @can('createFolder')
+                                    @if ($administrative->id != 1)
                                     <a title="Nueva carpeta"
                                         href="{{ route('createFolder', ['idAdministrative' => $administrative->id]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
                                             aria-hidden="true"></i></a>
+                                    @endif
                                     @endcan
                                     @can('folderList')
                                     <a title="Lista de carpetas"
