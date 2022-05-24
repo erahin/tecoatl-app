@@ -312,7 +312,7 @@ class ReportController extends Controller
         $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
         return view('Report.upload-file', compact('project', 'studio', 'report', 'files', 'report_type'));
     }
-    public function uploadFileReport(Request $request, $idProject, $idStudio, $idReport)
+    public function uploadFileReport(Request $request, $idReport, $idStudio, $idProject)
     {
         $project = Project::find($idProject);
         $region = strtolower($project->regions->name);
@@ -326,7 +326,7 @@ class ReportController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName());
             $fileName .= '.' . $extension;
-            $pathToFile = 'tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/';
+            $pathToFile = 'tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport;
             $path = Storage::disk('s3')->putFileAs($pathToFile, $file, $fileName);
             unlink($file->getPathname());
             return [

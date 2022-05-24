@@ -31,7 +31,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'confirmed'],
+            'name' => ['required', 'string'],
             'permissions' => 'required|min:1',
         ]);
         $role = Role::firstOrCreate(['name' => $request->name]);
