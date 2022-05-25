@@ -15,11 +15,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'super-admin',
-            'email' => 'super-admin.tecoatl@gmail.com',
-            'password' => bcrypt('super-admin'),
+            'name' => 'directivo',
+            'email' => 'directivo.tecoatl@gmail.com',
+            'password' => bcrypt('directivo'),
             'phone' => '9516129964'
-        ])->assignRole('Administrador general');
+        ])->assignRole('Directivo');
         User::create([
             'name' => 'jefa-region',
             'email' => 'jefa-region.tecoatl@gmail.com',
@@ -30,57 +30,57 @@ class UserSeeder extends Seeder
             'email' => 'coordinador-aves.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
             'phone' => '9513642226'
-        ])->assignRole('Coordinador de sub-área');
+        ])->assignRole('Coordinador de subárea');
         User::create([
             'name' => 'coordinador-murcielagos',
             'email' => 'coordinador-murcielagos.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Coordinador de sub-área');
+        ])->assignRole('Coordinador de subárea');
         User::create([
             'name' => 'coordinador-mariposas',
             'email' => 'coordinador-mariposas.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Coordinador de sub-área');
+        ])->assignRole('Coordinador de subárea');
         User::create([
             'name' => 'coordinador-impacto',
             'email' => 'coordinador-impacto.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Coordinador de sub-área');
+        ])->assignRole('Coordinador de subárea');
         User::create([
             'name' => 'coordinador-prospectivos',
             'email' => 'coordinador-prospectivos.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Coordinador de sub-área');
+        ])->assignRole('Coordinador de subárea');
         User::create([
             'name' => 'coordinador-informes',
             'email' => 'coordinador-informes.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Coordinador de sub-área');
+        ])->assignRole('Coordinador de subárea');
         User::create([
             'name' => 'coordinador-campo',
             'email' => 'coordinador-campo.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Coordinador de sub-área');
+        ])->assignRole('Coordinador de subárea');
         User::create([
             'name' => 'coordinador-rescate',
             'email' => 'coordinador-rescate.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Coordinador de sub-área');
+        ])->assignRole('Coordinador de subárea');
         User::create([
             'name' => 'coordinador-ambiental',
             'email' => 'coordinador-ambiental.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Coordinador de sub-área');
+        ])->assignRole('Coordinador de subárea');
         User::create([
             'name' => 'coordinador-justificativo',
             'email' => 'coordinador-justificativo.tecoatl@gmail.com',
             'password' => bcrypt('operativo'),
-        ])->assignRole('Coordinador de sub-área');
+        ])->assignRole('Coordinador de subárea');
         User::create([
-            'name' => 'Víctor Rodríguez',
-            'email' => 'victor.tecoatl@gmail.com',
-            'password' => bcrypt('vicko8148'),
-        ])->assignRole('Coordinador de sub-área');
+            'name' => 'Anónimo-TI',
+            'email' => 'anonimo.tecoatl@gmail.com',
+            'password' => bcrypt('anonimo'),
+        ])->assignRole('Técnico informático');
         User::create([
             'name' => 'jefa-administrativa',
             'email' => 'jefa-administrativa.tecoatl@gmail.com',

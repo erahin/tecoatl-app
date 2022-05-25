@@ -11,7 +11,7 @@ class ExecutiveController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:config');
+        $this->middleware('can:config.executive');
     }
 
     public function index()

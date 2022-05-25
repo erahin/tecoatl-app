@@ -11,7 +11,7 @@ class StudyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:config');
+        $this->middleware('can:config.ti');
     }
 
     public function index(Request $request)

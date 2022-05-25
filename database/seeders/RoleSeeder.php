@@ -18,10 +18,10 @@ class RoleSeeder extends Seeder
         /* -------------------------------------------------------------------------- */
         /*                                    Roles                                   */
         /* -------------------------------------------------------------------------- */
-        $role1 = Role::create(['name' => 'Administrador general']); //super admin
+        $role1 = Role::create(['name' => 'Técnico informático']); //super admin ahora ti
         $role2 = Role::create(['name' => 'Jefa de sub-departamento técnico']); //jefas de region
-        $role3 = Role::create(['name' => 'Coordinador de sub-área']); //operador
-        $role4 = Role::create(['name' => 'Técnico informático']); //ti
+        $role3 = Role::create(['name' => 'Coordinador de subárea']); //operador
+        $role4 = Role::create(['name' => 'Directivo']); //ti ahora directivo
         // $role5 = Role::create(['name' => 'Coordinador de área']); //sub jefa de region
         $role6 = Role::create(['name' => 'Jefa administrativa']);
         $role7 = Role::create(['name' => 'Jefa subadministrativa']);
@@ -53,7 +53,9 @@ class RoleSeeder extends Seeder
         /* Reports Module */
         Permission::create(['name' => 'show.reports', 'description' => 'Ver reportes'])->syncRoles([$role1, $role2, $role4]);
         /* Config Module */
-        Permission::create(['name' => 'config', 'description' => 'Ver menú de configuración'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'config.show', 'description' => 'Ver menú de configuración'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'config.ti', 'description' => 'Ver opciones de configuración'])->syncRoles([$role1]);
+        Permission::create(['name' => 'config.executive', 'description' => 'Ver opción directiva'])->syncRoles([$role1, $role4]);
         /* Administrative Module */
         Permission::create(['name' => 'departaments.show', 'description' => 'Ver menú de departamentos'])->syncRoles([
             $role1, $role4, $role6, $role7, $role8

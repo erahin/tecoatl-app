@@ -177,21 +177,21 @@
                             </div>
                         </li>
                         @endcan
-                        @can('config')
+                        @can('config.show')
                         <li class="nav-item dropdown text-uppercase" id="li5">
                             <a id="a5" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false" v-pre>
                                 <i class="fa fa-cogs fa__li" aria-hidden="true"></i> {{ 'configuración' }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="div5">
-                                @can('config')
+                                @can('config.ti')
                                 <div class="gtr-menu__li">
                                     <a class="dropdown-item" href="{{ route('roles.index') }}">
                                         <i class="fa fa-tasks" aria-hidden="true"></i> {{ __('roles') }}
                                     </a>
                                 </div>
                                 @endcan
-                                @can('config')
+                                @can('config.ti')
                                 <div class="gtr-menu__li">
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="{{ route('usuarios.index') }}">
@@ -199,7 +199,7 @@
                                     </a>
                                 </div>
                                 @endcan
-                                @can('config')
+                                @can('config.ti')
                                 <div class="gtr-menu__li">
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="{{ route('regiones.index') }}">
@@ -207,7 +207,7 @@
                                     </a>
                                 </div>
                                 @endcan
-                                @can('config')
+                                @can('config.ti')
                                 <div class="gtr-menu__li">
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="{{ route('estudios.index') }}">
@@ -216,9 +216,11 @@
                                     </a>
                                 </div>
                                 @endcan
-                                @can('config')
+                                @can('config.executive')
                                 <div class="gtr-menu__li">
+                                    @can('config.ti')
                                     <hr class="dropdown-divider">
+                                    @endcan
                                     <a class="nav-link" href="{{ route('directivo.index') }}"><i class="fa fa-star"
                                             aria-hidden="true"></i>
                                         {{ __('directivo') }}</a>
