@@ -35,9 +35,9 @@
                                     class=" fa fa-chevron-left" aria-hidden="true"></i>
                                 Regresar
                             </a>
-                            <a class="btn btn-danger" id="btn-cancel"><i class="fa fa-ban" aria-hidden="true"></i>
+                            {{-- <a class="btn btn-danger" id="btn-cancel"><i class="fa fa-ban" aria-hidden="true"></i>
                                 Cancelar
-                            </a>
+                            </a> --}}
                         </div>
                         <div style="display: none" class="progress mt-3" style="height: 25px">
                             <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
@@ -151,12 +151,12 @@
         }
 
     }
-    let btn_cancel = document.getElementById("btn-cancel");
-    btn_cancel.addEventListener("click", cancelUpload);
+    // let btn_cancel = document.getElementById("btn-cancel");
+    // btn_cancel.addEventListener("click", cancelUpload);
 
-    function cancelUpload() {
-        resumable.cancel();
-    }
+    // function cancelUpload() {
+    //     resumable.cancel();
+    // }
 
 </script>
 @endsection

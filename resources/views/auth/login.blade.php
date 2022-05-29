@@ -38,7 +38,7 @@
                             </span>
                             @enderror
                         </div>
-                        {{-- <div class="input-group my-4">
+                        <div class="input-group my-4">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"
                                     aria-hidden="true"></i></span>
                             <input id="code" type="text" class="form-control @error('code') is-invalid @enderror"
@@ -48,7 +48,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                        </div> --}}
+                        </div>
                         <div class="form-group">
                             <div class="">
                                 <button type="submit" class="btn btn-primary button_login">

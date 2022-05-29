@@ -54,7 +54,7 @@
                             ]) !!}
                             <div class=" col-md-6">
                                 {!! Form::number('report_number', '', ['class' => 'form-control', 'autofocus',
-                                'required', 'autofocus']) !!}
+                                'required', 'autofocus', 'min' => '1', 'pattern' => '^[1-9]+']) !!}
                                 @error('report_number')
                                 <strong class="text-danger text-center mt-5">{{ $message
                                     }}</strong>

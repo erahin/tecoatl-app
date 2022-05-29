@@ -33,10 +33,12 @@ class ProjectReportController extends Controller
             array_push($projectArray, $projects);
         }
         $percentArray = [];
-        for ($i = 0; $i < count($projectArray); $i++) {
-            $totalProject = count(Project::all());
-            $percent = (count($projectArray[$i]) * 100) / $totalProject;
-            $percentArray[] = ['name' => $regions[$i]->name, 'y' => $percent];
+        if (count(Project::all()) > 0) {
+            for ($i = 0; $i < count($projectArray); $i++) {
+                $totalProject = count(Project::all());
+                $percent = (count($projectArray[$i]) * 100) / $totalProject;
+                $percentArray[] = ['name' => $regions[$i]->name, 'y' => $percent];
+            }
         }
         return view('ProjectQuery.allProject', ["data" => json_encode($percentArray)]);
     }
