@@ -86,7 +86,7 @@
                                                 aria-hidden="true"></i></span>
                                         <input id="phone" type="number"
                                             class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                            value="{{ old('phone') }}" required placeholder="9516129964">
+                                            value="{{ old('phone') }}" required placeholder="Ejemplo: 9513567193">
                                         @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
