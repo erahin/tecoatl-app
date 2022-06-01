@@ -14,7 +14,7 @@ class ReportStudioController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:informes.create')->only('create', 'store');
+        $this->middleware('can:upload-reports')->only('store');
     }
     public function store(Request $request)
     {

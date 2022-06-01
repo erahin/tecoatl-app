@@ -30,28 +30,27 @@ class RoleSeeder extends Seeder
         /*                                 Permission                                 */
         /* -------------------------------------------------------------------------- */
         /* Projects Module */
-        Permission::create(['name' => 'proyectos', 'description' => 'Ver menú proyectos'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
+        Permission::create(['name' => 'proyectos', 'description' => 'Ver menú documentacion'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
         Permission::create(['name' => 'proyectos.index', 'description' => 'Ver lista de proyectos'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
         Permission::create(['name' => 'proyectos.create', 'description' => 'Crear nuevo proyecto'])->syncRoles([$role1, $role2, $role4]);
         Permission::create(['name' => 'proyectos.edit', 'description' => 'Editar proyecto'])->syncRoles([$role1, $role2, $role4]);
         Permission::create(['name' => 'proyectos.destroy', 'description' => 'Eliminar proyecto'])->syncRoles([$role1, $role2, $role4]);
         /* Report Module */
-        Permission::create(['name' => 'informes.create', 'description' => 'Crear informe'])->syncRoles([
-            $role1, $role2, $role3, $role4
-        ]);
-        Permission::create(['name' => 'reports-list', 'description' => 'Ver lista de informe de un proyecto'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
+        // Permission::create(['name' => 'informes.create', 'description' => 'Crear informe'])->syncRoles([
+        //     $role1, $role2, $role3, $role4
+        // ]);
         Permission::create(['name' => 'studies-list', 'description' => 'Ver lista de estudios de un proyecto'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
-        Permission::create(['name' => 'upload-reports', 'description' => 'Crear informes'])->syncRoles([$role1, $role2, $role3, $role4]);
-        Permission::create(['name' => 'report-edit', 'description' => 'Editar informe'])->syncRoles([$role1, $role2, $role3, $role4]);
-        Permission::create(['name' => 'uploadFileReport', 'description' => 'Subir archivos de un informe'])->syncRoles([$role1, $role2, $role3, $role4]);
-        Permission::create(['name' => 'show-informs', 'description' => 'Ver lista de informes'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
-        Permission::create(['name' => 'downloadFile', 'description' => 'Descargar archivos de los informes'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
-        Permission::create(['name' => 'deleteFile', 'description' => 'Eliminar archivos de los informes'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'upload-reports', 'description' => 'Crear informes para un estudio'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'reports-list', 'description' => 'Ver lista de informe de un proyecto'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
         Permission::create(['name' => 'deleteStudioDirectory', 'description' => 'Eliminar directorio de un estudio'])->syncRoles([$role1, $role2, $role4]);
+        Permission::create(['name' => 'show-informs', 'description' => 'Ver lista de archivos de un informe'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
+        Permission::create(['name' => 'report-edit', 'description' => 'Editar un informe'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'uploadFileReport', 'description' => 'Subir archivos de un informe'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'deleteReportsDirectory', 'description' => 'Eliminar directorio de un informe'])->syncRoles([$role1, $role2, $role4]);
-
+        Permission::create(['name' => 'downloadFile', 'description' => 'Descargar archivos de los informes'])->syncRoles([$role1, $role2, $role3, $role4, $role8]);
+        Permission::create(['name' => 'deleteFile', 'description' => 'Eliminar archivos de los informes'])->syncRoles([$role1, $role2, $role4]);
         /* Reports Module */
-        Permission::create(['name' => 'show.reports', 'description' => 'Ver reportes'])->syncRoles([$role1, $role2, $role4]);
+        Permission::create(['name' => 'show.reports', 'description' => 'Ver estatus de proyecto'])->syncRoles([$role1, $role2, $role4]);
         /* Config Module */
         Permission::create(['name' => 'config.show', 'description' => 'Ver menú de configuración'])->syncRoles([$role1, $role4]);
         Permission::create(['name' => 'config.ti', 'description' => 'Ver opciones de configuración'])->syncRoles([$role1]);
@@ -61,10 +60,10 @@ class RoleSeeder extends Seeder
             $role1, $role4, $role6, $role7, $role8
         ]);
         // First nivel //
-        Permission::create(['name' => 'administrativos.index', 'description' => 'Ver lista de departamentos'])->syncRoles([$role1, $role6, $role7, $role4]);
-        Permission::create(['name' => 'administrativos.create', 'description' => 'Crear un nuevo departamento'])->syncRoles([$role1, $role6, $role4]);
-        Permission::create(['name' => 'administrativos.edit', 'description' => 'Editar departamento'])->syncRoles([$role1, $role6, $role4]);
-        Permission::create(['name' => 'administrativos.destroy', 'description' => 'Eliminar departamento'])->syncRoles([$role1, $role6, $role4]);
+        Permission::create(['name' => 'administrativos.index', 'description' => 'Ver lista de departamento administrativo'])->syncRoles([$role1, $role6, $role7, $role4]);
+        Permission::create(['name' => 'administrativos.create', 'description' => 'Crear un nuevo departamento administrativo'])->syncRoles([$role1, $role6, $role4]);
+        Permission::create(['name' => 'administrativos.edit', 'description' => 'Editar departamento administrativo'])->syncRoles([$role1, $role6, $role4]);
+        Permission::create(['name' => 'administrativos.destroy', 'description' => 'Eliminar departamento administrativo'])->syncRoles([$role1, $role6, $role4]);
         Permission::create(['name' => 'createFolder', 'description' => 'Crear una carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
         Permission::create(['name' => 'folderList', 'description' => 'Ver lista de carpetas administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
         // Second nivel //
