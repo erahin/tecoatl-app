@@ -297,7 +297,7 @@ class ReportController extends Controller
     {
         $report = Report::find($idReport);
         $project = Project::find($idProject);
-        $studio = Study::find($idProject);
+        $studio = Study::find($idStudio);
         /* -------------------------------------------------------------------------- */
         /*                              Initial Validate                              */
         /* -------------------------------------------------------------------------- */
