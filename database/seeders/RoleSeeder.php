@@ -69,7 +69,7 @@ class RoleSeeder extends Seeder
         // Second nivel //
         Permission::create(['name' => 'showFormUploadFile', 'description' => 'Subir archivos a carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
         Permission::create(['name' => 'fileList', 'description' => 'Ver lista de archivos de una carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
-        Permission::create(['name' => 'deleteFolder', 'description' => 'Eliminar carpeta administrativa'])->syncRoles([$role1, $role6]);
+        Permission::create(['name' => 'deleteFolder', 'description' => 'Eliminar carpeta administrativa'])->syncRoles([$role1, $role6, $role4]);
         // Third level //
         Permission::create(['name' => 'operFile', 'description' => 'Abrir archivo de una carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);
         Permission::create(['name' => 'downloadFileFolder', 'description' => 'Descargar archivo de una carpeta administrativa'])->syncRoles([$role1, $role6, $role7, $role4]);

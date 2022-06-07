@@ -32,11 +32,14 @@ class AdministrativeSeeder extends Seeder
             'name' => 'Seguridad e higiene',
         ]);
         Storage::disk('s3')->deleteDirectory('administrativo');
+        Storage::disk('s3')->deleteDirectory('publico');
         Storage::disk('s3')->makeDirectory('administrativo');
         Storage::disk('s3')->makeDirectory('administrativo/1');
         Storage::disk('s3')->makeDirectory('administrativo/2');
         Storage::disk('s3')->makeDirectory('administrativo/3');
         Storage::disk('s3')->makeDirectory('administrativo/4');
         Storage::disk('s3')->makeDirectory('administrativo/5');
+        Storage::disk('s3')->makeDirectory('publico/Formatos');
+        Storage::disk('s3')->makeDirectory('publico/Fotografrías corporativas');
     }
 }
