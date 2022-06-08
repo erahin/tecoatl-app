@@ -83,6 +83,8 @@ class PublicController extends Controller
     }
     public function deletePublicFile($folder, $subfolder, $file)
     {
+        // Storage::disk('s3')->copy($folder . '/' . $subfolder . '/' . $file, 'papelera/' . $file);
+        // Storage::disk('s3')->setVisibility($folder . '/' . $subfolder . '/' . $file, 'private');
         Storage::disk('s3')->delete($folder . '/' . $subfolder . '/' . $file);
         return redirect()->route('publicFilesList', ['path' => $folder . '-' . $subfolder]);
     }

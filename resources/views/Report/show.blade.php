@@ -62,7 +62,7 @@
                                     </td>
                                     <td>
                                         <a title="Abrir" target="_blank" class="btn btn-outline-primary"
-                                            href="https://torvik-dev.s3.us-east-2.amazonaws.com/{{ $file }}"><i
+                                            href="https://tecoatl2022.s3.us-west-1.amazonaws.com/{{ $file }}"><i
                                                 class="fa fa-external-link" aria-hidden="true"></i></a>
                                         @can('downloadFile')
                                         <a title="Descargar" class="btn btn-outline-secondary"
