@@ -22,20 +22,21 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
-        if ($administrative->id === 1) {
-            // foreach ($directories as $directorie) {
-            //     $project = Project::find(explode('/', $directorie)[2]);
-            //     if ($project != null) {
-            //         array_push($projects, $project->place);
-            //     }
-            // }
-            return view('errors.4032');
-        }
         /* -------------------------------------------------------------------------- */
         /*                                  Get data                                  */
         /* -------------------------------------------------------------------------- */
         $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/');
         $projects = [];
+        if ($administrative->id === 1) {
+            foreach ($directories as $directorie) {
+                $project = Project::find(explode('/', $directorie)[2]);
+                if ($project != null) {
+                    array_push($projects, $project->place);
+                }
+            }
+            return view('errors.4032');
+        }
+
         /* -------------------------------------------------------------------------- */
         /*                                 Get user                                   */
         /* -------------------------------------------------------------------------- */
@@ -43,10 +44,10 @@ class DocumentAdministrativeController extends Controller
         $idUser = $user->id;
         $user = $user->roles[0]->name;
         if ($user != "Jefa subadministrativa") {
-            return view('DocumentAdministrative.create', compact('idAdministrative', 'administrative', 'directories'));
+            return view('DocumentAdministrative.create', compact('idAdministrative', 'administrative', 'directories', 'projects'));
         }
         if ($user == "Jefa subadministrativa" && $administrative->user_id == $idUser) {
-            return view('DocumentAdministrative.create', compact('idAdministrative', 'administrative', 'directories'));
+            return view('DocumentAdministrative.create', compact('idAdministrative', 'administrative', 'directories', 'projects'));
         } else {
             return view('errors.4032');
         }
