@@ -15,12 +15,14 @@
     <style>
         html,
         body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 100;
+            background-color: rgb(251 141 109);
+            color: rgb(62 93 88);
+            font-family: arboria, sans-serif;
+            font-weight: 400;
+            font-style: normal;
             height: 100vh;
             margin: 0;
+            text-transform: uppercase;
         }
 
         .full-height {
@@ -52,7 +54,7 @@
     <div class="flex-center position-ref full-height">
         <div class="content">
             <div class="title">
-                @yield('message')
+                @yield('code') | @yield('message')
             </div>
         </div>
     </div>
