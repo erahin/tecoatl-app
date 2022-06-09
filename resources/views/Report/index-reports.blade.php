@@ -63,6 +63,12 @@
                                 <td>{{ $report->start_date }}</td>
                                 <td>{{ $report->end_date }}</td>
                                 <td>
+                                    @can('uploadFileReport')
+                                    <a title="Agregar archivos"
+                                        href="{{ route('uploadFormFile', ['idReport' => $report->id, 'idStudio' => $studio->id, 'idProject' => $project->id]) }}"
+                                        class="btn btn-outline-primary"><i class="fa fa-upload"
+                                            aria-hidden="true"></i></a>
+                                    @endcan
                                     @can('show-informs')
                                     <a title="Lista de archivos"
                                         href="{{ route('show-informs', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id]) }}"
@@ -75,14 +81,8 @@
                                         class="btn btn-outline-success"><i class="fa fa-pencil-square-o"
                                             aria-hidden="true"></i></a>
                                     @endcan
-                                    @can('uploadFileReport')
-                                    <a title="Agregar archivos"
-                                        href="{{ route('uploadFormFile', ['idReport' => $report->id, 'idStudio' => $studio->id, 'idProject' => $project->id]) }}"
-                                        class="btn btn-outline-primary"><i class="fa fa-upload"
-                                            aria-hidden="true"></i></a>
-                                    @endcan
                                     @can('deleteReportsDirectory')
-                                    <a title="Eliminar carpeta"
+                                    <a title="Eliminar informe"
                                         href="{{ route('deleteReportsDirectory', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id]) }}"
                                         class="btn btn-outline-danger"
                                         onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ $report->report_number }} informe, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
