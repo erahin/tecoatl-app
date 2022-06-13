@@ -237,9 +237,12 @@ li a.nav-link.active {
 main {
     min-height: 91vh;
 }
-/* .card {
-    background-color: rgba(90, 0, 236, 0.719);
-} */
+.form__error {
+    display: flex !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-content: center !important;
+}
 .navbar__logo {
     width: 70px;
     border-radius: 7px;

@@ -81,6 +81,16 @@
 
                             <div class="card-body">
                                 <form method="GET" action="{{ route('sendCode') }}" class="body__form">
+
+                                    <div class="form__error">
+                                        @if($errors->any())
+                                        {{-- <span>
+                                            <strong class="text-danger">{{ $errors->first()
+                                                }}</strong>
+                                        </span> --}}
+                                        <span class="alert alert-danger text-center">{{ $errors->first() }}</span>
+                                        @endif
+                                    </div>
                                     <div class="input-group my-4">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"
                                                 aria-hidden="true"></i></span>
