@@ -113,12 +113,7 @@ if (a6 != null) {
 }
 
 (function () {
-    if (
-        localStorage.getItem("index") == -1 ||
-        localStorage.getItem("index") == undefined
-    ) {
-        console.log("0");
-    } else {
+    if (localStorage.getItem("index")) {
         liMenu[liActive].classList.remove("active");
         liMenu[localStorage.getItem("index")].classList.add("active");
         liActive = localStorage.getItem("index");
@@ -126,11 +121,13 @@ if (a6 != null) {
         activeMenu();
     }
 })();
-
+/* -------------------------------------------------------------------------- */
+/*                             Reset localstorage                             */
+/* -------------------------------------------------------------------------- */
 home.addEventListener("click", () => {
-    liMenu[liActive].classList.remove("active");
-    localStorage.setItem("index", -1);
+    // liMenu[liActive].classList.remove("active");
+    // localStorage.setItem("index", -1);
     localStorage.removeItem("index");
     localStorage.removeItem("a");
-    localStorage.clear();
+    // localStorage.clear();
 });

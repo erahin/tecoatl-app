@@ -66,7 +66,7 @@
     </div>
 </div>
 @endsection
-<script>
+{{-- <script>
     (function() {
             localStorage.removeItem("index");
             // localStorage.removeItem("regionArray");
@@ -74,4 +74,4 @@
             localStorage.removeItem("a");
             // localStorage.clear();
         })();
-</script>
+</script> --}}
