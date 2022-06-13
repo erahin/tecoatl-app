@@ -145,12 +145,5 @@
         }
 
     }
-    // let btn_cancel = document.getElementById("btn-cancel");
-    // btn_cancel.addEventListener("click", cancelUpload);
-
-    // function cancelUpload() {
-    //     resumable.cancel();
-    // }
-
 </script>
 @endsection

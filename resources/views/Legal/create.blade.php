@@ -41,38 +41,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="row mb-3">
-                            {!! Form::label('', 'Encargado', ['class' => 'col-md-4 col-form-label
-                            text-md-end'])
-                            !!}
-                            <div class="col-md-6">
-                                <div class="form-check scroll-studies">
-                                    @foreach ($userArray as $user)
-                                    <label class="form-check-label inline_label">
-                                        {!! Form::checkbox('user_id', $user->id, null, ['class' =>
-                                        'form-check-input']) !!}
-                                        {{ $user->name }}
-                                    </label>
-                                    @endforeach
-                                </div>
-                                @error('user_id')
-                                <strong class="text-danger text-center mt-5">{{ $message
-                                    }}</strong>
-                                @enderror
-                            </div>
-                        </div> --}}
-                        {{-- <div class="row mb-3">
-                            {!! Form::label('', 'Encargado', ['class' => 'col-md-4 col-form-label text-md-end'])
-                            !!}
-                            <div class="col-md-6">
-                                {!! Form::select('user_id', $userArray, '', ['class' => 'form-select', 'id' =>
-                                'user_id', 'placeholder' => 'Seleccione encargado']) !!}
-                                @error('user_id')
-                                <strong class="text-danger text-center mt-5">{{ $message
-                                    }}</strong>
-                                @enderror
-                            </div>
-                        </div> --}}
                         <div class="row mb-3">
                             <label for="exampleFormControlSelect1"
                                 class="col-md-4 col-form-label text-md-end">Encargado</label>

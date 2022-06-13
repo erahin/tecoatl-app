@@ -37,9 +37,6 @@
                                 Regresar
                             </a>
                             @endif
-                            {{-- <a class="btn btn-danger" id="btn-cancel"><i class="fa fa-ban" aria-hidden="true"></i>
-                                Cancelar
-                            </a> --}}
                         </div>
                         <div style="display: none" class="progress mt-3" style="height: 25px">
                             <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"

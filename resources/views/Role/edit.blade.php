@@ -80,9 +80,4 @@
         </div>
     </div>
 </div>
-{{-- <script>
-    (function(){
-        let rol = document.getElementById('name').readOnly = true;
-    })();
-</script> --}}
 @endsection

@@ -26,26 +26,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="row mb-3">
-                            {!! Form::label('', 'Encargado', ['class' => 'col-md-4 col-form-label
-                            text-md-end'])
-                            !!}
-                            <div class="col-md-6">
-                                <div class="form-check scroll-studies">
-                                    @foreach ($userArray as $user)
-                                    <label class="form-check-label inline_label">
-                                        {!! Form::checkbox('user_id', $user->id, null, ['class' =>
-                                        'form-check-input', 'id' => $user->id]) !!}
-                                        {{ $user->name }}
-                                    </label>
-                                    @endforeach
-                                </div>
-                                @error('user_id')
-                                <strong class="text-danger text-center mt-5">{{ $message
-                                    }}</strong>
-                                @enderror
-                            </div>
-                        </div> --}}
                         <div class="row mb-3">
                             <label for="exampleFormControlSelect1"
                                 class="col-md-4 col-form-label text-md-end">Encargado</label>
@@ -68,21 +48,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- @foreach ($userArray as $user)
-                        @if ($administrative->user_id == $user->id)
-                        <script>
-                            checkActive({{ $user->id}});
-
-                                function checkActive(idUser) {
-                                    let id = idUser;
-                                    let checkUser = document.getElementById(
-                                        id
-                                    );
-                                    checkUser.setAttribute("checked", "");
-                                }
-                        </script>
-                        @endif
-                        @endforeach --}}
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {{ Form::button('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar',

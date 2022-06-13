@@ -35,15 +35,6 @@
                         <a class=" btn btn-secondary my-2" href="{{ route('projectByRegion', ['id' => $id]) }}"
                             role="button">
                             <i class="fa fa-list" aria-hidden="true"></i> Lista completa</a>
-                        {{-- <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}" role="button">
-                            Crear
-                            Proyectos</a> <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}"
-                            role="button">
-                            Crear
-                            Proyectos</a>
-                        <a class=" btn btn-primary my-2" href="{{ route('proyectos.create') }}" role="button">
-                            Crear
-                            Proyectos</a> --}}
                     </div>
                     <table class="table table-hover table-bordered" id="table">
                         <thead>
