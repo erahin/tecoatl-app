@@ -83,6 +83,9 @@ class AdministrativeController extends Controller
      */
     public function store(Request $request)
     {
+        /* -------------------------------------------------------------------------- */
+        /*                              Validate Request                              */
+        /* -------------------------------------------------------------------------- */
         $request->validate([
             'name' => 'required',
             'user_id' => 'required|min:1'
