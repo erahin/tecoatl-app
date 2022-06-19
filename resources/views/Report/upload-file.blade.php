@@ -8,7 +8,6 @@
                 <div class="card-header">
                     <h1 class="text-center">Subir archivo
                     </h1>
-
                 </div>
                 <div class="mb-3 mt-2">
                     <h2 class="h6 text-center">Ruta: Técnico/{{ $project->regions->name }}/{{ $project->abbreviation

@@ -54,7 +54,7 @@
                                 <td>{{ $status[$project->status] }}</td>
                                 <td class="d-flex justify-content-start">
                                     @can('studies-list')
-                                    <a title="Reportes" href="{{ route('studies-list', $project->id) }}"
+                                    <a title="Informes" href="{{ route('studies-list', $project->id) }}"
                                         class="btn btn-primary ancla">
                                         <i class="fa fa-folder-open" aria-hidden="true"></i></a>
                                     @endcan

@@ -58,7 +58,7 @@
                                 <td>{{ explode('/', $file)[4] }}</td>
                                 <td class="d-flex justify-content-start">
                                     @can('operFile')
-                                    <a title="Abrir archivos" target="_blank"
+                                    <a title="Abrir archivo" target="_blank"
                                         href="https://tecoatl2022.s3.us-west-1.amazonaws.com/{{ $file }}"
                                         class="btn btn-secondary ancla"><i class="fa fa-external-link"
                                             aria-hidden="true"></i></a>

@@ -37,7 +37,7 @@
                         <hr>
                         @endif
                         <div class="row mb-3">
-                            {!! Form::label('name', 'Nombre de la sub carpeta', ['class' => 'col-md-4 col-form-label
+                            {!! Form::label('name', 'Nombre de la subcarpeta', ['class' => 'col-md-4 col-form-label
                             text-md-end']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('name', '', ['class' => 'form-control', 'autofocus', 'required',

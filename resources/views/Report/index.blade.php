@@ -43,7 +43,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Nombre del estudio</th>
-                                <th scope="col" colspan="1">Acción</th>
+                                <th scope="col" colspan="1">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>

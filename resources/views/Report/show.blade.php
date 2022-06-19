@@ -44,7 +44,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Archivo</th>
-                                    <th scope="col">Acción</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,16 +61,16 @@
                                         {{ explode('/', $file)[5] }}
                                     </td>
                                     <td>
-                                        <a title="Abrir" target="_blank" class="btn btn-outline-primary"
+                                        <a title="Abrir archivo" target="_blank" class="btn btn-outline-primary"
                                             href="https://tecoatl2022.s3.us-west-1.amazonaws.com/{{ $file }}"><i
                                                 class="fa fa-external-link" aria-hidden="true"></i></a>
                                         @can('downloadFile')
-                                        <a title="Descargar" class="btn btn-outline-secondary"
+                                        <a title="Descargar archivo" class="btn btn-outline-secondary"
                                             href="{{ route('downloadFile', ['idProject' => $project->id, 'idStudio' => $studio->id, 'idReport' => $report->id, 'nameFile' => explode('/', $file)[5]]) }}"><i
                                                 class="fa fa-download" aria-hidden="true"></i></a>
                                         @endcan
                                         @can('deleteFile')
-                                        <a title="Eliminar" class="btn btn-outline-danger"
+                                        <a title="Eliminar archivo" class="btn btn-outline-danger"
                                             href="{{ route('deleteFile', ['idProject' => $project->id,'idStudio' => $studio->id,'idReport' => $report->id,'nameFile' => explode('/', $file)[5]]) }}"
                                             onclick="return confirm( '¿Está seguro de eliminar {{ explode('/', $file)[5] }}?') "><i
                                                 class="fa fa-trash-o" aria-hidden="true"></i></a>

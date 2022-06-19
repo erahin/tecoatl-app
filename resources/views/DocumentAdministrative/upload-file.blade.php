@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Subir archivo
+                    <h1 class="text-center">Subir archivos
                     </h1>
                     @if ($project!= null)
                     <h2 class="h6 text-center">Ruta: Administrativo/{{ $administrative->name }}/{{ $project->place }}/

@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="text-center">Lista de departamentos
+                    <h1 class="text-center">Lista de departamentos administrativos
                     </h1>
                     <div>
                         <form action="{{ route('administrativos.index') }}"
@@ -29,8 +29,7 @@
                     <div class="d-flex justify-content-start flex-wrap">
                         @can('administrativos.create')
                         <a class="btn btn-primary my-2 ancla" href="{{ route('administrativos.create') }}"
-                            role="button"><i class="fa fa-plus" aria-hidden="true"></i> Crear
-                            departamento</a>
+                            role="button"><i class="fa fa-plus" aria-hidden="true"></i> Crear departamento</a>
                         @endcan
                         <a class=" btn btn-secondary my-2" href="{{ route('administrativos.index') }}" role="button">
                             <i class="fa fa-list" aria-hidden="true"></i> Lista completa</a>

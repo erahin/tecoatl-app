@@ -45,13 +45,13 @@
                                 <th scope="col">Tipo de reporte</th>
                                 <th scope="col">Fecha inicio</th>
                                 <th scope="col">Fecha final</th>
-                                <th scope="col" colspan="1">Acción</th>
+                                <th scope="col" colspan="1">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ($reports == null)
                             <tr>
-                                <td colspan="2">No existen informes</td>
+                                <td colspan="2">No existen informes.</td>
                             </tr>
                             @endif
                             @if ($reports)
