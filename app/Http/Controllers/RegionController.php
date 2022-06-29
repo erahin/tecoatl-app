@@ -58,7 +58,7 @@ class RegionController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                           Create region directory                          */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->makeDirectory('tecnico/' . strtolower($request->name));
+        Storage::disk('s3')->makeDirectory('Tecnico/' . strtolower($request->name));
         return redirect()->route('regiones.index');
     }
 
@@ -104,7 +104,7 @@ class RegionController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                           Destry region directory                          */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->deleteDirectory('tecnico/' . strtolower($region->name) . '/');
+        Storage::disk('s3')->deleteDirectory('Tecnico/' . strtolower($region->name) . '/');
         return redirect()->route('regiones.index');
     }
 }

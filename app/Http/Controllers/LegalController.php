@@ -67,7 +67,7 @@ class LegalController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                           Create departamet directory                      */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->makeDirectory('legal/' . $legal->name);
+        Storage::disk('s3')->makeDirectory('Legal/' . $legal->name);
         return redirect()->route('legal.index');
     }
 
@@ -115,7 +115,7 @@ class LegalController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                              Delete directory                              */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->deleteDirectory('legal/' . $legal->name . '/');
+        Storage::disk('s3')->deleteDirectory('Legal/' . $legal->name . '/');
         return redirect()->route('legal.index');
     }
 }

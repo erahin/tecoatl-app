@@ -98,7 +98,7 @@ class AdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                           Create departamet directory                      */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->makeDirectory('administrativo/' . $administrative->id);
+        Storage::disk('s3')->makeDirectory('Administrativo/' . $administrative->id);
         return redirect()->route('administrativos.index');
     }
 
@@ -176,7 +176,7 @@ class AdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                              Delete directory                              */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->deleteDirectory('administrativo/' . $id . '/');
+        Storage::disk('s3')->deleteDirectory('Administrativo/' . $id . '/');
         return redirect()->route('administrativos.index');
     }
 }

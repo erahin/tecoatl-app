@@ -204,7 +204,7 @@ class ReportController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                Get all files                               */
         /* -------------------------------------------------------------------------- */
-        $files = Storage::disk('s3')->allFiles('tecnico/' . $region . '/' . $project->id . '/' . $idStudio . '/' . $idReport . '/');
+        $files = Storage::disk('s3')->allFiles('Tecnico/' . $region . '/' . $project->id . '/' . $idStudio . '/' . $idReport . '/');
         /* -------------------------------------------------------------------------- */
         /*                            Return view and data                            */
         /* -------------------------------------------------------------------------- */
@@ -217,7 +217,7 @@ class ReportController extends Controller
     {
         $project = Project::find($idProject);
         $region = strtolower($project->regions->name);
-        $pathToFile = Storage::disk('s3')->path('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile);
+        $pathToFile = Storage::disk('s3')->path('Tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile);
         if (Storage::disk('s3')->exists($pathToFile)) {
             return Storage::disk('s3')->download($pathToFile);
         } else {
@@ -228,7 +228,7 @@ class ReportController extends Controller
     {
         $project = Project::find($idProject);
         $region = strtolower($project->regions->name);
-        Storage::disk('s3')->delete('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile);
+        Storage::disk('s3')->delete('Tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/' . $nameFile);
         return redirect()->route('show-informs', [$idProject, $idStudio, $idReport]);
     }
     public function deleteStudioDirectory($idProject, $idStudio)
@@ -236,14 +236,14 @@ class ReportController extends Controller
         $project = Project::find($idProject);
         $region = strtolower($project->regions->name);
         $project->studys()->detach($idStudio);
-        Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/');
+        Storage::disk('s3')->deleteDirectory('Tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/');
         return redirect()->route('studies-list', [$idProject, $idStudio]);
     }
     public function deleteReportsDirectory($idProject, $idStudio,  $idReport)
     {
         $project = Project::find($idProject);
         $region = strtolower($project->regions->name);
-        Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/');
+        Storage::disk('s3')->deleteDirectory('Tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/');
         $report = Report::find($idReport);
         $report->delete();
         return redirect()->route('reports-list', [$idProject, $idStudio]);
@@ -308,7 +308,7 @@ class ReportController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                Get file url                                */
         /* -------------------------------------------------------------------------- */
-        $files = Storage::disk('s3')->files('tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/');
+        $files = Storage::disk('s3')->files('Tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport . '/');
         $report_type = ["Bimestral", "Trimestral", "Semestral", "Anual"];
         return view('Report.upload-file', compact('project', 'studio', 'report', 'files', 'report_type'));
     }
@@ -326,7 +326,7 @@ class ReportController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName());
             $fileName .= '.' . $extension;
-            $pathToFile = 'tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport;
+            $pathToFile = 'Tecnico/' . $region . '/' . $idProject . '/' . $idStudio . '/' . $idReport;
             $path = Storage::disk('s3')->putFileAs($pathToFile, $file, $fileName);
             unlink($file->getPathname());
             return [

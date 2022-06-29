@@ -25,7 +25,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                  Get data                                  */
         /* -------------------------------------------------------------------------- */
-        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/');
+        $directories = Storage::disk('s3')->directories('Administrativo/' . $idAdministrative . '/');
         $projects = [];
         if ($administrative->id === 1) {
             foreach ($directories as $directorie) {
@@ -64,7 +64,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                           Create sub departamet subdirectory               */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->makeDirectory('administrativo/' . $idAdministrative . '/' . $request->name);
+        Storage::disk('s3')->makeDirectory('Administrativo/' . $idAdministrative . '/' . $request->name);
         return redirect()->route('administrativos.index');
     }
     public function folderList($idAdministrative)
@@ -85,7 +85,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                  Get data                                  */
         /* -------------------------------------------------------------------------- */
-        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/');
+        $directories = Storage::disk('s3')->directories('Administrativo/' . $idAdministrative . '/');
         $folderArray = [];
         $idArray = [];
         foreach ($directories as $directorie) {
@@ -121,7 +121,7 @@ class DocumentAdministrativeController extends Controller
         /*                                  Validate                                  */
         /* -------------------------------------------------------------------------- */
         $administrative = Administrative::find($idAdministrative);
-        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/');
+        $directories = Storage::disk('s3')->directories('Administrativo/' . $idAdministrative . '/');
         $isDirectorie = false;
         for ($i = 0; $i < count($directories); $i++) {
             if (explode('/', $directories[$i])[2] == $folder) {
@@ -141,7 +141,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                Get all files                               */
         /* -------------------------------------------------------------------------- */
-        $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        $files = Storage::disk('s3')->files('Administrativo/' . $idAdministrative . '/' . $folder . '/');
         $project = null;
         if ($administrative->id === 1) {
             $project = Project::find($folder);
@@ -174,7 +174,7 @@ class DocumentAdministrativeController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName());
             $fileName .= '.' . $extension;
-            $pathToFile = 'administrativo/' . $idAdministrative . '/' . $folder;
+            $pathToFile = 'Administrativo/' . $idAdministrative . '/' . $folder;
             $path = Storage::disk('s3')->putFileAs($pathToFile, $file, $fileName);
             unlink($file->getPathname());
             return [
@@ -207,7 +207,7 @@ class DocumentAdministrativeController extends Controller
         if ($administrative->id === 1) {
             $project = Project::find($folder);
         }
-        $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        $files = Storage::disk('s3')->files('Administrativo/' . $idAdministrative . '/' . $folder . '/');
         /* -------------------------------------------------------------------------- */
         /*                                  Validate user                             */
         /* -------------------------------------------------------------------------- */
@@ -232,7 +232,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                              Delete directory                              */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->deleteDirectory('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        Storage::disk('s3')->deleteDirectory('Administrativo/' . $idAdministrative . '/' . $folder . '/');
         return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
     }
     public function downloadFileFolder($idAdministrative, $folder, $file)
@@ -241,7 +241,7 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
-        $pathToFile = Storage::disk('s3')->path('administrativo/' . $idAdministrative . '/' . $folder . '/' . $file);
+        $pathToFile = Storage::disk('s3')->path('Administrativo/' . $idAdministrative . '/' . $folder . '/' . $file);
         if (Storage::disk('s3')->exists($pathToFile)) {
             return Storage::disk('s3')->download($pathToFile);
         } else {
@@ -254,7 +254,7 @@ class DocumentAdministrativeController extends Controller
         /*                                  Validate                                  */
         /* -------------------------------------------------------------------------- */
         $administrative = Administrative::find($idAdministrative);
-        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/');
+        $directories = Storage::disk('s3')->directories('Administrativo/' . $idAdministrative . '/');
         $isDirectorie = false;
         for ($i = 0; $i < count($directories); $i++) {
             if (explode('/', $directories[$i])[2] == $folder) {
@@ -275,7 +275,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                Get data                                    */
         /* -------------------------------------------------------------------------- */
-        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        $directories = Storage::disk('s3')->directories('Administrativo/' . $idAdministrative . '/' . $folder . '/');
         $project = null;
         if ($administrative->id === 1) {
             $project = Project::find($folder);
@@ -304,7 +304,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                           Create sub departamet subdirectory               */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->makeDirectory('administrativo/' . $idAdministrative . '/' . $folder . '/' . $request->name . '/');
+        Storage::disk('s3')->makeDirectory('Administrativo/' . $idAdministrative . '/' . $folder . '/' . $request->name . '/');
         return redirect()->route('folderList', ['idAdministrative' => $idAdministrative]);
     }
     public function subFolderList($idAdministrative, $folder)
@@ -325,7 +325,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                               Get data                                     */
         /* -------------------------------------------------------------------------- */
-        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        $directories = Storage::disk('s3')->directories('Administrativo/' . $idAdministrative . '/' . $folder . '/');
         $folderArray = [];
         foreach ($directories as $directorie) {
             array_push($folderArray, $directorie);
@@ -352,7 +352,7 @@ class DocumentAdministrativeController extends Controller
         /*                                  Validate                                  */
         /* -------------------------------------------------------------------------- */
         $administrative = Administrative::find($idAdministrative);
-        $directories = Storage::disk('s3')->directories('administrativo/' . $idAdministrative . '/' . $folder . '/');
+        $directories = Storage::disk('s3')->directories('Administrativo/' . $idAdministrative . '/' . $folder . '/');
         $isDirectorie = false;
         for ($i = 0; $i < count($directories); $i++) {
             if (explode('/', $directories[$i])[3] == $subfolder) {
@@ -367,7 +367,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                Get data                                    */
         /* -------------------------------------------------------------------------- */
-        $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
+        $files = Storage::disk('s3')->files('Administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
         $project = null;
         if ($administrative->id === 1) {
             $project = Project::find($folder);
@@ -406,7 +406,7 @@ class DocumentAdministrativeController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName());
             $fileName .= '.' . $extension;
-            $filePath = 'administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder;
+            $filePath = 'Administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder;
             $path = Storage::disk('s3')->putFileAs($filePath, $file, $fileName);
             unlink($file->getPathname());
             return [
@@ -438,7 +438,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                               Get data                                     */
         /* -------------------------------------------------------------------------- */
-        $files = Storage::disk('s3')->files('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
+        $files = Storage::disk('s3')->files('Administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
         $project = null;
         if ($administrative->id === 1) {
             $project = Project::find($folder);
@@ -467,7 +467,7 @@ class DocumentAdministrativeController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                              Delete directory                              */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->deleteDirectory('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
+        Storage::disk('s3')->deleteDirectory('Administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/');
         return redirect()->route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => $folder]);
     }
     public function downloadFileSubFolder($idAdministrative, $folder, $subfolder, $file)
@@ -476,7 +476,7 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
-        $pathToFile = Storage::disk('s3')->path('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/' . $file);
+        $pathToFile = Storage::disk('s3')->path('Administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/' . $file);
         if (Storage::disk('s3')->exists($pathToFile)) {
             return Storage::disk('s3')->download($pathToFile);
         } else {
@@ -490,7 +490,7 @@ class DocumentAdministrativeController extends Controller
             return view('errors.4032');
         }
 
-        Storage::disk('s3')->delete('administrativo/' . $idAdministrative . '/' . $folder . '/' . $file);
+        Storage::disk('s3')->delete('Administrativo/' . $idAdministrative . '/' . $folder . '/' . $file);
         return redirect()->route('fileList', ['idAdministrative' => $idAdministrative, 'folder' => $folder]);
     }
     public function deleteFileSubFolder($idAdministrative, $folder, $subfolder, $file)
@@ -499,7 +499,7 @@ class DocumentAdministrativeController extends Controller
         if ($administrative == null) {
             return view('errors.4032');
         }
-        Storage::disk('s3')->delete('administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/' . $file);
+        Storage::disk('s3')->delete('Administrativo/' . $idAdministrative . '/' . $folder . '/' . $subfolder . '/' . $file);
         return redirect()->route('subFolderFileList', ['idAdministrative' => $idAdministrative, 'folder' => $folder, 'subfolder' => $subfolder]);
     }
 }

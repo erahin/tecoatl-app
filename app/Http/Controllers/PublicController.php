@@ -11,12 +11,12 @@ class PublicController extends Controller
 {
     public function index()
     {
-        $folders = Storage::disk('s3')->directories('publico/');
+        $folders = Storage::disk('s3')->directories('Publico/');
         return view('DocumentPublic.index', compact('folders'));
     }
     public function create()
     {
-        $folders = Storage::disk('s3')->directories('publico/');
+        $folders = Storage::disk('s3')->directories('Publico/');
         return view('DocumentPublic.showForm', compact('folders'));
     }
     public function store(Request $request)
@@ -24,7 +24,7 @@ class PublicController extends Controller
         $request->validate([
             'name' => ['required', 'confirmed']
         ]);
-        Storage::disk('s3')->makeDirectory('publico/' . $request->name);
+        Storage::disk('s3')->makeDirectory('Publico/' . $request->name);
         return redirect()->route('publico.index');
     }
     public function uploadFileForm($path)

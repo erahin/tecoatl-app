@@ -16,12 +16,12 @@ class ExecutiveController extends Controller
 
     public function index()
     {
-        $folders = Storage::disk('s3')->directories('directivo/');
+        $folders = Storage::disk('s3')->directories('Directivo/');
         return view('DocumentExecutive.index', compact('folders'));
     }
     public function create()
     {
-        $folders = Storage::disk('s3')->directories('directivo/');
+        $folders = Storage::disk('s3')->directories('Directivo/');
         return view('DocumentExecutive.showForm', compact('folders'));
     }
     public function store(Request $request)
@@ -29,7 +29,7 @@ class ExecutiveController extends Controller
         $request->validate([
             'name' => ['required', 'confirmed']
         ]);
-        Storage::disk('s3')->makeDirectory('directivo/' . $request->name);
+        Storage::disk('s3')->makeDirectory('Directivo/' . $request->name);
         return redirect()->route('directivo.index');
     }
     public function createFolder($path)

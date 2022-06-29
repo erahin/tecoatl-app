@@ -57,7 +57,7 @@ class ProjectController extends Controller
         /*                               Make directory                               */
         /* -------------------------------------------------------------------------- */
         foreach ($request->studie_id as $studie) {
-            Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
+            Storage::disk('s3')->makeDirectory('Tecnico/' . $region . '/' . $project->id . '/' . $studie);
             /* -------------------------------------------------------------------------- */
             /*                                  Make key                                  */
             /* -------------------------------------------------------------------------- */
@@ -137,7 +137,7 @@ class ProjectController extends Controller
         /* -------------------------------------------------------------------------- */
         if ($request->studie_id) {
             foreach ($request->studie_id as $studie) {
-                Storage::disk('s3')->makeDirectory('tecnico/' . $region . '/' . $project->id . '/' . $studie);
+                Storage::disk('s3')->makeDirectory('Tecnico/' . $region . '/' . $project->id . '/' . $studie);
                 /* -------------------------------------------------------------------------- */
                 /*                                  Make key                                  */
                 /* -------------------------------------------------------------------------- */
@@ -168,7 +168,7 @@ class ProjectController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                              Delete directory                              */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->deleteDirectory('tecnico/' . $region . '/' . $project->id . '/');
+        Storage::disk('s3')->deleteDirectory('Tecnico/' . $region . '/' . $project->id . '/');
         /* -------------------------------------------------------------------------- */
         /*                               Delete project                               */
         /* -------------------------------------------------------------------------- */

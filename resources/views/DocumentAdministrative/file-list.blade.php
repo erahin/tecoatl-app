@@ -56,7 +56,7 @@
                                 <td class="d-flex justify-content-start">
                                     @can('operFile')
                                     <a title="Abrir archivo" target="_blank"
-                                        href="https://tecoatl2022.s3.us-west-1.amazonaws.com/{{ $file }}"
+                                        href="https://tecoatl-app.s3.amazonaws.com/{{ $file }}"
                                         class="btn btn-secondary ancla"><i class="fa fa-external-link"
                                             aria-hidden="true"></i></a>
                                     @endcan
