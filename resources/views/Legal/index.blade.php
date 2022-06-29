@@ -51,13 +51,13 @@
                                     @if ($isLegalUser == true)
                                     @if ($legal->user_id == Auth::user()->id)
                                     <a title="Nueva carpeta"
-                                        href="{{ route('legal.create-subfolder', ['path' => 'legal'. '-' . $legal->name]) }}"
+                                        href="{{ route('legal.create-subfolder', ['path' => 'Legal'. '-' . $legal->name]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
                                             aria-hidden="true"></i></a>
                                     @endif
                                     @else
                                     <a title="Nueva carpeta"
-                                        href="{{ route('legal.create-subfolder', ['path' => 'legal'. '-' . $legal->name]) }}"
+                                        href="{{ route('legal.create-subfolder', ['path' => 'Legal'. '-' . $legal->name]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-folder-open"
                                             aria-hidden="true"></i></a>
                                     @endif
@@ -67,13 +67,13 @@
                                     @if ($isLegalUser == true)
                                     @if ($legal->user_id == Auth::user()->id)
                                     <a title="Lista de carpetas"
-                                        href="{{ route('legal.folder-list', ['path' => 'legal'. '-' . $legal->name]) }}"
+                                        href="{{ route('legal.folder-list', ['path' => 'Legal'. '-' . $legal->name]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-archive"
                                             aria-hidden="true"></i></a>
                                     @endif
                                     @else
                                     <a title="Lista de carpetas"
-                                        href="{{ route('legal.folder-list', ['path' => 'legal'. '-' . $legal->name]) }}"
+                                        href="{{ route('legal.folder-list', ['path' => 'Legal'. '-' . $legal->name]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-archive"
                                             aria-hidden="true"></i></a>
                                     @endif
@@ -83,20 +83,20 @@
                                     @if ($isLegalUser == true)
                                     @if ($legal->user_id == Auth::user()->id)
                                     <a title="Subir archivos"
-                                        href="{{ route('legal.createUpload', ['path' => 'legal'. '-' . $legal->name]) }}"
+                                        href="{{ route('legal.createUpload', ['path' => 'Legal'. '-' . $legal->name]) }}"
                                         class="btn btn-outline-success ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
                                     @endif
                                     @else
                                     <a title="Subir archivos"
-                                        href="{{ route('legal.createUpload', ['path' => 'legal'. '-' . $legal->name]) }}"
+                                        href="{{ route('legal.createUpload', ['path' => 'Legal'. '-' . $legal->name]) }}"
                                         class="btn btn-outline-success ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
                                     @endif
                                     @endcan
                                     @can('legal.createUpload')
                                     <a title="Lista de archivos"
-                                        href="{{ route('legal.fileList', ['path' => 'legal'. '-' . $legal->name]) }}"
+                                        href="{{ route('legal.fileList', ['path' => 'Legal'. '-' . $legal->name]) }}"
                                         class="btn btn-outline-primary ancla"><i class="fa fa-list-alt"
                                             aria-hidden="true"></i></a>
                                     @endcan

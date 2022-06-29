@@ -68,7 +68,7 @@ class ProjectController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                        Make administrative directory                       */
         /* -------------------------------------------------------------------------- */
-        Storage::disk('s3')->makeDirectory('administrativo/' . 1 . '/' . $project->id);
+        Storage::disk('s3')->makeDirectory('Administrativo/' . 1 . '/' . $project->id);
         return redirect()->route('projectByRegion', ['id' => $request->region_id]);
     }
 
