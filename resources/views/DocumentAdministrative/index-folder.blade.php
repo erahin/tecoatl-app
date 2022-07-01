@@ -36,57 +36,94 @@
                         <thead>
                             <tr>
                                 <th scope="col">Carpeta</th>
-                                <th scope="col" colspan="2">Acciones</th>
+                                <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($folderArray) != 0)
-                            @for($i = 0; $i < count($folderArray); $i++) <tr>
-                                @if (count($projectArray))
+                            @if (count($folderArray) != 0 || count($projectArray) != 0)
+                            @if (count($projectArray) != 0 && $idAdministrative==1)
+                            @for($i = 0; $i < count($projectArray); $i++) <tr>
                                 <td>{{ $projectArray[$i]->place }}</td>
-                                @else
-                                <td>{{ explode('/', $folderArray[$i])[2] }}</td>
-                                @endif
                                 <td class="d-flex justify-content-start">
                                     @can('showFormUploadFile')
                                     <a title="Subir archivos"
-                                        href="{{ route('showFormUploadFile', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $folderArray[$i])[2]]) }}"
+                                        href="{{ route('showFormUploadFile', ['idAdministrative' => $idAdministrative, 'folder' => $projectArray[$i]->id]) }}"
                                         class="btn btn-secondary ancla"> <i class="fa fa-upload"
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('fileList')
                                     <a title="Lista de archivos"
-                                        href="{{ route('fileList', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $folderArray[$i])[2]]) }}"
+                                        href="{{ route('fileList', ['idAdministrative' => $idAdministrative, 'folder' => $projectArray[$i]->id]) }}"
                                         class="btn btn-primary ancla"><i class="fa fa-list-alt"
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('createFolder')
                                     <a title="Nueva carpeta"
-                                        href="{{ route('createSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $folderArray[$i])[2]]) }}"
+                                        href="{{ route('createSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => $projectArray[$i]->id]) }}"
                                         class="btn btn-danger ancla"> <i class="fa fa-folder-open"
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('folderList')
                                     <a title="Lista de carpetas"
-                                        href="{{ route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $folderArray[$i])[2]]) }}"
+                                        href="{{ route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => $projectArray[$i]->id]) }}"
                                         class="btn btn-success ancla"><i class="fa fa-archive"
                                             aria-hidden="true"></i></a>
                                     @endcan
                                     @can('deleteFolder')
                                     <a title="Eliminar carpeta"
-                                        href="{{ route('deleteFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $folderArray[$i])[2]]) }}"
+                                        href="{{ route('deleteFolder', ['idAdministrative' => $idAdministrative, 'folder' => $projectArray[$i]->id]) }}"
                                         class="btn btn-outline-danger"
-                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $folderArray[$i])[2] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
+                                        onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ $projectArray[$i]->place }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
                                             class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     @endcan
                                 </td>
                                 </tr>
                                 @endfor
-                                @else
-                                <tr>
-                                    <td colspan="4">No existen directorios.</td>
-                                </tr>
                                 @endif
+                                @if (count($folderArray) != 0 && $idAdministrative!=1)
+                                @for($i = 0; $i < count($folderArray); $i++) <tr>
+                                    <td>{{ explode('/', $folderArray[$i])[2] }}</td>
+                                    <td class="d-flex justify-content-start">
+                                        @can('showFormUploadFile')
+                                        <a title="Subir archivos"
+                                            href="{{ route('showFormUploadFile', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $folderArray[$i])[2]]) }}"
+                                            class="btn btn-secondary ancla"> <i class="fa fa-upload"
+                                                aria-hidden="true"></i></a>
+                                        @endcan
+                                        @can('fileList')
+                                        <a title="Lista de archivos"
+                                            href="{{ route('fileList', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $folderArray[$i])[2]]) }}"
+                                            class="btn btn-primary ancla"><i class="fa fa-list-alt"
+                                                aria-hidden="true"></i></a>
+                                        @endcan
+                                        @can('createFolder')
+                                        <a title="Nueva carpeta"
+                                            href="{{ route('createSubFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $folderArray[$i])[2]]) }}"
+                                            class="btn btn-danger ancla"> <i class="fa fa-folder-open"
+                                                aria-hidden="true"></i></a>
+                                        @endcan
+                                        @can('folderList')
+                                        <a title="Lista de carpetas"
+                                            href="{{ route('subFolderList', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $folderArray[$i])[2]]) }}"
+                                            class="btn btn-success ancla"><i class="fa fa-archive"
+                                                aria-hidden="true"></i></a>
+                                        @endcan
+                                        @can('deleteFolder')
+                                        <a title="Eliminar carpeta"
+                                            href="{{ route('deleteFolder', ['idAdministrative' => $idAdministrative, 'folder' => explode('/', $folderArray[$i])[2]]) }}"
+                                            class="btn btn-outline-danger"
+                                            onclick="return confirm( '¿Está seguro de eliminar la carpeta {{ explode('/', $folderArray[$i])[2] }}, tenga en cuenta que se eliminará todos los archivos que existan dentro de la misma?') "><i
+                                                class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        @endcan
+                                    </td>
+                                    </tr>
+                                    @endfor
+                                    @endif
+                                    @else
+                                    <tr>
+                                        <td colspan="4">No existen directorios.</td>
+                                    </tr>
+                                    @endif
                         </tbody>
                     </table>
                 </div>

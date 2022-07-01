@@ -103,6 +103,7 @@ class DocumentAdministrativeController extends Controller
                 }
             }
         }
+        // return $projectArray;
         /* -------------------------------------------------------------------------- */
         /*                                  Validate user                             */
         /* -------------------------------------------------------------------------- */

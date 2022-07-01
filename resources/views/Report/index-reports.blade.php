@@ -45,7 +45,7 @@
                                 <th scope="col">Tipo de reporte</th>
                                 <th scope="col">Fecha inicio</th>
                                 <th scope="col">Fecha final</th>
-                                <th scope="col" colspan="1">Acciones</th>
+                                <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,5 +99,4 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/table.js') }}"></script>
 @endsection

@@ -45,7 +45,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Carpeta</th>
-                                <th scope="col" colspan="2">Acciones</th>
+                                <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>

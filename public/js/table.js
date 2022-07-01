@@ -3,16 +3,22 @@
 /* -------------------------------------------------------------------------- */
 $(document).ready(function () {
     $("#table").DataTable({
-        paging: false,
+        paging: true,
         ordering: true,
         info: false,
         filter: false,
         language: {
-            lengthMenu: "Display _MENU_ records per page",
+            lengthMenu: "Mostrar _MENU_ registros por página",
             zeroRecords: "No se encontraron registros",
-            info: "Showing page _PAGE_ of _PAGES_",
-            infoEmpty: "No records available",
-            infoFiltered: "(filtered from _MAX_ total records)",
+            info: "Mostrando la página _PAGE_ de _PAGES_",
+            infoEmpty: "No hay registros disponibles",
+            infoFiltered: "(filtrado de _MAX_ registros totales)",
+            paginate: {
+                first: "«",
+                previous: "‹",
+                next: "›",
+                last: "»",
+            },
         },
     });
 });

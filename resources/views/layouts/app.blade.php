@@ -17,6 +17,7 @@
     <script src="https://kit.fontawesome.com/1934e005fb.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.11.5/kt-2.6.4/datatables.min.js">
     </script>
+    <script src="{{ asset('js/table.js') }}" defer></script>
     {{--
     <link type="text/javascript" src="https://cdn.jsdelivr.net/npm/resumablejs@1.1.0/resumable.min.js"> --}}
     <script src="https://cdn.jsdelivr.net/npm/resumablejs@1.1.0/resumable.min.js"></script>

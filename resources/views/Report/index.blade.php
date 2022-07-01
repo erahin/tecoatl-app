@@ -43,7 +43,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Nombre del estudio</th>
-                                <th scope="col" colspan="1">Acciones</th>
+                                <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,5 +82,4 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/table.js') }}" defer></script>
 @endsection
