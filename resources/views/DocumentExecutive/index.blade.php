@@ -71,9 +71,9 @@
                             </tr>
                             @endforeach
                             @else
-                            <tr>
-                                <td colspan="4">No existen carpetas.</td>
-                            </tr>
+                            {{-- <tr>
+                                <td colspan="2">No existen carpetas.</td>
+                            </tr> --}}
                             @endif
                         </tbody>
                     </table>
