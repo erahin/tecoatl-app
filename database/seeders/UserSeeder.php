@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'email' => 'tecoatlTI.tecoatl@gmail.com',
             'password' => bcrypt('anonimo'),
             'phone' => '9514038978'
-        ])->assignRole('Técnico informático');
+        ])->assignRole('Jefa sublegal');
         // User::create([
         //     'name' => 'directivo',
         //     'email' => 'directivo.tecoatl@gmail.com',

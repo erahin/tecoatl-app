@@ -21,9 +21,9 @@ class LegalSeeder extends Seeder
         Legal::create([
             'name' => 'Operativa',
         ]);
-        Storage::disk('s3')->deleteDirectory('Legal');
-        Storage::disk('s3')->makeDirectory('Legal');
-        Storage::disk('s3')->makeDirectory('Legal/Corporativa');
-        Storage::disk('s3')->makeDirectory('Legal/Operativa');
+        // Storage::disk('s3')->deleteDirectory('Legal');
+        // Storage::disk('s3')->makeDirectory('Legal');
+        // Storage::disk('s3')->makeDirectory('Legal/Corporativa');
+        // Storage::disk('s3')->makeDirectory('Legal/Operativa');
     }
 }

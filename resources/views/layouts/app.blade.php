@@ -259,6 +259,35 @@
     </div>
     @push('scripts')@stack('scripts')
 </body>
+@if (!Auth::guest())
+<script>
+    /* -------------------------------------------------------------------------- */
+        /* Format name */
+        /* -------------------------------------------------------------------------- */
+        (function() {
+        let li_logout = document.getElementById("li_logout");
+        let name = '{{ Auth::user()->name }}';
+        name = name.split(" ");
+        let finally_name = "";
+        for (let index = 0; index < name.length; index++) { if (index <=1) { finally_name +=name[index] + " " ; } } let
+            element_logout=`<a id="a6" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" v-pre>
+            <i class="fa fa-user-circle" aria-hidden="true"></i> ${finally_name}
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); localStorage.removeItem('regions'); localStorage.removeItem('namesRegions'); localStorage.removeItem('index'); localStorage.removeItem('a');document.getElementById('logout-form').submit();">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i> {{ __('SALIR') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>`;
+            li_logout.innerHTML = element_logout;
+            })();
+</script>
+@endif
+
 @can('proyectos.index')
 @if (!Auth::guest())
 <script>
@@ -291,35 +320,7 @@
 
         }
     })();
-    /* -------------------------------------------------------------------------- */
-    /*                                 Format name                                */
-    /* -------------------------------------------------------------------------- */
-    (function() {
-        let li_logout = document.getElementById("li_logout");
-        let name = '{{ Auth::user()->name }}';
-        name = name.split(" ");
-        let finally_name = "";
-        for (let index = 0; index < name.length; index++) {
-            if (index <= 1) {
-                finally_name += name[index] + " ";
-            }
 
-        }
-        let element_logout = `<a id="a6" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class="fa fa-user-circle" aria-hidden="true"></i> ${finally_name}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault(); localStorage.removeItem('regions'); localStorage.removeItem('namesRegions'); localStorage.removeItem('index'); localStorage.removeItem('a');document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i> {{ __('SALIR') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>`;
-        li_logout.innerHTML = element_logout;
-    })();
 </script>
 @endif
 @endcan
