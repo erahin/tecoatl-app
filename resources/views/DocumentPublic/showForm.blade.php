@@ -11,7 +11,7 @@
                     <h2 class="h6 text-center">Ruta: Público/</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('store') }}">
+                    <form method="POST" action="{{ route('store') }}" id="form">
                         @csrf
                         @if ($folders)
                         <div class="row mb-3">
@@ -75,4 +75,17 @@
         </div>
     </div>
 </div>
+<script>
+    const FOLDER_NAME = document.getElementById("folder");
+    const FORM = document.getElementById("form");
+    FORM.addEventListener("submit", (e) => {
+        let name = FOLDER_NAME.value;
+        let regExr = /-/;
+        let res = regExr.test(name);
+        if (res) {
+            alert('El nombre incluye carácter "-" no válido');
+            e.preventDefault();
+        }
+    });
+</script>
 @endsection

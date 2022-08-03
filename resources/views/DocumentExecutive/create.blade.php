@@ -12,7 +12,8 @@
                 </div>
                 <div class="card-body">
                     <form method="POST"
-                        action="{{ route('directivo.store-subfolder', ['path' => str_replace('/', '-', $path)]) }}">
+                        action="{{ route('directivo.store-subfolder', ['path' => str_replace('/', '-', $path)]) }}"
+                        id="form">
                         @csrf
                         @if ($folders)
                         <div class="row mb-3">
@@ -76,4 +77,17 @@
         </div>
     </div>
 </div>
+<script>
+    const FOLDER_NAME = document.getElementById("folder");
+    const FORM = document.getElementById("form");
+    FORM.addEventListener("submit", (e) => {
+        let name = FOLDER_NAME.value;
+        let regExr = /-/;
+        let res = regExr.test(name);
+        if (res) {
+            alert('El nombre incluye carácter "-" no válido');
+            e.preventDefault();
+        }
+    });
+</script>
 @endsection

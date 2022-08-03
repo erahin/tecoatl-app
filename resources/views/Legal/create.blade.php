@@ -10,7 +10,7 @@
                     </h1>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('legal.store') }}">
+                    <form method="POST" action="{{ route('legal.store') }}" id="form">
                         @csrf
                         <div class="row mb-3">
                             {!! Form::label('name', 'Nombre del departamento', ['class' => 'col-md-4 col-form-label
@@ -75,4 +75,17 @@
         </div>
     </div>
 </div>
+<script>
+    const FOLDER_NAME = document.getElementById("departament");
+    const FORM = document.getElementById("form");
+    FORM.addEventListener("submit", (e) => {
+        let name = FOLDER_NAME.value;
+        let regExr = /-/;
+        let res = regExr.test(name);
+        if (res) {
+            alert('El nombre incluye carácter "-" no válido');
+            e.preventDefault();
+        }
+    });
+</script>
 @endsection

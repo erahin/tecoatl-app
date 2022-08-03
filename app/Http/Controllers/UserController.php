@@ -91,7 +91,9 @@ class UserController extends Controller
         }
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        if ($user->password != $request->password) {
+            $user->password = Hash::make($request->password);
+        }
         $user->phone = $request->phone;
         $user->save();
         $user->roles()->sync($request->roles);
